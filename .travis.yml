@@ -14,7 +14,7 @@ nodejs:
   - "lts/*"
   - "12"
 script:
-  - "yarn start & wait-on http://localhost:3000"
+  - "yarn start"
   - "yarn test"
 cache:
   yarn: true
