@@ -1,0 +1,19 @@
+dist: xenial
+sudo: true
+branches:
+  only: 
+    - master
+before_install:
+  - sudo apt-get install -y libgconf-2-4
+services:
+  - xvfb
+language: node_js
+nodejs:
+  - "lts/*"
+  - "12"
+cache:
+  yarn: true
+  directories:
+    - ~/.cache
+notifications:
+  email: false
