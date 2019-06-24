@@ -1,16 +1,21 @@
 dist: xenial
-sudo: true
 branches:
   only: 
     - master
-before_install:
-  - sudo apt-get install -y libgconf-2-4
+addons:
+  apt:
+    packages:
+      # Ubuntu 16+ does not install this dependency by default, so we need to install it ourselves
+      - libgconf-2-4
 services:
   - xvfb
 language: node_js
 nodejs:
   - "lts/*"
   - "12"
+scripts:
+  - "yarn start & wait-on http://localhost:3000"
+  - "yarn test"
 cache:
   yarn: true
   directories:
