@@ -6,6 +6,9 @@
 
 ## Build Setup
 
+* Make sure you have node v12 or higher and yarn installed.
+* If you're working on windows, I would recommend you use Git-bash for your Git needs and as the main terminal for this project. Make sure that you have configured Git to use `LF` as your line endings and not `CRLF` which is default on windows.
+
 ``` bash
 # install dependencies
 $ yarn install
