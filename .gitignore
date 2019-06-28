@@ -87,6 +87,5 @@ sw.*
 # Mac OSX
 .DS_Store
 
-# Cypress
-test/e2e/videos
-test/e2e/screenshots
+# package lock
+package-lock.json
