@@ -4,6 +4,11 @@
   "description": "A web app to display an interactive map that shows information about the various native flora growing on the UWA campus. The map is open for all to access but the main focus is mainly the FoGUWA community.",
   "author": "JeremiahPinto",
   "private": true,
+  "engines": {
+    "node": ">= 12.0.0",
+    "npm": ">= 6.0.0",
+    "yarn": ">= 1.0.0"
+  },
   "scripts": {
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "yarn lint",
