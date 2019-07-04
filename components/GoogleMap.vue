@@ -18,7 +18,7 @@ export default {
     // TODO: A reference error will occur if scriptjs is define above and not here
     scriptjs = require('scriptjs')
     // Load the Google Maps API
-    scriptjs('https://maps.googleapis.com/maps/api/js?key={API_KEY}', () => {
+    scriptjs('https://maps.googleapis.com/maps/api/js?key=' + process.env.googleMapsApi, () => {
       this.initMap()
     })
   },
