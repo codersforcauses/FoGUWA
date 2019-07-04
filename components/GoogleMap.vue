@@ -38,8 +38,7 @@ export default {
 /* Always set the map height explicitly to define the size of the div
  * element that contains the map. */
 #Map {
-  /* height: 100%; */
-  height: 500px;
-  width: 500px;
+  height: 100%;
+  width: 100%;
 }
 </style>
