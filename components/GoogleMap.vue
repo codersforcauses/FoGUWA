@@ -5,9 +5,6 @@
 </template>
 
 <script>
-// TODO: I don't know why scriptjs needs to be defined here
-let scriptjs
-
 export default {
   data: function () {
     return {
@@ -15,8 +12,8 @@ export default {
     }
   },
   mounted() {
-    // TODO: A reference error will occur if scriptjs is define above and not here
-    scriptjs = require('scriptjs')
+    // Load dependencies
+    const scriptjs = require('scriptjs')
     // Load the Google Maps API
     scriptjs('https://maps.googleapis.com/maps/api/js?key=' + process.env.googleMapsApi, () => {
       this.initMap()
@@ -24,7 +21,7 @@ export default {
   },
   methods: {
     // The callback after the Google Maps JS API loads
-    initMap: () => {
+    initMap() {
       this.map = new window.google.maps.Map(document.getElementById('Map'), {
         center: { lat: -31.9754738, lng: 115.8166837 },
         zoom: 15
