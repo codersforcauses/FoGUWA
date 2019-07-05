@@ -24,8 +24,8 @@
     "@nuxtjs/vuetify": "0.5.5",
     "cross-env": "^5.2.0",
     "express": "^4.16.4",
-    "nuxt": "^2.0.0",
-    "scriptjs": "^2.5.9"
+    "google-maps-api-loader": "^1.1.1",
+    "nuxt": "^2.0.0"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^0.0.1",

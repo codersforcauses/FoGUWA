@@ -1,28 +1,35 @@
 <template>
-  <div id="Map">
+  <div ref="googleMap" class="google-map">
     <!-- The Google Maps API will make use of this div. -->
   </div>
 </template>
 
 <script>
+import GoogleMapsApiLoader from 'google-maps-api-loader'
+
 export default {
   data: function () {
+    // Data managed by the component and accessible to the parent
     return {
-      map: false
+      google: null,
+      map: null
     }
   },
-  mounted() {
-    // Load dependencies
-    const scriptjs = require('scriptjs')
-    // Load the Google Maps API
-    scriptjs('https://maps.googleapis.com/maps/api/js?key=' + process.env.googleMapsApi, () => {
-      this.initMap()
+  async mounted() {
+    // Fetch the maps API
+    const googleMapApi = await GoogleMapsApiLoader({
+      apiKey: process.env.googleMapsApi
     })
+    // Expose the API for future use and initialise the map
+    this.google = googleMapApi
+    this.initMap()
   },
   methods: {
-    // The callback after the Google Maps JS API loads
     initMap() {
-      this.map = new window.google.maps.Map(document.getElementById('Map'), {
+      // Fetch the HTML element for the map, with the given ref value
+      const mapContainer = this.$refs.googleMap
+      // Create the map instance
+      this.map = new this.google.maps.Map(mapContainer, {
         center: { lat: -31.9754738, lng: 115.8166837 },
         zoom: 15
       })
@@ -34,7 +41,7 @@ export default {
 <style>
 /* Always set the map height explicitly to define the size of the div
  * element that contains the map. */
-#Map {
+.google-map {
   height: 100%;
   width: 100%;
 }
