@@ -21,6 +21,21 @@ import GoogleMapsApiLoader from 'google-maps-api-loader'
 import { labels, locations } from '../assets/js/plants'
 
 export default {
+  props: {
+    mapConfig: {
+      type: Object,
+      default: function () {
+        return {
+          center: { lat: 0.0, lng: 0.0 },
+          zoom: 0
+        }
+      }
+    },
+    apiKey: {
+      type: String,
+      required: true
+    }
+  },
   data: function () {
     // Data managed by the component and accessible to the parent
     return {
@@ -31,7 +46,7 @@ export default {
   async mounted() {
     // Fetch the maps API
     const googleMapApi = await GoogleMapsApiLoader({
-      apiKey: process.env.googleMapsApi
+      apiKey: this.apiKey
     })
     // Expose the API for future use and initialise the map
     this.google = googleMapApi
@@ -42,10 +57,7 @@ export default {
       // Fetch the HTML element for the map, with the given ref value
       const mapContainer = this.$refs.googleMap
       // Create the map instance
-      this.map = new this.google.maps.Map(mapContainer, {
-        center: { lat: -31.9754738, lng: 115.8166837 },
-        zoom: 15
-      })
+      this.map = new this.google.maps.Map(mapContainer, this.mapConfig)
       // Add plant markers.
       const markers = locations.map((location, i) => { // eslint-disable-line no-unused-vars
         return new this.google.maps.Marker({
