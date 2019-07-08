@@ -18,6 +18,7 @@
 
 <script>
 import GoogleMapsApiLoader from 'google-maps-api-loader'
+import { labels, locations } from '../assets/js/plants'
 
 export default {
   data: function () {
@@ -44,6 +45,14 @@ export default {
       this.map = new this.google.maps.Map(mapContainer, {
         center: { lat: -31.9754738, lng: 115.8166837 },
         zoom: 15
+      })
+      // Add plant markers.
+      const markers = locations.map((location, i) => { // eslint-disable-line no-unused-vars
+        return new this.google.maps.Marker({
+          position: location,
+          label: labels[i].name,
+          map: this.map
+        })
       })
     }
   }
