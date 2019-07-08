@@ -1,37 +1,35 @@
 <template>
-  <div id="about">
-    <div class="cfc-image">
-      <img src="~/static/cfc-icon.png">
-    </div>
-    <div class="about-info">
-      <h1>About Us</h1>
-      <p>Student Developers for Charities and Not-For-Profits. Visit our website below for more information.</p>
-      <a href="https://codersforcauses.org/landing">Coders for Causes website</a>
-    </div>
-  </div>
+  <v-container>
+    <v-layout row wrap>
+      <v-flex xs12 md3 lg2 style="padding: 20px 0 20px 0">
+        <v-img :src="require('~/static/cfc-icon.png')" />
+      </v-flex>
+      <v-flex xs12 md9 lg10>
+        <v-card-title class="display-1">
+          About Coders for Causes
+        </v-card-title>
+        <v-card-text style="text-align: justify">
+          <p>Coders for Causes (CFC) are student developers for charities and Not-For-Profits. Visit our website below for more information.</p>
+          <a target="_blank" href="https://codersforcauses.org/landing">Coders for Causes website</a>
+        </v-card-text>
+      </v-flex>
+      <v-flex xs12 md3 lg2 style="padding: 20px 0 20px 0">
+        <v-img :src="require('~/static/FoGUWA.jpg')" />
+      </v-flex>
+      <v-flex xs12 md9 lg10>
+        <v-card-title class="display-1">
+          About Friends of the Grounds of UWA
+        </v-card-title>
+        <v-card-text style="text-align: justify">
+          <p>Friends of the Grounds UWA (FoGUWA) was established in the 2000 with four core objectives: (1) to encourage the University and wider Western Australian community to take an active interest in UWA’s grounds as an important part of the heritage of this State; (2) to enhance the profile of the university’s grounds by developing an annual program of activities; (3) to provide information about the grounds through publications, lectures and events; (4) to raise funds to assist with special projects relating to the grounds.</p>
+          <a target="_blank" href="https://www.facebook.com/friendsofthegrounds/">FoGUWA Facebook page</a>
+        </v-card-text>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
 export default {
 }
 </script>
-
-<style scoped>
-#about{
-  display: flex;
-  flex-wrap: wrap;
-}
-.cfc-image{
-  width: 20%;
-  height: auto;
-  padding: 20px;
-}
-img{
-  width: 100%;
-  height: auto;
-}
-.about-info{
-  padding: 20px;
-  width: 60%;
-}
-</style>
