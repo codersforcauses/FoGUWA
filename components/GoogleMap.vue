@@ -1,6 +1,18 @@
 <template>
   <div ref="googleMap" class="google-map">
     <!-- The Google Maps API will make use of this div. -->
+    <div v-show="map === null" class="loading-container">
+      <div class="loading-item">
+        <v-progress-circular
+          :size="70"
+          :width="7"
+          color="green"
+          indeterminate
+          style="margin-left:auto;margin-right:auto"
+        />
+        <span>Loading map...</span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -44,5 +56,20 @@ export default {
 .google-map {
   height: 100%;
   width: 100%;
+}
+
+.loading-container {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.loading-item {
+  margin-top: auto;
+  margin-bottom: auto;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
 }
 </style>
