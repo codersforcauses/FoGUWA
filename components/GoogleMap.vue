@@ -18,7 +18,7 @@
 
 <script>
 import GoogleMapsApiLoader from 'google-maps-api-loader'
-import { labels, locations } from '../assets/js/plants'
+import { labels, locations } from '@/assets/js/plants'
 
 export default {
   props: {
