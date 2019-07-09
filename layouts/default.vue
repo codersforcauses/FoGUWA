@@ -1,5 +1,5 @@
 <template>
-  <v-app dark>
+  <v-app>
     <Toolbar v-model="drawer" />
     <NavDrawer v-bind.sync="{ drawer }" />
     <v-content>
