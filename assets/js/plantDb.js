@@ -1,4 +1,4 @@
-export const labels = [
+const labels = [
   {
     name: 'Swamp banksia',
     scientificName: 'Banksia littoralis'
@@ -53,7 +53,7 @@ export const labels = [
   }
 ]
 
-export const locations = [ // eslint-disable-line no-unused-vars
+const locations = [
   { lat: -31.978303, lng: 115.816732 }, // Swamp banksia
   { lat: -31.983334, lng: 115.819156 }, // Wickham's grevillea
   { lat: -31.983057, lng: 115.819128 }, // Acorn banksia
@@ -68,3 +68,5 @@ export const locations = [ // eslint-disable-line no-unused-vars
   { lat: -31.976957, lng: 115.819052 }, // Emma
   { lat: -31.979699, lng: 115.816948 } // Grass tree
 ]
+
+export { labels, locations }
