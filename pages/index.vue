@@ -18,6 +18,7 @@
 
 <script>
 import GoogleMap from '@/components/GoogleMap.vue'
+import { uwaMapSettings } from '@/assets/js/mapSettings'
 
 export default {
   components: {
@@ -28,7 +29,8 @@ export default {
       apiKey: process.env.googleMapsApi,
       mapConfig: {
         center: { lat: -31.9754738, lng: 115.8166837 },
-        zoom: 15
+        zoom: 15,
+        ...uwaMapSettings
       }
     }
   }
