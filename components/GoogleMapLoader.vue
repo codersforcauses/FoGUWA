@@ -1,6 +1,14 @@
 <template>
   <div ref="googleMap" class="google-map">
     <!-- The Google Maps API will make use of this div. -->
+    <!-- Slot to expose google api and map instance. -->
+    <template v-if="Boolean(this.google) && Boolean(this.map)">
+      <slot
+        :google="google"
+        :map="map"
+      />
+    </template>
+    <!-- Loading icon/message as JS API is fetched. -->
     <div v-show="map === null" class="loading-container">
       <div class="loading-item">
         <v-progress-circular
