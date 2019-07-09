@@ -2,11 +2,9 @@ export const uwaMapSettings = {
   // Disable steet view
   streetViewControl: false,
   // Map type options
-  mapTypeControlOptions: {
-    // mapTypeIds: ['roadmap', 'terrain', 'satellite', 'hybrid']
-    mapTypeIds: ['roadmap', 'satellite']
-  },
   mapTypeId: 'roadmap',
+  // Map UI controls
+  mapTypeControl: false,
   // Custom styling
   styles: [
     {
