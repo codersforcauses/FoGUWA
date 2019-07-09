@@ -22,6 +22,7 @@ import { labels, locations } from '@/assets/js/plantDb'
 
 export default {
   props: {
+    // These are the attributes exposed to the parent component
     mapConfig: {
       type: Object,
       default: function () {
@@ -37,7 +38,7 @@ export default {
     }
   },
   data: function () {
-    // Data managed by the component and accessible to the parent
+    // Data managed by, and local to, this component
     return {
       google: null,
       map: null
@@ -53,6 +54,7 @@ export default {
     this.initMap()
   },
   methods: {
+    // The callback made after the Google Maps JS API loads
     initMap() {
       // Fetch the HTML element for the map, with the given ref value
       const mapContainer = this.$refs.googleMap
