@@ -8,6 +8,7 @@
 
 * Make sure you have node v12 or higher and yarn installed.
 * If you're working on windows, I would recommend you use Git-bash for your Git needs and as the main terminal for this project. Make sure that you have configured Git to use `LF` as your line endings and not `CRLF` which is default on windows.
+* Get the `.env` file from a member of the team and place it in the root of the project (i.e. in the same location where `package.json` is)
 
 ``` bash
 # install dependencies
@@ -40,6 +41,7 @@ The project will expose developers to Progressive Web Applications (PWAs), a des
 - NuxtJS (Front-end Framework which is based off VueJS)
 - MongoDB (NoSQL Database to be used if needed. Doesn't seem like it's required for phase 1)
 - Jest (Test Framework)
+- Vuetify (Component Library)
 
 ## Project Working
 
@@ -63,7 +65,14 @@ During the summer, to make it easier for the client to modify the data on the we
 
 the scope may be increased later down the line.
 
-## Useful APIs
+## Useful APIs and Tutorials
+
+The links to API's we're using in this project (in one place):
+- [Nuxt.js](https://nuxtjs.org/guide/directory-structure)
+= [Vue.js](https://vuejs.org/v2/guide/)
+- [Vuetify](https://vuetifyjs.com/en/getting-started/quick-start)
+- [Google Maps](https://developers.google.com/maps/documentation/javascript/tutorial)
+- [Node.js](https://nodejs.org/api/)
 
 For the maps, the majors mapping-software to display on the web are:
 - [Mapbox](https://docs.mapbox.com/mapbox-gl-js/api/)
@@ -83,11 +92,6 @@ If you would like to use youtube to watch tutorials, here are a few reputed ones
 ## Development Team
 - Jeremiah Pinto (Project Manager/ Tech Lead)
 - Thai Nguyen (Committee Member)
-- Ethan Pui
-- Jordi Hermoso
-- Sean Sim
-- Zahra Ussi
-- Latrice Kong
 - Cassie Ritchie
 - Adrian Tan
 - Jurek Malarecki
