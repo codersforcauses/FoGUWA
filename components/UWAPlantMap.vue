@@ -19,19 +19,12 @@
 import GoogleMapLoader from './GoogleMapLoader'
 import GoogleMapMarker from './GoogleMapMarker'
 import { uwaMapSettings } from '@/assets/js/mapSettings'
+import { labels, locations } from '@/assets/js/plantDb'
 
 export default {
   components: {
     GoogleMapLoader,
     GoogleMapMarker
-  },
-  data() {
-    return {
-      markers: [
-        { id: 'a', position: { lat: -31.976548, lng: 115.815182 } }, // Stirling Hwy
-        { id: 'b', position: { lat: -31.975092, lng: 115.820557 } } // Mounts Bay Rd
-      ]
-    }
   },
   computed: {
     apiKey() {
@@ -43,6 +36,16 @@ export default {
         zoom: 15,
         ...uwaMapSettings
       }
+    },
+    markers() {
+      // Generate array of markers
+      return locations.map((location, i) => {
+        return {
+          id: i,
+          label: labels[i].name,
+          position: location
+        }
+      })
     }
   }
 }

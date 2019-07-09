@@ -26,7 +26,6 @@
 
 <script>
 import GoogleMapsApiLoader from 'google-maps-api-loader'
-import { labels, locations } from '@/assets/js/plantDb'
 
 export default {
   props: {
@@ -68,14 +67,6 @@ export default {
       const mapContainer = this.$refs.googleMap
       // Create the map instance
       this.map = new this.google.maps.Map(mapContainer, this.mapConfig)
-      // Add plant markers.
-      const markers = locations.map((location, i) => { // eslint-disable-line no-unused-vars
-        return new this.google.maps.Marker({
-          position: location,
-          label: labels[i].name,
-          map: this.map
-        })
-      })
     }
   }
 }

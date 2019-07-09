@@ -21,6 +21,7 @@ export default {
   },
   mounted() {
     this.markerInst = new this.google.maps.Marker({
+      label: this.marker.label,
       position: this.marker.position,
       map: this.map
     })
