@@ -21,6 +21,15 @@ import GoogleMapMarker from './GoogleMapMarker'
 import { uwaMapSettings } from '@/assets/js/mapSettings'
 import { labels, locations } from '@/assets/js/plantDb'
 
+// Use https://www.gps-coordinates.net/ to easily fetch coordinates
+const UWA_BOUNDS = {
+  north: -31.972979992153224,
+  south: -31.98713100347039,
+  west: 115.81349721126503,
+  east: 115.82249284467866
+}
+const UWA_COORDS = { lat: -31.9804624, lng: 115.818 }
+
 export default {
   components: {
     GoogleMapLoader,
@@ -32,7 +41,13 @@ export default {
     },
     mapConfig() {
       return {
-        center: { lat: -31.9754738, lng: 115.8166837 },
+        center: UWA_COORDS,
+        restriction: {
+          latLngBounds: UWA_BOUNDS,
+          strictBounds: false
+        },
+        minZoom: 7,
+        maxZoom: 21,
         zoom: 15,
         ...uwaMapSettings
       }
