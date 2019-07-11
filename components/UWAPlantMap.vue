@@ -35,6 +35,12 @@ export default {
     GoogleMapLoader,
     GoogleMapMarker
   },
+  data() {
+    return {
+      geolocatorId: null,
+      userLocation: null
+    }
+  },
   computed: {
     apiKey() {
       return process.env.googleMapsApi.toString()
@@ -61,6 +67,64 @@ export default {
           position: location
         }
       })
+    }
+  },
+  mounted() {
+    // Setup the geolocator to access the devices location
+    const options = {
+      enableHighAccuracy: false,
+      timeout: 5000,
+      maximumAge: 0
+    }
+    this.geolocatorId = navigator.geolocation.watchPosition(this.geolocationSuccess, this.geolocationError, options)
+  },
+  destroyed() {
+    // Remove the geolocation watcher
+    if (this.geolocatorId) {
+      navigator.geolocation.clearWatch(this.geolocatorId)
+    }
+  },
+  methods: {
+    geolocationSuccess(location) {
+      this.userLocation = {
+        id: -1,
+        label: 'user',
+        position: { lat: location.latitude, lng: location.longitude }
+      }
+    },
+    geolocationError(error) {
+      const errorEvent = {
+        type: null,
+        message: null
+      }
+      // Sanitise the error message
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
+          errorEvent.type = 'info'
+          errorEvent.message = 'Allow location access to view your current location.'
+          break
+        case error.POSITION_UNAVAILABLE:
+          errorEvent.type = 'warn'
+          errorEvent.message = 'Location information is unavailable.'
+          break
+        case error.TIMEOUT:
+          errorEvent.type = 'error'
+          errorEvent.message = 'Location information is unavailable.'
+          break
+        case error.UNKNOWN_ERROR:
+        default:
+          errorEvent.type = 'error'
+          errorEvent.message = 'Location information is unavailable.'
+          break
+      }
+      // Propagate the error
+      if (errorEvent.type === 'info') {
+        console.log('INFO(' + error.code + '): ' + error.message) // eslint-disable-line no-console
+      } else if (errorEvent.type === 'warn') {
+        console.warn('WARN(' + error.code + '): ' + error.message) // eslint-disable-line no-console
+      } else {
+        console.error('ERROR(' + error.code + '):' + errorEvent.message) // eslint-disable-line no-console
+      }
     }
   }
 }
