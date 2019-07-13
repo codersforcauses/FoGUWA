@@ -76,5 +76,11 @@ module.exports = {
     */
     extend(config, ctx) {
     }
+  },
+  /*
+  ** Environmental variables
+  */
+  env: {
+    googleMapsApi: process.env.GOOGLE_MAPS_API_KEY || ''
   }
 }
