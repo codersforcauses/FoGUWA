@@ -42,10 +42,17 @@ export default {
     apiKey: {
       type: String,
       required: true
+    },
+    mapInst: {
+      type: Object,
+      default: null
+    },
+    googleInst: {
+      type: Object,
+      default: null
     }
   },
-  data: function () {
-    // Data managed by, and local to, this component
+  data() {
     return {
       google: null,
       map: null
@@ -58,6 +65,7 @@ export default {
     })
     // Expose the API for future use and initialise the map
     this.google = googleMapApi
+    this.$emit('update:googleInst', this.google)
     this.initMap()
   },
   methods: {
@@ -67,6 +75,7 @@ export default {
       const mapContainer = this.$refs.googleMap
       // Create the map instance
       this.map = new this.google.maps.Map(mapContainer, this.mapConfig)
+      this.$emit('update:mapInst', this.map)
     }
   }
 }

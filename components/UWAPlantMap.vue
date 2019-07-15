@@ -2,6 +2,8 @@
   <google-map-loader
     :map-config="mapConfig"
     :api-key="apiKey"
+    :map-inst.sync="map"
+    :google-inst.sync="google"
   >
     <template v-slot:default="mapProps">
       <GoogleMapMarker
@@ -35,6 +37,12 @@ export default {
     GoogleMapLoader,
     GoogleMapMarker
   },
+  data() {
+    return {
+      map: null,
+      google: null
+    }
+  },
   computed: {
     apiKey() {
       return process.env.googleMapsApi.toString()
@@ -61,6 +69,22 @@ export default {
           position: location
         }
       })
+    }
+  },
+  watch: {
+    map(val) {
+      this.loadMarkers()
+    },
+    google(val) {
+      this.loadMarkers()
+    }
+  },
+  methods: {
+    loadMarkers() {
+      if (this.map && this.google) {
+        // Will run twice
+        console.log('Loading markers...') // eslint-disable-line
+      }
     }
   }
 }
