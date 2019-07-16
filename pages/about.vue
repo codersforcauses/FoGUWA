@@ -1,22 +1,23 @@
 <template>
   <v-container>
     <v-layout row wrap>
-      <v-flex xs12 md3 lg2 style="padding: 20px 0 20px 0">
+      <v-flex xs12 sm6 md3 lg2 style="padding: 20px 0 20px 0">
         <v-img :src="require('~/static/cfc-icon.png')" />
       </v-flex>
-      <v-flex xs12 md9 lg10>
+      <v-flex xs12 sm6 md9 lg10>
         <v-card-title class="display-1">
           About Coders for Causes
         </v-card-title>
         <v-card-text style="text-align: justify">
           <p>Coders for Causes (CFC) are student developers for charities and Not-For-Profits. Visit our website below for more information.</p>
-          <a target="_blank" href="https://codersforcauses.org/landing">Coders for Causes website</a>
+          <a target="_blank" href="https://codersforcauses.org/landing">Coders for Causes website<br></a>
+          <a target="blank" href="https://www.facebook.com/codersforcauses">Coders for Causes Facebook</a>
         </v-card-text>
       </v-flex>
-      <v-flex xs12 md3 lg2 style="padding: 20px 0 20px 0">
+      <v-flex xs12 sm6 md3 lg2 style="padding: 20px 0 20px 0">
         <v-img :src="require('~/static/FoGUWA.jpg')" />
       </v-flex>
-      <v-flex xs12 md9 lg10>
+      <v-flex xs12 sm6 md9 lg10>
         <v-card-title class="display-1">
           About Friends of the Grounds of UWA
         </v-card-title>
