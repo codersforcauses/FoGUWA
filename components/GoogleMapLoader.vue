@@ -9,18 +9,23 @@
       />
     </template>
     <!-- Loading icon/message as JS API is fetched. -->
-    <v-container v-show="!google || !map" fluid fill-height>
-      <v-layout align-center justify-center column>
-        <v-progress-circular
-          :size="70"
-          :width="7"
-          color="green"
-          indeterminate
-          class="mb-4"
-        />
-        <span>Loading map...</span>
-      </v-layout>
-    </v-container>
+    <v-layout
+      v-show="!google || !map"
+      align-center
+      justify-center
+      column
+      fluid
+      fill-height
+    >
+      <v-progress-circular
+        :size="70"
+        :width="7"
+        color="green"
+        indeterminate
+        class="mb-4"
+      />
+      <span>Loading map...</span>
+    </v-layout>
   </div>
 </template>
 
