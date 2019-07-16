@@ -29,11 +29,7 @@ export default {
     return {
       map: null,
       google: null,
-      markerInstances: []
-    }
-  },
-  data() {
-    return {
+      markerInstances: [],
       geolocatorId: null,
       userLocation: null
     }
@@ -71,7 +67,17 @@ export default {
     },
     markers(val) {
       this.loadMarkers()
+    },
+    userLocation(val) {
+      // draw on map
+      console.log(this.userLocation) // eslint-disable-line
     }
+  },
+  mounted() {
+    this.geolocatorEnable()
+  },
+  destroyed() {
+    this.geolocatorDisable()
   },
   methods: {
     loadMarkers() {
@@ -118,24 +124,27 @@ export default {
           }
         })
       }
-    }
-  },
-  mounted() {
-    // Setup the geolocator to access the devices location
-    const options = {
-      enableHighAccuracy: false,
-      timeout: 5000,
-      maximumAge: 0
-    }
-    this.geolocatorId = navigator.geolocation.watchPosition(this.geolocationSuccess, this.geolocationError, options)
-  },
-  destroyed() {
-    // Remove the geolocation watcher
-    if (this.geolocatorId) {
-      navigator.geolocation.clearWatch(this.geolocatorId)
-    }
-  },
-  methods: {
+    },
+    // Geolocator
+    geolocatorEnable() {
+      // Check if it's already setup
+      if (this.geolocatorId) {
+        return
+      }
+      // Setup the geolocator to access the devices location
+      const options = {
+        enableHighAccuracy: false,
+        timeout: 5000,
+        maximumAge: 0
+      }
+      this.geolocatorId = navigator.geolocation.watchPosition(this.geolocationSuccess, this.geolocationError, options)
+    },
+    geolocatorDisable() {
+      // Remove the geolocation watcher
+      if (this.geolocatorId) {
+        navigator.geolocation.clearWatch(this.geolocatorId)
+      }
+    },
     geolocationSuccess(location) {
       this.userLocation = {
         id: -1,
