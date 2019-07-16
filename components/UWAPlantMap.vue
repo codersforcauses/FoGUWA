@@ -9,10 +9,8 @@
 
 <script>
 import GoogleMapLoader from './GoogleMapLoader'
-// import GoogleMapMarker from './GoogleMapMarker'
 import { uwaMapSettings } from '@/assets/js/mapSettings'
-// import { labels, locations } from '@/assets/js/plantDb'
-import { plants } from '@/static/plantdb.json'
+import { plants } from '@/assets/plantdb.json'
 
 // Use https://www.gps-coordinates.net/ to easily fetch coordinates
 const UWA_BOUNDS = {
