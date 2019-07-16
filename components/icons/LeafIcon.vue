@@ -23,18 +23,6 @@
 <script>
 export default {
   props: {
-    google: {
-      type: Object,
-      required: true
-    },
-    map: {
-      type: Object,
-      required: true
-    },
-    marker: {
-      type: Object,
-      required: true
-    },
     iconName: {
       type: String,
       default: 'leaf'
@@ -55,26 +43,6 @@ export default {
       type: String,
       default: '#004d00'
     }
-  },
-  data() {
-    return {
-      markerInst: null
-    }
-  },
-  mounted() {
-    const leafIcon = {
-      url: 'data:image/svg+xml;utf8,' + encodeURIComponent(this.$refs.leafIconSVG.outerHTML),
-      size: null, // new this.google.maps.Size(24, 24),
-      origin: null, // new this.google.maps.Point(0, 0),
-      anchor: null, // new this.google.maps.Point(12, 12),
-      scaledSize: new this.google.maps.Size(this.width, this.height)
-    }
-    this.markerInst = new this.google.maps.Marker({
-      label: this.marker.label,
-      position: this.marker.position,
-      icon: leafIcon,
-      map: this.map
-    })
   }
 }
 </script>
