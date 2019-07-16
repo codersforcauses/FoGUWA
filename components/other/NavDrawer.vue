@@ -38,9 +38,9 @@ export default {
           to: '/'
         },
         {
-          icon: 'bubble_chart',
-          title: 'Inspire',
-          to: '/inspire'
+          icon: 'info',
+          title: 'About',
+          to: '/about'
         }
       ]
     }
