@@ -5,6 +5,7 @@ export const uwaMapSettings = {
   mapTypeId: 'roadmap',
   // Map UI controls
   mapTypeControl: false,
+  fullscreenControl: false,
   // Custom styling
   styles: [
     {

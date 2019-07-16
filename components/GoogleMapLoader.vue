@@ -9,18 +9,23 @@
       />
     </template>
     <!-- Loading icon/message as JS API is fetched. -->
-    <div v-show="!google || !map" class="loading-container">
-      <div class="loading-item">
-        <v-progress-circular
-          :size="70"
-          :width="7"
-          color="green"
-          indeterminate
-          style="margin-left:auto;margin-right:auto"
-        />
-        <span>Loading map...</span>
-      </div>
-    </div>
+    <v-layout
+      v-show="!google || !map"
+      align-center
+      justify-center
+      column
+      fluid
+      fill-height
+    >
+      <v-progress-circular
+        :size="70"
+        :width="7"
+        color="green"
+        indeterminate
+        class="mb-4"
+      />
+      <span>Loading map...</span>
+    </v-layout>
   </div>
 </template>
 
@@ -42,10 +47,17 @@ export default {
     apiKey: {
       type: String,
       required: true
+    },
+    mapInst: {
+      type: Object,
+      default: null
+    },
+    googleInst: {
+      type: Object,
+      default: null
     }
   },
-  data: function () {
-    // Data managed by, and local to, this component
+  data() {
     return {
       google: null,
       map: null
@@ -58,6 +70,7 @@ export default {
     })
     // Expose the API for future use and initialise the map
     this.google = googleMapApi
+    this.$emit('update:googleInst', this.google)
     this.initMap()
   },
   methods: {
@@ -67,6 +80,7 @@ export default {
       const mapContainer = this.$refs.googleMap
       // Create the map instance
       this.map = new this.google.maps.Map(mapContainer, this.mapConfig)
+      this.$emit('update:mapInst', this.map)
     }
   }
 }
@@ -78,20 +92,5 @@ export default {
 .google-map {
   height: 100%;
   width: 100%;
-}
-
-.loading-container {
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  height: 100%;
-}
-
-.loading-item {
-  margin-top: auto;
-  margin-bottom: auto;
-  display: flex;
-  flex-direction: column;
-  align-content: center;
 }
 </style>
