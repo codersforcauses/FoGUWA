@@ -70,14 +70,12 @@ export default {
   methods: {
     loadMarkers() {
       if (this.map && this.google) {
-        console.log('Loading markers...') // eslint-disable-line
         // Clear old markers
         for (const marker of this.markerInstances) {
           marker.setMap(null)
         }
         this.markerInstances = []
         // Create new markers and store them
-        console.log('# of markers: ' + this.markers.length) // eslint-disable-line
         this.markers.forEach((marker, index) => {
           const leafIcon = {
             path: 'M17 8C8 10 5.901 16.166 3.816 21.343l1.891.65.954-2.292c.482.168.976.299 1.339.299C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z',
