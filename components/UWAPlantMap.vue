@@ -52,8 +52,6 @@ export default {
     markers() {
       // Generate array of markers
       const markers = [...plants] // Copy the array
-      // Load the markers
-      // this.loadMarkers() // TODO why does this cause infinite recursion
       return markers
     }
   },
@@ -63,6 +61,9 @@ export default {
       this.loadMarkers()
     },
     google(val) {
+      this.loadMarkers()
+    },
+    markers(val) {
       this.loadMarkers()
     }
   },
