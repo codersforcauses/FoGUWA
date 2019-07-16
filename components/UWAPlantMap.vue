@@ -149,7 +149,7 @@ export default {
       this.userLocation = {
         id: -1,
         label: 'user',
-        position: { lat: location.latitude, lng: location.longitude }
+        position: { lat: location.coords.latitude, lng: location.coords.longitude }
       }
     },
     geolocationError(error) {
