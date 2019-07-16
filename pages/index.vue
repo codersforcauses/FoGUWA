@@ -7,6 +7,7 @@
     <v-card
       height="100%"
       width="100%"
+      tile
     >
       <UWAPlantMap />
     </v-card>
