@@ -22,11 +22,6 @@
 
 <script>
 
-export default {
-  props: {
-    fixed: Boolean
-  }
-}
 </script>
 
 <style>
