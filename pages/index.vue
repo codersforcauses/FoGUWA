@@ -9,6 +9,7 @@
       width="100%"
       tile
     >
+      <Searchbar />
       <UWAPlantMap />
     </v-card>
   </v-layout>
@@ -16,10 +17,12 @@
 
 <script>
 import UWAPlantMap from '@/components/UWAPlantMap.vue'
+import Searchbar from '~/components/other/Searchbar.vue'
 
 export default {
   components: {
-    UWAPlantMap
+    UWAPlantMap,
+    Searchbar
   }
 }
 </script>
