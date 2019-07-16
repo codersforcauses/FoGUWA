@@ -1,8 +1,8 @@
 <template>
   <v-container>
     <v-layout row wrap>
-      <v-flex xs12 sm6 md3 lg2 style="padding: 20px 0 20px 0">
-        <v-img :src="require('~/static/cfc-icon.png')" />
+      <v-flex xs12 sm6 md3 lg2 class="py-3">
+        <v-img :src="require('~/assets/images/cfc-icon.png')" />
       </v-flex>
       <v-flex xs12 sm6 md9 lg10>
         <v-card-title class="display-1">
@@ -14,8 +14,8 @@
           <a target="blank" href="https://www.facebook.com/codersforcauses">Coders for Causes Facebook</a>
         </v-card-text>
       </v-flex>
-      <v-flex xs12 sm6 md3 lg2 style="padding: 20px 0 20px 0">
-        <v-img :src="require('~/static/FoGUWA.jpg')" />
+      <v-flex xs12 sm6 md3 lg2 class="py-3">
+        <v-img :src="require('~/assets/images/FoGUWA.jpg')" />
       </v-flex>
       <v-flex xs12 sm6 md9 lg10>
         <v-card-title class="display-1">
@@ -23,7 +23,7 @@
         </v-card-title>
         <v-card-text style="text-align: justify">
           <p>Friends of the Grounds UWA (FoGUWA) was established in the 2000 with four core objectives: </p>
-          <ol style="margin-bottom: 16px;">
+          <ol class="mb-3">
             <li>To encourage the University and wider Western Australian community to take an active interest in UWA’s grounds as an important part of the heritage of this State</li>
             <li>To enhance the profile of the university’s grounds by developing an annual program of activities</li>
             <li>To provide information about the grounds through publications, lectures and events</li>
