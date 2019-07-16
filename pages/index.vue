@@ -16,7 +16,7 @@
 
 <script>
 import GoogleMap from '~/components/GoogleMap.vue'
-import Searchbar from '~/components/other/searchbar.vue'
+import Searchbar from '~/components/other/Searchbar.vue'
 
 export default {
   components: {
