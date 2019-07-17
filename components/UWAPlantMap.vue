@@ -151,38 +151,32 @@ export default {
       }
     },
     geolocationError(error) {
-      const errorEvent = {
+      const logEvent = {
         type: null,
         message: null
       }
       // Sanitise the error message
       switch (error.code) {
         case error.PERMISSION_DENIED:
-          errorEvent.type = 'info'
-          errorEvent.message = 'Allow location access to view your current location.'
+          logEvent.type = 'info'
+          logEvent.message = 'Allow location access to view your current location. This may require you to refresh your browser.'
           break
         case error.POSITION_UNAVAILABLE:
-          errorEvent.type = 'warn'
-          errorEvent.message = 'Location information is unavailable.'
+          logEvent.type = 'warn'
+          logEvent.message = 'Location information is unavailable.'
           break
         case error.TIMEOUT:
-          errorEvent.type = 'error'
-          errorEvent.message = 'Location information is unavailable.'
+          logEvent.type = 'error'
+          logEvent.message = 'Location information is unavailable.'
           break
         case error.UNKNOWN_ERROR:
         default:
-          errorEvent.type = 'error'
-          errorEvent.message = 'Location information is unavailable.'
+          logEvent.type = 'error'
+          logEvent.message = 'Location information is unavailable.'
           break
       }
-      // Propagate the error
-      if (errorEvent.type === 'info') {
-        console.log('INFO(' + error.code + '): ' + error.message) // eslint-disable-line no-console
-      } else if (errorEvent.type === 'warn') {
-        console.warn('WARN(' + error.code + '): ' + error.message) // eslint-disable-line no-console
-      } else {
-        console.error('ERROR(' + error.code + '):' + errorEvent.message) // eslint-disable-line no-console
-      }
+      // Propagate the event
+      this.$emit('log', logEvent)
     }
   }
 }
