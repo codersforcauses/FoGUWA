@@ -82,5 +82,19 @@ module.exports = {
   */
   env: {
     googleMapsApi: process.env.GOOGLE_MAPS_API_KEY || ''
+  },
+  /*
+  ** PWA setup
+  */
+  manifest: {
+    name: 'Friends of the Grounds UWA',
+    short_name: 'FoGUWA',
+    start_url: '/',
+    display: 'standalone',
+    background_color: '#FFFFFF',
+    theme_color: '#008000'
+  },
+  meta: {
+    mobileAppIOS: true
   }
 }
