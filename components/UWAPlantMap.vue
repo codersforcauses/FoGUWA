@@ -30,6 +30,7 @@ export default {
       map: null,
       google: null,
       markerInstances: [],
+      userMarker: null,
       geolocatorId: null,
       userLocation: null
     }
@@ -69,8 +70,17 @@ export default {
       this.loadMarkers()
     },
     userLocation(val) {
-      // draw on map
-      console.log(this.userLocation) // eslint-disable-line
+      // Draw user on map
+      if (this.userMarker == null) {
+        this.userMarker = new this.google.maps.Marker({
+          position: this.userLocation.position,
+          animation: this.google.maps.Animation.DROP,
+          zIndex: 10,
+          map: this.map
+        })
+      } else {
+        this.userMarker.setPosition(this.userLocation.position)
+      }
     }
   },
   destroyed() {
@@ -152,6 +162,10 @@ export default {
       if (this.geolocatorId != null) {
         navigator.geolocation.clearWatch(this.geolocatorId)
         this.geolocatorId = null
+      }
+      if (this.userMarker != null) {
+        this.userMarker.setMap(null)
+        this.userMarker = null
       }
     },
     geolocationSuccess(location) {
