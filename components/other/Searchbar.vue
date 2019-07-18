@@ -10,7 +10,7 @@
       single-line
     />
 
-    <v-btn icon>
+    <v-btn icon @click="$emit('toggle-geolocation')">
       <v-icon>my_location</v-icon>
     </v-btn>
 
@@ -21,7 +21,8 @@
 </template>
 
 <script>
-
+export default {
+}
 </script>
 
 <style>

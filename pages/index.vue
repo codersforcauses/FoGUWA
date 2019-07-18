@@ -9,8 +9,11 @@
       height="100%"
       width="100%"
     >
-      <Searchbar />
-      <UWAPlantMap
+      <searchbar
+        @toggle-geolocation="setupGeolocation"
+      />
+      <uwa-plant-map
+        ref="plantMap"
         @log="handleLog"
       />
       <v-snackbar
@@ -38,7 +41,7 @@ import Searchbar from '~/components/other/Searchbar.vue'
 
 export default {
   components: {
-    UWAPlantMap,
+    'uwa-plant-map': UWAPlantMap,
     Searchbar
   },
   data() {
@@ -46,13 +49,12 @@ export default {
       snackbar: false,
       snackbarTimeout: 6000,
       snackbarColour: 'primary',
-      snackbarText: 'Hello, I\'m a snackbar'
+      snackbarText: ''
     }
   },
   methods: {
     handleLog(event) {
-      console.log(event) // eslint-disable-line
-      this.snackbarColour = event.type === 'warn' ? 'error' : event.type
+      this.snackbarColour = event.type
       this.snackbarText = event.message
       this.snackbar = true
       // Propagate the error
@@ -63,6 +65,9 @@ export default {
       // } else {
       //   console.error('ERROR(' + error.code + '):' + errorEvent.message) // eslint-disable-line no-console
       // }
+    },
+    setupGeolocation() {
+      this.$refs.plantMap.geolocatorEnable()
     }
   }
 }

@@ -73,10 +73,8 @@ export default {
       console.log(this.userLocation) // eslint-disable-line
     }
   },
-  mounted() {
-    this.geolocatorEnable()
-  },
   destroyed() {
+    // Disable the geolocator, if necessary
     this.geolocatorDisable()
   },
   methods: {
@@ -124,23 +122,36 @@ export default {
       }
     },
     // Geolocator
+    geolocatorTest() {
+      if (!navigator.geolocation) {
+        this.$emit('geolocator-unavailable')
+        this.$emit('log', { type: 'error', message: 'Geolocation is not available on this browser or device.' })
+        return false
+      }
+      return true
+    },
     geolocatorEnable() {
+      // Check if geolocation is available
+      if (!this.geolocatorTest()) {
+        return
+      }
       // Check if it's already setup
-      if (this.geolocatorId) {
+      if (this.geolocatorId != null) {
         return
       }
       // Setup the geolocator to access the devices location
       const options = {
         enableHighAccuracy: false,
-        timeout: 5000,
+        // timeout: 5000,
         maximumAge: 0
       }
       this.geolocatorId = navigator.geolocation.watchPosition(this.geolocationSuccess, this.geolocationError, options)
     },
     geolocatorDisable() {
       // Remove the geolocation watcher
-      if (this.geolocatorId) {
+      if (this.geolocatorId != null) {
         navigator.geolocation.clearWatch(this.geolocatorId)
+        this.geolocatorId = null
       }
     },
     geolocationSuccess(location) {
@@ -151,6 +162,7 @@ export default {
       }
     },
     geolocationError(error) {
+      // Setup error message
       const logEvent = {
         type: null,
         message: null
@@ -160,19 +172,23 @@ export default {
         case error.PERMISSION_DENIED:
           logEvent.type = 'info'
           logEvent.message = 'Allow location access to view your current location. This may require you to refresh your browser.'
+          this.geolocatorDisable()
           break
         case error.POSITION_UNAVAILABLE:
-          logEvent.type = 'warn'
+          logEvent.type = 'error'
           logEvent.message = 'Location information is unavailable.'
+          this.geolocatorDisable()
           break
         case error.TIMEOUT:
           logEvent.type = 'error'
           logEvent.message = 'Location information is unavailable.'
+          this.geolocatorDisable()
           break
         case error.UNKNOWN_ERROR:
         default:
           logEvent.type = 'error'
           logEvent.message = 'Location information is unavailable.'
+          this.geolocatorDisable()
           break
       }
       // Propagate the event
