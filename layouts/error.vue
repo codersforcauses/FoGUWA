@@ -8,10 +8,18 @@
         <h1 v-else class="display-2 font-weight-bold">
           {{ otherError }}
         </h1>
-        <v-btn round color="primary" dark nuxt to="/">
-          <v-icon dark left>
+        <v-btn
+          round
+          color="primary"
+          dark
+          nuxt
+          to="/"
+          class="mt-4"
+        >
+          <v-icon dark class="mr-2">
             arrow_back
-          </v-icon>Return to Home page
+          </v-icon>
+          Return to Home page
         </v-btn>
       </v-flex>
     </v-layout>
