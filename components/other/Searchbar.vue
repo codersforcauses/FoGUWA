@@ -10,7 +10,13 @@
       single-line
     />
 
-    <v-btn icon @click="$emit('toggle-geolocation')">
+    <v-btn
+      icon
+      :outline="geoBtnOutline"
+      :loading="geoBtnLoading"
+      :color="geoBtnColor"
+      @click="$emit('toggle-geolocation')"
+    >
       <v-icon>my_location</v-icon>
     </v-btn>
 
@@ -22,6 +28,15 @@
 
 <script>
 export default {
+  data() {
+    return {
+      geoBtnLoading: false,
+      geoBtnOutline: false,
+      geoBtnColor: 'default'
+    }
+  },
+  methods: {
+  }
 }
 </script>
 
