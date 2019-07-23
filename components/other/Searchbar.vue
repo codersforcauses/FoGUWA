@@ -11,6 +11,7 @@
     />
 
     <v-btn
+      v-show="!geoBtnHidden"
       icon
       :outline="geoBtnOutline"
       :loading="geoBtnLoading"
@@ -28,14 +29,47 @@
 
 <script>
 export default {
+  props: {
+    userPosition: {
+      type: Object,
+      default: function () {
+        return {
+          lat: null,
+          lng: null
+        }
+      }
+    }
+  },
   data() {
     return {
+      geoBtnHidden: false,
       geoBtnLoading: false,
       geoBtnOutline: false,
       geoBtnColor: 'default'
     }
   },
   methods: {
+    setGeoBtnState(state) {
+      switch (state) {
+        case 'ready':
+          this.geoBtnLoading = false
+          this.geoBtnOutline = false
+          this.geoBtnColor = 'default'
+          break
+        case 'loading':
+          this.geoBtnLoading = true
+          this.geoBtnOutline = false
+          this.geoBtnColor = 'primary'
+          break
+        case 'active':
+          this.geoBtnLoading = false
+          this.geoBtnOutline = true
+          this.geoBtnColor = 'primary'
+          break
+        default:
+          break
+      }
+    }
   }
 }
 </script>
