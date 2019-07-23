@@ -16,7 +16,7 @@
       :outline="geoBtnOutline"
       :loading="geoBtnLoading"
       :color="geoBtnColor"
-      @click="$emit('toggle-geolocation')"
+      @click="geoBtnClicked"
     >
       <v-icon>my_location</v-icon>
     </v-btn>
@@ -30,14 +30,9 @@
 <script>
 export default {
   props: {
-    userPosition: {
+    userPositionInst: {
       type: Object,
-      default: function () {
-        return {
-          lat: null,
-          lng: null
-        }
-      }
+      default: null
     }
   },
   data() {
@@ -45,17 +40,20 @@ export default {
       geoBtnHidden: false,
       geoBtnLoading: false,
       geoBtnOutline: false,
-      geoBtnColor: 'default'
+      geoBtnColor: 'default',
+      geoBtnState: 'ready',
+      geolocatorId: null,
+      userPosition: null
+    }
+  },
+  watch: {
+    userPosition(val) {
+      this.$emit('update:userPositionInst', this.userPosition)
     }
   },
   methods: {
     setGeoBtnState(state) {
       switch (state) {
-        case 'ready':
-          this.geoBtnLoading = false
-          this.geoBtnOutline = false
-          this.geoBtnColor = 'default'
-          break
         case 'loading':
           this.geoBtnLoading = true
           this.geoBtnOutline = false
@@ -66,9 +64,105 @@ export default {
           this.geoBtnOutline = true
           this.geoBtnColor = 'primary'
           break
+        case 'hidden':
+          this.geoBtnHidden = false
+          break
+        case 'ready':
         default:
+          this.geoBtnLoading = false
+          this.geoBtnOutline = false
+          this.geoBtnColor = 'default'
           break
       }
+      this.geoBtnState = state
+    },
+    geoBtnClicked() {
+      if (!this.isGeolocatorEnabled() && this.geoBtnState === 'ready') {
+        this.setGeoBtnState('loading')
+        new Promise((resolve) => { // eslint-disable-line
+          resolve(this.geolocatorEnable())
+        })
+      } else {
+        new Promise(() => { // eslint-disable-line
+          this.geolocatorDisable()
+        })
+      }
+    },
+    // Geolocator
+    geolocatorAvailabilityTest() {
+      if (!navigator.geolocation) {
+        this.setGeoBtnState('hidden')
+        this.$emit('log', { type: 'error', message: 'Geolocation is not available on this browser or device.' })
+        return false
+      }
+      return true
+    },
+    geolocatorEnable() {
+      // Check if geolocation is available
+      if (!this.geolocatorAvailabilityTest()) {
+        return null
+      }
+      // Check if it's already setup
+      if (this.isGeolocatorEnabled()) {
+        return this.geolocatorId
+      }
+      // Setup the geolocator to access the devices location
+      const options = {
+        enableHighAccuracy: true,
+        // timeout: 5000,
+        maximumAge: 0
+      }
+      this.geolocatorId = navigator.geolocation.watchPosition(this.geolocationSuccess, this.geolocationError, options)
+      return this.geolocatorId
+    },
+    isGeolocatorEnabled() {
+      return this.geolocatorId != null
+    },
+    geolocatorDisable() {
+      // Remove the geolocation watcher
+      if (this.isGeolocatorEnabled()) {
+        navigator.geolocation.clearWatch(this.geolocatorId)
+        this.geolocatorId = null
+        this.userPosition = null
+        this.setGeoBtnState('ready')
+      }
+    },
+    geolocationSuccess(location) {
+      this.setGeoBtnState('active')
+      this.userPosition = { lat: location.coords.latitude, lng: location.coords.longitude }
+    },
+    geolocationError(error) {
+      // Setup error message
+      const logEvent = {
+        type: null,
+        message: null
+      }
+      // Sanitise the error message
+      switch (error.code) {
+        case error.PERMISSION_DENIED:
+          logEvent.type = 'info'
+          logEvent.message = 'Allow location access to view your current location. This may require you to refresh your browser.'
+          this.geolocatorDisable()
+          break
+        case error.POSITION_UNAVAILABLE:
+          logEvent.type = 'error'
+          logEvent.message = 'Location information is unavailable.'
+          this.geolocatorDisable()
+          break
+        case error.TIMEOUT:
+          logEvent.type = 'error'
+          logEvent.message = 'Location information is unavailable.'
+          this.geolocatorDisable()
+          break
+        case error.UNKNOWN_ERROR:
+        default:
+          logEvent.type = 'error'
+          logEvent.message = 'Location information is unavailable.'
+          this.geolocatorDisable()
+          break
+      }
+      // Propagate the event
+      this.$emit('log', logEvent)
     }
   }
 }

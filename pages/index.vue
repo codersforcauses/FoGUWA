@@ -10,10 +10,12 @@
       width="100%"
     >
       <searchbar
-        @toggle-geolocation="setupGeolocation"
+        :user-position-inst.sync="userPosition"
+        @log="handleLog"
       />
       <uwa-plant-map
         ref="plantMap"
+        :user-position="userPosition"
         @log="handleLog"
       />
       <v-snackbar
@@ -49,11 +51,15 @@ export default {
       snackbar: false,
       snackbarTimeout: 6000,
       snackbarColour: 'primary',
-      snackbarText: ''
+      snackbarText: '',
+      userPosition: null
     }
   },
   methods: {
     handleLog(event) {
+      if (event.type === 'debug') {
+        return
+      }
       this.snackbarColour = event.type
       this.snackbarText = event.message
       this.snackbar = true
@@ -65,9 +71,6 @@ export default {
       // } else {
       //   console.error('ERROR(' + error.code + '):' + errorEvent.message) // eslint-disable-line no-console
       // }
-    },
-    setupGeolocation() {
-      this.$refs.plantMap.geolocatorEnable()
     }
   }
 }
