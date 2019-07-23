@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import { loggingLevels } from '@/assets/js/logging.js'
 import UWAPlantMap from '~/components/UWAPlantMap.vue'
 import Searchbar from '~/components/other/Searchbar.vue'
 
@@ -57,7 +58,7 @@ export default {
   },
   methods: {
     handleLog(event) {
-      if (event.type === 'debug') {
+      if (event.type === loggingLevels.DEBUG) {
         return
       }
       this.snackbarColour = event.type

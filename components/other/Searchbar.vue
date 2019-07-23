@@ -28,6 +28,8 @@
 </template>
 
 <script>
+import { loggingLevels } from '@/assets/js/logging.js'
+
 export default {
   props: {
     userPositionInst: {
@@ -92,7 +94,7 @@ export default {
     geolocatorAvailabilityTest() {
       if (!navigator.geolocation) {
         this.setGeoBtnState('hidden')
-        this.$emit('log', { type: 'error', message: 'Geolocation is not available on this browser or device.' })
+        this.$emit('log', { type: loggingLevels.ERROR, message: 'Geolocation is not available on this browser or device.' })
         return false
       }
       return true
@@ -140,23 +142,23 @@ export default {
       // Sanitise the error message
       switch (error.code) {
         case error.PERMISSION_DENIED:
-          logEvent.type = 'info'
+          logEvent.type = loggingLevels.INFO
           logEvent.message = 'Allow location access to view your current location. This may require you to refresh your browser.'
           this.geolocatorDisable()
           break
         case error.POSITION_UNAVAILABLE:
-          logEvent.type = 'error'
+          logEvent.type = loggingLevels.ERROR
           logEvent.message = 'Location information is unavailable.'
           this.geolocatorDisable()
           break
         case error.TIMEOUT:
-          logEvent.type = 'error'
+          logEvent.type = loggingLevels.ERROR
           logEvent.message = 'Location information is unavailable.'
           this.geolocatorDisable()
           break
         case error.UNKNOWN_ERROR:
         default:
-          logEvent.type = 'error'
+          logEvent.type = loggingLevels.ERROR
           logEvent.message = 'Location information is unavailable.'
           this.geolocatorDisable()
           break
