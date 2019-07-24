@@ -31,10 +31,14 @@
 </template>
 
 <script>
-import { count, plants } from '@/assets/plantdb.json'
-
 export default {
   props: {
+    dataset: {
+      type: Array,
+      default: () => {
+        return []
+      }
+    },
     searchResults: {
       type: Array,
       default: () => {
@@ -80,8 +84,7 @@ export default {
       if (this.searchLoading) return
       this.searchLoading = true
       // Load the input items
-      this.plants = plants
-      this.counts = count
+      this.plants = this.dataset
       this.searchLoading = false
       // TODO: query database for matches, e.g.
       // queryDatabasePromise('val').then((res) => {

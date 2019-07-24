@@ -10,7 +10,6 @@
 <script>
 import GoogleMapLoader from './GoogleMapLoader'
 import { uwaMapSettings } from '@/assets/js/mapSettings'
-import { plants } from '@/assets/plantdb.json'
 
 // Use https://www.gps-coordinates.net/ to easily fetch coordinates
 const UWA_BOUNDS = {
@@ -24,6 +23,20 @@ const UWA_COORDS = { lat: -31.9804624, lng: 115.818 }
 export default {
   components: {
     GoogleMapLoader
+  },
+  props: {
+    plants: {
+      type: Array,
+      default: () => {
+        return []
+      }
+    },
+    filteredPlants: {
+      type: Array,
+      default: () => {
+        return []
+      }
+    }
   },
   data() {
     return {
@@ -51,7 +64,7 @@ export default {
     },
     markers() {
       // Generate array of markers
-      const markers = [...plants] // Copy the array
+      const markers = [...this.plants] // Copy the array
       return markers
     }
   },
@@ -65,6 +78,21 @@ export default {
     },
     markers(val) {
       this.loadMarkers()
+    },
+    filteredPlants(val) {
+      const sortedNames = this.filteredPlants.map((entry) => {
+        return entry.name
+      })
+      sortedNames.sort()
+      // Clear bounce
+      for (const marker of this.markerInstances) {
+        marker.marker.setAnimation(null)
+      }
+      // Add bounce to matching plants
+      const matches = this.markerInstances.filter(marker => sortedNames.includes(marker.name))
+      for (const marker of matches) {
+        marker.marker.setAnimation(this.google.maps.Animation.BOUNCE)
+      }
     }
   },
   methods: {
@@ -72,7 +100,7 @@ export default {
       if (this.map && this.google) {
         // Clear old markers
         for (const marker of this.markerInstances) {
-          marker.setMap(null)
+          marker.marker.setMap(null)
         }
         this.markerInstances = []
         // Create new markers and store them
@@ -106,7 +134,11 @@ export default {
               icon: (marker.type === 'tree' ? leafIcon : statueIcon),
               map: this.map
             })
-            this.markerInstances.push(markerInst)
+            // Store the marker
+            this.markerInstances.push({
+              name: marker.name,
+              marker: markerInst
+            })
           }
         })
       }
