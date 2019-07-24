@@ -61,7 +61,7 @@ export default {
         return []
       }
       return this.plants.map((entry) => {
-        const description = entry.name + ' (' + entry.scientificName + ')'
+        const description = entry.name + (entry.scientificName != null && entry.scientificName.length > 0 ? ' (' + entry.scientificName + ')' : '')
         const name = description.length > this.searchDescLimit
           ? description.slice(0, this.searchDescLimit - 3) + '...'
           : description
