@@ -1,6 +1,12 @@
 <template>
-  <v-footer>
-    <span>&copy; 2019</span>
+  <v-footer absolute>
+    <v-container fill-height>
+      <v-layout>
+        <v-flex align-self-center>
+          Made By Coders For Cause
+        </v-flex>
+      </v-layout>
+    </v-container>
   </v-footer>
 </template>
 
