@@ -1,6 +1,6 @@
 <template>
   <v-navigation-drawer
-    v-model="drawer"
+    v-model="panel"
     temporary
     floating
     app
@@ -14,7 +14,7 @@
         exact
       >
         <v-list-tile-action>
-          <v-icon>{{ item.icon }}</v-icon>
+          <v-icon> {{ item.icon }} </v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
           <v-list-tile-title v-text="item.title" />
@@ -27,7 +27,7 @@
 <script>
 export default {
   props: {
-    drawer: Boolean
+    value: Boolean
   },
   data() {
     return {
@@ -43,6 +43,18 @@ export default {
           to: '/about'
         }
       ]
+    }
+  },
+  computed: {
+    panel: {
+      get() {
+        return this.value
+      },
+      set(value) {
+        if (!value) {
+          this.$emit('input', false)
+        }
+      }
     }
   }
 }

@@ -3,7 +3,7 @@
     fixed
     app
   >
-    <v-toolbar-side-icon @click="$emit('input', $event)" />
+    <v-toolbar-side-icon @click="$emit('input', !value)" />
 
     <v-toolbar-title>
       FoGUWA
