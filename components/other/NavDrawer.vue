@@ -33,8 +33,8 @@ export default {
     return {
       items: [
         {
-          icon: 'apps',
-          title: 'Welcome',
+          icon: 'map',
+          title: 'Home',
           to: '/'
         },
         {
@@ -59,7 +59,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>
