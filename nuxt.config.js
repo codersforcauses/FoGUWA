@@ -26,7 +26,7 @@ module.exports = {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#9ccd12' },
+  loading: { color: '#639700' },
   /*
   ** Global CSS
   */
@@ -59,7 +59,7 @@ module.exports = {
   */
   vuetify: {
     theme: {
-      primary: '#9ccd12',
+      primary: '#639700',
       accent: colors.grey.darken3,
       secondary: colors.amber.darken3,
       info: colors.teal.lighten1,

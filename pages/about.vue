@@ -31,7 +31,7 @@
               To raise funds to assist with special projects relating to the grounds
             </li>
           </ol>
-          <a target="_blank" href="https://www.facebook.com/friendsofthegrounds/" class="primary--text text--darken-2">
+          <a target="_blank" href="https://www.facebook.com/friendsofthegrounds/" class="primary--text">
             FoGUWA Facebook page
           </a>
         </v-card-text>
@@ -56,10 +56,10 @@
             charities and Not-For-Profits. Visit our website
             below for more information.
           </p>
-          <a target="_blank" href="https://codersforcauses.org/landing" class="primary--text text--darken-2">
+          <a target="_blank" href="https://codersforcauses.org/landing" class="primary--text">
             Coders for Causes website <br>
           </a>
-          <a target="blank" href="https://www.facebook.com/codersforcauses" class="primary--text text--darken-2">
+          <a target="blank" href="https://www.facebook.com/codersforcauses" class="primary--text">
             Coders for Causes Facebook
           </a>
         </v-card-text>
