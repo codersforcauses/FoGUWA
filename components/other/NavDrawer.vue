@@ -34,7 +34,7 @@ export default {
       items: [
         {
           icon: 'map',
-          title: 'Home',
+          title: 'Map',
           to: '/'
         },
         {
