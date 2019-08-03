@@ -1,17 +1,10 @@
 <template>
-  <v-footer>
-    <span>&copy; 2019</span>
+  <v-footer class="px-4">
+    Made with &#10084; by Coders for Causes
   </v-footer>
 </template>
 
 <script>
 export default {
-  props: {
-    fixed: Boolean
-  }
 }
 </script>
-
-<style>
-
-</style>
