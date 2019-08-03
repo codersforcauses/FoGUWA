@@ -1,4 +1,5 @@
 const colors = require('vuetify/es5/util/colors').default
+const env = require('dotenv').config()
 
 module.exports = {
   mode: 'universal',
@@ -80,7 +81,5 @@ module.exports = {
   /*
   ** Environmental variables
   */
-  env: {
-    googleMapsApi: process.env.GOOGLE_MAPS_API_KEY || ''
-  }
+  env: env.parsed
 }
