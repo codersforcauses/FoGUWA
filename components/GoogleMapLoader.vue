@@ -18,10 +18,10 @@
       fill-height
     >
       <v-progress-circular
+        indeterminate
         :size="70"
         :width="7"
-        color="green"
-        indeterminate
+        color="primary"
         class="mb-4"
       />
       <span>Loading map...</span>
@@ -37,16 +37,10 @@ export default {
     // These are the attributes exposed to the parent component
     mapConfig: {
       type: Object,
-      default: function () {
-        return {
-          center: { lat: 0.0, lng: 0.0 },
-          zoom: 0
-        }
-      }
-    },
-    apiKey: {
-      type: String,
-      required: true
+      default: () => ({
+        center: { lat: 0.0, lng: 0.0 },
+        zoom: 0
+      })
     },
     mapInst: {
       type: Object,
@@ -64,12 +58,10 @@ export default {
     }
   },
   async mounted() {
-    // Fetch the maps API
-    const googleMapApi = await GoogleMapsApiLoader({
-      apiKey: this.apiKey
-    })
     // Expose the API for future use and initialise the map
-    this.google = googleMapApi
+    this.google = await GoogleMapsApiLoader({
+      apiKey: process.env.GMAPS_KEY || ''
+    })
     this.$emit('update:googleInst', this.google)
     this.initMap()
   },

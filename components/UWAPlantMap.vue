@@ -1,7 +1,6 @@
 <template>
   <google-map-loader
     :map-config="mapConfig"
-    :api-key="apiKey"
     :map-inst.sync="map"
     :google-inst.sync="google"
   />
@@ -33,9 +32,6 @@ export default {
     }
   },
   computed: {
-    apiKey() {
-      return process.env.googleMapsApi.toString()
-    },
     mapConfig() {
       return {
         center: UWA_COORDS,
@@ -50,9 +46,8 @@ export default {
       }
     },
     markers() {
-      // Generate array of markers
-      const markers = [...plants] // Copy the array
-      return markers
+      // return the array
+      return [...plants]
     }
   },
   watch: {
@@ -91,13 +86,6 @@ export default {
             strokeColor: '#905923',
             scale: 1
           }
-          // const leafIcon = {
-          //   url: 'data:image/svg+xml;utf8,' + encodeURIComponent(this.$refs.leafIconSVG.outerHTML),
-          //   size: null, // new this.google.maps.Size(24, 24),
-          //   origin: null, // new this.google.maps.Point(0, 0),
-          //   anchor: null, // new this.google.maps.Point(12, 12),
-          //   scaledSize: new this.google.maps.Size(this.width, this.height)
-          // }
           // Plot all instances
           for (const instance of marker.instances) {
             const markerInst = new this.google.maps.Marker({
