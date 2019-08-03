@@ -1,4 +1,5 @@
 const colors = require('vuetify/es5/util/colors').default
+const env = require('dotenv').config()
 
 module.exports = {
   mode: 'universal',
@@ -14,7 +15,7 @@ module.exports = {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.png' },
       {
         rel: 'stylesheet',
         href:
@@ -25,7 +26,7 @@ module.exports = {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#fff' },
+  loading: { color: '#9ccd12' },
   /*
   ** Global CSS
   */
@@ -58,7 +59,7 @@ module.exports = {
   */
   vuetify: {
     theme: {
-      primary: colors.blue.darken2,
+      primary: '#9ccd12',
       accent: colors.grey.darken3,
       secondary: colors.amber.darken3,
       info: colors.teal.lighten1,
@@ -80,7 +81,5 @@ module.exports = {
   /*
   ** Environmental variables
   */
-  env: {
-    googleMapsApi: process.env.GOOGLE_MAPS_API_KEY || ''
-  }
+  env: env.parsed
 }

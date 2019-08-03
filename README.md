@@ -94,4 +94,4 @@ If you would like to use youtube to watch tutorials, here are a few reputed ones
 - Thai Nguyen (Committee Member)
 - Cassie Ritchie
 - Adrian Tan
-- Jurek Malarecki
+- JT Malarecki
