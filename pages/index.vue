@@ -1,6 +1,8 @@
 <template>
   <v-layout>
-    <UWAPlantMap />
+    <v-card height="100%" width="100%" tile>
+      <uwa-plant-map ref="plantMap" />
+    </v-card>
   </v-layout>
 </template>
 
@@ -9,7 +11,7 @@ import UWAPlantMap from '~/components/UWAPlantMap.vue'
 
 export default {
   components: {
-    UWAPlantMap
+    'uwa-plant-map': UWAPlantMap
   }
 }
 </script>

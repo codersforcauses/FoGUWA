@@ -3,10 +3,7 @@
     <!-- The Google Maps API will make use of this div. -->
     <!-- Slot to expose google api and map instance. -->
     <template v-if="google && map">
-      <slot
-        :google="google"
-        :map="map"
-      />
+      <slot :google="google" :map="map" />
     </template>
     <!-- Loading icon/message as JS API is fetched. -->
     <v-layout
@@ -18,9 +15,9 @@
       fill-height
     >
       <v-progress-circular
-        indeterminate
         :size="70"
         :width="7"
+        indeterminate
         color="primary"
         class="mb-4"
       />
@@ -51,12 +48,10 @@ export default {
       default: null
     }
   },
-  data() {
-    return {
-      google: null,
-      map: null
-    }
-  },
+  data: () => ({
+    google: null,
+    map: null
+  }),
   async mounted() {
     // Expose the API for future use and initialise the map
     this.google = await GoogleMapsApiLoader({

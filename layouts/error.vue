@@ -1,28 +1,15 @@
 <template>
   <v-container fill-height fluid>
-    <v-layout align-center justify-center row fill-height>
-      <v-flex xs12 class="text-xs-center">
-        <h1 v-if="error.statusCode === 404" class="display-2">
-          {{ pageNotFound }}
-        </h1>
-        <h1 v-else class="display-2 font-weight-bold">
-          {{ otherError }}
-        </h1>
-        <v-btn
-          round
-          color="primary"
-          dark
-          nuxt
-          to="/"
-          class="mt-4"
-        >
-          <v-icon dark class="mr-2">
-            arrow_back
-          </v-icon>
-          Return to Home page
+    <v-row align="center" justify="center">
+      <div class="text-center">
+        <!-- eslint-disable-next-line -->
+        <h1 v-if="error.statusCode === 404" class="display-2">{{ pageNotFound }}</h1>
+        <h1 v-else class="display-2 font-weight-bold">{{ otherError }}</h1>
+        <v-btn rounded color="primary" dark nuxt to="/" class="mt-4">
+          <v-icon dark class="mr-2">arrow_back</v-icon>Return to Home page
         </v-btn>
-      </v-flex>
-    </v-layout>
+      </div>
+    </v-row>
   </v-container>
 </template>
 
@@ -43,14 +30,11 @@ export default {
       title
     }
   },
-  data() {
-    return {
-      pageNotFound: '404 Not Found',
-      otherError: 'An error occurred'
-    }
-  }
+  data: () => ({
+    pageNotFound: '404 Not Found',
+    otherError: 'An error occurred'
+  })
 }
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

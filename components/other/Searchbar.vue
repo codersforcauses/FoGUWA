@@ -1,42 +1,21 @@
 <template>
-  <v-toolbar
-    :absolute="isIndex"
-    :fixed="!isIndex"
-    :style="{ margin: margin }"
-    height="56"
-  >
-    <v-app-bar-nav-icon @click="$emit('input', !value)" />
+  <v-toolbar floating absolute style="margin: 10px;">
+    <v-text-field hide-details prepend-icon="search" single-line />
 
-    <v-text-field
-      v-show="isIndex"
-      :style="{ width: width }"
-      single-line
-      solo-inverted
-      hide-details
-      flat
-      dark
-      color="grey"
-      class="theme--dark"
-    >
-      <template v-slot:label>
-        <span class="grey--text">Search FoGUWA</span>
-      </template>
-      <template v-slot:append>
-        <v-icon class="grey--text">search</v-icon>
-      </template>
-    </v-text-field>
     <v-btn
-      v-show="!geoBtnHidden && isIndex"
+      v-show="!geoBtnHidden"
+      :outline="geoBtnOutline"
       :loading="geoBtnLoading"
       :color="geoBtnColor"
       @click="geoBtnClicked"
       icon
-      text
     >
       <v-icon>my_location</v-icon>
     </v-btn>
 
-    <v-toolbar-title v-show="!isIndex" class="title">FoGUWA</v-toolbar-title>
+    <v-btn icon>
+      <v-icon>more_vert</v-icon>
+    </v-btn>
   </v-toolbar>
 </template>
 
@@ -45,31 +24,24 @@ import { loggingLevels } from '@/assets/js/logging.js'
 
 export default {
   props: {
-    value: Boolean,
-    isIndex: Boolean
+    userPositionInst: {
+      type: Object,
+      default: null
+    }
   },
   data: () => ({
     geoBtnHidden: false,
     geoBtnLoading: false,
+    geoBtnOutline: false,
     geoBtnColor: 'default',
     geoBtnState: 'ready',
     geolocatorId: null,
     userPosition: null
   }),
-  computed: {
-    margin() {
-      return this.isIndex ? '10px' : '0'
-    },
-    width() {
-      return this.$vuetify.breakpoint.smAndDown ? 'calc(100vw - 136px)' : '100%'
-    }
-  },
   watch: {
-    userPosition() {
-      this.$store.commit('setPosition', this.userPosition)
-    },
-    '$route.path'() {
-      this.geolocatorDisable()
+    userPosition(val) {
+      this.$store.commit('setPosition')
+      this.$emit('update:userPositionInst', this.userPosition)
     }
   },
   methods: {
@@ -77,10 +49,12 @@ export default {
       switch (state) {
         case 'loading':
           this.geoBtnLoading = true
+          this.geoBtnOutline = false
           this.geoBtnColor = 'primary'
           break
         case 'active':
           this.geoBtnLoading = false
+          this.geoBtnOutline = true
           this.geoBtnColor = 'primary'
           break
         case 'hidden':
@@ -89,6 +63,7 @@ export default {
         case 'ready':
         default:
           this.geoBtnLoading = false
+          this.geoBtnOutline = false
           this.geoBtnColor = 'default'
           break
       }
@@ -99,11 +74,14 @@ export default {
         this.setGeoBtnState('loading')
         // eslint-disable-next-line
         new Promise(resolve => {
-          // eslint-disable-line
           resolve(this.geolocatorEnable())
         })
       } else {
-        this.geolocatorDisable()
+        // eslint-disable-next-line
+        new Promise(() => {
+          // eslint-disable-line
+          this.geolocatorDisable()
+        })
       }
     },
     // Geolocator
@@ -141,17 +119,16 @@ export default {
       return this.geolocatorId
     },
     isGeolocatorEnabled() {
-      return this.geolocatorId !== null
+      return this.geolocatorId != null
     },
     geolocatorDisable() {
       // Remove the geolocation watcher
-      navigator.geolocation.clearWatch(this.geolocatorId)
-      this.geolocatorId = null
-      this.userPosition = {
-        lat: 0,
-        lng: 0
+      if (this.isGeolocatorEnabled()) {
+        navigator.geolocation.clearWatch(this.geolocatorId)
+        this.geolocatorId = null
+        this.userPosition = null
+        this.setGeoBtnState('ready')
       }
-      this.setGeoBtnState('ready')
     },
     geolocationSuccess(location) {
       this.setGeoBtnState('active')
@@ -171,18 +148,17 @@ export default {
         case error.PERMISSION_DENIED:
           logEvent.type = loggingLevels.INFO
           logEvent.message =
-            'Please allow location access to view your current location. This may require you to refresh your browser.'
+            'Allow location access to view your current location. This may require you to refresh your browser.'
           this.geolocatorDisable()
           break
         case error.POSITION_UNAVAILABLE:
           logEvent.type = loggingLevels.ERROR
-          logEvent.message = 'We are unable to find your location'
+          logEvent.message = 'Location information is unavailable.'
           this.geolocatorDisable()
           break
         case error.TIMEOUT:
           logEvent.type = loggingLevels.ERROR
-          logEvent.message =
-            'Finding your location took too long. Please try again.'
+          logEvent.message = 'Location information is unavailable.'
           this.geolocatorDisable()
           break
         case error.UNKNOWN_ERROR:
@@ -198,3 +174,5 @@ export default {
   }
 }
 </script>
+
+<style></style>
