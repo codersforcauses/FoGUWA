@@ -90,8 +90,19 @@ If you would like to use youtube to watch tutorials, here are a few reputed ones
 - [Free Code Camp](https://www.youtube.com/channel/UC8butISFwT-Wl7EV0hUK0BQ)
 
 ## Development Team
+### Winter 2019
 - Jeremiah Pinto (Project Manager/ Tech Lead)
 - Thai Nguyen (Committee Member)
 - Cassie Ritchie
 - Adrian Tan
 - JT Malarecki
+
+### Summer 2019
+- Jeremiah Pinto (Tech Lead)
+- Innocent Muisha (Project Manager)
+- Drew Alexander (Project Manager)
+- Clayton Herbst
+- Daphne Yu
+- Dean Vains
+- Madeleine Lim
+- Victor John Wilson
