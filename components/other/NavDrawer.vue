@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="panel" temporary floating app>
+  <v-navigation-drawer v-model="panel" temporary floating app class="nav">
     <v-list>
       <v-list-item
         v-for="(item, i) in items"
@@ -53,3 +53,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.nav {
+  z-index: 999999999 !important;
+}
+</style>

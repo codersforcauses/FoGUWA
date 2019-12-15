@@ -6,8 +6,7 @@
         <toolbar v-model="drawer" @log="handleLog" :isIndex="isIndex" />
         <v-alert :value="$nuxt.isOffline" type="error" dismissible class="ma-0">
           <!-- eslint-disable-next-line -->
-          You are currently offline. Please check your internet
-          connection.
+          You are currently offline. Please check your internet connection.
         </v-alert>
         <v-container :fill-height="isIndex" fluid class="pa-0 mx-0">
           <nuxt />
@@ -78,5 +77,8 @@ export default {
 ::selection {
   background: #c0df68;
   text-shadow: none;
+}
+.search-menu {
+  left: 10px !important;
 }
 </style>

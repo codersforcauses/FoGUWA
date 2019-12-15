@@ -2,17 +2,27 @@
   <v-toolbar
     :absolute="isIndex"
     :fixed="!isIndex"
-    :style="{ margin: margin }"
+    :style="{ margin, borderRadius: radius, padding }"
     height="56"
   >
-    <v-app-bar-nav-icon @click="$emit('input', !value)" />
+    <v-app-bar-nav-icon v-show="!isIndex" @click="$emit('input', !value)" />
 
-    <v-text-field
+    <v-autocomplete
       v-show="isIndex"
-      :style="{ width: width }"
+      :items="items"
+      :search-input.sync="search"
+      :style="{ maxWidth: width }"
+      :menu-props="{
+        nudgeBottom: '5px',
+        openOnClick: false,
+        contentClass: 'search-menu'
+      }"
+      dense
+      auto-select-first
       single-line
       solo-inverted
       hide-details
+      hide-selected
       flat
       dark
       color="grey"
@@ -21,20 +31,42 @@
       <template v-slot:label>
         <span class="grey--text">Search FoGUWA</span>
       </template>
-      <template v-slot:append>
-        <v-icon class="grey--text">search</v-icon>
+      <template v-slot:prepend-inner>
+        <v-btn @click="$emit('input', !value)" color="black" icon text>
+          <v-icon>menu</v-icon>
+        </v-btn>
       </template>
-    </v-text-field>
-    <v-btn
-      v-show="!geoBtnHidden && isIndex"
-      :loading="geoBtnLoading"
-      :color="geoBtnColor"
-      @click="geoBtnClicked"
-      icon
-      text
-    >
-      <v-icon>my_location</v-icon>
-    </v-btn>
+      <template v-slot:append>
+        <v-btn :disabled="showSearch" color="primary" icon text>
+          <v-icon>search</v-icon>
+        </v-btn>
+        <v-btn
+          :loading="geoBtnLoading"
+          :color="geoBtnColor"
+          @click="geoBtnClicked"
+          icon
+          text
+        >
+          <v-icon>my_location</v-icon>
+        </v-btn>
+      </template>
+      <template v-slot:item="item">
+        <div class="px-2">
+          <v-icon>menu</v-icon>
+        </div>
+        <div class="px-2">
+          {{ item.item.text }}
+        </div>
+      </template>
+      <template v-slot:no-data>
+        <div class="no-data">
+          <v-icon color="error lighten-4" class="px-2">error_outline</v-icon>
+          <div class="px-2">
+            Search did not yield any results
+          </div>
+        </div>
+      </template>
+    </v-autocomplete>
 
     <v-toolbar-title v-show="!isIndex" class="title">FoGUWA</v-toolbar-title>
   </v-toolbar>
@@ -51,17 +83,28 @@ export default {
   data: () => ({
     geoBtnHidden: false,
     geoBtnLoading: false,
-    geoBtnColor: 'default',
+    geoBtnColor: 'black',
     geoBtnState: 'ready',
     geolocatorId: null,
-    userPosition: null
+    userPosition: null,
+    search: '',
+    items: [{ text: 'hello', value: 'world' }]
   }),
   computed: {
     margin() {
       return this.isIndex ? '10px' : '0'
     },
+    padding() {
+      return this.isIndex ? '0' : '0 16px'
+    },
+    radius() {
+      return this.isIndex ? '4px' : '0'
+    },
     width() {
       return this.$vuetify.breakpoint.smAndDown ? 'calc(100vw - 136px)' : '100%'
+    },
+    showSearch() {
+      return this.search === ''
     }
   },
   watch: {
@@ -89,7 +132,7 @@ export default {
         case 'ready':
         default:
           this.geoBtnLoading = false
-          this.geoBtnColor = 'default'
+          this.geoBtnColor = 'black'
           break
       }
       this.geoBtnState = state
@@ -198,3 +241,16 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.v-card {
+  border-radius: 0 !important;
+}
+.v-toolbar >>> .v-toolbar__content {
+  padding: 0 !important;
+}
+.no-data {
+  display: flex;
+  padding: 0 16px;
+}
+</style>
