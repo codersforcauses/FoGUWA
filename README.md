@@ -73,11 +73,7 @@ The scope may be increased later down the line.
 
 Contributions to the codebase are managed using the Gitflow Workflow. A detailed overview of this can be found [here](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow).
 
-To commit to a branch in this repository, use the command bellow instead of `git commit`:
-
-```
-$ yarn cz
-```
+To commit to a branch in this repository, use the command `yarn cz` or `git commit`. You will be forced to follow the format that commitizen provides.
 
 Once run, you will be prompted to fill the required fields which then gives your commit messages a structured format. For more information on this, visit Commitizen's GitHub page [here](https://github.com/commitizen/cz-cli).
 
