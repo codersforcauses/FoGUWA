@@ -35,12 +35,14 @@
         <v-btn @click="$emit('input', !value)" color="black" icon text>
           <v-icon>menu</v-icon>
         </v-btn>
+        <v-divider class="ma-1 mr-3" light vertical />
       </template>
       <template v-slot:append>
         <v-btn :disabled="showSearch" color="primary" icon text>
           <v-icon>search</v-icon>
         </v-btn>
         <v-btn
+          :disabled="geoBtnLoading"
           :loading="geoBtnLoading"
           :color="geoBtnColor"
           @click="geoBtnClicked"
@@ -51,19 +53,16 @@
         </v-btn>
       </template>
       <template v-slot:item="item">
-        <div class="px-2">
+        <!-- will need to pass in icon and colour to :items to display correct icons for the search -->
+        <div class="pl-2 pr-3">
           <v-icon>menu</v-icon>
         </div>
-        <div class="px-2">
-          {{ item.item.text }}
-        </div>
+        <div class="pl-5">{{ item.item.text }}</div>
       </template>
       <template v-slot:no-data>
         <div class="no-data">
           <v-icon color="error lighten-4" class="px-2">error_outline</v-icon>
-          <div class="px-2">
-            Search did not yield any results
-          </div>
+          <div class="px-2">Search did not yield any results</div>
         </div>
       </template>
     </v-autocomplete>
@@ -81,7 +80,6 @@ export default {
     isIndex: Boolean
   },
   data: () => ({
-    geoBtnHidden: false,
     geoBtnLoading: false,
     geoBtnColor: 'black',
     geoBtnState: 'ready',
@@ -126,9 +124,6 @@ export default {
           this.geoBtnLoading = false
           this.geoBtnColor = 'primary'
           break
-        case 'hidden':
-          this.geoBtnHidden = false
-          break
         case 'ready':
         default:
           this.geoBtnLoading = false
@@ -140,11 +135,7 @@ export default {
     geoBtnClicked() {
       if (!this.isGeolocatorEnabled() && this.geoBtnState === 'ready') {
         this.setGeoBtnState('loading')
-        // eslint-disable-next-line
-        new Promise(resolve => {
-          // eslint-disable-line
-          resolve(this.geolocatorEnable())
-        })
+        this.geolocatorEnable()
       } else {
         this.geolocatorDisable()
       }
@@ -173,7 +164,7 @@ export default {
       // Setup the geolocator to access the devices location
       const options = {
         enableHighAccuracy: true,
-        // timeout: 5000,
+        timeout: 5000,
         maximumAge: 0
       }
       this.geolocatorId = navigator.geolocation.watchPosition(
@@ -243,9 +234,6 @@ export default {
 </script>
 
 <style scoped>
-.v-card {
-  border-radius: 0 !important;
-}
 .v-toolbar >>> .v-toolbar__content {
   padding: 0 !important;
 }

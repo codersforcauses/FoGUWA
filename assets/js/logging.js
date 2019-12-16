@@ -1,8 +1,5 @@
-// Enumerated logging levels. Note: these names are the standard theme colours used in Vuetify:
-// see: https://vuetifyjs.com/en/framework/theme#customizing
-
 export const loggingLevels = Object.freeze({
-  DEBUG: 'debug',
+  DEBUG: 'grey',
   SUCCESS: 'success',
   INFO: 'info',
   WARNING: 'warning',
