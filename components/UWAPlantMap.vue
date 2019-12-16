@@ -40,9 +40,9 @@ export default {
           latLngBounds: UWA_BOUNDS,
           strictBounds: false
         },
-        minZoom: 7,
+        zoom: 19,
+        minZoom: 18,
         maxZoom: 21,
-        zoom: 15,
         ...uwaMapSettings
       }
     },

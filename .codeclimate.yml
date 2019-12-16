@@ -1,0 +1,15 @@
+plugins:
+  editorconfig:
+    enabled: true
+    channel: beta
+    config:
+      editorconfig: .editorconfig
+  eslint:
+    enabled: true
+    channel: 'eslint-6'
+    config:
+      extensions:
+        - .es6
+        - .js
+        - .vue
+      ignore_warnings: true

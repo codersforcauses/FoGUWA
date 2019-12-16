@@ -3,11 +3,10 @@
     <nav-drawer v-model="drawer" />
     <v-content class="pa-0">
       <v-card tile height="100%" width="100%">
-        <toolbar v-model="drawer" @log="handleLog" :isIndex="isIndex" />
+        <toolbar v-model="drawer" :is-index="isIndex" @log="handleLog" />
         <v-alert :value="$nuxt.isOffline" type="error" dismissible class="ma-0">
           <!-- eslint-disable-next-line -->
-          You are currently offline. Please check your internet
-          connection.
+          You are currently offline. Please check your internet connection.
         </v-alert>
         <v-container :fill-height="isIndex" fluid class="pa-0 mx-0">
           <nuxt />
@@ -20,7 +19,7 @@
           multi-line
         >
           {{ snackbarText }}
-          <v-btn @click="snackbar = false" flat>Close</v-btn>
+          <v-btn flat @click="snackbar = false">Close</v-btn>
         </v-snackbar>
       </v-card>
     </v-content>
