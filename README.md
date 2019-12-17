@@ -81,7 +81,7 @@ There are four (5) types of branch names used in the project:
 
     feature/ - used for working on new features. (will be most used)
     test/ - used for fixing/adding tests.
-    bugfix/ - used for fixing bugs that comeup.
+    bugfix/ - used for fixing bugs that come up.
     hotfix/ - used for fixing an urgent bug on master, that have a high impact.
     chore/ - used for updating menial tasks such as README's, yarn.lock etc.
 
