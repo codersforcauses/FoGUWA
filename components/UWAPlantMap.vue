@@ -7,7 +7,9 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import { mapState } from 'vuex'
+import Popup from './other/Popup'
 import GoogleMapLoader from './GoogleMapLoader'
 import { uwaMapSettings } from '@/assets/js/mapSettings'
 import { plants } from '@/assets/plantdb.json'
@@ -23,13 +25,16 @@ const UWA_COORDS = { lat: -31.9804624, lng: 115.818 }
 
 export default {
   components: {
-    'google-map-loader': GoogleMapLoader
+    'google-map-loader': GoogleMapLoader,
+    /* eslint-disable */
+    'pop-up': Popup
   },
   data: () => ({
     map: null,
     google: null,
     markerInstances: [],
-    userMarker: null
+    userMarker: null,
+    showPopup: false
   }),
   computed: {
     ...mapState(['position']),
@@ -84,6 +89,7 @@ export default {
     }
   },
   methods: {
+    renderPopup(marker) {},
     loadMarkers() {
       if (this.map && this.google) {
         // Clear old markers
@@ -116,6 +122,18 @@ export default {
               position: instance.location,
               icon: marker.type === 'tree' ? leafIcon : statueIcon,
               map: this.map
+            })
+            const markerPopup = new this.google.maps.InfoWindow({
+              content: ''
+            })
+            markerInst.addListener('click', () => {
+              const popupContent = Vue.compile(
+                `<pop-up 
+                  plantName="${marker.name}" 
+                />`
+              )
+              markerPopup.setContent(popupContent)
+              markerPopup.open(this.map, markerInst)
             })
             this.markerInstances.push(markerInst)
           }
