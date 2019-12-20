@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer.vue mount component 1`] = `
+"<v-footer class=\\"px-4\\">
+  Made with ❤ by Coders for Causes
+</v-footer>"
+`;
