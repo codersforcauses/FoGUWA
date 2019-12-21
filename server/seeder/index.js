@@ -38,14 +38,20 @@ const addFlora = floraObject => {
 }
 
 // Seed the db
-module.exports.seedUsers = async () => {
+const seedUsers = async () => {
   const userPromises = userSeedData.map(userSeed => addUser(userSeed))
   const users = await Promise.all(userPromises)
   consola.success(`Seeded ${users.length} users`)
 }
 
-module.exports.seedFlora = async () => {
+const seedFlora = async () => {
   const floraPromises = floraSeedData.map(floraSeed => addFlora(floraSeed))
   const flora = await Promise.all(floraPromises)
   consola.success(`Seeded ${flora.length} plants`)
+}
+
+module.exports = {
+  addFlora,
+  seedFlora,
+  seedUsers
 }
