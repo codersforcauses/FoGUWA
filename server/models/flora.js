@@ -37,4 +37,4 @@ const floraSchema = new mongoose.Schema({
   }
 })
 
-mongoose.model('Flora', floraSchema)
+mongoose.model('Flora', floraSchema, 'flora')
