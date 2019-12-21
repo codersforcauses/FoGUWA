@@ -1,8 +1,18 @@
-{
+[
+  {
   "name": {
     "first": "FoG",
     "last": "UWA"
   },
   "email": "admin@fog.com",
   "password": "authpass"
-  }
+  },
+  {
+    "name": {
+      "first": "Jim",
+      "last": "Jam"
+    },
+    "email": "jimjam@fog.com",
+    "password": "test123"
+    }
+]

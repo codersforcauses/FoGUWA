@@ -1,5 +1,5 @@
-{
-"plants": [{
+[
+  {
   "name": "Swamp banksia",
   "scientificName": "Banksia littoralis",
   "icon": "tree",
@@ -185,5 +185,5 @@
       }
     }
   ]
-}]
 }
+]
