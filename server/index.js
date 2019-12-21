@@ -29,6 +29,8 @@ if (process.env.NODE_ENV !== 'production') {
   })
 }
 
+const middleware = require('./middleware')
+
 async function start() {
   // Init Nuxt.js
   const nuxt = new Nuxt(config)
@@ -44,7 +46,8 @@ async function start() {
   }
 
   // Give nuxt middleware to express
-  app.use(nuxt.render)
+  middleware(app)
+  app.use(nuxt.render) // needs to be last
 
   // Listen the server
   app.listen(port, host)
