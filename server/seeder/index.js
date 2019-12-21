@@ -2,7 +2,8 @@ const mongoose = require('mongoose')
 const consola = require('consola')
 const User = mongoose.model('User')
 const Flora = mongoose.model('Flora')
-const { userSeedData, floraSeedData } = require('./seedData')
+const floraSeedData = require('./floraSeeds')
+const userSeedData = require('./userSeeds')
 
 const addUser = userObject => {
   return new Promise((resolve, reject) => {
