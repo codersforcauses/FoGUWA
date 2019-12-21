@@ -5,7 +5,7 @@ const Flora = mongoose.model('Flora')
 const router = express.Router()
 
 router.get('/flora', async (req, res, next) => {
-  const floraObj = await Flora.find().exec()
+  const floraObj = await Flora.find()
 
   res.json(floraObj)
   next()
@@ -20,7 +20,7 @@ router.post('/flora', async (req, res, next) => {
 })
 
 router.get('/flora/:id', async (req, res, next) => {
-  const obj = await Flora.findById(req.params.id).exec()
+  const obj = await Flora.findById(req.params.id)
   res.json(obj)
   next()
 })
