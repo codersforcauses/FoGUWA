@@ -34,7 +34,7 @@ export default {
     google: null,
     markerInstances: [],
     userMarker: null,
-    showPopup: false
+    showPopup: true
   }),
   computed: {
     ...mapState(['position']),
