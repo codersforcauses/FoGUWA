@@ -3,7 +3,11 @@ const consola = require('consola')
 
 const dbURI = 'mongodb://localhost:27017/fog'
 
-mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(dbURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true
+})
 
 mongoose.connection.on('connected', () => {
   consola.success(`Mongoose connected to ${dbURI}`)
