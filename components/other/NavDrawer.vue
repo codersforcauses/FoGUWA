@@ -36,6 +36,11 @@ export default {
         icon: 'info',
         title: 'About',
         to: '/about'
+      },
+      {
+        icon: 'info',
+        title: 'Login',
+        to: '/login'
       }
     ]
   }),
