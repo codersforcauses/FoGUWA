@@ -29,9 +29,9 @@
       v-show="!geoBtnHidden && isIndex"
       :loading="geoBtnLoading"
       :color="geoBtnColor"
+      @click="geoBtnClicked"
       icon
       text
-      @click="geoBtnClicked"
     >
       <v-icon>my_location</v-icon>
     </v-btn>
