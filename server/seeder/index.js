@@ -1,9 +1,8 @@
+const fs = require('fs')
 const mongoose = require('mongoose')
 const consola = require('consola')
 const User = mongoose.model('User')
 const Flora = mongoose.model('Flora')
-const floraSeedData = require('./floraSeeds')
-const userSeedData = require('./userSeeds')
 
 const addUser = userObject => {
   return new Promise((resolve, reject) => {
@@ -38,18 +37,23 @@ const addFlora = floraObject => {
   })
 }
 
-const seedUsers = async () => {
-  const userSeedObj = JSON.parse(userSeedData)
-  const userPromises = userSeedObj.map(userSeed => addUser(userSeed))
-  const users = await Promise.all(userPromises)
-  consola.success(`Seeded ${users.length} users`)
+const parseJSON = JSONfile => {
+  const rawdata = fs.readFileSync(JSONfile)
+  const data = JSON.parse(rawdata)
+  return data
 }
 
-const seedFlora = async () => {
-  const floraSeedObj = JSON.parse(floraSeedData)
-  const floraPromises = floraSeedObj.map(floraSeed => addFlora(floraSeed))
-  const flora = await Promise.all(floraPromises)
-  consola.success(`Seeded ${flora.length} plants`)
+const seedData = async (dataJSON, promiseFunction, seedName) => {
+  const seedObj = parseJSON(dataJSON)
+  const promises = seedObj.map(seed => promiseFunction(seed))
+  const seedResult = await Promise.all(promises)
+  consola.success(`Seeded ${seedResult.length} ${seedName}`)
 }
+
+const seedUsers = () =>
+  seedData('server/seeder/userSeeds.json', addUser, 'users')
+
+const seedFlora = () =>
+  seedData('server/seeder/floraSeeds.json', addFlora, 'plants')
 
 module.exports = { addFlora, addUser, seedFlora, seedUsers }
