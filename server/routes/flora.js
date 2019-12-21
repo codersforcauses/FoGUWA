@@ -25,4 +25,25 @@ router.get('/flora/:id', async (req, res, next) => {
   next()
 })
 
+router.put('/flora/:id', async (req, res, next) => {
+  const floraObj = await Flora.findById(req.params.id)
+
+  floraObj.update(
+    { name: res.body.name },
+    { scientificName: res.body.scientificName },
+    { description: res.body.description },
+    { icon: res.body.icon },
+    { instances: res.body.instances }
+  )
+
+  res.json(floraObj)
+  next()
+})
+
+router.delete('/flora/:id', async (req, res, next) => {
+  const floraObj = await Flora.findByIdAndDelete(req.params.id)
+  res.json(floraObj.deletedCount)
+  next()
+})
+
 module.exports = router
