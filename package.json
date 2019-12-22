@@ -70,14 +70,5 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "auth": {
-    "strategies": {
-      "auth0": {
-        "domain": "domain.auth0.com",
-        "client_id": "....",
-        "audience": "https://my-api-domain.com/"
-      }
-    }
   }
 }
