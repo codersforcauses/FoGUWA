@@ -12,7 +12,7 @@ export const uwaMapSettings = {
       elementType: 'geometry',
       stylers: [
         {
-          color: '#ebe3cd'
+          color: '#96acb7'
         }
       ]
     },
@@ -80,7 +80,7 @@ export const uwaMapSettings = {
       elementType: 'geometry',
       stylers: [
         {
-          color: '#dfd2ae'
+          color: '#ffffff'
         }
       ]
     },
@@ -89,7 +89,7 @@ export const uwaMapSettings = {
       elementType: 'geometry',
       stylers: [
         {
-          color: '#dfd2ae'
+          color: '#d4e4bc'
         }
       ]
     },
@@ -107,7 +107,7 @@ export const uwaMapSettings = {
       elementType: 'geometry.fill',
       stylers: [
         {
-          color: '#a5b076'
+          color: '#1b998b'
         }
       ]
     },
@@ -125,7 +125,16 @@ export const uwaMapSettings = {
       elementType: 'geometry',
       stylers: [
         {
-          color: '#f5f1e6'
+          color: '#f8c967'
+        }
+      ]
+    },
+    {
+      featureType: 'road',
+      elementType: 'geometry.stroke',
+      stylers: [
+        {
+          color: '#C79E63'
         }
       ]
     },
@@ -134,7 +143,16 @@ export const uwaMapSettings = {
       elementType: 'geometry',
       stylers: [
         {
-          color: '#fdfcf8'
+          color: '#f8c967'
+        }
+      ]
+    },
+    {
+      featureType: 'road.arterial',
+      elementType: 'geometry.stroke',
+      stylers: [
+        {
+          color: '#C79E63'
         }
       ]
     },
@@ -152,7 +170,7 @@ export const uwaMapSettings = {
       elementType: 'geometry.stroke',
       stylers: [
         {
-          color: '#e9bc62'
+          color: '#C79E63'
         }
       ]
     },
@@ -224,7 +242,7 @@ export const uwaMapSettings = {
       elementType: 'geometry.fill',
       stylers: [
         {
-          color: '#b9d3c2'
+          color: '#bcf4f5'
         }
       ]
     },
