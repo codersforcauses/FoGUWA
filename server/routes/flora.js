@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const consola = require('consola')
 
 const Flora = mongoose.model('Flora')
 const router = express.Router()
@@ -34,7 +35,7 @@ router.put('/flora/:id', async (req, res, next) => {
   }
   const floraObj = await Flora.findOneAndUpdate(filter, update, (err, doc) => {
     if (err) {
-      console.log('Something wrong when updating data!')
+      consola.error(`Updating flora failed: ${err}`)
     }
   })
   res.json(floraObj)
