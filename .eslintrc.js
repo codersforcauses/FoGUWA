@@ -6,7 +6,8 @@ module.exports = {
     es6: true
   },
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: 'babel-eslint',
+    ecmaVersion: 2018
   },
   extends: [
     '@nuxtjs',
