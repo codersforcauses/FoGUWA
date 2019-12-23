@@ -44,8 +44,7 @@ router.put('/flora/:id', async (req, res, next) => {
 
 router.delete('/flora/:id', async (req, res, next) => {
   const floraObj = await Flora.findByIdAndDelete(req.params.id)
-  const flora = await Promise.all(floraObj)
-  res.json(flora)
+  res.json(floraObj)
   next()
 })
 

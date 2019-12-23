@@ -1,7 +1,9 @@
 const FloraRouter = require('./routes/flora')
+const UsersRouter = require('./routes/users')
 
 module.exports = app => {
   app.use('/api', FloraRouter)
+  app.use('/api', UsersRouter)
 
   app.use((req, res, next) => {
     if (res.body !== undefined) {
