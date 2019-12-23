@@ -16,7 +16,7 @@ module.exports = {
     'plugin:nuxt/base',
     'plugin:prettier/recommended'
   ],
-  plugins: ['prettier'],
+  plugins: ['prettier', 'eslint'],
   // add your custom rules here
   rules: {
     'nuxt/no-cjs-in-config': 'off',
