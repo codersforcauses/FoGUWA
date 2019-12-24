@@ -41,7 +41,7 @@ export default {
           strictBounds: false
         },
         zoom: 19,
-        minZoom: 13,
+        minZoom: 18,
         maxZoom: 21,
         ...uwaMapSettings
       }

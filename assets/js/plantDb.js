@@ -20,7 +20,7 @@ const labels = [
     scientificName: 'Hakea laurina'
   },
   {
-    name: 'Jarrah (alive)',
+    name: 'Jarrah (dead)',
     scientificName: 'Eucalyptus marginata'
   },
   {
