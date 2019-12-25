@@ -45,7 +45,7 @@ async function start() {
     await nuxt.ready()
   }
 
-  // Give nuxt middleware to express
+  // Give middleware to express
   middleware(app)
   app.use(nuxt.render) // needs to be last
 

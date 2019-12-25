@@ -1,50 +1,68 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const consola = require('consola')
+const { addUser } = require('../seeder/index')
 
 const Users = mongoose.model('User')
 const router = express.Router()
 
+const sanitiseUser = userObj => {
+  return {
+    name: userObj.name,
+    email: userObj.email,
+    _id: userObj._id
+  }
+}
+
 router.get('/users', async (req, res, next) => {
-  const usersObj = await Users.find()
-  res.json(usersObj)
-  next()
+  const users = await Users.find()
+  res.json(
+    // Remove password from returned json
+    users.map(user => {
+      const cleanUser = sanitiseUser(user)
+      return cleanUser
+    })
+  )
 })
 
 router.get('/users/:id', async (req, res, next) => {
-  const usersObj = await Users.findById(req.params.id)
-  res.json(usersObj)
-  next()
+  if (mongoose.Types.ObjectId.isValid(req.params.id)) {
+    const user = await Users.findById(req.params.id)
+    if (user) return res.json(sanitiseUser(user))
+  }
+  res.json({ message: 'User not found' })
+  consola.error(`User not found`)
 })
 
 router.post('/users', async (req, res, next) => {
-  const { addUser } = require('../seeder/index')
-  const userPromise = await addUser(req.body)
-  res.json(userPromise)
-  next()
+  const user = await addUser(req.body)
+  res.json(sanitiseUser(user))
 })
 
 router.put('users/:id', async (req, res, next) => {
   const filter = { id: req.params.id }
+  const { name, email, password } = req.body
   const update = {
-    name: req.body.name,
-    email: req.body.email,
-    password: req.body.password
+    name,
+    email,
+    password
   }
 
-  const userObj = await Users.findOneAndUpdate(filter, update, (err, doc) => {
+  const user = await Users.findOneAndUpdate(filter, update, (err, doc) => {
     if (err) {
-      consola.error('Something went wrong upating user information.')
+      consola.error(`Error updating user information: ${err}`)
     }
   })
-  res.json(userObj)
-  next()
+  res.json(sanitiseUser(user))
 })
 
 router.delete('/users/:id', async (req, res, next) => {
-  const userObj = await Users.findByIdAndDelete(req.params.id)
-  res.json(userObj)
-  next()
+  const user = await Users.findByIdAndDelete(req.params.id)
+  if (user) res.json(sanitiseUser(user))
+  else {
+    res.json({ message: 'User not found' })
+    consola.error(`User not found`)
+  }
 })
 
 module.exports = router
