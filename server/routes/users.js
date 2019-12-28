@@ -37,21 +37,21 @@ router.post('/users', async (req, res, next) => {
 })
 
 router.patch('/users/:id', async (req, res, next) => {
-  consola.info('Patch route hit')
-  const filter = { id: req.params.id }
-  const { name, email, password } = req.body
-  const update = {
-    name,
-    email,
-    password
-  }
-
-  const user = await Users.findOneAndUpdate(filter, update, (err, doc) => {
-    if (err) {
-      consola.error(`Error updating user information: ${err}`)
+  const user = await Users.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true },
+    (err, doc) => {
+      if (err) {
+        consola.error(`Updating user failed: ${err}`)
+      }
     }
-  })
-  res.json(sanitiseUser(user))
+  )
+  if (user) return res.json(user)
+  else {
+    res.json({ message: 'user not updated' })
+    consola.error('user not updated')
+  }
 })
 
 router.delete('/users/:id', async (req, res, next) => {
