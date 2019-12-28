@@ -18,10 +18,7 @@ router.get('/users', async (req, res, next) => {
   const users = await Users.find()
   res.json(
     // Remove password from returned json
-    users.map(user => {
-      const cleanUser = sanitiseUser(user)
-      return cleanUser
-    })
+    users.map(user => sanitiseUser(user))
   )
 })
 
@@ -39,7 +36,8 @@ router.post('/users', async (req, res, next) => {
   res.json(sanitiseUser(user))
 })
 
-router.put('users/:id', async (req, res, next) => {
+router.patch('/users/:id', async (req, res, next) => {
+  consola.info('Patch route hit')
   const filter = { id: req.params.id }
   const { name, email, password } = req.body
   const update = {
