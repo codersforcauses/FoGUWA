@@ -2,10 +2,14 @@ module.exports = {
   root: true,
   env: {
     browser: true,
-    node: true
+    node: true,
+    es2020: true,
+    jest: true,
+    serviceworker: true
   },
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: 'babel-eslint',
+    ecmaVersion: 2020
   },
   extends: [
     '@nuxtjs',
