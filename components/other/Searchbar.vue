@@ -1,4 +1,5 @@
 <template>
+  <!-- useless component now, all done in toolbar -->
   <v-toolbar floating absolute style="margin: 10px;">
     <v-text-field hide-details prepend-icon="search" single-line />
 
