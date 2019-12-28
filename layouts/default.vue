@@ -4,22 +4,18 @@
     <v-content class="pa-0">
       <v-card tile height="100%" width="100%">
         <toolbar v-model="drawer" :is-index="isIndex" @log="handleLog" />
-        <v-alert :value="$nuxt.isOffline" type="error" dismissible class="ma-0">
-          <!-- eslint-disable-next-line -->
-          You are currently offline. Please check your internet connection.
-        </v-alert>
         <v-container :fill-height="isIndex" fluid class="pa-0 mx-0">
           <nuxt />
         </v-container>
         <v-snackbar
-          v-model="snackbar"
+          v-model="$nuxt.isOffline"
           :timeout="snackbarTimeout"
           :color="snackbarColour"
           bottom
           multi-line
         >
           {{ snackbarText }}
-          <v-btn @click="snackbar = false" flat>Close</v-btn>
+          <v-btn @click="snackbar = false" color="white" text flat>Close</v-btn>
         </v-snackbar>
       </v-card>
     </v-content>
@@ -42,9 +38,10 @@ export default {
   data: () => ({
     drawer: false,
     snackbar: false,
-    snackbarTimeout: 10000,
-    snackbarColour: 'primary',
-    snackbarText: ''
+    snackbarTimeout: 5000,
+    snackbarColour: 'error',
+    snackbarText:
+      'You are currently offline. Please check your internet connection.'
   }),
   computed: {
     isIndex() {
@@ -59,6 +56,7 @@ export default {
       this.snackbarColour = event.type
       this.snackbarText = event.message
       this.snackbar = true
+
       // Propagate the error
       // if (errorEvent.type === 'info') {
       //   console.log('INFO(' + error.code + '): ' + error.message) // eslint-disable-line no-console
