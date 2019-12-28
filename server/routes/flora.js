@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const consola = require('consola')
+const { addFlora } = require('../seeder/index')
 
 const Flora = mongoose.model('Flora')
 const router = express.Router()
@@ -8,44 +9,47 @@ const router = express.Router()
 router.get('/flora', async (req, res, next) => {
   const floraObj = await Flora.find()
   res.json(floraObj)
-  next()
-})
-
-router.post('/flora', async (req, res, next) => {
-  const { addFlora } = require('../seeder/index')
-  const floraPromise = await addFlora(req.params)
-  await res.json(floraPromise)
-  next()
 })
 
 router.get('/flora/:id', async (req, res, next) => {
-  const obj = await Flora.findById(req.params.id)
-  res.json(obj)
-  next()
+  if (mongoose.Types.ObjectId.isValid(req.params.id)) {
+    const flora = await Flora.findById(req.params.id)
+    if (flora) return res.json(flora)
+  }
+  res.json({ message: 'Flora not found' })
+  consola.error('Flora not found')
 })
 
-router.put('/flora/:id', async (req, res, next) => {
-  const filter = { id: req.params.id }
-  const update = {
-    name: req.body.name,
-    scientificName: req.body.scientificName,
-    description: req.body.description,
-    icon: req.body.icon,
-    instances: req.body.instances
-  }
-  const floraObj = await Flora.findOneAndUpdate(filter, update, (err, doc) => {
-    if (err) {
-      consola.error(`Updating flora failed: ${err}`)
+router.post('/flora', async (req, res, next) => {
+  const flora = await addFlora(req.body)
+  res.json(flora)
+})
+
+router.patch('/flora/:id', async (req, res, next) => {
+  const flora = await Flora.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true },
+    (err, doc) => {
+      if (err) {
+        consola.error(`Updating flora failed: ${err}`)
+      }
     }
-  })
-  res.json(floraObj)
-  next()
+  )
+  if (flora) return res.json(flora)
+  else {
+    res.json({ message: 'Flora not updated' })
+    consola.error('Flora not updated')
+  }
 })
 
 router.delete('/flora/:id', async (req, res, next) => {
-  const floraObj = await Flora.findByIdAndDelete(req.params.id)
-  res.json(floraObj)
-  next()
+  const flora = await Flora.findByIdAndDelete(req.params.id)
+  if (flora) res.json(flora)
+  else {
+    res.json({ message: 'Flora not found' })
+    consola.error('Flora not found')
+  }
 })
 
 module.exports = router
