@@ -36,9 +36,8 @@
             target="_blank"
             href="https://www.facebook.com/friendsofthegrounds/"
             class="primary--text"
+            >FoGUWA Facebook page</a
           >
-            FoGUWA Facebook page
-          </a>
         </v-card-text>
       </v-flex>
       <v-flex xs12 sm6 md3 lg2 class="py-3">
@@ -52,9 +51,7 @@
         </v-card>
       </v-flex>
       <v-flex xs12 sm6 md9 lg10>
-        <v-card-title class="display-1">
-          About Coders for Causes
-        </v-card-title>
+        <v-card-title class="display-1">About Coders for Causes</v-card-title>
         <v-card-text style="text-align: justify">
           <p>
             Coders for Causes (CFC) are student developers for charities and
@@ -65,15 +62,15 @@
             href="https://codersforcauses.org/landing"
             class="primary--text"
           >
-            Coders for Causes website <br />
+            Coders for Causes website
+            <br />
           </a>
           <a
             target="blank"
             href="https://www.facebook.com/codersforcauses"
             class="primary--text"
+            >Coders for Causes Facebook</a
           >
-            Coders for Causes Facebook
-          </a>
         </v-card-text>
       </v-flex>
     </v-layout>
@@ -82,6 +79,7 @@
 
 <script>
 export default {
+  auth: false,
   head: {
     title: 'About Us'
   }

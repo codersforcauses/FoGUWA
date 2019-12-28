@@ -55,7 +55,19 @@ module.exports = {
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxtjs/pwa'],
+  modules: ['@nuxtjs/pwa', '@nuxtjs/axios', '@nuxtjs/auth'],
+  auth: {
+    strategies: {
+      auth0: {
+        domain: 'cfchome2health.au.auth0.com',
+        client_id: 'n4I5tqXdBzMqS3uXIb1gq8oCWEzM3Ea6',
+        audience: 'https://my-api-domain.com/'
+      }
+    }
+  },
+  router: {
+    middleware: ['auth']
+  },
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
