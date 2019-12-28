@@ -2,21 +2,43 @@
   <v-navigation-drawer v-model="panel" temporary floating app>
     <v-list>
       <v-list-item
-        v-for="(item, i) in items"
-        :key="i"
-        :to="item.to"
+        v-for="{ icon, title, to } in items"
+        :key="title"
+        :to="to"
         router
         exact
         active-class="primary--text"
       >
         <v-list-item-action>
-          <v-icon> {{ item.icon }} </v-icon>
+          <v-icon> {{ icon }} </v-icon>
         </v-list-item-action>
         <v-list-item-content>
-          <v-list-item-title v-text="item.title" />
+          <v-list-item-title v-text="title" />
         </v-list-item-content>
       </v-list-item>
     </v-list>
+    <template v-slot:append>
+      <v-divider />
+      <v-list-item two-line>
+        <!-- possibly have dynamic colours -->
+        <v-list-item-avatar color="red" class="mr-4">
+          <span class="white--text headline">{{ initials }}</span>
+        </v-list-item-avatar>
+
+        <v-list-item-content>
+          <v-list-item-title>
+            {{ `${name.first} ${name.last}` }}
+          </v-list-item-title>
+          <v-list-item-subtitle>Admin</v-list-item-subtitle>
+        </v-list-item-content>
+
+        <v-list-item-action>
+          <v-btn icon>
+            <v-icon color="grey lighten-1">mdi-logout</v-icon>
+          </v-btn>
+        </v-list-item-action>
+      </v-list-item>
+    </template>
   </v-navigation-drawer>
 </template>
 
@@ -26,6 +48,10 @@ export default {
     value: Boolean
   },
   data: () => ({
+    name: {
+      first: 'Janeyawfgasuefygawueyfgawueyfg',
+      last: 'Doe'
+    },
     items: [
       {
         icon: 'map',
@@ -49,6 +75,9 @@ export default {
           this.$emit('input', false)
         }
       }
+    },
+    initials() {
+      return `${this.name.first.charAt(0)}${this.name.last.charAt(0)}`
     }
   }
 }
