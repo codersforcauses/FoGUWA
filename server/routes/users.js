@@ -6,13 +6,11 @@ const { updateModel } = require('./routeUtilities')
 const Users = mongoose.model('User')
 const router = express.Router()
 
-const sanitiseUser = userObj => {
-  return {
-    name: userObj.name,
-    email: userObj.email,
-    _id: userObj._id
-  }
-}
+const sanitiseUser = ({ name, email, _id }) => ({
+  name,
+  email,
+  _id
+})
 
 router.get('/users', async (req, res, next) => {
   const users = await Users.find()
