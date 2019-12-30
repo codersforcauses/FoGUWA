@@ -1,7 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const consola = require('consola')
 const { addFlora } = require('../seeder/index')
+const { updateModel } = require('./routeUtilities')
 
 const Flora = mongoose.model('Flora')
 const router = express.Router()
@@ -27,16 +27,7 @@ router.post('/flora', async (req, res, next) => {
 router.patch('/flora/:id', async (req, res, next) => {
   const update = { ...req.body }
   delete update._id
-  const flora = await Flora.findByIdAndUpdate(
-    req.params.id,
-    update,
-    { new: true },
-    (err, doc) => {
-      if (err) {
-        consola.error(`Updating flora failed: ${err}`)
-      }
-    }
-  )
+  const flora = await updateModel(Flora, req.params.id, update)
   if (flora) return res.json(flora)
   else {
     res.json({ message: 'Flora not updated' })
