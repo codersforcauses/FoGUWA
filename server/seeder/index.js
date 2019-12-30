@@ -56,8 +56,9 @@ const seedUsers = () =>
 const seedFlora = () =>
   seedFactory('server/seeder/floraSeeds.json', addFlora, 'plants')
 
-const seedDB = (collectionName, factory) => {
-  mongoose.collection(collectionName).countDocuments((err, count) => {
+// Uses a provided function to seed data into the specified collection
+const seedDB = (dbconnection, collectionName, factory) => {
+  dbconnection.collection(collectionName).countDocuments((err, count) => {
     if (err)
       consola.error(`Error getting ${collectionName} collection count: ${err}`)
     else if (count === 0) {

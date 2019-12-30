@@ -8,11 +8,12 @@ const app = express()
 const config = require('../nuxt.config.js')
 config.dev = !(process.env.NODE_ENV === 'production')
 
+const { mongoose } = require('./config/mongoose')
 const { seedUsers, seedFlora, seedDB } = require('./seeder')
 // // Seed data for empty collections
 if (process.env.NODE_ENV !== 'production') {
-  seedDB('users', seedUsers)
-  seedDB('flora', seedFlora)
+  seedDB(mongoose, 'users', seedUsers)
+  seedDB(mongoose, 'flora', seedFlora)
 }
 
 const middleware = require('./middleware')
