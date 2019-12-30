@@ -27,7 +27,7 @@ router.get('/users/:id', async (req, res, next) => {
     const user = await Users.findById(req.params.id)
     if (user) return res.json(sanitiseUser(user))
   }
-  res.status(400).json({ message: 'User not found' })
+  res.status(400).send('User not found')
 })
 
 router.post('/users', async (req, res, next) => {
@@ -42,7 +42,7 @@ router.patch('/users/:id', async (req, res, next) => {
   const user = await updateModel(Users, req.params.id, update)
   if (user) return res.json(user)
   else {
-    res.status(400).json({ message: 'User not updated/found' })
+    res.status(400).send('User not updated/found')
   }
 })
 
@@ -50,7 +50,7 @@ router.delete('/users/:id', async (req, res, next) => {
   const user = await Users.findByIdAndDelete(req.params.id)
   if (user) res.json(sanitiseUser(user))
   else {
-    res.status(400).json({ message: 'User not found' })
+    res.status(400).send('User not found')
   }
 })
 

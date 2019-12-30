@@ -16,7 +16,7 @@ router.get('/flora/:id', async (req, res, next) => {
     const flora = await Flora.findById(req.params.id)
     if (flora) return res.json(flora)
   }
-  res.status(400).json({ message: 'Flora not found' })
+  res.status(400).send('Flora not found')
 })
 
 router.post('/flora', async (req, res, next) => {
@@ -30,7 +30,7 @@ router.patch('/flora/:id', async (req, res, next) => {
   const flora = await updateModel(Flora, req.params.id, update)
   if (flora) return res.json(flora)
   else {
-    res.status(400).json({ message: 'Flora not updated/found' })
+    res.status(400).send('Flora not updated/found')
   }
 })
 
@@ -38,7 +38,7 @@ router.delete('/flora/:id', async (req, res, next) => {
   const flora = await Flora.findByIdAndDelete(req.params.id)
   if (flora) res.json(flora)
   else {
-    res.status(400).json({ message: 'Flora not found' })
+    res.status(400).send('Flora not found')
   }
 })
 
