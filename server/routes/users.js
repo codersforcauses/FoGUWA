@@ -59,7 +59,6 @@ router.delete('/users/:id', async (req, res, next) => {
   if (user) res.json(sanitiseUser(user))
   else {
     res.json({ message: 'User not found' })
-    consola.error(`User not found`)
   }
 })
 

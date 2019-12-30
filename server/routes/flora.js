@@ -39,7 +39,6 @@ router.patch('/flora/:id', async (req, res, next) => {
   if (flora) return res.json(flora)
   else {
     res.json({ message: 'Flora not updated' })
-    consola.error('Flora not updated')
   }
 })
 
