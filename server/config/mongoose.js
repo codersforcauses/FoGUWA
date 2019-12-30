@@ -6,7 +6,8 @@ const dbURI = 'mongodb://localhost:27017/fog'
 mongoose.connect(dbURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useCreateIndex: true
+  useCreateIndex: true,
+  useFindAndModify: false
 })
 
 mongoose.connection.on('connected', () => {
