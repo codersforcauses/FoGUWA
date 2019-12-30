@@ -22,21 +22,25 @@
         <span class="grey--text">Search FoGUWA</span>
       </template>
       <template v-slot:append>
-        <v-icon class="grey--text">search</v-icon>
+        <v-icon class="grey--text">
+          search
+        </v-icon>
       </template>
     </v-text-field>
     <v-btn
       v-show="!geoBtnHidden && isIndex"
       :loading="geoBtnLoading"
       :color="geoBtnColor"
-      @click="geoBtnClicked"
       icon
       text
+      @click="geoBtnClicked"
     >
       <v-icon>my_location</v-icon>
     </v-btn>
 
-    <v-toolbar-title v-show="!isIndex" class="title">FoGUWA</v-toolbar-title>
+    <v-toolbar-title v-show="!isIndex" class="title">
+      FoGUWA
+    </v-toolbar-title>
   </v-toolbar>
 </template>
 

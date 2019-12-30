@@ -19,7 +19,9 @@
           multi-line
         >
           {{ snackbarText }}
-          <v-btn @click="snackbar = false" flat>Close</v-btn>
+          <v-btn flat @click="snackbar = false">
+            Close
+          </v-btn>
         </v-snackbar>
       </v-card>
     </v-content>

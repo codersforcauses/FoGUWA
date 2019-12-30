@@ -2,11 +2,17 @@
   <v-container fill-height fluid>
     <v-row align="center" justify="center">
       <div class="text-center">
-        <!-- eslint-disable-next-line -->
-        <h1 v-if="error.statusCode === 404" class="display-2">{{ pageNotFound }}</h1>
-        <h1 v-else class="display-2 font-weight-bold">{{ otherError }}</h1>
+        <h1 v-if="error.statusCode === 404" class="display-2">
+          {{ pageNotFound }}
+        </h1>
+        <h1 v-else class="display-2 font-weight-bold">
+          {{ otherError }}
+        </h1>
         <v-btn rounded color="primary" dark nuxt to="/" class="mt-4">
-          <v-icon dark class="mr-2">arrow_back</v-icon>Return to Home page
+          <v-icon dark class="mr-2">
+            arrow_back
+          </v-icon>
+          Return to Home page
         </v-btn>
       </div>
     </v-row>
