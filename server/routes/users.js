@@ -1,7 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const consola = require('consola')
 const { addUser } = require('../seeder/index')
+const { updateModel } = require('./routeUtilities')
 
 const Users = mongoose.model('User')
 const router = express.Router()
@@ -28,7 +28,6 @@ router.get('/users/:id', async (req, res, next) => {
     if (user) return res.json(sanitiseUser(user))
   }
   res.json({ message: 'User not found' })
-  consola.error(`User not found`)
 })
 
 router.post('/users', async (req, res, next) => {
@@ -40,20 +39,10 @@ router.patch('/users/:id', async (req, res, next) => {
   const update = { ...req.body }
   delete update._id
   delete update.email
-  const user = await Users.findByIdAndUpdate(
-    req.params.id,
-    update,
-    { new: true },
-    (err, doc) => {
-      if (err) {
-        consola.error(`Updating user failed: ${err}`)
-      }
-    }
-  )
+  const user = await updateModel(Users, req.params.id, update)
   if (user) return res.json(user)
   else {
     res.json({ message: 'user not updated' })
-    consola.error('user not updated')
   }
 })
 
