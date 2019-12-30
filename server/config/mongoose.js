@@ -40,7 +40,7 @@ process.on('SIGINT', () => {
 })
 
 process.on('SIGTERM', () => {
-  gracefulShutdown('heroku app shutdown', () => {
+  gracefulShutdown('app shutdown', () => {
     process.exit(0)
   })
 })
