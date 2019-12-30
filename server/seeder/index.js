@@ -43,7 +43,7 @@ const parseJSON = JSONfile => {
   return data
 }
 
-const seedData = async (dataJSON, promiseFunction, seedName) => {
+const seedFactory = async (dataJSON, promiseFunction, seedName) => {
   const seedObj = parseJSON(dataJSON)
   const promises = seedObj.map(seed => promiseFunction(seed))
   const seedResult = await Promise.all(promises)
@@ -51,9 +51,21 @@ const seedData = async (dataJSON, promiseFunction, seedName) => {
 }
 
 const seedUsers = () =>
-  seedData('server/seeder/userSeeds.json', addUser, 'users')
+  seedFactory('server/seeder/userSeeds.json', addUser, 'users')
 
 const seedFlora = () =>
-  seedData('server/seeder/floraSeeds.json', addFlora, 'plants')
+  seedFactory('server/seeder/floraSeeds.json', addFlora, 'plants')
 
-module.exports = { addFlora, addUser, seedFlora, seedUsers }
+// Uses a provided function to seed data into the specified collection
+const seedDB = (dbconnection, collectionName, factory) => {
+  dbconnection.collection(collectionName).countDocuments((err, count) => {
+    if (err)
+      consola.error(`Error getting ${collectionName} collection count: ${err}`)
+    else if (count === 0) {
+      consola.info(`Seeding ${collectionName} collection`)
+      factory()
+    }
+  })
+}
+
+module.exports = { addFlora, addUser, seedFlora, seedUsers, seedDB }

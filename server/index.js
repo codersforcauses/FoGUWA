@@ -9,24 +9,11 @@ const config = require('../nuxt.config.js')
 config.dev = !(process.env.NODE_ENV === 'production')
 
 const { mongoose } = require('./config/mongoose')
-const { seedUsers, seedFlora } = require('./seeder')
+const { seedUsers, seedFlora, seedDB } = require('./seeder')
 // // Seed data for empty collections
 if (process.env.NODE_ENV !== 'production') {
-  mongoose.collection('users').countDocuments((err, count) => {
-    if (err) consola.error(`Error getting user collection count: ${err}`)
-    else if (count === 0) {
-      consola.info('Seeding Users collection')
-      seedUsers()
-    }
-  })
-
-  mongoose.collection('flora').countDocuments((err, count) => {
-    if (err) consola.error(`Error getting flora collection count: ${err}`)
-    else if (count === 0) {
-      consola.info('Seeding Flora collection')
-      seedFlora()
-    }
-  })
+  seedDB(mongoose, 'users', seedUsers)
+  seedDB(mongoose, 'flora', seedFlora)
 }
 
 const middleware = require('./middleware')
