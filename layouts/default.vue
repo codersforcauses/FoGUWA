@@ -20,11 +20,11 @@
         <v-snackbar
           v-model="$nuxt.isOffline"
           :timeout="offlineTimeout"
-          :color="snackbarColour"
+          color="error"
           bottom
           multi-line
         >
-          {{ offlineText }}
+          You are currently offline, please check your internet connection
         </v-snackbar>
       </v-card>
     </v-content>
@@ -47,12 +47,10 @@ export default {
   data: () => ({
     drawer: false,
     snackbar: false,
-    offlineTimeout: 100000,
+    offlineTimeout: 0,
     snackbarTimeout: 5000,
-    snackbarColour: 'error',
-    snackbarText: 'Something went wrong sir',
-    offlineText:
-      'You are currently offline, please check your internet connection'
+    snackbarColour: 'primary',
+    snackbarText: ''
   }),
   computed: {
     isIndex() {
