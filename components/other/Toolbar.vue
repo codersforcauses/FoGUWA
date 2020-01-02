@@ -29,11 +29,11 @@
     </v-text-field>
     <v-btn
       v-show="!geoBtnHidden && isIndex"
+      icon
+      text
       :loading="geoBtnLoading"
       :color="geoBtnColor"
       @click="geoBtnClicked"
-      icon
-      text
     >
       <v-icon>my_location</v-icon>
     </v-btn>
