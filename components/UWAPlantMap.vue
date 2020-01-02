@@ -9,7 +9,7 @@
 <script>
 import Vue from 'vue'
 import { mapState } from 'vuex'
-import Popup from './other/Popup'
+import PlantCard from './other/PlantCard.vue'
 import GoogleMapLoader from './GoogleMapLoader'
 import { uwaMapSettings } from '@/assets/js/mapSettings'
 import { plants } from '@/assets/plantdb.json'
@@ -27,7 +27,7 @@ export default {
   components: {
     'google-map-loader': GoogleMapLoader,
     /* eslint-disable */
-    'pop-up': Popup
+    'plant-card': PlantCard
   },
   data: () => ({
     map: null,
@@ -128,7 +128,7 @@ export default {
             })
             markerInst.addListener('click', () => {
               const popupContent = Vue.compile(
-                `<pop-up 
+                `<plant-card 
                   plantName="${marker.name}" 
                 />`
               )

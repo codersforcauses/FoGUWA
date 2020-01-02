@@ -11,7 +11,7 @@
         <v-container :fill-height="isIndex" fluid class="pa-0 mx-0">
           <nuxt />
         </v-container>
-        <popup plant-name="UWA Flora" />
+        <plant-card />
         <v-snackbar
           v-model="snackbar"
           :timeout="snackbarTimeout"
@@ -32,14 +32,14 @@
 
 <script>
 import Toolbar from '~/components/other/Toolbar.vue'
-import Popup from '~/components/other/Popup.vue'
+import PlantCard from '~/components/other/PlantCard.vue'
 import NavDrawer from '~/components/other/NavDrawer.vue'
 import Footer from '~/components/other/Footer.vue'
 import { loggingLevels } from '@/assets/js/logging.js'
 
 export default {
   components: {
-    popup: Popup,
+    'plant-card': PlantCard,
     toolbar: Toolbar,
     foot: Footer,
     'nav-drawer': NavDrawer
