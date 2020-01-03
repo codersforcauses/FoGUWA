@@ -15,7 +15,9 @@
           multi-line
         >
           {{ snackbarText }}
-          <v-btn @click="snackbar = false" color="white" text flat>Close</v-btn>
+          <v-btn color="white" text flat @click="snackbar = false">
+            Close
+          </v-btn>
         </v-snackbar>
         <v-snackbar
           v-model="$nuxt.isOffline"

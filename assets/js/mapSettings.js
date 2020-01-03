@@ -12,7 +12,8 @@ export const uwaMapSettings = {
       elementType: 'geometry',
       stylers: [
         {
-          color: '#ebe3cd'
+          // building
+          color: '#E0E8E2'
         }
       ]
     },
@@ -20,6 +21,7 @@ export const uwaMapSettings = {
       elementType: 'labels',
       stylers: [
         {
+          // change this to on to show places name and marker
           visibility: 'off'
         }
       ]
@@ -80,7 +82,8 @@ export const uwaMapSettings = {
       elementType: 'geometry',
       stylers: [
         {
-          color: '#dfd2ae'
+          // surrounding land
+          color: '#F3F3F0'
         }
       ]
     },
@@ -89,7 +92,9 @@ export const uwaMapSettings = {
       elementType: 'geometry',
       stylers: [
         {
-          color: '#dfd2ae'
+          // land background
+          // color: '#CEC4B7' light brown
+          color: '#B1D3C3'
         }
       ]
     },
@@ -107,7 +112,8 @@ export const uwaMapSettings = {
       elementType: 'geometry.fill',
       stylers: [
         {
-          color: '#a5b076'
+          // main greenery
+          color: '#1b998b'
         }
       ]
     },
@@ -125,7 +131,8 @@ export const uwaMapSettings = {
       elementType: 'geometry',
       stylers: [
         {
-          color: '#f5f1e6'
+          // minor road
+          color: '#9E7757'
         }
       ]
     },
@@ -134,7 +141,8 @@ export const uwaMapSettings = {
       elementType: 'geometry',
       stylers: [
         {
-          color: '#fdfcf8'
+          // medium road
+          color: '#9E7757'
         }
       ]
     },
@@ -143,16 +151,8 @@ export const uwaMapSettings = {
       elementType: 'geometry',
       stylers: [
         {
-          color: '#f8c967'
-        }
-      ]
-    },
-    {
-      featureType: 'road.highway',
-      elementType: 'geometry.stroke',
-      stylers: [
-        {
-          color: '#e9bc62'
+          // major road
+          color: '#9E7757'
         }
       ]
     },
@@ -183,6 +183,7 @@ export const uwaMapSettings = {
         }
       ]
     },
+    /* we do not use transit, might delete later
     {
       featureType: 'transit.line',
       elementType: 'geometry',
@@ -218,13 +219,13 @@ export const uwaMapSettings = {
           color: '#dfd2ae'
         }
       ]
-    },
+    }, */
     {
       featureType: 'water',
       elementType: 'geometry.fill',
       stylers: [
         {
-          color: '#b9d3c2'
+          color: '#bcf4f5'
         }
       ]
     },
