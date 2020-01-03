@@ -1,6 +1,27 @@
 <template>
-  <v-navigation-drawer v-model="plantDialog" app bottom hide-overlay>
-    <v-card>
+  <v-navigation-drawer
+    v-model="plantDrawer"
+    app
+    bottom
+    hide-overlay
+    width="35%"
+  >
+    <v-btn
+      fab
+      absolute
+      right
+      x-small
+      depressed
+      color="#00000077"
+      :ripple="false"
+      class="mt-2"
+      @click="plantDrawer = false"
+    >
+      <v-icon color="white">
+        mdi-close
+      </v-icon>
+    </v-btn>
+    <v-card flat>
       <v-carousel hide-delimiters cycle interval="3500" show-arrows-on-hover>
         <v-carousel-item v-for="(image, i) in images" :key="i">
           <v-img :src="image" height="100%"></v-img>
@@ -21,7 +42,7 @@
 
 <script>
 export default {
-  name: 'PlantCard',
+  name: 'PlantInfo',
   props: {
     plantName: {
       type: String,
@@ -46,14 +67,7 @@ export default {
     }
   },
   data: () => ({
-    plantDialog: true
+    plantDrawer: true
   })
 }
 </script>
-<style>
-.popup-dialog {
-  position: absolute;
-  left: 0;
-  width: calc(30%+10px);
-}
-</style>
