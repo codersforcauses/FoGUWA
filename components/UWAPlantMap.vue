@@ -1,15 +1,18 @@
 <template>
-  <google-map-loader
-    :map-config="mapConfig"
-    :map-inst.sync="map"
-    :google-inst.sync="google"
-  />
+  <div>
+    <plant-info />
+    <google-map-loader
+      :map-config="mapConfig"
+      :map-inst.sync="map"
+      :google-inst.sync="google"
+    />
+  </div>
 </template>
 
 <script>
-import Vue from 'vue'
+// import Vue from 'vue'
 import { mapState } from 'vuex'
-import PlantCard from './PlantCard.vue'
+import PlantInfo from './PlantInfo.vue'
 import GoogleMapLoader from './GoogleMapLoader'
 import { uwaMapSettings } from '@/assets/js/mapSettings'
 import { plants } from '@/assets/plantdb.json'
@@ -27,14 +30,14 @@ export default {
   components: {
     'google-map-loader': GoogleMapLoader,
     /* eslint-disable */
-    'plant-card': PlantCard
+    'plant-info': PlantInfo
   },
   data: () => ({
     map: null,
     google: null,
     markerInstances: [],
     userMarker: null,
-    showPopup: true
+    plantInfo: null
   }),
   computed: {
     ...mapState(['position']),
@@ -123,17 +126,16 @@ export default {
               icon: marker.type === 'tree' ? leafIcon : statueIcon,
               map: this.map
             })
-            const markerPopup = new this.google.maps.InfoWindow({
-              content: ''
-            })
-            markerInst.addListener('click', () => {
-              const popupContent = Vue.compile(
-                `<plant-card 
-                  plantName="${marker.name}" 
-                />`
-              )
-              markerPopup.setContent(popupContent)
-              markerPopup.open(this.map, markerInst)
+            // const markerPopup = new this.google.maps.InfoWindow({
+            //   content: ''
+            // })
+            markerInst.addListener('click', (info, ...rest) => {
+              this.plantInfo = {
+                name: marker.name,
+                sciName: marker.scientificName,
+                desc: marker.description,
+                type: marker.type || 'tree'
+              }
             })
             this.markerInstances.push(markerInst)
           }
