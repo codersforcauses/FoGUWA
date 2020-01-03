@@ -1,5 +1,5 @@
 <template>
-  <v-layout>
+  <!-- <v-layout>
     <v-flex xs12 sm6 offset-sm3>
       <v-dialog
         v-if="$vuetify.breakpoint.smAndDown"
@@ -10,17 +10,18 @@
       >
         <plant-content />
       </v-dialog>
-      <v-card v-else v-model="plantDialog">
-        <v-navigation-drawer>
-          <plant-content />
-        </v-navigation-drawer>
-      </v-card>
+      <v-navigation-drawer v-else value="plantDialog" width="100%" hide-overlay>
+        <plant-content />
+      </v-navigation-drawer>
     </v-flex>
-  </v-layout>
+  </v-layout> -->
+  <v-navigation-drawer v-model="plantDialog" app bottom hide-overlay>
+    <plant-content />
+  </v-navigation-drawer>
 </template>
 
 <script>
-import PlantContent from '~/components/other/PlantContent.vue'
+import PlantContent from '~/components/PlantContent.vue'
 
 export default {
   name: 'PlantCard',

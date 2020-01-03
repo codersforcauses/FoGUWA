@@ -9,7 +9,7 @@
 <script>
 import Vue from 'vue'
 import { mapState } from 'vuex'
-import PlantCard from './other/PlantCard.vue'
+import PlantCard from './PlantCard.vue'
 import GoogleMapLoader from './GoogleMapLoader'
 import { uwaMapSettings } from '@/assets/js/mapSettings'
 import { plants } from '@/assets/plantdb.json'
@@ -85,7 +85,7 @@ export default {
         this.userMarker = null
       } else {
         this.userMarker.setPosition(this.position)
-      }
+      }df8
     }
   },
   methods: {

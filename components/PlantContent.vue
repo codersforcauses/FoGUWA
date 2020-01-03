@@ -1,24 +1,20 @@
 <template>
-  <v-layout>
-    <v-flex xs12 sm6 offset-sm3>
-      <v-card>
-        <v-carousel hide-delimiters cycle interval="3500" show-arrows-on-hover>
-          <v-carousel-item v-for="(image, i) in images" :key="i">
-            <v-img :src="image" height="100%"></v-img>
-          </v-carousel-item>
-        </v-carousel>
-        <v-card-title primary-title>
-          {{ plantName }}
-        </v-card-title>
-        <v-card-subtitle>
-          <em>{{ sciName }}</em>
-        </v-card-subtitle>
-        <v-card-text>
-          {{ description }}
-        </v-card-text>
-      </v-card>
-    </v-flex>
-  </v-layout>
+  <v-card>
+    <v-carousel hide-delimiters cycle interval="3500" show-arrows-on-hover>
+      <v-carousel-item v-for="(image, i) in images" :key="i">
+        <v-img :src="image" height="100%"></v-img>
+      </v-carousel-item>
+    </v-carousel>
+    <v-card-title primary-title>
+      {{ plantName }}
+    </v-card-title>
+    <v-card-subtitle>
+      <em>{{ sciName }}</em>
+    </v-card-subtitle>
+    <v-card-text>
+      {{ description }}
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
