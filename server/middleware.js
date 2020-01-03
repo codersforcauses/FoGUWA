@@ -4,7 +4,6 @@ const UsersRouter = require('./routes/users')
 
 module.exports = app => {
   app.use(bodyParser.json())
-
   app.use('/api', FloraRouter)
   app.use('/api', UsersRouter)
 

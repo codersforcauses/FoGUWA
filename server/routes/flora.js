@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const { checkJwt } = require('../authentication.js')
 const { addFlora } = require('../seeder/index')
 const { updateModel } = require('./routeUtilities')
 
@@ -19,7 +20,7 @@ router.get('/flora/:id', async (req, res, next) => {
   res.status(400).send('Flora not found')
 })
 
-router.post('/flora', async (req, res, next) => {
+router.post('/flora', checkJwt, async (req, res, next) => {
   const flora = await addFlora(req.body)
   res.json(flora)
 })
