@@ -6,12 +6,12 @@ const checkJwt = jwt({
     cache: true,
     rateLimit: true,
     jwksRequestsPerMinute: 5,
-    jwksUri: `https://<AUTH0_DOMAIN>/.well-known/jwks.json`
+    jwksUri: `https://codersforcauses.au.auth0.com/.well-known/jwks.json`
   }),
 
   // Validate the audience and the issuer.
   audience: '<API_IDENTIFIER>',
-  issuer: `https://<AUTH0_DOMAIN>/`,
+  issuer: `https://codersforcauses.au.auth0.com/`,
   algorithms: ['RS256']
 })
 
