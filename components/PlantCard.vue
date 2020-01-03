@@ -1,37 +1,31 @@
 <template>
-  <!-- <v-layout>
-    <v-flex xs12 sm6 offset-sm3>
-      <v-dialog
-        v-if="$vuetify.breakpoint.smAndDown"
-        v-model="plantDialog"
-        fullscreen
-        persistent
-        class="popup-dialog"
-      >
-        <plant-content />
-      </v-dialog>
-      <v-navigation-drawer v-else value="plantDialog" width="100%" hide-overlay>
-        <plant-content />
-      </v-navigation-drawer>
-    </v-flex>
-  </v-layout> -->
   <v-navigation-drawer v-model="plantDialog" app bottom hide-overlay>
-    <plant-content />
+    <v-card>
+      <v-carousel hide-delimiters cycle interval="3500" show-arrows-on-hover>
+        <v-carousel-item v-for="(image, i) in images" :key="i">
+          <v-img :src="image" height="100%"></v-img>
+        </v-carousel-item>
+      </v-carousel>
+      <v-card-title primary-title>
+        {{ plantName }}
+      </v-card-title>
+      <v-card-subtitle>
+        <em>{{ sciName }}</em>
+      </v-card-subtitle>
+      <v-card-text>
+        {{ description }}
+      </v-card-text>
+    </v-card>
   </v-navigation-drawer>
 </template>
 
 <script>
-import PlantContent from '~/components/PlantContent.vue'
-
 export default {
   name: 'PlantCard',
-  components: {
-    'plant-content': PlantContent
-  },
   props: {
     plantName: {
       type: String,
-      default: 'Plant Guy'
+      default: 'Plants and Trees'
     },
     sciName: {
       type: String,
