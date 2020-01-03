@@ -8,8 +8,8 @@
       :outline="geoBtnOutline"
       :loading="geoBtnLoading"
       :color="geoBtnColor"
-      @click="geoBtnClicked"
       icon
+      @click="geoBtnClicked"
     >
       <v-icon>my_location</v-icon>
     </v-btn>
