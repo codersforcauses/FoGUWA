@@ -6,12 +6,12 @@ const checkJwt = jwt({
     cache: true,
     rateLimit: true,
     jwksRequestsPerMinute: 5,
-    jwksUri: `https://codersforcauses.au.auth0.com/.well-known/jwks.json`
+    jwksUri: `https://fog-uwa.au.auth0.com/.well-known/jwks.json`
   }),
 
   // Validate the audience and the issuer.
-  audience: '<API_IDENTIFIER>',
-  issuer: `https://codersforcauses.au.auth0.com/`,
+  audience: 'https://fog-uwa.au.auth0.com/api/v2/',
+  issuer: `https://fog-uwa.au.auth0.com/`,
   algorithms: ['RS256']
 })
 
