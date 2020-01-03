@@ -10,9 +10,9 @@ const checkJwt = jwt({
   }),
 
   // Validate the audience and the issuer.
-  audience: 'https://fog-uwa.au.auth0.com/api/v2/',
-  issuer: `https://fog-uwa.au.auth0.com/`,
-  algorithms: ['RS256']
+  audience: process.env.AUTH0_AUDIENCE,
+  issuer: process.env.AUTH0_DOMAIN,
+  algorithms: [process.env.AUTH0_ALGORITHM]
 })
 
 module.exports = { checkJwt }

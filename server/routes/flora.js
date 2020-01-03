@@ -25,7 +25,7 @@ router.post('/flora', checkJwt, async (req, res, next) => {
   res.json(flora)
 })
 
-router.patch('/flora/:id', async (req, res, next) => {
+router.patch('/flora/:id', checkJwt, async (req, res, next) => {
   const update = { ...req.body }
   delete update._id
   const flora = await updateModel(Flora, req.params.id, update)
@@ -35,7 +35,7 @@ router.patch('/flora/:id', async (req, res, next) => {
   }
 })
 
-router.delete('/flora/:id', async (req, res, next) => {
+router.delete('/flora/:id', checkJwt, async (req, res, next) => {
   const flora = await Flora.findByIdAndDelete(req.params.id)
   if (flora) res.json(flora)
   else {
