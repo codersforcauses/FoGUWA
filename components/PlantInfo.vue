@@ -15,7 +15,7 @@
       color="#00000077"
       :ripple="false"
       class="mt-2"
-      @click="plantInfoVisible = false"
+      @click="drawerClose"
     >
       <v-icon color="white">
         mdi-close
@@ -57,6 +57,11 @@ export default {
     plantInfoVisible: {
       type: Boolean,
       required: true
+    }
+  },
+  methods: {
+    drawerClose(event) {
+      this.$emit('closeDrawer', 'true')
     }
   }
 }
