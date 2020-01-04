@@ -4,6 +4,7 @@
     <plant-info
       :plant-info="plantInfo"
       :plant-info-visible="plantInfoVisible"
+      @closeDrawer="plantInfoVisible = false"
     />
     <google-map-loader
       :map-config="mapConfig"
@@ -30,6 +31,18 @@ const UWA_BOUNDS = {
 }
 const UWA_COORDS = { lat: -31.9804624, lng: 115.818 }
 
+const defaultInfo = {
+  plantName: 'Plants and Trees',
+  sciName: 'Planticus Namium',
+  images: [
+    'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/dsc-5454_orig.jpg',
+    'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/dsc-7528_orig.jpg',
+    'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/20090626-uwa-grounds2-007_orig.jpg'
+  ],
+  description:
+    'Plants are mainly multicellular, predominantly photosynthetic eukaryotes of the kingdom Plantae. Historically, plants were treated as one of two kingdoms including all living things that were not animals, and all algae and fungi were treated as plants.'
+}
+
 export default {
   components: {
     'google-map-loader': GoogleMapLoader,
@@ -42,17 +55,7 @@ export default {
     markerInstances: [],
     userMarker: null,
     plantInfoVisible: false,
-    plantInfo: {
-          plantName: 'Plants and Trees',
-          sciName: 'Planticus Namium',
-          images: [
-            'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/dsc-5454_orig.jpg',
-            'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/dsc-7528_orig.jpg',
-            'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/20090626-uwa-grounds2-007_orig.jpg'
-          ],
-          description:
-            'Plants are mainly multicellular, predominantly photosynthetic eukaryotes of the kingdom Plantae. Historically, plants were treated as one of two kingdoms including all living things that were not animals, and all algae and fungi were treated as plants.'
-        }
+    plantInfo: defaultInfo
   }),
   computed: {
     ...mapState(['position']),
@@ -72,6 +75,19 @@ export default {
     markers() {
       // return the array
       return [...plants]
+    },
+    defaultInfo() {
+      return {
+        plantName: 'Plants and Trees',
+        sciName: 'Planticus Namium',
+        images: [
+          'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/dsc-5454_orig.jpg',
+          'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/dsc-7528_orig.jpg',
+          'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/20090626-uwa-grounds2-007_orig.jpg'
+        ],
+        description:
+          'Plants are mainly multicellular, predominantly photosynthetic eukaryotes of the kingdom Plantae. Historically, plants were treated as one of two kingdoms including all living things that were not animals, and all algae and fungi were treated as plants.'
+      }
     }
   },
   watch: {
@@ -141,14 +157,12 @@ export default {
               icon: marker.type === 'tree' ? leafIcon : statueIcon,
               map: this.map
             })
-            // const markerPopup = new this.google.maps.InfoWindow({
-            //   content: ''
-            // })
-            markerInst.addListener('click', (info, ...rest) => {
+            markerInst.addListener('click', () => {
               this.plantInfo = {
-                plantName: marker.name,
-                sciName: marker.scientificName,
-                desc: marker.description,
+                plantName: marker.name || this.defaultInfo.plantName,
+                sciName: marker.scientificName || this.defaultInfo.scientificName,
+                description: marker.description || this.defaultInfo.description,
+                images: marker.images || this.defaultInfo.images,
                 type: marker.type || 'tree'
               }
               this.plantInfoVisible = true
@@ -158,20 +172,6 @@ export default {
         })
       }
     },
-  //   loadPlantInfo() {
-  //     const defaultInfo = {
-  //         plantName: 'Plants and Trees',
-  //         sciName: 'Planticus Namium',
-  //         images: [
-  //           'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/dsc-5454_orig.jpg',
-  //           'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/dsc-7528_orig.jpg',
-  //           'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/20090626-uwa-grounds2-007_orig.jpg'
-  //         ],
-  //         description:
-  //           'Plants are mainly multicellular, predominantly photosynthetic eukaryotes of the kingdom Plantae. Historically, plants were treated as one of two kingdoms including all living things that were not animals, and all algae and fungi were treated as plants.'
-  //       }
-  //       this.plantInfo = defaultInfo
-  //     }
   }
 }
 </script>
