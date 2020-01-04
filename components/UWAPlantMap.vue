@@ -1,12 +1,12 @@
 <template>
-  <div>
-    <plant-info />
+  <v-card height="100%">
+    <plant-info info="plantInfo" />
     <google-map-loader
       :map-config="mapConfig"
       :map-inst.sync="map"
       :google-inst.sync="google"
     />
-  </div>
+  </v-card>
 </template>
 
 <script>
