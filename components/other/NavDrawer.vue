@@ -16,7 +16,13 @@
           <v-list-item-title v-text="item.title" />
         </v-list-item-content>
       </v-list-item>
-      <v-list-item active-class="primary--text" router exact @click="auth">
+      <v-list-item
+        v-if="!user"
+        active-class="primary--text"
+        router
+        exact
+        @click="auth"
+      >
         <v-list-item-action>
           <v-icon> {{ login.icon }} </v-icon>
         </v-list-item-action>
@@ -24,6 +30,9 @@
           <v-list-item-title v-text="login.title" />
         </v-list-item-content>
       </v-list-item>
+      <p v-else>
+        {{ user.name }}
+      </p>
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -53,6 +62,9 @@ export default {
     }
   }),
   computed: {
+    user() {
+      return (this.$auth || {}).user || null
+    },
     panel: {
       get() {
         return this.value
