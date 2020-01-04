@@ -4,7 +4,7 @@
     app
     bottom
     hide-overlay
-    width="35%"
+    width="450px"
   >
     <v-btn
       fab
