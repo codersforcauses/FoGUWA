@@ -19,8 +19,7 @@
     </v-list>
     <template v-slot:append>
       <v-divider />
-      <v-list-item two-line>
-        <!-- possibly have dynamic colours -->
+      <v-list-item v-if="$store.state.auth.loggedIn" two-line>
         <v-list-item-avatar color="red" class="mr-4">
           <span class="white--text headline">{{ initials }}</span>
         </v-list-item-avatar>
@@ -34,10 +33,15 @@
 
         <v-list-item-action>
           <v-btn icon>
-            <v-icon color="grey lighten-1">mdi-logout</v-icon>
+            <v-icon color="grey lighten-1">
+              mdi-logout
+            </v-icon>
           </v-btn>
         </v-list-item-action>
       </v-list-item>
+      <v-btn v-else block text tile dark color="primary">
+        Admin Login
+      </v-btn>
     </template>
   </v-navigation-drawer>
 </template>
@@ -62,11 +66,6 @@ export default {
         icon: 'info',
         title: 'About',
         to: '/about'
-      },
-      {
-        icon: 'info',
-        title: 'Login',
-        to: '/login'
       }
     ]
   }),
