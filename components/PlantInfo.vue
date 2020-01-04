@@ -22,7 +22,13 @@
       </v-icon>
     </v-btn>
     <v-card flat>
-      <v-carousel hide-delimiters cycle interval="3500" show-arrows-on-hover>
+      <v-carousel
+        hide-delimiters
+        cycle
+        interval="3500"
+        show-arrows-on-hover
+        :show-arrows="plantInfo.images.length > 1"
+      >
         <v-carousel-item v-for="(image, i) in plantInfo.images" :key="i">
           <v-img :src="image" height="100%"></v-img>
         </v-carousel-item>
@@ -46,27 +52,12 @@ export default {
   props: {
     plantInfo: {
       type: Object,
-      default() {
-        return {
-          plantName: 'Plants and Trees',
-          sciName: 'Planticus Namium',
-          images: [
-            'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/dsc-5454_orig.jpg',
-            'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/dsc-7528_orig.jpg',
-            'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/20090626-uwa-grounds2-007_orig.jpg'
-          ],
-          description:
-            'Plants are mainly multicellular, predominantly photosynthetic eukaryotes of the kingdom Plantae. Historically, plants were treated as one of two kingdoms including all living things that were not animals, and all algae and fungi were treated as plants.'
-        }
-      }
+      required: true
     },
     plantInfoVisible: {
       type: Boolean,
       required: true
     }
-  },
-  data: () => ({
-    plantInfoVisible: false
-  })
+  }
 }
 </script>
