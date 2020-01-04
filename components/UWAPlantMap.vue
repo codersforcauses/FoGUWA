@@ -1,6 +1,10 @@
 <template>
   <v-card height="100%">
-    <plant-info info="plantInfo" />
+    <!-- <plant-info :plant-info="plantInfo" /> -->
+    <plant-info
+      :plant-info="plantInfo"
+      :plant-info-visible="plantInfoVisible"
+    />
     <google-map-loader
       :map-config="mapConfig"
       :map-inst.sync="map"
@@ -37,7 +41,18 @@ export default {
     google: null,
     markerInstances: [],
     userMarker: null,
-    plantInfo: null
+    plantInfoVisible: false,
+    plantInfo: {
+          plantName: 'Plants and Trees',
+          sciName: 'Planticus Namium',
+          images: [
+            'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/dsc-5454_orig.jpg',
+            'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/dsc-7528_orig.jpg',
+            'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/20090626-uwa-grounds2-007_orig.jpg'
+          ],
+          description:
+            'Plants are mainly multicellular, predominantly photosynthetic eukaryotes of the kingdom Plantae. Historically, plants were treated as one of two kingdoms including all living things that were not animals, and all algae and fungi were treated as plants.'
+        }
   }),
   computed: {
     ...mapState(['position']),
@@ -117,7 +132,7 @@ export default {
             fillOpacity: 1.0,
             strokeColor: '#905923',
             scale: 1
-          }
+            }
           // Plot all instances
           for (const instance of marker.instances) {
             const markerInst = new this.google.maps.Marker({
@@ -131,17 +146,32 @@ export default {
             // })
             markerInst.addListener('click', (info, ...rest) => {
               this.plantInfo = {
-                name: marker.name,
+                plantName: marker.name,
                 sciName: marker.scientificName,
                 desc: marker.description,
                 type: marker.type || 'tree'
               }
+              this.plantInfoVisible = true
             })
             this.markerInstances.push(markerInst)
           }
         })
       }
-    }
+    },
+  //   loadPlantInfo() {
+  //     const defaultInfo = {
+  //         plantName: 'Plants and Trees',
+  //         sciName: 'Planticus Namium',
+  //         images: [
+  //           'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/dsc-5454_orig.jpg',
+  //           'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/dsc-7528_orig.jpg',
+  //           'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/20090626-uwa-grounds2-007_orig.jpg'
+  //         ],
+  //         description:
+  //           'Plants are mainly multicellular, predominantly photosynthetic eukaryotes of the kingdom Plantae. Historically, plants were treated as one of two kingdoms including all living things that were not animals, and all algae and fungi were treated as plants.'
+  //       }
+  //       this.plantInfo = defaultInfo
+  //     }
   }
 }
 </script>
