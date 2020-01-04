@@ -18,6 +18,7 @@
       </v-list-item>
       <v-list-item
         v-if="!user"
+        :to="login.to"
         active-class="primary--text"
         router
         exact
@@ -42,6 +43,7 @@ export default {
   props: {
     value: Boolean
   },
+  middleware: 'auth',
   data: () => ({
     items: [
       {
@@ -58,7 +60,7 @@ export default {
     login: {
       icon: 'person',
       title: 'Login',
-      to: '/login'
+      to: '/'
     }
   }),
   computed: {
