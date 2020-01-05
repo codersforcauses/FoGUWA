@@ -1,6 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const { checkJwt } = require('../authentication.js')
+const { checkJwt, AuthMiddleware } = require('../authentication.js')
 const { addUser } = require('../seeder/index')
 const { updateModel } = require('./routeUtilities')
 
@@ -13,11 +13,12 @@ const sanitiseUser = ({ name, email, _id }) => ({
   _id
 })
 
-router.get('/users', checkJwt, async (req, res, next) => {
-  const users = await Users.find()
+router.get('/users', AuthMiddleware, (req, res, next) => {
+  // const users = await Users.find()
   res.json(
     // Remove password from returned json
-    users.map(user => sanitiseUser(user))
+    // users.map(user => sanitiseUser(user))
+    { hell0: 'hell', users: req.users }
   )
 })
 
