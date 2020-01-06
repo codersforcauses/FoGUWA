@@ -1,24 +1,11 @@
 <template>
-  <v-layout
-    column
-    justify-center
-    align-center
-  >
-    <button
-      v-show="canInstall"
-      ref="install"
-      absolute
-      @click="installApp"
-    >
+  <v-layout column justify-center align-center>
+    <button v-show="canInstall" ref="install" absolute @click="installApp">
       Add to home screen
     </button>
-    <v-card
-      tile
-      height="100%"
-      width="100%"
-    >
+    <v-card tile height="100%" width="100%">
       <Searchbar />
-      <UWAPlantMap />
+      <uwa-plant-map ref="plantMap" />
     </v-card>
   </v-layout>
 </template>
@@ -30,7 +17,7 @@ let deferredPrompt
 
 export default {
   components: {
-    UWAPlantMap,
+    'uwa-plant-map': UWAPlantMap,
     Searchbar
   },
   data() {
@@ -65,7 +52,7 @@ export default {
       // Show the deffered install prompt
       deferredPrompt.prompt()
       // Wait for the user to respond to the prompt
-      deferredPrompt.userChoice.then((choiceResult) => {
+      deferredPrompt.userChoice.then(choiceResult => {
         if (choiceResult.outcome === 'accepted') {
           console.log('User accepted the A2HS prompt') // eslint-disable-line
         } else {

@@ -2,13 +2,6 @@ dist: xenial
 branches:
   only: 
     - master
-addons:
-  apt:
-    packages:
-      # Ubuntu 16+ does not install this dependency by default, so we need to install it ourselves
-      - libgconf-2-4
-services:
-  - xvfb
 language: node_js
 nodejs:
   - "lts/*"
