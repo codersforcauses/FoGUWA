@@ -1,6 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const { checkJwt, AuthMiddleware } = require('../authentication.js')
+const { checkJwt } = require('../authentication.js')
 const { addUser } = require('../seeder/index')
 const { updateModel } = require('./routeUtilities')
 
@@ -13,7 +13,7 @@ const sanitiseUser = ({ name, email, _id }) => ({
   _id
 })
 
-router.get('/users', AuthMiddleware, (req, res, next) => {
+router.get('/users', checkJwt, (req, res, next) => {
   // const users = await Users.find()
   res.json(
     // Remove password from returned json

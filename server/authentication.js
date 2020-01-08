@@ -11,18 +11,17 @@ const checkJwt = expressjwt({
 
   // Validate the audience and the issuer.
   audience: process.env.AUTH0_AUDIENCE,
-  issuer: process.env.AUTH0_DOMAIN,
   algorithms: [process.env.AUTH0_ALGORITHM]
 })
 
-const AuthMiddleware = expressjwt({
-  secret: process.env.AUTH0_SECRET,
-  algorithms: [process.env.AUTH0_ALGORITHM],
-  audience: process.env.AUTH0_AUDIENCE,
-  issuer: process.env.AUTH0_DOMAIN,
-  getToken: req => {
-    return req.cookies['auth._token.auth0'] || null
-  }
-})
+// const AuthMiddleware = expressjwt({
+//   secret: process.env.AUTH0_SECRET,
+//   algorithms: [process.env.AUTH0_ALGORITHM],
+//   audience: process.env.AUTH0_AUDIENCE,
+//   issuer: process.env.AUTH0_DOMAIN,
+//   getToken: req => {
+//     return req.cookies['auth._token.auth0'] || null
+//   }
+// })
 
-module.exports = { checkJwt, AuthMiddleware }
+module.exports = { checkJwt }
