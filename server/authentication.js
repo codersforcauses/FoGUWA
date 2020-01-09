@@ -1,7 +1,15 @@
 const expressjwt = require('express-jwt')
 const jwksRsa = require('jwks-rsa')
 
-const checkJwt = expressjwt({
+const getToken = req => {
+  const tokenString = req.cookies['auth._token.auth0']
+    ? req.cookies['auth._token.auth0']
+    : req.headers.authorization
+  const tokenMatcher = /(?<=Bearer ).+/
+  return tokenMatcher.exec(tokenString)[0]
+}
+
+const setUser = expressjwt({
   secret: jwksRsa.expressJwtSecret({
     cache: true,
     rateLimit: true,
@@ -11,17 +19,8 @@ const checkJwt = expressjwt({
 
   // Validate the audience and the issuer.
   audience: process.env.AUTH0_AUDIENCE,
-  algorithms: [process.env.AUTH0_ALGORITHM]
+  algorithms: [process.env.AUTH0_ALGORITHM],
+  getToken
 })
 
-// const AuthMiddleware = expressjwt({
-//   secret: process.env.AUTH0_SECRET,
-//   algorithms: [process.env.AUTH0_ALGORITHM],
-//   audience: process.env.AUTH0_AUDIENCE,
-//   issuer: process.env.AUTH0_DOMAIN,
-//   getToken: req => {
-//     return req.cookies['auth._token.auth0'] || null
-//   }
-// })
-
-module.exports = { checkJwt }
+module.exports = { setUser }
