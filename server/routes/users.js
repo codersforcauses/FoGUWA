@@ -13,12 +13,11 @@ const sanitiseUser = ({ name, email, _id }) => ({
   _id
 })
 
-router.get('/users', setUser, (req, res, next) => {
-  // const users = await Users.find()
+router.get('/users', setUser, async (req, res, next) => {
+  const users = await Users.find()
   res.json(
     // Remove password from returned json
-    // users.map(user => sanitiseUser(user))
-    { hell0: 'hell', users: req }
+    users.map(user => sanitiseUser(user))
   )
 })
 
