@@ -20,12 +20,21 @@
     "cz": "./node_modules/.bin/git-cz"
   },
   "dependencies": {
+    "@nuxtjs/auth": "^4.8.5",
+    "@nuxtjs/axios": "^5.9.2",
     "@nuxtjs/pwa": "3.0.0-beta.16",
+    "add": "^2.0.6",
+    "cookie-parser": "^1.4.4",
     "cross-env": "^5.2.0",
     "dotenv": "^8.0.0",
     "express": "^4.16.4",
+    "express-jwt": "^5.3.1",
     "google-maps-api-loader": "^1.1.1",
-    "nuxt": "^2.0.0"
+    "jwks-rsa": "^1.6.0",
+    "mongodb": "^3.4.1",
+    "mongoose": "^5.8.1",
+    "nuxt": "^2.0.0",
+    "yarn": "^1.21.1"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^1.0.1",
