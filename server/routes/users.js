@@ -1,12 +1,12 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const { setUser } = require('../authentication.js')
-const { addUser } = require('../seeder/index')
-const { updateModel } = require('./routeUtilities')
+const { addUser, updateUser } = require('../controllers/users')
 
 const Users = mongoose.model('User')
 const router = express.Router()
 
+// Remove password from returned json
 const sanitiseUser = ({ name, email, _id }) => ({
   name,
   email,
@@ -15,42 +15,36 @@ const sanitiseUser = ({ name, email, _id }) => ({
 
 router.get('/users', setUser, async (req, res, next) => {
   const users = await Users.find()
-  res.json(
-    // Remove password from returned json
-    users.map(user => sanitiseUser(user))
-  )
+  res.json(users.map(user => sanitiseUser(user)))
 })
 
-router.get('/users/:id', setUser, async (req, res, next) => {
+router.get('/users/:id', setUser, async (req, res) => {
   if (mongoose.Types.ObjectId.isValid(req.params.id)) {
     const user = await Users.findById(req.params.id)
     if (user) return res.json(sanitiseUser(user))
   }
-  res.status(400).send('User not found')
+  res.status(400).json('User not found')
 })
 
-router.post('/users', setUser, async (req, res, next) => {
+router.post('/users', setUser, async (req, res) => {
   const user = await addUser(req.body)
   res.json(sanitiseUser(user))
 })
 
-router.patch('/users/:id', setUser, async (req, res, next) => {
-  const update = { ...req.body }
-  delete update._id
-  delete update.email
-  const user = await updateModel(Users, req.params.id, update)
-  if (user) return res.json(user)
-  else {
-    res.status(400).send('User not updated/found')
+router.patch('/users/:id', setUser, async (req, res) => {
+  if (mongoose.Types.ObjectId.isValid(req.params.id)) {
+    const user = await updateUser(req.params.id, req.body)
+    if (user) return res.json(user)
   }
+  res.status(400).json('User not updated/found')
 })
 
 router.delete('/users/:id', setUser, async (req, res, next) => {
-  const user = await Users.findByIdAndDelete(req.params.id)
-  if (user) res.json(sanitiseUser(user))
-  else {
-    res.status(400).send('User not found')
+  if (mongoose.Types.ObjectId.isValid(req.params.id)) {
+    const user = await Users.findByIdAndDelete(req.params.id)
+    if (user) return res.json(sanitiseUser(user))
   }
+  res.status(400).json('User not found')
 })
 
 module.exports = router

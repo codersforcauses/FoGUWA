@@ -1,8 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const { setUser } = require('../authentication.js')
-const { addFlora } = require('../seeder/index')
-const { updateModel } = require('./routeUtilities')
+const { addFlora, updateFlora } = require('../controllers/flora')
 
 const Flora = mongoose.model('Flora')
 const router = express.Router()
@@ -17,7 +16,7 @@ router.get('/flora/:id', async (req, res, next) => {
     const flora = await Flora.findById(req.params.id)
     if (flora) return res.json(flora)
   }
-  res.status(400).send('Flora not found')
+  res.status(400).json('Flora not found')
 })
 
 router.post('/flora', setUser, async (req, res, next) => {
@@ -28,10 +27,10 @@ router.post('/flora', setUser, async (req, res, next) => {
 router.patch('/flora/:id', setUser, async (req, res, next) => {
   const update = { ...req.body }
   delete update._id
-  const flora = await updateModel(Flora, req.params.id, update)
+  const flora = await updateFlora(req.params.id, update)
   if (flora) return res.json(flora)
   else {
-    res.status(400).send('Flora not updated/found')
+    res.status(400).json('Flora not updated/found')
   }
 })
 
@@ -39,7 +38,7 @@ router.delete('/flora/:id', setUser, async (req, res, next) => {
   const flora = await Flora.findByIdAndDelete(req.params.id)
   if (flora) res.json(flora)
   else {
-    res.status(400).send('Flora not found')
+    res.status(400).json('Flora not found')
   }
 })
 
