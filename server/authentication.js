@@ -39,4 +39,4 @@ const getUserInfo = async token => {
   }
 }
 
-module.exports = { checkJwt, getUserInfo }
+module.exports = { checkJwt, getToken, getUserInfo }
