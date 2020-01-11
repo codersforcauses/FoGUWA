@@ -5,8 +5,9 @@ const getToken = req => {
   const tokenString = req.cookies['auth._token.auth0']
     ? req.cookies['auth._token.auth0']
     : req.headers.authorization
-  const tokenMatcher = /(?<=Bearer ).+/
-  return tokenMatcher.exec(tokenString)[0]
+  const tokenMatch = /(?<=Bearer ).+/.exec(tokenString)
+  if (tokenMatch) return tokenMatch[0]
+  return null
 }
 
 const setUser = expressjwt({
