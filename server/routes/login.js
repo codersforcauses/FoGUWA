@@ -5,11 +5,11 @@ const Users = mongoose.model('User')
 
 const { getUserInfo, getToken } = require('../authentication')
 
-router.get('/login', async req => {
+router.get('/login', async (req, res) => {
   const userInfo = await getUserInfo(getToken(req))
   const { email } = userInfo.data
   const user = await Users.findOne({ email })
-  console.log(user)
+  res.json(user)
 })
 
 module.exports = router
