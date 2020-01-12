@@ -99,8 +99,8 @@ export default {
                 lat: instance.location.coordinates[0],
                 lng: instance.location.coordinates[1]
               },
-              icon: plantIcons.hasOwnProperty(marker.type)
-                ? plantIcons[marker.type]
+              icon: plantIcons.hasOwnProperty(marker.icon)
+                ? plantIcons[marker.icon]
                 : plantIcons.leaf,
               map: this.map
             })

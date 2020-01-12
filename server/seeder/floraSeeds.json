@@ -2,7 +2,7 @@
   {
   "name": "Swamp banksia",
   "scientificName": "Banksia littoralis",
-  "icon": "tree",
+  "icon": "lotus",
   "description":
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   "instances": [
@@ -17,7 +17,7 @@
 {
   "name": "Wickham's grevillea",
   "scientificName": "Grevillea wickhamii",
-  "icon": "tree",
+  "icon": "leaf",
   "description":
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   "instances": [
@@ -47,7 +47,7 @@
 {
   "name": "Marri",
   "scientificName": "Corymbia calophylla",
-  "icon": "tree",
+  "icon": "tulip",
   "description":
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   "instances": [
@@ -62,7 +62,7 @@
 {
   "name": "Pin-cushion Hakea",
   "scientificName": "Hakea laurina",
-  "icon": "tree",
+  "icon": "leaf",
   "description":
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   "instances": [
@@ -130,7 +130,7 @@
 {
   "name": "Western Australian Peppermint",
   "scientificName": "Agonis flexuosa",
-  "icon": "tree",
+  "icon": "lotus",
   "description":
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
   "instances": [
@@ -160,7 +160,7 @@
 {
   "name": "Emma",
   "scientificName": "",
-  "icon": "art",
+  "icon": "other",
   "description": "Bronze sculpture",
   "instances": [
     {
