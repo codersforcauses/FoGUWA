@@ -1,6 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const { checkJwt } = require('../authentication.js')
+const { setUser } = require('../authentication.js')
 const { addUser } = require('../seeder/index')
 const { updateModel } = require('./routeUtilities')
 
@@ -13,7 +13,7 @@ const sanitiseUser = ({ name, email, _id }) => ({
   _id
 })
 
-router.get('/users', checkJwt, async (req, res, next) => {
+router.get('/users', setUser, async (req, res, next) => {
   const users = await Users.find()
   res.json(
     // Remove password from returned json
@@ -21,7 +21,7 @@ router.get('/users', checkJwt, async (req, res, next) => {
   )
 })
 
-router.get('/users/:id', checkJwt, async (req, res, next) => {
+router.get('/users/:id', setUser, async (req, res, next) => {
   if (mongoose.Types.ObjectId.isValid(req.params.id)) {
     const user = await Users.findById(req.params.id)
     if (user) return res.json(sanitiseUser(user))
@@ -29,12 +29,12 @@ router.get('/users/:id', checkJwt, async (req, res, next) => {
   res.status(400).send('User not found')
 })
 
-router.post('/users', checkJwt, async (req, res, next) => {
+router.post('/users', setUser, async (req, res, next) => {
   const user = await addUser(req.body)
   res.json(sanitiseUser(user))
 })
 
-router.patch('/users/:id', checkJwt, async (req, res, next) => {
+router.patch('/users/:id', setUser, async (req, res, next) => {
   const update = { ...req.body }
   delete update._id
   delete update.email
@@ -45,7 +45,7 @@ router.patch('/users/:id', checkJwt, async (req, res, next) => {
   }
 })
 
-router.delete('/users/:id', checkJwt, async (req, res, next) => {
+router.delete('/users/:id', setUser, async (req, res, next) => {
   const user = await Users.findByIdAndDelete(req.params.id)
   if (user) res.json(sanitiseUser(user))
   else {
