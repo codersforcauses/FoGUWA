@@ -7,9 +7,6 @@
       "config": {
         "serverFiles": ["middleware/**", "server/**"]
       },
-      "env": {
-        "GMAPS_KEY": "@gmap-api"
-      },
       "build": {
         "env": {
           "GMAPS_KEY": "@gmap-api"
