@@ -10,6 +10,7 @@
 import { mapState } from 'vuex'
 import GoogleMapLoader from './GoogleMapLoader'
 import { uwaMapSettings } from '@/assets/js/mapSettings'
+import plantIcons from '@/assets/js/plantIcons.js'
 
 // Use https://www.gps-coordinates.net/ to easily fetch coordinates
 const UWA_BOUNDS = {
@@ -90,22 +91,6 @@ export default {
         await this.loadPlants()
         // Create new markers and store them
         this.plants.forEach((marker, index) => {
-          const leafIcon = {
-            path:
-              'M17 8C8 10 5.901 16.166 3.816 21.343l1.891.65.954-2.292c.482.168.976.299 1.339.299C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z',
-            fillColor: '#008000',
-            fillOpacity: 1.0,
-            strokeColor: '#004d00',
-            scale: 1
-          }
-          const statueIcon = {
-            path:
-              'M17 8C8 10 5.901 16.166 3.816 21.343l1.891.65.954-2.292c.482.168.976.299 1.339.299C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z',
-            fillColor: '#cd7f32',
-            fillOpacity: 1.0,
-            strokeColor: '#905923',
-            scale: 1
-          }
           // Plot all instances
           for (const instance of marker.instances) {
             const markerInst = new this.google.maps.Marker({
@@ -114,7 +99,9 @@ export default {
                 lat: instance.location.coordinates[0],
                 lng: instance.location.coordinates[1]
               },
-              icon: marker.type === 'tree' ? leafIcon : statueIcon,
+              icon: plantIcons.hasOwnProperty(marker.type)
+                ? plantIcons[marker.type]
+                : plantIcons.leaf,
               map: this.map
             })
             this.markerInstances.push(markerInst)
