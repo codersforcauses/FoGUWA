@@ -10,7 +10,6 @@
 import { mapState } from 'vuex'
 import GoogleMapLoader from './GoogleMapLoader'
 import { uwaMapSettings } from '@/assets/js/mapSettings'
-import { plants } from '@/assets/plantdb.json'
 
 // Use https://www.gps-coordinates.net/ to easily fetch coordinates
 const UWA_BOUNDS = {
@@ -29,7 +28,8 @@ export default {
     map: null,
     google: null,
     markerInstances: [],
-    userMarker: null
+    userMarker: null,
+    plants: null
   }),
   computed: {
     ...mapState(['position']),
@@ -45,10 +45,6 @@ export default {
         maxZoom: 21,
         ...uwaMapSettings
       }
-    },
-    markers() {
-      // return the array
-      return [...plants]
     }
   },
   watch: {
@@ -84,15 +80,16 @@ export default {
     }
   },
   methods: {
-    loadMarkers() {
+    async loadMarkers() {
       if (this.map && this.google) {
         // Clear old markers
         for (const marker of this.markerInstances) {
           marker.setMap(null)
         }
         this.markerInstances = []
+        await this.loadPlants()
         // Create new markers and store them
-        this.markers.forEach((marker, index) => {
+        this.plants.forEach((marker, index) => {
           const leafIcon = {
             path:
               'M17 8C8 10 5.901 16.166 3.816 21.343l1.891.65.954-2.292c.482.168.976.299 1.339.299C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z',
@@ -113,7 +110,10 @@ export default {
           for (const instance of marker.instances) {
             const markerInst = new this.google.maps.Marker({
               label: marker.name,
-              position: instance.location,
+              position: {
+                lat: instance.location.coordinates[0],
+                lng: instance.location.coordinates[1]
+              },
               icon: marker.type === 'tree' ? leafIcon : statueIcon,
               map: this.map
             })
@@ -121,6 +121,10 @@ export default {
           }
         })
       }
+    },
+    async loadPlants() {
+      const data = await this.$axios.$get('/api/flora')
+      this.plants = data
     }
   }
 }
