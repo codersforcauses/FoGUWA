@@ -6,11 +6,6 @@
       "use": "@nuxtjs/now-builder",
       "config": {
         "serverFiles": ["middleware/**", "server/**"]
-      },
-      "build": {
-        "env": {
-          "GMAPS_KEY": "@gmap-api"
-        }
       }
     }
   ]
