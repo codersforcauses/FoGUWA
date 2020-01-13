@@ -14,6 +14,8 @@ before_install:
 script:
   - yarn build # build your site
   - yarn test # run your normal tests
+after_success:
+  - lhci autorun --upload.target=temporary-public-storage # run lighthouse CI against your site
 cache:
   yarn: true
   directories:
