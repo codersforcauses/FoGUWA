@@ -27,8 +27,12 @@ router.get('/users/:id', checkJwt, async (req, res) => {
 })
 
 router.post('/users', checkJwt, async (req, res) => {
-  const user = await addUser(req.body)
-  res.json(sanitiseUser(user))
+  try {
+    const user = await addUser(req.body)
+    return res.json(sanitiseUser(user))
+  } catch (err) {
+    return res.json(err.message)
+  }
 })
 
 router.patch('/users/:id', checkJwt, async (req, res) => {

@@ -20,8 +20,12 @@ router.get('/flora/:id', async (req, res, next) => {
 })
 
 router.post('/flora', checkJwt, async (req, res, next) => {
-  const flora = await addFlora(req.body)
-  res.json(flora)
+  try {
+    const flora = await addFlora(req.body)
+    return res.json(flora)
+  } catch (err) {
+    return res.json(err.message)
+  }
 })
 
 router.patch('/flora/:id', checkJwt, async (req, res, next) => {
