@@ -9,12 +9,9 @@ module.exports = {
       user.name.last = userObject.name.last
       user.email = userObject.email
       user.password = userObject.password
-      user.save(err => {
-        if (err) {
-          reject(err)
-        }
+      user.save((err, user) => {
+        err ? reject(err) : resolve(user)
       })
-      resolve(user)
     })
   },
 
@@ -22,9 +19,8 @@ module.exports = {
     delete update._id
     delete update.email
     return new Promise((resolve, reject) => {
-      User.findByIdAndUpdate(id, update, { new: true }, err => {
-        if (err) reject(err)
-        else resolve()
+      User.findByIdAndUpdate(id, update, { new: true }, (err, user) => {
+        err ? reject(err) : resolve(user)
       })
     })
   }

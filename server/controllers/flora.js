@@ -19,9 +19,8 @@ module.exports = {
       flora.description = floraObject.description
       flora.icon = floraObject.icon
       flora.instances = floraObject.instances
-      flora.save((err, res) => {
-        if (err) reject(err)
-        else resolve(res)
+      flora.save((err, flora) => {
+        err ? reject(err) : resolve(flora)
       })
     })
   },
@@ -29,9 +28,8 @@ module.exports = {
   updateFlora: (id, update) => {
     delete update._id
     return new Promise((resolve, reject) => {
-      Flora.findByIdAndUpdate(id, update, { new: true }, (err, res) => {
-        if (err) reject(err)
-        else resolve(res)
+      Flora.findByIdAndUpdate(id, update, { new: true }, (err, flora) => {
+        err ? reject(err) : resolve(flora)
       })
     })
   }
