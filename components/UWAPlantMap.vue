@@ -1,6 +1,5 @@
 <template>
   <v-card height="100%">
-    <!-- <plant-info :plant-info="plantInfo" /> -->
     <plant-info
       :plant-info="plantInfo"
       :plant-info-visible="plantInfoVisible"
