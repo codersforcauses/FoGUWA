@@ -119,7 +119,7 @@ export default {
         this.userMarker = null
       } else {
         this.userMarker.setPosition(this.position)
-      }df8
+      }
     }
   },
   methods: {
