@@ -5,8 +5,7 @@ module.exports = {
   getFlora: res => {
     return new Promise((resolve, reject) => {
       Flora.find((err, res) => {
-        if (err) reject(err)
-        else resolve(res)
+        err ? reject(err) : resolve(res)
       })
     })
   },
