@@ -45,7 +45,6 @@ const defaultInfo = {
 export default {
   components: {
     'google-map-loader': GoogleMapLoader,
-    /* eslint-disable */
     'plant-info': PlantInfo
   },
   data: () => ({
@@ -86,7 +85,6 @@ export default {
     }
   },
   watch: {
-    // TODO these two watchers will be called quickly enough, such that both map and google are both defined
     map(val) {
       this.loadMarkers()
     },
@@ -142,7 +140,7 @@ export default {
             fillOpacity: 1.0,
             strokeColor: '#905923',
             scale: 1
-            }
+          }
           // Plot all instances
           for (const instance of plant.instances) {
             const markerInst = new this.google.maps.Marker({
@@ -154,7 +152,8 @@ export default {
             markerInst.addListener('click', () => {
               this.plantInfo = {
                 plantName: plant.name || this.defaultInfo.plantName,
-                sciName: plant.scientificName || this.defaultInfo.scientificName,
+                sciName:
+                  plant.scientificName || this.defaultInfo.scientificName,
                 description: plant.description || this.defaultInfo.description,
                 images: plant.images || this.defaultInfo.images,
                 type: plant.type || 'tree'
@@ -165,7 +164,7 @@ export default {
           }
         })
       }
-    },
+    }
   }
 }
 </script>
