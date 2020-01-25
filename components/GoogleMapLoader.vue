@@ -8,15 +8,14 @@
     <!-- Loading icon/message as JS API is fetched. -->
     <v-layout
       v-show="!google || !map"
-      align-center
-      justify-center
       column
       fluid
       fill-height
+      class="d-flex align-center justify-center"
     >
       <v-progress-circular
-        :size="70"
-        :width="7"
+        size="70"
+        width="7"
         indeterminate
         color="primary"
         class="mb-4"
