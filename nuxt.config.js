@@ -1,21 +1,18 @@
-const colors = require('vuetify/es5/util/colors').default
-const env = require('dotenv').config()
-
 module.exports = {
   mode: 'universal',
   /*
    ** Headers of the page
    */
   head: {
-    titleTemplate: '%s - ' + process.env.npm_package_name,
-    title: process.env.npm_package_name || '',
+    title: 'FoGUWA',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       {
         hid: 'description',
         name: 'description',
-        content: process.env.npm_package_description || ''
+        content:
+          'An interactive map that shows information about the various native flora growing on the UWA campus.'
       }
     ],
     link: [
@@ -74,12 +71,11 @@ module.exports = {
       themes: {
         light: {
           primary: '#639700',
-          accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
-          info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
-          success: colors.green.accent3
+          secondary: '#FF8F00',
+          info: '#26A69A',
+          warning: '#FFC107',
+          error: '#DD2C00',
+          success: '#00E676'
         }
       },
       options: {
@@ -96,8 +92,7 @@ module.exports = {
      */
     extend(config, ctx) {}
   },
-  /*
-   ** Environmental variables
-   */
-  env: env.parsed
+  env: {
+    GMAPS_KEY: process.env.GMAPS_KEY
+  }
 }
