@@ -1,5 +1,13 @@
 <template>
-  <v-navigation-drawer v-model="panel" temporary floating app>
+  <v-navigation-drawer v-model="panel" width="200" temporary floating app>
+    <template v-slot:prepend>
+      <v-img
+        :src="require('~/assets/images/FoG-logo.png')"
+        contain
+        class="mx-8 my-4"
+      >
+      </v-img>
+    </template>
     <v-list>
       <v-list-item
         v-for="(item, i) in items"
