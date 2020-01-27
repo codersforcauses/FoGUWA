@@ -5,7 +5,7 @@
     :style="{ margin: margin }"
     height="56"
   >
-    <v-app-bar-nav-icon @click="$emit('input', !value)" />
+    <v-app-bar-nav-icon @click="$emit('input', !value)" aria-label="Menu" />
 
     <v-text-field
       v-show="isIndex"
@@ -22,8 +22,8 @@
         <span class="grey--text">Search FoGUWA</span>
       </template>
       <template v-slot:append>
-        <v-icon class="grey--text">
-          search
+        <v-icon color="grey darken-1">
+          mdi-magnify
         </v-icon>
       </template>
     </v-text-field>
@@ -32,10 +32,11 @@
       @click="geoBtnClicked"
       :loading="geoBtnLoading"
       :color="geoBtnColor"
+      aria-label="Current Location"
       icon
       text
     >
-      <v-icon>my_location</v-icon>
+      <v-icon>mdi-crosshairs-gps</v-icon>
     </v-btn>
 
     <v-toolbar-title v-show="!isIndex" class="title">

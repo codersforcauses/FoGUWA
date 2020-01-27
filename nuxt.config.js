@@ -22,12 +22,43 @@ module.exports = {
       {
         rel: 'preconnect',
         href: 'https://fonts.gstatic.com/',
-        crossorigin: ''
+        crossorigin: true
+      },
+      {
+        rel: 'dns-prefetch',
+        href: 'https://fonts.gstatic.com/'
+      },
+      {
+        rel: 'preconnect',
+        href: 'https://maps.gstatic.com',
+        crossorigin: true
+      },
+      {
+        rel: 'dns-prefetch',
+        href: 'https://maps.gstatic.com'
+      },
+      {
+        rel: 'preconnect',
+        href: 'https://maps.googleapis.com',
+        crossorigin: true
+      },
+      {
+        rel: 'dns-prefetch',
+        href: 'https://maps.googleapis.com'
+      },
+      {
+        rel: 'preconnect',
+        href: 'https://fonts.googleapis.com',
+        crossorigin: true
+      },
+      {
+        rel: 'dns-prefetch',
+        href: 'https://fonts.googleapis.com'
       },
       {
         rel: 'stylesheet',
         href:
-          'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'
+          'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700'
       }
     ]
   },

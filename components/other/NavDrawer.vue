@@ -50,25 +50,25 @@ export default {
   data: () => ({
     items: [
       {
-        icon: 'map',
+        icon: 'mdi-map',
         title: 'Map',
         to: '/'
       },
       {
-        icon: 'info',
+        icon: 'mdi-information',
         title: 'About',
         to: '/about'
       }
     ],
     login: {
-      icon: 'person',
+      icon: 'mdi-account',
       title: 'Login',
       to: '/'
     }
   }),
   computed: {
     user() {
-      return (this.$auth || {}).user || null
+      return this.$auth && this.$auth.user
     },
     panel: {
       get() {

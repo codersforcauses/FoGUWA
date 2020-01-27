@@ -2,7 +2,7 @@
   <v-container>
     <v-layout row wrap>
       <v-flex xs12 sm6 md3 lg2 class="my-5">
-        <v-img :src="require('~/assets/images/FoG-logo.png')" contain />
+        <v-img :src="require('~/assets/images/FoG-logo.png')" alt="FoGUWA logo" contain />
       </v-flex>
       <v-flex xs12 sm6 md9 lg10>
         <v-card-title class="display-1">
@@ -46,6 +46,7 @@
           <v-img
             :src="require('~/assets/images/cfc-logo.svg')"
             :aspect-ratio="1 / 1"
+            alt="CFC logo"
             contain
             class="mx-3"
           />
