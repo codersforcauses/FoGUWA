@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Flora = mongoose.model('Flora')
 
 module.exports = {
-  getFlora: res => {
+  getFlora: () => {
     return new Promise((resolve, reject) => {
       Flora.find((err, res) => {
         err ? reject(err) : resolve(res)
