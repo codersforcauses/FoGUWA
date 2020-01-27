@@ -24,9 +24,9 @@ router.get('/users', setUser, async (req, res, next) => {
 router.get('/users/:id', setUser, async (req, res, next) => {
   if (mongoose.Types.ObjectId.isValid(req.params.id)) {
     const user = await Users.findById(req.params.id)
-    if (user) return res.json(sanitiseUser(user))
+    return user ? res.json(user) : res.status(400).send('User not found')
   }
-  res.status(400).send('User not found')
+  return res.status(400).send('Invalid objectId')
 })
 
 router.post('/users', setUser, async (req, res, next) => {
@@ -39,18 +39,12 @@ router.patch('/users/:id', setUser, async (req, res, next) => {
   delete update._id
   delete update.email
   const user = await updateModel(Users, req.params.id, update)
-  if (user) return res.json(user)
-  else {
-    res.status(400).send('User not updated/found')
-  }
+  user ? res.json(user) : res.status(400).send('User not updated/found')
 })
 
 router.delete('/users/:id', setUser, async (req, res, next) => {
   const user = await Users.findByIdAndDelete(req.params.id)
-  if (user) res.json(sanitiseUser(user))
-  else {
-    res.status(400).send('User not found')
-  }
+  user ? res.json(sanitiseUser(user)) : res.status(400).send('User not found')
 })
 
 module.exports = router

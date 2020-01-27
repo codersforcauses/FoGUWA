@@ -15,9 +15,9 @@ router.get('/flora', async (req, res, next) => {
 router.get('/flora/:id', async (req, res, next) => {
   if (mongoose.Types.ObjectId.isValid(req.params.id)) {
     const flora = await Flora.findById(req.params.id)
-    if (flora) return res.json(flora)
+    return flora ? res.json(flora) : res.status(400).send('Flora not found')
   }
-  res.status(400).send('Flora not found')
+  return res.status(400).send('Invalid objectId')
 })
 
 router.post('/flora', setUser, async (req, res, next) => {
@@ -29,18 +29,12 @@ router.patch('/flora/:id', setUser, async (req, res, next) => {
   const update = { ...req.body }
   delete update._id
   const flora = await updateModel(Flora, req.params.id, update)
-  if (flora) return res.json(flora)
-  else {
-    res.status(400).send('Flora not updated/found')
-  }
+  flora ? res.json(flora) : res.status(400).send('Flora not updated/found')
 })
 
 router.delete('/flora/:id', setUser, async (req, res, next) => {
   const flora = await Flora.findByIdAndDelete(req.params.id)
-  if (flora) res.json(flora)
-  else {
-    res.status(400).send('Flora not found')
-  }
+  flora ? res.json(flora) : res.status(400).send('Flora not found')
 })
 
 module.exports = router
