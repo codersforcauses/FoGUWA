@@ -95,6 +95,12 @@ export default {
         // Create new markers and store them
         this.markers.forEach((marker, index) => {
           // Plot all instances
+          const defaultColour = {
+            fillColor: '#f7b538',
+            fillOpacity: 1.0,
+            strokeColor: '#f7d55b',
+            scale: 1
+          }
           for (const instance of marker.instances) {
             const markerInst = new this.google.maps.Marker({
               label: marker.name,
@@ -102,6 +108,7 @@ export default {
               icon: plantIcons.hasOwnProperty(marker.type)
                 ? plantIcons[marker.type]
                 : plantIcons.leaf,
+              ...defaultColour,
               map: this.map
             })
             this.markerInstances.push(markerInst)
