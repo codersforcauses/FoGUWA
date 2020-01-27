@@ -6,7 +6,7 @@ const { getFlora, addFlora, updateFlora } = require('../controllers/flora')
 const Flora = mongoose.model('Flora')
 const router = express.Router()
 
-router.get('/flora', async res => {
+router.get('/flora', async (req, res) => {
   const floraObj = await getFlora()
   res.json(floraObj)
 })
@@ -19,7 +19,7 @@ router.get('/flora/:id', async (req, res) => {
   res.status(400).json('Invalid flora id')
 })
 
-router.post('/flora', checkJwt, async (req, res, next) => {
+router.post('/flora', checkJwt, async (req, res) => {
   try {
     const flora = await addFlora(req.body)
     return res.json(flora)
@@ -28,7 +28,7 @@ router.post('/flora', checkJwt, async (req, res, next) => {
   }
 })
 
-router.patch('/flora/:id', checkJwt, async (req, res, next) => {
+router.patch('/flora/:id', checkJwt, async (req, res) => {
   const update = { ...req.body }
   if (mongoose.Types.ObjectId.isValid(req.params.id)) {
     const flora = await updateFlora(req.params.id, update)
@@ -39,7 +39,7 @@ router.patch('/flora/:id', checkJwt, async (req, res, next) => {
   res.status(400).json('Invalid flora id')
 })
 
-router.delete('/flora/:id', checkJwt, async (req, res, next) => {
+router.delete('/flora/:id', checkJwt, async (req, res) => {
   const flora = await Flora.findByIdAndDelete(req.params.id)
   if (flora) res.json(flora)
   else {
