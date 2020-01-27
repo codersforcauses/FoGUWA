@@ -15,25 +15,13 @@
   "extends": [
     "@nuxtjs",
     "prettier",
-    "prettier/vue",
-    "plugin:nuxt/base",
-    "plugin:prettier/recommended",
+    "plugin:nuxt/recommended",
     "plugin:vue/recommended"
   ],
   "plugins": ["prettier", "nuxt", "vue"],
   "rules": {
     "nuxt/no-cjs-in-config": "off",
     "vue/html-quotes": ["error", "double"],
-    "vue/html-self-closing": "off",
-    "vue/max-attributes-per-line": [
-      2,
-      {
-        "singleline": 20,
-        "multiline": {
-          "max": 1,
-          "allowFirstLine": false
-        }
-      }
-    ]
+    "vue/html-self-closing": "off"
   }
 }
