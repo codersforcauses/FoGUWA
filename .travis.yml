@@ -15,7 +15,7 @@ script:
   - yarn build # build your site
   - yarn test # run your normal tests
 after_success:
-  - lhci autorun --upload.target=temporary-public-storage --upload.githubAppToken=$LHCI_GITHUB_APP_TOKEN --collect.staticDistDir="./.nuxt" # run lighthouse CI against your site
+  - lhci autorun --upload.token="$LHCI_GITHUB_APP_TOKEN"
 cache:
   yarn: true
   directories:

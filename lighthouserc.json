@@ -1,0 +1,17 @@
+{
+  "ci": {
+    "collect": {
+      "numberOfRuns": 3,
+      "staticDistDir": "./.nuxt",
+      "startServerCommand": "yarn start",
+      "startServerReadyPattern": "listening",
+      "url": "http://localhost:3000/"
+    },
+    "assert": {
+      "preset": "lighthouse:recommended"
+    },
+    "upload": {
+      "target": "temporary-public-storage"
+    }
+  }
+}
