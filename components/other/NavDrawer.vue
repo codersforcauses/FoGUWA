@@ -68,7 +68,7 @@ export default {
     login: {
       icon: 'person',
       title: 'Login',
-      to: '/'
+      to: '/login'
     }
   }),
   computed: {
