@@ -13,11 +13,9 @@ module.exports = {
   addFlora: floraObject => {
     return new Promise((resolve, reject) => {
       const flora = new Flora()
-      flora.name = floraObject.name
-      flora.scientificName = floraObject.scientificName
-      flora.description = floraObject.description
-      flora.icon = floraObject.icon
-      flora.instances = floraObject.instances
+      Object.keys(floraObject).forEach(field => {
+        flora[field] = floraObject[field]
+      });
       flora.save((err, flora) => {
         err ? reject(err) : resolve(flora)
       })

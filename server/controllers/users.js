@@ -5,10 +5,9 @@ module.exports = {
   addUser: userObject => {
     return new Promise((resolve, reject) => {
       const user = new User()
-      user.name.first = userObject.name.first
-      user.name.last = userObject.name.last
-      user.email = userObject.email
-      user.password = userObject.password
+      Object.keys(userObject).forEach(field => {
+        user[field] = userObject[field]
+      });
       user.save((err, user) => {
         err ? reject(err) : resolve(user)
       })
