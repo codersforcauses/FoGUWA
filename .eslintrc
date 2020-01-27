@@ -17,7 +17,7 @@
     "prettier",
     "plugin:nuxt/recommended"
   ],
-  "plugins": ["prettier", "nuxt"],
+  "plugins": ["prettier", "nuxt", "vue"],
   "rules": {
     "nuxt/no-cjs-in-config": "off",
     "vue/html-quotes": ["error", "double"],
