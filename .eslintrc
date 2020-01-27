@@ -15,7 +15,8 @@
   "extends": [
     "@nuxtjs",
     "prettier",
-    "plugin:nuxt/recommended"
+    "plugin:nuxt/recommended",
+    "plugin:vue/recommended"
   ],
   "plugins": ["prettier", "nuxt", "vue"],
   "rules": {
