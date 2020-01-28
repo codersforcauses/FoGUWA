@@ -21,11 +21,11 @@
       </v-list-item>
       <v-list-item
         v-if="!user"
-        @click="auth"
         :to="login.to"
         active-class="primary--text"
         router
         exact
+        @click="auth"
       >
         <v-list-item-action>
           <v-icon>{{ login.icon }}</v-icon>
