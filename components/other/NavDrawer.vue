@@ -1,5 +1,8 @@
 <template>
-  <v-navigation-drawer v-model="panel" temporary floating app>
+  <v-navigation-drawer v-model="panel" width="200" temporary floating app>
+    <template v-slot:prepend>
+      <v-img :src="require('~/assets/images/FoG-logo.png')" class="mx-8 my-4" contain eager />
+    </template>
     <v-list>
       <v-list-item
         v-for="(item, i) in items"
@@ -10,7 +13,7 @@
         active-class="primary--text"
       >
         <v-list-item-action>
-          <v-icon> {{ item.icon }} </v-icon>
+          <v-icon>{{ item.icon }}</v-icon>
         </v-list-item-action>
         <v-list-item-content>
           <v-list-item-title v-text="item.title" />
@@ -25,7 +28,7 @@
         @click="auth"
       >
         <v-list-item-action>
-          <v-icon> {{ login.icon }} </v-icon>
+          <v-icon>{{ login.icon }}</v-icon>
         </v-list-item-action>
         <v-list-item-content>
           <v-list-item-title v-text="login.title" />
