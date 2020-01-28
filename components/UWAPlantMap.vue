@@ -1,9 +1,8 @@
 <template>
   <v-card height="100%">
     <plant-info
+      v-model="infoDrawer"
       :plant-info="plantInfo"
-      :plant-info-visible="plantInfoVisible"
-      @closeDrawer="plantInfoVisible = false"
     />
     <google-map-loader
       :map-config="mapConfig"
@@ -52,7 +51,7 @@ export default {
     google: null,
     markerInstances: [],
     userMarker: null,
-    plantInfoVisible: false,
+    infoDrawer: false,
     plantInfo: defaultInfo
   }),
   computed: {
@@ -158,7 +157,7 @@ export default {
                 images: plant.images || this.defaultInfo.images,
                 type: plant.type || 'tree'
               }
-              this.plantInfoVisible = true
+              this.infoDrawer = true
             })
             this.markerInstances.push(markerInst)
           }

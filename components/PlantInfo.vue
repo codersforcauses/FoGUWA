@@ -15,7 +15,7 @@
       color="#00000077"
       :ripple="false"
       class="mt-2"
-      @click="drawerClose"
+      @click="$emit('input', !value)"
     >
       <v-icon color="white">
         mdi-close
@@ -50,18 +50,22 @@
 export default {
   name: 'PlantInfo',
   props: {
+    value: Boolean,
     plantInfo: {
       type: Object,
       required: true
-    },
-    plantInfoVisible: {
-      type: Boolean,
-      required: true
     }
   },
-  methods: {
-    drawerClose(event) {
-      this.$emit('closeDrawer', 'true')
+  computed: {
+    plantInfoVisible: {
+      get() {
+        return this.value
+      },
+      set(value) {
+        if (!value) {
+          this.$emit('input', false)
+        }
+      }
     }
   }
 }
