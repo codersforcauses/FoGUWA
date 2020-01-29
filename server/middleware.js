@@ -1,13 +1,11 @@
 const bodyParser = require('body-parser')
 const FloraRouter = require('./routes/flora')
 const UsersRouter = require('./routes/users')
-const LoginRouter = require('./routes/login')
 
 module.exports = app => {
   app.use(bodyParser.json())
   app.use('/api', FloraRouter)
   app.use('/api', UsersRouter)
-  app.use('/', LoginRouter)
 
   app.use((req, res, next) => {
     if (res.body !== undefined) {
