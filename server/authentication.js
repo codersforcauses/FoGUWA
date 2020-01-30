@@ -1,7 +1,6 @@
 const expressjwt = require('express-jwt')
 const jwksRsa = require('jwks-rsa')
 const axios = require('axios')
-const consola = require('consola')
 const { findUserByEmail } = require('./controllers/users.js')
 
 const getToken = req => {
@@ -36,7 +35,7 @@ const getUserInfo = async token => {
   try {
     return await axios.get('https://fog-uwa.au.auth0.com/userinfo', config)
   } catch (error) {
-    consola.log(error)
+    return null
   }
 }
 
@@ -44,6 +43,7 @@ const userAuthorised = async req => {
   const token = getToken(req)
   if (!token) return false
   const userInfo = await getUserInfo(token)
+  if (!userInfo) return false
   const { email } = userInfo.data
   const adminObject = await findUserByEmail(email)
   return Object.keys(adminObject).length !== 0
