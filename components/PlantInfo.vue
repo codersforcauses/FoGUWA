@@ -10,7 +10,7 @@
       fab
       absolute
       right
-      x-small
+      small
       depressed
       color="#00000077"
       :ripple="false"
@@ -28,9 +28,10 @@
         interval="3500"
         show-arrows-on-hover
         :show-arrows="plantInfo.images.length > 1"
+        height="60%"
       >
         <v-carousel-item v-for="(image, i) in plantInfo.images" :key="i">
-          <v-img :src="image" height="100%"></v-img>
+          <v-img :src="image"></v-img>
         </v-carousel-item>
       </v-carousel>
       <v-card-title primary-title>
