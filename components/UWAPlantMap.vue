@@ -11,7 +11,8 @@ import { mapState } from 'vuex'
 import GoogleMapLoader from './GoogleMapLoader'
 import { uwaMapSettings } from '@/assets/js/mapSettings'
 import { plants } from '@/assets/plantdb.json'
-import plantIcons from '@/assets/js/plantIcons.js'
+import iconData from '@/assets/js/plantIcons.js'
+const { iconStyle, ...iconPaths } = iconData
 
 // Use https://www.gps-coordinates.net/ to easily fetch coordinates
 const UWA_BOUNDS = {
@@ -95,17 +96,24 @@ export default {
         // Create new markers and store them
         this.markers.forEach((marker, index) => {
           // Plot all instances
-          for (const instance of marker.instances) {
+          marker.instances.forEach(instance => {
+            const icon = iconPaths.hasOwnProperty(marker.type)
+                ? iconPaths[marker.type]
+                : iconPaths.leaf
+            Object.keys(iconStyle).forEach(style => {
+              icon[style] = iconStyle[style]
+            })
+            // icon.strokeWeight = iconStyle.strokeWeight
+            // icon.fillOpacity = iconStyle.fillOpacity
+            // icon.scale = iconStyle.scale
             const markerInst = new this.google.maps.Marker({
               label: marker.name,
               position: instance.location,
-              icon: plantIcons.hasOwnProperty(marker.type)
-                ? plantIcons[marker.type]
-                : plantIcons.leaf,
+              icon,
               map: this.map
             })
             this.markerInstances.push(markerInst)
-          }
+          })
         })
       }
     }
