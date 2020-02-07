@@ -99,7 +99,7 @@ export default {
           marker.instances.forEach(instance => {
             const icon = iconPaths.hasOwnProperty(marker.type)
                 ? iconPaths[marker.type]
-                : iconPaths.leaf
+                : iconPaths.info
             Object.keys(iconStyle).forEach(style => {
               icon[style] = iconStyle[style]
             })

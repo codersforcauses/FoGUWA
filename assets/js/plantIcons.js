@@ -40,4 +40,10 @@ const lotus = {
     '21.88 22,20 22,10C17.82,10 14.15,12.17 12,15.45Z',
   fillColor: '#d282a6'
 }
-export default { leaf, tree, tulip, lotus, iconStyle }
+
+const info = {
+  path:
+  'M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z',
+  fillColor: '#88BBEE'
+}
+export default { info, leaf, tree, tulip, lotus, iconStyle }
