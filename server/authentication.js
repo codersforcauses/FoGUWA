@@ -1,7 +1,6 @@
 const expressjwt = require('express-jwt')
 const jwksRsa = require('jwks-rsa')
 const axios = require('axios')
-const consola = require('consola')
 
 const getToken = req => {
   const tokenString = req.cookies['auth._token.auth0']
@@ -25,18 +24,14 @@ const checkJwt = expressjwt({
   getToken
 })
 
-const getUserInfo = async token => {
+const getUserInfo = token => {
   const config = {
     headers: {
       Accept: 'application/json',
       Authorization: `Bearer ${token}`
     }
   }
-  try {
-    return await axios.get('https://fog-uwa.au.auth0.com/userinfo', config)
-  } catch (error) {
-    consola.log(error)
-  }
+  return axios.get('https://fog-uwa.au.auth0.com/userinfo', config)
 }
 
 module.exports = { checkJwt, getToken, getUserInfo }
