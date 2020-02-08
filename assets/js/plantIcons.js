@@ -1,6 +1,6 @@
 const iconStyle = {
   strokeWeight: 2,
-  strokeColor: '#e0e8e2ee',
+  strokeColor: '#e0e8e2',
   fillOpacity: 1,
   scale: 2
 }
