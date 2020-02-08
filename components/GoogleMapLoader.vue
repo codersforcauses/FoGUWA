@@ -2,6 +2,7 @@
   <div ref="googleMap" class="google-map">
     <!-- The Google Maps API will make use of this div. -->
     <!-- Slot to expose google api and map instance. -->
+    <!-- {{ console.log(map) }} -->
     <template v-if="google && map">
       <slot :google="google" :map="map" />
     </template>
