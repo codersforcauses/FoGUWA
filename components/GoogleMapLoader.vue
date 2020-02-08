@@ -1,11 +1,8 @@
 <template>
   <div ref="googleMap" class="google-map">
-    <!-- The Google Maps API will make use of this div. -->
-    <!-- Slot to expose google api and map instance. -->
     <template v-if="google && map">
       <slot :google="google" :map="map" />
     </template>
-    <!-- Loading icon/message as JS API is fetched. -->
     <v-layout
       v-show="!google || !map"
       align-center
@@ -61,11 +58,8 @@ export default {
     this.initMap()
   },
   methods: {
-    // The callback made after the Google Maps JS API loads
     initMap() {
-      // Fetch the HTML element for the map, with the given ref value
       const mapContainer = this.$refs.googleMap
-      // Create the map instance
       this.map = new this.google.maps.Map(mapContainer, this.mapConfig)
       this.$emit('update:mapInst', this.map)
     }
@@ -74,8 +68,6 @@ export default {
 </script>
 
 <style scoped>
-/* Always set the map height explicitly to define the size of the div
- * element that contains the map. */
 .google-map {
   height: 100%;
   width: 100%;

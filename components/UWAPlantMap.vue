@@ -8,9 +8,10 @@
 
 <script>
 import { mapState } from 'vuex'
-import GoogleMapLoader from './GoogleMapLoader'
 import { uwaMapSettings } from '@/assets/js/mapSettings'
 import { plants } from '@/assets/plantdb.json'
+// eslint-disable-next-line
+import GoogleMapLoader from './GoogleMapLoader' 
 
 // Use https://www.gps-coordinates.net/ to easily fetch coordinates
 const UWA_BOUNDS = {
@@ -80,6 +81,7 @@ export default {
         this.userMarker = null
       } else {
         this.userMarker.setPosition(this.position)
+        this.map.panTo(this.position)
       }
     }
   },
