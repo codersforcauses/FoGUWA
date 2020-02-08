@@ -15,10 +15,12 @@
 <script>
 // import Vue from 'vue'
 import { mapState } from 'vuex'
-import PlantInfo from './PlantInfo.vue'
-import GoogleMapLoader from './GoogleMapLoader'
-import { uwaMapSettings } from '@/assets/js/mapSettings'
 import { plants } from '@/assets/plantdb.json'
+import { uwaMapSettings } from '@/assets/js/mapSettings'
+// eslint-disable-next-line
+import PlantInfo from './PlantInfo.vue'
+// eslint-disable-next-line
+import GoogleMapLoader from './GoogleMapLoader'
 
 // Use https://www.gps-coordinates.net/ to easily fetch coordinates
 const UWA_BOUNDS = {
