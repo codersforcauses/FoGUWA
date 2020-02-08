@@ -37,6 +37,21 @@
       <p v-else>
         {{ user.name }}
       </p>
+  
+      <v-list-item
+        v-if="user"
+        :to="logout.to"
+        router
+        exact
+        @click="thislogout"
+      >
+        <v-list-item-action>
+          <v-icon>{{ login.icon }}</v-icon>
+        </v-list-item-action>
+        <v-list-item-content>
+          <v-list-item-title v-text="logout.title" />
+        </v-list-item-content>
+      </v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -65,7 +80,13 @@ export default {
       title: 'Login',
       to: '/login'
     }
-  }),
+  ,
+  logout: {
+    icon: 'person',
+    title: "Logout",
+    to: '/'
+  }})
+  ,
   computed: {
     user() {
       return (this.$auth || {}).user || null
@@ -85,6 +106,13 @@ export default {
     async auth() {
       try {
         await this.$auth.loginWith('auth0')
+      } catch (e) {
+        this.error = e.response.data.message
+      }
+    },
+    async thislogout() {
+      try {
+        await this.$auth.logout()
       } catch (e) {
         this.error = e.response.data.message
       }
