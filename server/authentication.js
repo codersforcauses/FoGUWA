@@ -1,6 +1,7 @@
 const expressjwt = require('express-jwt')
 const jwksRsa = require('jwks-rsa')
 const axios = require('axios')
+const consola = require('consola')
 const { findUserByEmail } = require('./controllers/users.js')
 
 const getToken = req => {
@@ -39,14 +40,23 @@ const getUserInfo = async token => {
   }
 }
 
-const userAuthorised = async req => {
+const findUser = async req => {
   const token = getToken(req)
-  if (!token) return false
+  if (!token) throw new Error('Error retrieving token')
   const userInfo = await getUserInfo(token)
-  if (!userInfo) return false
+  if (!userInfo) throw new Error('Error retrieving User Info')
   const { email } = userInfo.data
   const adminObject = await findUserByEmail(email)
-  return Object.keys(adminObject).length !== 0
+  return adminObject
+}
+const userAuthorised = () => {
+  try {
+    const adminObject = findUser()
+    return Object.keys(adminObject).length !== 0
+  } catch (error) {
+    consola.log(error)
+    return false
+  }
 }
 
 const restrictAccess = async (req, res, next) => {
@@ -54,4 +64,4 @@ const restrictAccess = async (req, res, next) => {
   isAdmin ? next() : res.send('Access Denied')
 }
 
-module.exports = { checkJwt, getToken, getUserInfo, restrictAccess }
+module.exports = { checkJwt, getToken, getUserInfo, restrictAccess, findUser }
