@@ -8,9 +8,9 @@
 
 <script>
 import { mapState } from 'vuex'
-import { uwaMapSettings } from '@/assets/js/mapSettings'
 import { plants } from '@/assets/plantdb.json'
-// eslint-disable-next-line
+import { uwaMapSettings } from '@/assets/js/mapSettings'
+// eslint-disable-next-line import/order
 import GoogleMapLoader from './GoogleMapLoader' 
 
 // Use https://www.gps-coordinates.net/ to easily fetch coordinates

@@ -1,9 +1,10 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const consola = require('consola')
 const { checkJwt, restrictAccess } = require('../authentication')
+const { findUser } = require('../authentication')
 const { addUser } = require('../seeder/index')
 const { updateModel } = require('./routeUtilities')
-
 const Users = mongoose.model('User')
 const router = express.Router()
 
@@ -27,6 +28,12 @@ router.get('/users/:id', checkJwt, async (req, res, next) => {
     if (user) return res.json(sanitiseUser(user))
   }
   res.status(400).send('User not found')
+})
+
+router.get('/userinfo', async (req, res, next) => {
+  const user = await findUser(req)
+  consola.log(user)
+  res.send(user)
 })
 
 router.post('/users', async (req, res, next) => {
