@@ -41,9 +41,6 @@
             </v-icon>
           </v-btn>
         </v-list-item-action>
-        </v->
-        </v-img>
-        </v-list-item-avatar></v->
       </v-list-item>
       <v-btn
         v-else
