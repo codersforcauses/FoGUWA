@@ -13,14 +13,15 @@
 </template>
 
 <script>
-// import Vue from 'vue'
 import { mapState } from 'vuex'
-import { plants } from '@/assets/plantdb.json'
-import { uwaMapSettings } from '@/assets/js/mapSettings'
-// eslint-disable-next-line
+// eslint-disable-next-line import/order
 import PlantInfo from './PlantInfo.vue'
-// eslint-disable-next-line
+import { plants } from '@/assets/plantdb.json'
+import iconData from '@/assets/js/plantIcons.js'
+import { uwaMapSettings } from '@/assets/js/mapSettings'
+// eslint-disable-next-line import/order
 import GoogleMapLoader from './GoogleMapLoader'
+const { iconStyle, ...iconPaths } = iconData
 
 // Use https://www.gps-coordinates.net/ to easily fetch coordinates
 const UWA_BOUNDS = {
@@ -29,7 +30,7 @@ const UWA_BOUNDS = {
   west: 115.81349721126503,
   east: 115.82249284467866
 }
-const UWA_COORDS = { lat: -31.9804624, lng: 115.818 }
+const UWA_COORDS = { lat: -31.976764, lng: 115.818220 }
 
 const defaultInfo = {
   plantName: 'Plants and Trees',
@@ -65,7 +66,7 @@ export default {
           latLngBounds: UWA_BOUNDS,
           strictBounds: false
         },
-        zoom: 19,
+        zoom: 18,
         minZoom: 18,
         maxZoom: 21,
         ...uwaMapSettings
@@ -119,52 +120,50 @@ export default {
   methods: {
     loadMarkers() {
       if (this.map && this.google) {
-        // Clear old markers
-        for (const marker of this.markerInstances) {
-          marker.setMap(null)
-        }
-        this.markerInstances = []
+        this.clearMarkers()        
         // Create new markers and store them
         plants.forEach((plant, index) => {
-          const leafIcon = {
-            path:
-              'M17 8C8 10 5.901 16.166 3.816 21.343l1.891.65.954-2.292c.482.168.976.299 1.339.299C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z',
-            fillColor: '#008000',
-            fillOpacity: 1.0,
-            strokeColor: '#004d00',
-            scale: 1
-          }
-          const statueIcon = {
-            path:
-              'M17 8C8 10 5.901 16.166 3.816 21.343l1.891.65.954-2.292c.482.168.976.299 1.339.299C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z',
-            fillColor: '#cd7f32',
-            fillOpacity: 1.0,
-            strokeColor: '#905923',
-            scale: 1
-          }
           // Plot all instances
-          for (const instance of plant.instances) {
-            const markerInst = new this.google.maps.Marker({
-              label: plant.name,
-              position: instance.location,
-              icon: plant.type === 'tree' ? leafIcon : statueIcon,
-              map: this.map
-            })
-            markerInst.addListener('click', () => {
-              this.plantInfo = {
-                plantName: plant.name || this.defaultInfo.plantName,
-                sciName:
-                  plant.scientificName || this.defaultInfo.scientificName,
-                description: plant.description || this.defaultInfo.description,
-                images: plant.images || this.defaultInfo.images,
-                type: plant.type || 'tree'
-              }
-              this.infoDrawer = true
-            })
+          plant.instances.forEach(instance => {
+            const markerInst = this.createMarkerInstance(plant, instance)
+            this.addListenerToMarker(markerInst, plant)
             this.markerInstances.push(markerInst)
-          }
+          })
         })
       }
+    },
+    clearMarkers() {
+      this.markerInstances.forEach(marker => {
+        marker.setMap(null)
+      })
+      this.markerInstances = []
+    },
+    createMarkerInstance(plant, instance) {
+      const icon = iconPaths.hasOwnProperty(plant.type)
+                  ? iconPaths[plant.type]
+                  : iconPaths.info
+      Object.keys(iconStyle).forEach(style => {
+        icon[style] = iconStyle[style]
+      })
+      return new this.google.maps.Marker({
+        label: plant.name,
+        position: instance.location,
+        icon,
+        map: this.map
+      })
+    },
+    addListenerToMarker(markerInstance, plant) {
+      markerInstance.addListener('click', () => {
+        this.plantInfo = {
+          plantName: plant.name || this.defaultInfo.plantName,
+          sciName:
+            plant.scientificName || this.defaultInfo.scientificName,
+          description: plant.description || this.defaultInfo.description,
+          images: plant.images || this.defaultInfo.images,
+          type: plant.type || 'tree'
+        }
+        this.infoDrawer = true
+      })
     }
   }
 }

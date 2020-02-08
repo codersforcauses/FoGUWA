@@ -4,7 +4,7 @@
     {
       "name": "Swamp banksia",
       "scientificName": "Banksia littoralis",
-      "type": "tree",
+      "type": "lotus",
       "description": "...",
       "instances": [
         {
@@ -16,7 +16,7 @@
     {
       "name": "Wickham's grevillea",
       "scientificName": "Grevillea wickhamii",
-      "type": "tree",
+      "type": "leaf",
       "description": "...",
       "instances": [
         {
@@ -28,7 +28,7 @@
     {
       "name": "Acorn banksia",
       "scientificName": "Banksia prionotes",
-      "type": "tree",
+      "type": "lotus",
       "description": "...",
       "instances": [
         {
@@ -52,7 +52,7 @@
     {
       "name": "Pin-cushion Hakea",
       "scientificName": "Hakea laurina",
-      "type": "tree",
+      "type": "tulip",
       "description": "...",
       "instances": [
         {
