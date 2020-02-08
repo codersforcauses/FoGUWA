@@ -4,7 +4,7 @@
       <v-layout wrap name="searchbar-card">
         <v-flex name="searchbar">
           <v-autocomplete
-            v-model="value"
+            
             :items="plants"
             dense
             filled
@@ -25,7 +25,7 @@
               </v-icon>
               <v-col>
                 <v-card-title class="pt-2 pl-6">
-                  Plant Namae
+                  Plant Name
                   <!-- <span v-if="!editView"> Plant Name </span> -->
                   <!-- <v-text-field v-else v-model="plant.name" dense label="Plant Name" outlined /> -->
                   <v-chip color="indigo darken-3" small outlined class="ml-4">
@@ -42,9 +42,28 @@
                 <v-btn color="indigo" text dark @click="editView = !editView">
                   EDIT
                 </v-btn>
-                <v-btn color="indigo" text class="mr-3">
-                  DELETE
-                </v-btn>
+                <v-dialog v-model="confirmDelete" persistent max-width="290">
+                  <template v-slot:activator="{ on }">
+                    <v-btn color="indigo" text class="mr-3" v-on="on">
+                      DELETE
+                    </v-btn>
+                  </template>
+                  <v-card>
+                    <v-card-title class="headline">
+                      Delete this plant
+                    </v-card-title>
+                    <v-card-text>probably display the name of the plant they are about to delete here</v-card-text>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn color="indigo" text @click="confirmDelete = false">
+                        NO
+                      </v-btn>
+                      <v-btn color="indigo" dark @click="confirmDelete = true">
+                        YES
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
               </v-card-actions>
             </v-row>
             <v-row>
@@ -73,6 +92,7 @@ export default {
       hover: false,
       editView: false,
       plant: {},
+      confirmDelete: false
     }
   },
   watch: {
