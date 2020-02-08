@@ -9,7 +9,8 @@ const getToken = req => {
     ? req.cookies['auth._token.auth0']
     : req.headers.authorization
   const tokenMatcher = /(?<=Bearer ).+/
-  return tokenMatcher.exec(tokenString)[0]
+  const match = tokenMatcher.exec(tokenString)
+  return match ? match[0] : null
 }
 
 const checkJwt = expressjwt({
@@ -49,9 +50,10 @@ const findUser = async req => {
   const adminObject = await findUserByEmail(email)
   return adminObject
 }
-const userAuthorised = () => {
+
+const userAuthorised = async req => {
   try {
-    const adminObject = findUser()
+    const adminObject = await findUser(req)
     return Object.keys(adminObject).length !== 0
   } catch (error) {
     consola.log(error)
