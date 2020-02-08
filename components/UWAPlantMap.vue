@@ -1,15 +1,24 @@
 <template>
-  <google-map-loader
-    :map-config="mapConfig"
-    :map-inst.sync="map"
-    :google-inst.sync="google"
-  />
+  <v-card height="100%">
+    <plant-info
+      v-model="infoDrawer"
+      :plant-info="plantInfo"
+    />
+    <google-map-loader
+      :map-config="mapConfig"
+      :map-inst.sync="map"
+      :google-inst.sync="google"
+    />
+  </v-card>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import { uwaMapSettings } from '@/assets/js/mapSettings'
+// eslint-disable-next-line import/order
+import PlantInfo from './PlantInfo.vue'
+import { plants } from '@/assets/plantdb.json'
 import iconData from '@/assets/js/plantIcons.js'
+import { uwaMapSettings } from '@/assets/js/mapSettings'
 // eslint-disable-next-line import/order
 import GoogleMapLoader from './GoogleMapLoader'
 const { iconStyle, ...iconPaths } = iconData
@@ -21,18 +30,33 @@ const UWA_BOUNDS = {
   west: 115.81349721126503,
   east: 115.82249284467866
 }
-const UWA_COORDS = { lat: -31.9804624, lng: 115.818 }
+const UWA_COORDS = { lat: -31.976764, lng: 115.818220 }
+
+const defaultInfo = {
+  plantName: 'Plants and Trees',
+  sciName: 'Planticus Namium',
+  images: [
+    'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/dsc-5454_orig.jpg',
+    'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/dsc-7528_orig.jpg',
+    'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/20090626-uwa-grounds2-007_orig.jpg'
+  ],
+  description:
+    'Plants are mainly multicellular, predominantly photosynthetic eukaryotes of the kingdom Plantae. Historically, plants were treated as one of two kingdoms including all living things that were not animals, and all algae and fungi were treated as plants.'
+}
 
 export default {
   components: {
-    'google-map-loader': GoogleMapLoader
+    'google-map-loader': GoogleMapLoader,
+    'plant-info': PlantInfo
   },
   data: () => ({
     map: null,
     google: null,
     markerInstances: [],
     userMarker: null,
-    plants: null
+    plants: null,
+    infoDrawer: false,
+    plantInfo: defaultInfo
   }),
   computed: {
     ...mapState(['position']),
@@ -43,15 +67,27 @@ export default {
           latLngBounds: UWA_BOUNDS,
           strictBounds: false
         },
-        zoom: 19,
+        zoom: 18,
         minZoom: 18,
         maxZoom: 21,
         ...uwaMapSettings
       }
+    },
+    defaultInfo() {
+      return {
+        plantName: 'Plant Name',
+        sciName: 'Scientific Plant Name',
+        images: [
+          'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/dsc-5454_orig.jpg',
+          'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/dsc-7528_orig.jpg',
+          'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/20090626-uwa-grounds2-007_orig.jpg'
+        ],
+        description:
+          'Plants are mainly multicellular, predominantly photosynthetic eukaryotes of the kingdom Plantae. Historically, plants were treated as one of two kingdoms including all living things that were not animals, and all algae and fungi were treated as plants.'
+      }
     }
   },
   watch: {
-    // TODO these two watchers will be called quickly enough, such that both map and google are both defined
     map(val) {
       this.loadMarkers()
     },
@@ -83,33 +119,15 @@ export default {
     }
   },
   methods: {
-    async loadMarkers() {
+    loadMarkers() {
       if (this.map && this.google) {
-        // Clear old markers
-        for (const marker of this.markerInstances) {
-          marker.setMap(null)
-        }
-        this.markerInstances = []
-        await this.loadPlants()
+        this.clearMarkers()        
         // Create new markers and store them
-        this.plants.forEach((marker, index) => {
+        plants.forEach((plant, index) => {
           // Plot all instances
-          marker.instances.forEach(instance => {
-            const icon = iconPaths.hasOwnProperty(marker.type)
-                ? iconPaths[marker.type]
-                : iconPaths.info
-            Object.keys(iconStyle).forEach(style => {
-              icon[style] = iconStyle[style]
-            })
-            const markerInst = new this.google.maps.Marker({
-              label: marker.name,
-              position: {
-                lat: instance.location.coordinates[0],
-                lng: instance.location.coordinates[1]
-              },
-              icon,
-              map: this.map
-            })
+          plant.instances.forEach(instance => {
+            const markerInst = this.createMarkerInstance(plant, instance)
+            this.addListenerToMarker(markerInst, plant)
             this.markerInstances.push(markerInst)
           })
         })
@@ -118,6 +136,42 @@ export default {
     async loadPlants() {
       const data = await this.$axios.$get('/api/flora')
       this.plants = data
+    },
+    clearMarkers() {
+      this.markerInstances.forEach(marker => {
+        marker.setMap(null)
+      })
+      this.markerInstances = []
+    },
+    createMarkerInstance(plant, instance) {
+      const icon = iconPaths.hasOwnProperty(plant.type)
+                  ? iconPaths[plant.type]
+                  : iconPaths.info
+      Object.keys(iconStyle).forEach(style => {
+        icon[style] = iconStyle[style]
+      })
+      return new this.google.maps.Marker({
+        label: plant.name,
+        position: {
+          lat: instance.location.coordinates[0],
+          lng: instance.location.coordinates[1]
+        },
+        icon,
+        map: this.map
+      })
+    },
+    addListenerToMarker(markerInstance, plant) {
+      markerInstance.addListener('click', () => {
+        this.plantInfo = {
+          plantName: plant.name || this.defaultInfo.plantName,
+          sciName:
+            plant.scientificName || this.defaultInfo.scientificName,
+          description: plant.description || this.defaultInfo.description,
+          images: plant.images || this.defaultInfo.images,
+          type: plant.type || 'tree'
+        }
+        this.infoDrawer = true
+      })
     }
   }
 }

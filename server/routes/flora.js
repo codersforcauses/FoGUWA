@@ -41,10 +41,7 @@ router.patch('/flora/:id', checkJwt, async (req, res) => {
 
 router.delete('/flora/:id', checkJwt, async (req, res) => {
   const flora = await Flora.findByIdAndDelete(req.params.id)
-  if (flora) res.json(flora)
-  else {
-    res.status(400).json('Flora not found')
-  }
+  flora ? res.json(flora) : res.status(400).send('Flora not found')
 })
 
 module.exports = router

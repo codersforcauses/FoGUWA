@@ -21,7 +21,7 @@ router.get('/users', checkJwt, async (req, res, next) => {
 router.get('/users/:id', checkJwt, async (req, res) => {
   if (mongoose.Types.ObjectId.isValid(req.params.id)) {
     const user = await Users.findById(req.params.id)
-    if (user) return res.json(sanitiseUser(user))
+    return user ? res.json(user) : res.status(400).send('User not found')
   }
   res.status(400).json('User not found')
 })
