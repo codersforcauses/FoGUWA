@@ -103,9 +103,6 @@ export default {
             Object.keys(iconStyle).forEach(style => {
               icon[style] = iconStyle[style]
             })
-            // icon.strokeWeight = iconStyle.strokeWeight
-            // icon.fillOpacity = iconStyle.fillOpacity
-            // icon.scale = iconStyle.scale
             const markerInst = new this.google.maps.Marker({
               label: marker.name,
               position: instance.location,
