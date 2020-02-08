@@ -49,9 +49,9 @@ const findUser = async req => {
   const adminObject = await findUserByEmail(email)
   return adminObject
 }
-const userAuthorised = () => {
+const userAuthorised = async req => {
   try {
-    const adminObject = findUser()
+    const adminObject = await findUser(req)
     return Object.keys(adminObject).length !== 0
   } catch (error) {
     consola.log(error)
