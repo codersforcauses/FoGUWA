@@ -24,9 +24,9 @@
       <v-divider />
       <v-list-item v-if="$store.state.auth.loggedIn" two-line>
         <v-list-item-avatar color="red" class="mr-4">
-          <span class="white--text headline">{{ initials }}</span>
+          <v-img :src="user.picture">
+          </v-img>
         </v-list-item-avatar>
-
         <v-list-item-content>
           <v-list-item-title>
             {{ user.nickname }}
@@ -41,6 +41,9 @@
             </v-icon>
           </v-btn>
         </v-list-item-action>
+        </v->
+        </v-img>
+        </v-list-item-avatar></v->
       </v-list-item>
       <v-btn
         v-else
@@ -95,10 +98,10 @@ export default {
           this.$emit('input', false)
         }
       }
-    },
-    initials() {
-      return `${this.name.first.charAt(0)}${this.name.last.charAt(0)}`
     }
+    // initials() {
+    //   return `${this.name.first.charAt(0)}${this.name.last.charAt(0)}`
+    // }
   },
   methods: {
     async auth() {
