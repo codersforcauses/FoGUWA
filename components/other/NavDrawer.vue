@@ -64,10 +64,6 @@ export default {
   },
   middleware: 'auth',
   data: () => ({
-    name: {
-      first: 'Janeyawfgasuefygawueyfgawueyfg',
-      last: 'Doe'
-    },
     items: [
       {
         icon: 'map',
