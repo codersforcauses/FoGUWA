@@ -132,7 +132,7 @@ export const uwaMapSettings = {
       stylers: [
         {
           // minor road
-          color: '#9E7757'
+          color: '#C1B098'
         }
       ]
     },
@@ -142,7 +142,7 @@ export const uwaMapSettings = {
       stylers: [
         {
           // medium road
-          color: '#9E7757'
+          color: '#C1B098'
         }
       ]
     },
@@ -152,7 +152,7 @@ export const uwaMapSettings = {
       stylers: [
         {
           // major road
-          color: '#9E7757'
+          color: '#C1B098'
         }
       ]
     },
