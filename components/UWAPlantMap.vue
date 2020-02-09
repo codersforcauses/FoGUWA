@@ -156,7 +156,6 @@ export default {
       markerInstance.addListener('click', () => {
         this.plantInfo = plant
         this.plantInfo.images = plant.images || defaultInfo.images
-        console.log(this.plantInfo)
         this.infoDrawer = true
       })
     }
