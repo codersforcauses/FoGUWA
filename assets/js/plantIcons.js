@@ -2,7 +2,7 @@ const iconStyle = {
   strokeWeight: 2,
   strokeColor: '#e0e8e2',
   fillOpacity: 1,
-  scale: 2
+  scale: 1.7
 }
 
 const leaf = {
