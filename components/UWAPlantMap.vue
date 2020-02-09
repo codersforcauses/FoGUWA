@@ -162,14 +162,8 @@ export default {
     },
     addListenerToMarker(markerInstance, plant) {
       markerInstance.addListener('click', () => {
-        this.plantInfo = {
-          plantName: plant.name || this.defaultInfo.plantName,
-          sciName:
-            plant.scientificName || this.defaultInfo.scientificName,
-          description: plant.description || this.defaultInfo.description,
-          images: plant.images || this.defaultInfo.images,
-          type: plant.type || 'tree'
-        }
+        this.plantInfo = plant
+        this.plantInfo.images = plant.images || defaultInfo.images
         this.infoDrawer = true
       })
     }

@@ -35,10 +35,10 @@
         </v-carousel-item>
       </v-carousel>
       <v-card-title primary-title>
-        {{ plantInfo.plantName }}
+        {{ plantInfo.name }}
       </v-card-title>
       <v-card-subtitle>
-        <em>{{ plantInfo.sciName }}</em>
+        <em>{{ plantInfo.scientificName }}</em>
       </v-card-subtitle>
       <v-card-text>
         {{ plantInfo.description }}
