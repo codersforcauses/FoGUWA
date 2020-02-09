@@ -24,7 +24,7 @@ router.post('/flora', checkJwt, async (req, res) => {
     const flora = await addFlora(req.body)
     return res.json(flora)
   } catch (err) {
-    return res.json(err.message)
+    return res.status(400).json('Flora could not created')
   }
 })
 
