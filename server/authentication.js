@@ -7,7 +7,7 @@ const getToken = req => {
     ? req.cookies['auth._token.auth0']
     : req.headers.authorization
   const tokenMatch = /(?<=Bearer ).+/.exec(tokenString)
-  return tokenMatch ? tokenMatch[0] : null
+  return tokenMatch.length > 0 ? tokenMatch[0] : null
 }
 
 const checkJwt = expressjwt({
