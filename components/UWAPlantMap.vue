@@ -163,7 +163,7 @@ export default {
     addListenerToMarker(markerInstance, plant) {
       markerInstance.addListener('click', () => {
         this.plantInfo = plant
-        this.plantInfo.images = plant.images || defaultInfo.images
+        this.plantInfo.images = plant.images.length > 0 ? plant.images : defaultInfo.images
         this.infoDrawer = true
       })
     }
