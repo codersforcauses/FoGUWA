@@ -146,9 +146,17 @@ export default {
         icon[style] = iconStyle[style]
       })
       return new this.google.maps.Marker({
-        label: plant.name,
+        label:{
+            text: plant.name,
+            fontFamily: 'Roboto',
+            fontWeight: 'Bold',
+            color: '#444444'
+          },
         position: instance.location,
-        icon,
+        icon: {
+          labelOrigin: new this.google.maps.Point(12, -5),
+          ...icon
+        },
         map: this.map
       })
     },
