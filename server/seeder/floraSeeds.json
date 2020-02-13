@@ -1,189 +1,178 @@
 [
   {
-  "name": "Swamp banksia",
-  "scientificName": "Banksia littoralis",
-  "icon": "tree",
-  "description":
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  "instances": [
-    {
-      "location": {
-        "type": "Point",
-        "coordinates": [-31.978303, 115.816732]
+    "name": "Swamp banksia",
+    "scientificName": "Banksia littoralis",
+    "icon": "tree",
+    "description": "It is a tree in the plant genus Banksia and is found in south west Western Australia from the south eastern metropolitan area of Perth to the Stirling Range and Albany. It grows in peaty sand, low-lying and seasonally-damp areas along water courses. It possesses epicormic buds that are hidden under its bark and its yellow-orange flowers bloom between March and August.",
+    "instances": [
+      {
+        "location": {
+          "type": "Point",
+          "coordinates": [-31.978303, 115.816732]
+        }
       }
-    }
-  ]
-},
-{
-  "name": "Wickham's grevillea",
-  "scientificName": "Grevillea wickhamii",
-  "icon": "tree",
-  "description":
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  "instances": [
-    {
-      "location": {
-        "type": "Point",
-        "coordinates": [-31.983334, 115.819156]
+    ]
+  },
+  {
+    "name": "Wickham's grevillea",
+    "scientificName": "Grevillea wickhamii",
+    "icon": "tree",
+    "description": "It is an erect shrub or small tree that grows to 6 metres in height. Flowers bloom between April and October and are normally red but can also appear pink, orange or yellow.It is endemic to Western Australia, Northern Territory and Queensland, and grows in loam, stony or skeletal soils, red sand, laterite, sandstone, limestone and quartzite. Hence, they are often found on sand dunes, plains, rocky hills and cliffs. On the UWA campus, it is grafted on the root stock of Grevillea robusta, which naturally occur in Queensland.",
+    "instances": [
+      {
+        "location": {
+          "type": "Point",
+          "coordinates": [-31.983334, 115.819156]
+        }
       }
-    }
-  ]
-},
-{
-  "name": "Acorn banksia",
-  "scientificName": "Banksia prionotes",
-  "icon": "tree",
-  "description":
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  "instances": [
-    {
-      "location": {
-        "type": "Point",
-        "coordinates": [-31.983057, 115.819128]
+    ]
+  },
+  {
+    "name": "Acorn banksia",
+    "scientificName": "Banksia prionotes",
+    "icon": "tree",
+    "description": "It is one of the more common and easy-to-grow banksias. They are adored by birds and gardeners alike. It is a non-lignotuberous tree or shrub that grows up to 10 metres in height. Flowers are cream and orange, and bloom between February and August. It grows on white, grey or yellow sand, sandy loam, brown clay, laterite and granite. Hence, it naturally occurs on sand plains, sand dunes, and undulating slopes. They are recommended for growth in Perth gardens as they are less sensitive to phosphorus and alkaline conditions compared to other banksias.",
+    "instances": [
+      {
+        "location": {
+          "type": "Point",
+          "coordinates": [-31.983057, 115.819128]
+        }
       }
-    }
-  ]
-},
-{
-  "name": "Marri",
-  "scientificName": "Corymbia calophylla",
-  "icon": "tree",
-  "description":
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  "instances": [
-    {
-      "location": {
-        "type": "Point",
-        "coordinates": [-31.98311, 115.819306]
+    ]
+  },
+  {
+    "name": "Marri",
+    "scientificName": "Corymbia calophylla",
+    "icon": "tree",
+    "description": "These serve as one of the major food sources for our threatened red-tailed black cockatoos and Carnaby's black cockatoo. Both are endangered as a result of habitat destruction and diminishing food sources. It is a eucalypt tree that has rough, tessellated bark and it grows to 40-60 metres in height. Flowers are white-pink and bloom between December to May. It grows on red-brown clay loam, orange-brown sandy clay, gravel, grey sand, limestone, granite and laterite. Hence, they naturally occur on hills, slopes, breakaways, wetlands, and fringing salt marches. Sadly, they are under threat from the Marri canker disease, that is aggravated by changes to soil conditions. ",
+    "instances": [
+      {
+        "location": {
+          "type": "Point",
+          "coordinates": [-31.98311, 115.819306]
+        }
       }
-    }
-  ]
-},
-{
-  "name": "Pin-cushion Hakea",
-  "scientificName": "Hakea laurina",
-  "icon": "tree",
-  "description":
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  "instances": [
-    {
-      "location": {
-        "type": "Point",
-        "coordinates": [-31.983047, 115.820071]
+    ]
+  },
+  {
+    "name": "Pin-cushion Hakea",
+    "scientificName": "Hakea laurina",
+    "icon": "tree",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "instances": [
+      {
+        "location": {
+          "type": "Point",
+          "coordinates": [-31.983047, 115.820071]
+        }
       }
-    }
-  ]
-},
-{
-  "name": "Jarrah",
-  "scientificName": "Eucalyptus marginata",
-  "icon": "tree",
-  "description":
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  "instances": [
-    {
-      "description": "Dead.",
-      "location": {
-        "type": "Point",
-        "coordinates": [-31.983461, 115.819482]
+    ]
+  },
+  {
+    "name": "Jarrah",
+    "scientificName": "Eucalyptus marginata",
+    "icon": "tree",
+    "description": "Jarrah, djarraly in Noongar language, also known as the Swan River mahogany, naturally occurs in the south-west corner of Western Australia, where rainfall generally exceeds 600mm. It is found as far as Mooliabeenee, Clackline, Narrogin, and the Stirling Range. Its northern limit is Mount Peron near Jurien Bay. However, there are also outliers in Kulin and Tutanning in the Pingelly Shire. The plant may take the form of a mallee, a multi-stemmed eucalypt, in Mount Lesueur and the Stirling Range. It typically grows in soils derived from ironstone. Jarrah gum nuts are an important food source for the threatened Forest red-tailed black cockatoo that often visit the campus. Its flowers are an important food source for birds and insects.",
+    "instances": [
+      {
+        "description": "Dead.",
+        "location": {
+          "type": "Point",
+          "coordinates": [-31.983461, 115.819482]
+        }
+      },
+      {
+        "description": "Yellowing bark.",
+        "location": {
+          "type": "Point",
+          "coordinates": [-31.982723, 115.819798]
+        }
       }
-    },
-    {
-      "description": "Yellowing bark.",
-      "location": {
-        "type": "Point",
-        "coordinates": [-31.982723, 115.819798]
+    ]
+  },
+  {
+    "name": "Western Australia Christmas Tree",
+    "scientificName": "Nuytsia floribunda",
+    "icon": "tree",
+    "description": "It is believed to be the largest parasitic tree in the world. It is an icon of the region it grows in, south-western Australia, and is known locally as the Western Australian Christmas Tree as its orange flowers bloom dramatically during summer. The tree is indiscriminate - it has greedy roots that can stab host plant victims up to 110m away, and they grow by attaching themselves to their hosts to draw water and nutrients.",
+    "instances": [
+      {
+        "location": {
+          "type": "Point",
+          "coordinates": [-31.9799077, 115.8170656]
+        }
       }
-    }
-  ]
-},
-{
-  "name": "Western Australia Christmas Tree",
-  "scientificName": "Nuytsia floribunda",
-  "icon": "tree",
-  "description":
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  "instances": [
-    {
-      "location": {
-        "type": "Point",
-        "coordinates": [-31.9799077, 115.8170656]
+    ]
+  },
+  {
+    "name": "Zamia Palm",
+    "scientificName": "Macrozamia riedlei",
+    "icon": "tree",
+    "description": "Macrozamia riedlii’s (zamia)  seeds - with their colourful fleshy covering (sarcotesta) - contain high levels of the poisonous macrozamin. Despite claims that the toxin is only in the seeds, the sarcotesta of Macrozamia riedlii actually shows 10 times higher concentrations in the sarcotesta than in the kernels (Ladd et al., 1993). Native animals do consume the sarcotesta, without obvious harm, but it is not known what their resistance to macrozamin may be based on. Emus (Dromaius novaehollandiae) carry the zamia seeds over vast distances, and appear to be important in their dispersal (Calviño-Cancela et al., 2006). Aboriginal people throughout Australia knew how to prepare the seeds or sarcotesta to reduce the toxin levels. It appears that in the southwest, Noongar people consumed the sarcotesta, whereas elsewhere in Australia they used the kernels.",
+    "instances": [
+      {
+        "location": {
+          "type": "Point",
+          "coordinates": [-31.97941, 115.817221]
+        }
       }
-    }
-  ]
-},
-{
-  "name": "Zamia Palm",
-  "scientificName": "Macrozamia riedlei",
-  "icon": "tree",
-  "description":
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  "instances": [
-    {
-      "location": {
-        "type": "Point",
-        "coordinates": [-31.97941, 115.817221]
+    ]
+  },
+  {
+    "name": "Western Australian Peppermint",
+    "scientificName": "Agonis flexuosa",
+    "icon": "tree",
+    "description": "Agonis flexuosa, peppermint. One of the more important Angiosperms on the south-western Australian coast line. Drawing and photo by Andre Jagger. The Western Australian Peppermint ( ThewWillow myrtle) Agonis flexuosa (C. L. Willdenow 1809) R. Sweet (1830) Family: Myrtaceae Order: Myrtales Three botanical varieties are recognised: var. angustifolia differs from the typical var. flexuosa in having long, narrow leaves, while var. latifolia has short, broad leaves. Several selected forms of A. flexuosa are available. Popular cultivars include 'Nana', a compact form to about 4 metres, 'Variegata', a form with variegated foliage (seen in Kings Park by the toilets nearest to the boabab tree) and 'After Dark', a form with deep burgundy to purple foliage. This species is regarded as a weed in all other Australian States due to its incredible ability to survive in multiple different environments and is quite invasive. The plant will live in soils of various types; calcareous, sandy, loam, clay, and granitic. Near-coastal areas. It is an incredibly useful plant in its native range of distribution: a. It serves as a stabiliser for moving sand dunes b. It provides a windbreak and is often sculpted by such forces c. It provides a humus layer to soil, useful after fire for new species d. It provides dense thickets for protective cover for many animal species e. It serves to establish plant life on new and exposed soils f. It provides an oil from its leaves with a pungent odour (possible perfume / aroma uses ?) g. It provides a good rehabilitation tree and street tree in coastal areas only in the South West of Western Australia h. It provides abundant flowers for insects (nectar)(possible implications for the honey industry)",
+    "instances": [
+      {
+        "location": {
+          "type": "Point",
+          "coordinates": [-31.978146, 115.816893]
+        }
       }
-    }
-  ]
-},
-{
-  "name": "Western Australian Peppermint",
-  "scientificName": "Agonis flexuosa",
-  "icon": "tree",
-  "description":
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  "instances": [
-    {
-      "location": {
-        "type": "Point",
-        "coordinates": [-31.978146, 115.816893]
+    ]
+  },
+  {
+    "name": "Norfolk Island Pine",
+    "scientificName": "Araucaria heterophylla",
+    "icon": "tree",
+    "description": "The Norfolk Island Pine or ‘living Christmas Tree’ is endemic to its’ island namesake, although it is not a true pine. It grows well in deep sand, and has a tolerance for salt and wind that make it ideal for the coastal areas and subtropical climates that it is found in. They grow relative to the area they are encapsulated in and can lose some of their youthful symmetry as they mature.",
+    "instances": [
+      {
+        "location": {
+          "type": "Point",
+          "coordinates": [-31.977056, 115.819887]
+        }
       }
-    }
-  ]
-},
-{
-  "name": "Norfolk Island Pine",
-  "scientificName": "Araucaria heterophylla",
-  "icon": "tree",
-  "description":
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  "instances": [
-    {
-      "location": {
-        "type": "Point",
-        "coordinates": [-31.977056, 115.819887]
+    ]
+  },
+  {
+    "name": "Emma",
+    "scientificName": "",
+    "icon": "art",
+    "description": "Bronze sculpture named 'Emma', created by Greg James at Jackson Court",
+    "instances": [
+      {
+        "location": {
+          "type": "Point",
+          "coordinates": [-31.976957, 115.819052]
+        }
       }
-    }
-  ]
-},
-{
-  "name": "Emma",
-  "scientificName": "",
-  "icon": "art",
-  "description": "Bronze sculpture",
-  "instances": [
-    {
-      "location": {
-        "type": "Point",
-        "coordinates": [-31.976957, 115.819052]
+    ]
+  },
+  {
+    "name": "Grass tree",
+    "scientificName": "Xanthorrhoea",
+    "icon": "tree",
+    "description": "A wide-spread species of perennial monocot with the ability to withstand fire. It is a species of high important to the Noongar people who named it balga, and used the  gum it contains, its’ spikes for spears, and the bardi grub that would reside among its leaves",
+    "instances": [
+      {
+        "location": {
+          "type": "Point",
+          "coordinates": [-31.979699, 115.816948]
+        }
       }
-    }
-  ]
-},
-{
-  "name": "Grass tree",
-  "scientificName": "Xanthorrhoea",
-  "icon": "tree",
-  "description":
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-  "instances": [
-    {
-      "location": {
-        "type": "Point",
-        "coordinates": [-31.979699, 115.816948]
-      }
-    }
-  ]
-}
+    ]
+  }
 ]
