@@ -25,6 +25,10 @@ const floraSchema = new mongoose.Schema({
           enum: ['Point'],
           required: true
         },
+        heading: {
+          type: String
+        },
+        description: {},
         coordinates: {
           type: [Number],
           required: true
