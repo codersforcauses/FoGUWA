@@ -9,11 +9,10 @@
           label="Search for plants..."
           hide-details
         />
-        {{ plantNames }}
       </v-toolbar>
       <v-sheet height="calc(100vh - 158px)" style="overflow-y: auto;">
-        <plant-list :plants="plants" />
         <plant-card :plant="plants[0]" />
+        <plant-list :plants="plants" />
       </v-sheet>
     </v-flex>
     <v-flex height="100vh" tile>
@@ -25,7 +24,7 @@
 <script>
 import UWAPlantMap from '~/components/UWAPlantMap.vue'
 import PlantList from '~/components/other/PlantList.vue'
-  import plantCard from '~/components/other/plantCard.vue'
+import plantCard from '~/components/other/PlantCard.vue'
 
 export default {
   components: {
