@@ -1,48 +1,43 @@
 <template>
-  <v-card>
-    <v-card v-for="(plant, i) in plants" :key="i" class="d-flex" tile>
-      <v-row>
-        <v-icon large text icon color="pink lighten-3" class="ml-3 pl-6">
-          mdi-mushroom
+  <v-list two-line>
+    <v-list-item v-for="(plant, i) in plants" :key="i" class="d-flex" to="/about" nuxt>
+      <v-list-item-avatar>
+        <v-icon large text icon :color="getPlantIcon(plant.icon).fillColor">
+          {{ getPlantIcon(plant.icon).mdiName }}
         </v-icon>
-        <v-col>
-          <v-card-title class="pt-2 pl-6">
-            {{ plant.name }}
-            <v-chip v-if="plant.instaces" color="indigo darken-3" small outlined class="ml-4">
-              <i>{{ plant.scientificName }}</i>
-            </v-chip>
-          <!-- <v-text-field v-model="plant.sciname" dense label="Scientific Name" outlined /> -->
-          </v-card-title>
-          <v-card-subtitle class="pl-6">
-            {{ plant.scientificName }}
-          </v-card-subtitle>
-        </v-col>
-        <!-- <v-spacer></v-spacer> -->
-        <v-card-actions class="mr-2">
-          <v-btn color="indigo" text dark @click="editView = !editView">
-            EDIT
-          </v-btn>
-          <v-btn color="indigo" text class="mr-3">
-            DELETE
-          </v-btn>
-        </v-card-actions>
-      </v-row>
-      <v-row>
-        <v-card-text class="ml-3 pt-0 pb-6 px-6">
-          {{ plant.description }}
-        </v-card-text>
-      </v-row>
-    </v-card>  
-  </v-card>
+      </v-list-item-avatar>
+      <v-list-item-content>
+        <v-list-item-title>
+          {{ plant.name }}
+        </v-list-item-title>
+        <v-list-item-subtitle>
+          {{ plant.scientificName }}
+        </v-list-item-subtitle>
+      </v-list-item-content>
+      <v-list-item-action>
+        <v-btn color="indigo" text dark @click="editView = !editView">
+          EDIT
+        </v-btn>
+      </v-list-item-action>
+    </v-list-item>  
+  </v-list>
 </template>
 
 <script>
+import iconData from '@/assets/js/plantIcons.js'
+
 export default {
   props: {
     plants: {
       type: Array,
       required: true
     }
+  },
+  methods: {
+    getPlantIcon(icon) {
+      const { iconStyle, ...icons } = iconData
+      return icons[icon] ? icons[icon] : icons.info
+    },
   },
 }
 </script>

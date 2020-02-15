@@ -1,22 +1,16 @@
 <template>
   <v-layout name="panel-and-map">
     <v-flex xs12 md6 lg5 name="panel">
-      <v-layout wrap name="searchbar-card">
-        <v-flex name="searchbar">
-          <v-autocomplete
-            v-model="value"
-            :items="plants"
-            dense
-            filled
-            label="Search for plant..."
-            class="mt-4 mx-4"
-          >
-          </v-autocomplete>
-        </v-flex>
-        <v-flex name="card">
-          <plant-list :plants="plantData" />
-        </v-flex>
-      </v-layout>
+      <v-toolbar fixed color="transparent">
+        <v-autocomplete
+          :items="plants"
+          label="Search for plants..."
+          class="mt-4 mx-4"
+        />
+      </v-toolbar>
+      <v-sheet height="calc(100vh - 158px)" style="overflow-y: auto;">
+        <plant-list :plants="plants" />
+      </v-sheet>
     </v-flex>
     <v-flex height="100vh" tile>
       <uwa-plant-map ref="plantMap" />
@@ -27,7 +21,6 @@
 <script>
 import UWAPlantMap from '~/components/UWAPlantMap.vue'
 import PlantList from '~/components/other/PlantList.vue'
-import { plants } from '@/assets/plantdb.json'
 
 export default {
   components: {
@@ -39,15 +32,9 @@ export default {
       loading: false,
       search: null,
       select: null,
-      plants: ['plant1', 'plant2', 'plant3'], // need DB
       hover: false,
       editView: false,
-      plant: {},
-    }
-  },
-  computed: {
-    plantData() {
-      return plants
+      plants: [],
     }
   },
   watch: {
@@ -59,6 +46,9 @@ export default {
       console.log(val)
     }
   },
+  async mounted() {
+    await this.loadPlants()
+  },
   methods: {
     querySelections(v) {
       this.loading = true
@@ -69,6 +59,10 @@ export default {
         })
         this.loading = false
       }, 500)
+    },
+    async loadPlants() {
+      const data = await this.$axios.$get('/api/flora')
+      this.plants = data
     }
   }
 }
