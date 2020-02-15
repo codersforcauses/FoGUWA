@@ -108,6 +108,28 @@
                   </v-col>
                 </v-row>
                 <v-row>
+                  <v-card-actions class="mx-7 mb-6">
+                    <p class="font-weight-light">
+                      Choose icon &emsp;
+                    </p>
+                    <v-btn v-model="selected" color="pink" fab small outlined>
+                      <v-icon>mdi-flower</v-icon>
+                    </v-btn>
+                    <v-btn v-model="selected" color="pink lighten-3" fab small outlined>
+                      <v-icon>mdi-mushroom</v-icon>
+                    </v-btn>
+                    <v-btn v-model="selected" color="orange" fab outlined small>
+                      <v-icon>mdi-carrot</v-icon>
+                    </v-btn>
+                    <v-btn v-model="selected" color="light-green" fab small outlined>
+                      <v-icon>mdi-leaf</v-icon>
+                    </v-btn>
+                    <v-btn v-model="selected" color="green" fab small outlined>
+                      <v-icon>mdi-tree</v-icon>
+                    </v-btn>
+                  </v-card-actions>
+                </v-row>
+                <v-row>
                   <v-textarea
                     clearable
                     clear-icon="cancel"
@@ -157,9 +179,37 @@ export default {
         latitude: 123.456789,
         longtitude: 123.456789,
         description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        icon: '',
-        iconColour:''
-      }
+        icon: 'mdi-mushroom',
+      },
+      // selected: this.samplePlant.icon,
+      options:[
+        {
+          iconName: 'mdi-flower',
+          iconColour: 'pink',
+          isSelected: false
+        },
+        {
+          iconName: 'mdi-mushroom',
+          iconColour: 'pink lighten-3',
+          isSelected: false
+        },
+        {
+          iconName: 'mdi-carrot',
+          iconColour: 'orange',
+          isSelected: false
+        },
+        {
+          iconName: 'mdi-leaf',
+          iconColour: 'light-green',
+          isSelected: false
+        },
+        {
+          iconName: 'mdi-tree',
+          iconColour: 'green',
+          isSelected: false
+        }
+      ]
+
     }
   },
   watch: {
@@ -169,6 +219,12 @@ export default {
     editView(val) {
       // eslint-disable-next-line no-console
       console.log(val)
+    },
+    colourIcon(val){
+      // console.log(this.samplePlant.icon)
+      this.options.forEach(()=>{if(this.options.iconName===this.selected){
+        this.options.isSelected=true
+      }})
     }
   },
   methods: {
