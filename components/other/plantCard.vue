@@ -17,9 +17,9 @@
                 <i>{{ plant.scientificName }}</i>
               </v-chip>
             </v-card-title>
-            <v-card-subtitle class="pl-6">
+            <!-- <v-card-subtitle class="pl-6">
               {{ plant.instance[0].heading }}
-            </v-card-subtitle>
+            </v-card-subtitle> -->
           </v-col>
           <v-card-actions class="mr-2">
             <v-btn color="indigo" text dark @click="displayForm++">
@@ -54,6 +54,35 @@
             {{ plant.description }}
           </v-card-text>
         </v-row>
+        <v-row>
+          <v-divider class="mx-3"></v-divider>
+        </v-row>
+
+        <v-card
+          v-for="(instance,i) in plant.instance" 
+          :key="i" 
+          tile
+          flat
+          class="px-3" 
+          @mouseover="mouseOver(i)"
+          @mouseout="mouseOut(i)"
+        >
+          <v-card-actions>
+            {{ instance.heading }}
+            <v-spacer></v-spacer>
+            <div v-show="instance.showIcon">
+              <v-btn text icon color="indigo">
+                <v-icon>mdi-pencil</v-icon>
+              </v-btn>
+              <v-btn text icon color="indigo">
+                <v-icon>mdi-delete</v-icon>
+              </v-btn>
+              <v-btn text icon color="indigo">
+                <v-icon>my_location</v-icon>
+              </v-btn>
+            </div>
+          </v-card-actions>
+        </v-card>
       </v-window-item>
       <v-window-item :value="2">
         <v-row class="mx-2 mb-0">
@@ -139,19 +168,15 @@ export default {
 
   data: ()=>({
     confirmDelete: false,
-    displayForm: 1
+    displayForm: 1,
   }),
-
-  computed:{
-
-  },
-
-  watch:{
-
-  },
-
   methods:{
-
-  }
+    mouseOver(index) {
+      this.plant.instance[index].showIcon = true
+      },
+    mouseOut(index) {
+      this.plant.instance[index].showIcon = false
+      }
+    }
 }
 </script>
