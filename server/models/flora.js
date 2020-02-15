@@ -19,16 +19,18 @@ const floraSchema = new mongoose.Schema({
   },
   instances: [
     {
+      title: {
+        type: String
+      },
+      description: {
+        type: String
+      },
       location: {
         type: {
           type: String,
           enum: ['Point'],
           required: true
         },
-        heading: {
-          type: String
-        },
-        description: {},
         coordinates: {
           type: [Number],
           required: true
