@@ -14,23 +14,25 @@
           </v-autocomplete>
         </v-flex>
         <v-flex name="card">
-          <plantlist :plants="plantData" />
+          <plant-list :plants="plantData" />
         </v-flex>
       </v-layout>
     </v-flex>
-    <v-flex name="map" style="border: 3px solid black; height:600px">
-      This is where the map should be
+    <v-flex height="100vh" tile>
+      <uwa-plant-map ref="plantMap" />
     </v-flex>
   </v-layout>
 </template>
 
 <script>
+import UWAPlantMap from '~/components/UWAPlantMap.vue'
 import PlantList from '~/components/other/PlantList.vue'
 import { plants } from '@/assets/plantdb.json'
 
 export default {
   components: {
-    plantlist: PlantList
+    'plant-list': PlantList,
+    'uwa-plant-map': UWAPlantMap
   },
   data() {
     return {
