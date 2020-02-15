@@ -13,6 +13,7 @@
           </v-autocomplete>
         </v-flex>     
         <v-flex name="card">
+          <!--
           <v-card class="mx-4">
             <v-window v-model="displayForm">
               <v-window-item :value="1">
@@ -27,18 +28,14 @@
                   <v-col>
                     <v-card-title class="pt-2 pl-6">
                       {{ samplePlant.name }}
-                      <!-- <span v-if="!editView"> Plant Name </span> -->
-                      <!-- <v-text-field v-else v-model="plant.name" dense label="Plant Name" outlined /> -->
                       <v-chip color="indigo darken-3" small outlined class="ml-4">
                         <i>{{ samplePlant.scientificName }}</i>
                       </v-chip>
-                      <!-- <v-text-field v-model="plant.sciname" dense label="Scientific Name" outlined /> -->
                     </v-card-title>
                     <v-card-subtitle class="pl-6">
                       Lat: {{ samplePlant.latitude }} &emsp; Lon:{{ samplePlant.longtitude }}
                     </v-card-subtitle>
                   </v-col>
-                  <!-- <v-spacer></v-spacer> -->
                   <v-card-actions class="mr-2">
                     <v-btn color="indigo" text dark @click="displayForm++">
                       EDIT
@@ -74,14 +71,6 @@
                 </v-row>
               </v-window-item>
               <v-window-item :value="2">
-                <!-- <v-row>
-                  <v-img
-                    src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-                    height="150px"
-                    width="600px"
-                    class="mx-6"
-                  ></v-img>
-                </v-row> -->
                 <v-row class="mx-2 mb-0">
                   <v-col class="pb-0">
                     <v-text-field
@@ -151,7 +140,9 @@
                 </v-card-actions>
               </v-window-item>
             </v-window>
-          </v-card>
+          </v-card> -->
+          <plant-card :plant="samplePlant">
+          </plant-card>
         </v-flex>
       </v-layout>
     </v-flex>
@@ -161,7 +152,13 @@
 </template>
 
 <script>
+import plantCard from '~/components/other/plantCard.vue'
+
 export default {
+  components:{
+    'plant-card': plantCard
+  },
+
   data() {
     return {
       loading: false,
@@ -171,44 +168,24 @@ export default {
       hover: false,
       editView: false,
       plant: {},
-      confirmDelete: false,
-      displayForm: 1,
+      // confirmDelete: false,
+      // displayForm: 1,
       samplePlant:{
         name:'Cactus',
         scientificName: 'Cactaceae',
-        latitude: 123.456789,
-        longtitude: 123.456789,
         description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
         icon: 'mdi-mushroom',
-      },
-      // selected: this.samplePlant.icon,
-      options:[
-        {
-          iconName: 'mdi-flower',
-          iconColour: 'pink',
-          isSelected: false
-        },
-        {
-          iconName: 'mdi-mushroom',
-          iconColour: 'pink lighten-3',
-          isSelected: false
-        },
-        {
-          iconName: 'mdi-carrot',
-          iconColour: 'orange',
-          isSelected: false
-        },
-        {
-          iconName: 'mdi-leaf',
-          iconColour: 'light-green',
-          isSelected: false
-        },
-        {
-          iconName: 'mdi-tree',
-          iconColour: 'green',
-          isSelected: false
-        }
-      ]
+        instance:[
+          {
+            location:{
+              type:'',
+              coordinates:[100,100]
+            },
+            heading: 'Little Magic Cactus',
+            description:'option description',
+          }
+        ],
+      }
 
     }
   },
