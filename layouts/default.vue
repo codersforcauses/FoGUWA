@@ -35,10 +35,10 @@
 </template>
 
 <script>
+import { loggingLevels } from '@/assets/js/logging.js'
 import Toolbar from '~/components/other/Toolbar.vue'
 import NavDrawer from '~/components/other/NavDrawer.vue'
 import Footer from '~/components/other/Footer.vue'
-import { loggingLevels } from '@/assets/js/logging.js'
 
 export default {
   components: {
@@ -69,15 +69,6 @@ export default {
       this.snackbarColour = event.type
       this.snackbarText = event.message
       this.snackbar = true
-
-      // Propagate the error
-      // if (errorEvent.type === 'info') {
-      //   console.log('INFO(' + error.code + '): ' + error.message) // eslint-disable-line no-console
-      // } else if (errorEvent.type === 'warn') {
-      //   console.warn('WARN(' + error.code + '): ' + error.message) // eslint-disable-line no-console
-      // } else {
-      //   console.error('ERROR(' + error.code + '):' + errorEvent.message) // eslint-disable-line no-console
-      // }
     }
   }
 }

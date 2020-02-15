@@ -9,7 +9,7 @@ const getToken = req => {
   return tokenMatcher.exec(tokenString)[0]
 }
 
-const setUser = expressjwt({
+const checkJwt = expressjwt({
   secret: jwksRsa.expressJwtSecret({
     cache: true,
     rateLimit: true,
@@ -23,4 +23,4 @@ const setUser = expressjwt({
   getToken
 })
 
-module.exports = { setUser }
+module.exports = { checkJwt }
