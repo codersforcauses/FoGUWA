@@ -13,6 +13,7 @@
       </v-toolbar>
       <v-sheet height="calc(100vh - 158px)" style="overflow-y: auto;">
         <plant-list :plants="plants" />
+        <plant-card :plant="plants[0]" />
       </v-sheet>
     </v-flex>
     <v-flex height="100vh" tile>
@@ -24,11 +25,13 @@
 <script>
 import UWAPlantMap from '~/components/UWAPlantMap.vue'
 import PlantList from '~/components/other/PlantList.vue'
+  import plantCard from '~/components/other/plantCard.vue'
 
 export default {
   components: {
     'plant-list': PlantList,
-    'uwa-plant-map': UWAPlantMap
+    'uwa-plant-map': UWAPlantMap,
+    'plant-card': plantCard
   },
   data() {
     return {
@@ -47,6 +50,12 @@ export default {
     editView(val) {
       // eslint-disable-next-line no-console
       console.log(val)
+    },
+    colourIcon(val){
+      // console.log(this.samplePlant.icon)
+      this.options.forEach(()=>{if(this.options.iconName===this.selected){
+        this.options.isSelected=true
+      }})
     }
   },
   async mounted() {
