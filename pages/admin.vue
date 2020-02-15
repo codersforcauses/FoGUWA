@@ -14,45 +14,7 @@
           </v-autocomplete>
         </v-flex>
         <v-flex name="card">
-          <v-card class="mx-4">
-            <v-img
-              src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-              height="150px"
-            ></v-img>
-            <v-row>
-              <v-icon large text icon color="pink lighten-3" class="ml-3 pl-6">
-                mdi-mushroom
-              </v-icon>
-              <v-col>
-                <v-card-title class="pt-2 pl-6">
-                  Plant Namae
-                  <!-- <span v-if="!editView"> Plant Name </span> -->
-                  <!-- <v-text-field v-else v-model="plant.name" dense label="Plant Name" outlined /> -->
-                  <v-chip color="indigo darken-3" small outlined class="ml-4">
-                    <i>Scientific Name</i>
-                  </v-chip>
-                  <!-- <v-text-field v-model="plant.sciname" dense label="Scientific Name" outlined /> -->
-                </v-card-title>
-                <v-card-subtitle class="pl-6">
-                  Lat: 123.456789 &emsp; Lon:123.456789
-                </v-card-subtitle>
-              </v-col>
-              <!-- <v-spacer></v-spacer> -->
-              <v-card-actions class="mr-2">
-                <v-btn color="indigo" text dark @click="editView = !editView">
-                  EDIT
-                </v-btn>
-                <v-btn color="indigo" text class="mr-3">
-                  DELETE
-                </v-btn>
-              </v-card-actions>
-            </v-row>
-            <v-row>
-              <v-card-text class="ml-3 pt-0 pb-6 px-6">
-                This is a very very very very very very very very very very very very very very very very very very long description
-              </v-card-text>
-            </v-row>
-          </v-card>
+          <plantlist :plants="plantData" />
         </v-flex>
       </v-layout>
     </v-flex>
@@ -63,7 +25,13 @@
 </template>
 
 <script>
+import PlantList from '~/components/other/PlantList.vue'
+import { plants } from '@/assets/plantdb.json'
+
 export default {
+  components: {
+    plantlist: PlantList
+  },
   data() {
     return {
       loading: false,
@@ -73,6 +41,11 @@ export default {
       hover: false,
       editView: false,
       plant: {},
+    }
+  },
+  computed: {
+    plantData() {
+      return plants
     }
   },
   watch: {
