@@ -58,31 +58,31 @@
           <v-divider class="mx-3"></v-divider>
         </v-row>
 
-        <v-card
-          v-for="(instance,i) in plant.instance" 
-          :key="i" 
-          tile
-          flat
-          class="px-3" 
-          @mouseover="mouseOver(i)"
-          @mouseout="mouseOut(i)"
-        >
-          <v-card-actions>
-            {{ instance.heading }}
-            <v-spacer></v-spacer>
-            <div v-show="instance.showIcon">
-              <v-btn text icon color="indigo">
+        <v-list>
+          <v-list-item
+            v-for="(instance,i) in plant.instance"
+            :key="i"
+            class="list-item"
+            @mouseover="showByIndex = i"
+            @mouseout="showByIndex = null"
+          >
+            <v-list-item-content>
+              <v-list-item-title>{{ instance.heading }}</v-list-item-title>
+            </v-list-item-content>
+
+            <v-list-item-action v-show="showByIndex === i" class="action">
+              <v-btn icon color="indigo">
                 <v-icon>mdi-pencil</v-icon>
               </v-btn>
-              <v-btn text icon color="indigo">
+              <v-btn icon color="indigo">
                 <v-icon>mdi-delete</v-icon>
               </v-btn>
-              <v-btn text icon color="indigo">
+              <v-btn icon color="indigo">
                 <v-icon>my_location</v-icon>
               </v-btn>
-            </div>
-          </v-card-actions>
-        </v-card>
+            </v-list-item-action>
+          </v-list-item>
+        </v-list>
       </v-window-item>
       <v-window-item :value="2">
         <v-row class="mx-2 mb-0">
@@ -165,18 +165,21 @@ export default {
       required:true
     }
   },
-
-  data: ()=>({
+  data: () => ({
     confirmDelete: false,
     displayForm: 1,
-  }),
-  methods:{
-    mouseOver(index) {
-      this.plant.instance[index].showIcon = true
-      },
-    mouseOut(index) {
-      this.plant.instance[index].showIcon = false
-      }
-    }
+    showByIndex: null,
+  })
 }
 </script>
+
+<style>
+.list-item {
+  min-height: 60px;
+}
+.action {
+  width: 100px;
+  display: flex;
+  flex-direction: row;
+}
+</style>

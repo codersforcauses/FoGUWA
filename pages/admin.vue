@@ -11,9 +11,9 @@
             class="mt-4 mx-4"
           >
           </v-autocomplete>
-        </v-flex>     
+        </v-flex>
         <v-flex name="card">
-          <plant-card :plant="showPlant">
+          <plant-card :plant="samplePlant">
           </plant-card>
         </v-flex>
       </v-layout>
@@ -30,7 +30,6 @@ export default {
   components:{
     'plant-card': plantCard
   },
-
   data() {
     return {
       loading: false,
@@ -67,12 +66,6 @@ export default {
         ],
       }
 
-    }
-  },
-  computed: {
-    showPlant() {
-      const instance = this.samplePlant.instance.map(inst => ({...inst, showIcon: false}))
-      return {...this.samplePlant, instance}
     }
   },
   watch: {
