@@ -7,7 +7,7 @@
       <slot :google="google" :map="map" />
     </template>
     <!-- Loading icon/message as JS API is fetched. -->
-    <v-layout
+    <v-row
       v-show="!google || !map"
       align-center
       justify-center
@@ -23,7 +23,7 @@
         class="mb-4"
       />
       <span>Loading map...</span>
-    </v-layout>
+    </v-row>
   </div>
 </template>
 
