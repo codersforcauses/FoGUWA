@@ -4,9 +4,12 @@
       <v-toolbar fixed color="transparent">
         <v-autocomplete
           :items="plants"
+          item-text="name"
+          item-value="id"
           label="Search for plants..."
-          class="mt-4 mx-4"
+          hide-details
         />
+        {{ plantNames }}
       </v-toolbar>
       <v-sheet height="calc(100vh - 158px)" style="overflow-y: auto;">
         <plant-list :plants="plants" />
