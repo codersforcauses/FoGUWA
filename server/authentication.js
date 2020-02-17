@@ -50,6 +50,7 @@ const findUser = async req => {
   const adminObject = await findUserByEmail(email)
   return adminObject
 }
+
 const userAuthorised = async req => {
   try {
     const adminObject = await findUser(req)

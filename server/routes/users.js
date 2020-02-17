@@ -1,6 +1,5 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const consola = require('consola')
 const { checkJwt, restrictAccess } = require('../authentication')
 const { findUser } = require('../authentication')
 const { addUser } = require('../seeder/index')
@@ -14,50 +13,68 @@ const sanitiseUser = ({ name, email, _id }) => ({
   _id
 })
 
-router.get('/users', checkJwt, restrictAccess, async (req, res, next) => {
-  const users = await Users.find()
-  res.json(
-    // Remove password from returned json
-    users.map(user => sanitiseUser(user))
-  )
-})
-
-router.get('/users/:id', checkJwt, async (req, res, next) => {
-  if (mongoose.Types.ObjectId.isValid(req.params.id)) {
-    const user = await Users.findById(req.params.id)
-    if (user) return res.json(sanitiseUser(user))
+router.get('/users', checkJwt, restrictAccess, async (req, res) => {
+  try {
+    const users = await Users.find()
+    res.json(
+      // Remove password from returned json
+      users.map(user => sanitiseUser(user)))
+  } catch (error) {
+    res.status(500).json(error)
   }
-  res.status(400).send('User not found')
 })
 
-router.get('/userinfo', async (req, res, next) => {
+router.get('/users/:id', checkJwt, restrictAccess, async (req, res) => {
+  if (mongoose.Types.ObjectId.isValid(req.params.id)) {
+    try {
+      const user = await Users.findById(req.params.id)
+      return user ? res.json(sanitiseUser(user)) : res.status(404).json('User not found')
+    } catch (error) {
+      return res.status(500).json(error)
+    }
+  }
+  return res.status(400).json('Invalid objectId')
+})
+
+router.get('/userinfo', checkJwt, async (req, res) => {
   const user = await findUser(req)
-  consola.log(user)
   res.send(user)
 })
 
-router.post('/users', async (req, res, next) => {
-  const user = await addUser(req.body)
-  res.json(sanitiseUser(user))
+router.post('/users', checkJwt, restrictAccess, async (req, res) => {
+  try { 
+    const user = await addUser(req.body)
+    res.json(sanitiseUser(user))
+  } catch (error) {
+    res.status(500).json(error)
+  }
 })
 
-router.patch('/users/:id', checkJwt, async (req, res, next) => {
+router.patch('/users/:id', checkJwt, restrictAccess, async (req, res) => {
   const update = { ...req.body }
   delete update._id
   delete update.email
-  const user = await updateModel(Users, req.params.id, update)
-  if (user) return res.json(user)
-  else {
-    res.status(400).send('User not updated/found')
+  if (mongoose.Types.ObjectId.isValid(req.params.id)) {
+    try {
+      const user = await updateModel(Users, req.params.id, update)
+      return user ? res.json(sanitiseUser(user)) : res.status(404).json('User not found')
+    } catch (error) {
+      return res.status(500).json(error)
+    }
   }
+  return res.status(400).json('Invalid objectId')
 })
 
-router.delete('/users/:id', checkJwt, async (req, res, next) => {
-  const user = await Users.findByIdAndDelete(req.params.id)
-  if (user) res.json(sanitiseUser(user))
-  else {
-    res.status(400).send('User not found')
+router.delete('/users/:id', checkJwt, restrictAccess, async (req, res) => {
+  if (mongoose.Types.ObjectId.isValid(req.params.id)) {
+    try {
+      const user = await Users.findByIdAndDelete(req.params.id)
+      return user ? res.json(sanitiseUser(user)) : res.status(404).json('User not found')
+    } catch (error) {
+      return res.status(500).json(error)
+    }
   }
+  return res.status(400).json('Invalid objectId')
 })
 
 module.exports = router
