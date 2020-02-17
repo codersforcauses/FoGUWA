@@ -23,9 +23,8 @@
     <template v-slot:append>
       <v-divider />
       <v-list-item v-if="$store.state.auth.loggedIn" two-line>
-        <v-list-item-avatar color="red" class="mr-4">
-          <v-img :src="user.picture">
-          </v-img>
+        <v-list-item-avatar color="light-blue" class="mr-4">
+          <v-img :src="user.picture" />
         </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title>
@@ -33,7 +32,6 @@
           </v-list-item-title>
           <v-list-item-subtitle>User</v-list-item-subtitle>
         </v-list-item-content>
-
         <v-list-item-action>
           <v-btn icon @click="logout">
             <v-icon color="grey lighten-1">
@@ -42,6 +40,7 @@
           </v-btn>
         </v-list-item-action>
       </v-list-item>
+      </v-list>
       <v-btn
         v-else
         block
@@ -115,6 +114,20 @@ export default {
       } catch (e) {
         this.error = e.response.data.message
       }
+    },
+    async getUserInfo() {
+      try {
+        const userInfo = await this.$axios.$get('/api/userinfo')
+        return {
+          ...this.user,
+          ...userInfo
+        }
+      } catch (error) {
+        return {}
+      }
+    },
+    getUser() {
+      return this.getUserInfo
     }
   }
 }
