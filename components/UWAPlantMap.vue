@@ -1,6 +1,7 @@
 <template>
   <v-card height="100%">
     <plant-info
+      v-if="this.$route.name==='index'"
       v-model="infoDrawer"
       :plant-info="plantInfo"
     />
