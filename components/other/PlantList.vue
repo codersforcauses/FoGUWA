@@ -1,6 +1,6 @@
 <template>
   <v-list two-line>
-    <v-list-item v-for="(plant, i) in plants" :key="i" class="d-flex" to="/about" nuxt>
+    <v-list-item v-for="(plant, i) in plants" :key="i" class="d-flex" :to="'/admin/plants/'+plant._id" nuxt>
       <v-list-item-avatar>
         <v-icon large text icon :color="getPlantIcon(plant.icon).fillColor">
           {{ getPlantIcon(plant.icon).mdiName }}
