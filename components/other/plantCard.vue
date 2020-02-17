@@ -112,8 +112,8 @@
         </v-row>
         <v-row>
           <v-card-actions class="mx-7 mb-6">
-            <p class="font-weight-light">
-              Choose icon &emsp;
+            <p class="font-weight-light mr-5">
+              Choose icon
             </p>
             <v-btn
               v-for="(icon, i) in icons"
