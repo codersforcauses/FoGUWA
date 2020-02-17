@@ -115,20 +115,8 @@
             <p class="font-weight-light">
               Choose icon &emsp;
             </p>
-            <v-btn color="pink" fab small outlined>
-              <v-icon>mdi-flower</v-icon>
-            </v-btn>
-            <v-btn color="pink lighten-3" fab small outlined>
-              <v-icon>mdi-mushroom</v-icon>
-            </v-btn>
-            <v-btn color="orange" fab outlined small>
-              <v-icon>mdi-carrot</v-icon>
-            </v-btn>
-            <v-btn color="light-green" fab small outlined>
-              <v-icon>mdi-leaf</v-icon>
-            </v-btn>
-            <v-btn color="green" fab small outlined>
-              <v-icon>mdi-tree</v-icon>
+            <v-btn v-for="(icon, i) in icons" :key="i" :color="icon.fillColor" fab small outlined>
+              <v-icon>{{ icon.mdiName }}</v-icon>
             </v-btn>
           </v-card-actions>
         </v-row>
@@ -158,6 +146,8 @@
 </template>
 
 <script>
+  import iconData from '@/assets/js/plantIcons'
+  const { iconStyle, ...icons } = iconData
 export default {
   props:{
     plant:{
@@ -192,7 +182,14 @@ export default {
     confirmDelete: false,
     displayForm: 1,
     showByIndex: null,
-  })
+  }),
+
+  computed: {
+    icons() {
+      console.log(icons)
+      return icons
+    }
+  }
 }
 </script>
 
