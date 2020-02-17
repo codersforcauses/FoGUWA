@@ -115,7 +115,14 @@
             <p class="font-weight-light">
               Choose icon &emsp;
             </p>
-            <v-btn v-for="(icon, i) in icons" :key="i" :color="icon.fillColor" fab small outlined>
+            <v-btn
+              v-for="(icon, i) in icons"
+              :key="i"
+              :color="icon.fillColor"
+              fab
+              small
+              outlined
+            >
               <v-icon>{{ icon.mdiName }}</v-icon>
             </v-btn>
           </v-card-actions>
@@ -186,7 +193,6 @@ export default {
 
   computed: {
     icons() {
-      console.log(icons)
       return icons
     }
   }
