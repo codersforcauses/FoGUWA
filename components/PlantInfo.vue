@@ -28,7 +28,7 @@
         interval="3500"
         show-arrows-on-hover
         :show-arrows="plantInfo.images.length > 1"
-        height="40vh"
+        height="30vh"
       >
         <v-carousel-item v-for="(image, i) in plantInfo.images" :key="i">
           <v-img :src="image"></v-img>
