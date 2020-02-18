@@ -16,7 +16,7 @@
 import { mapState } from 'vuex'
 // eslint-disable-next-line import/order
 import PlantInfo from './PlantInfo.vue'
-import { plants } from '@/assets/plantdb.json'
+import plants from '@/assets/plantdb.json'
 import iconData from '@/assets/js/plantIcons.js'
 import { uwaMapSettings } from '@/assets/js/mapSettings'
 // eslint-disable-next-line import/order
@@ -73,17 +73,7 @@ export default {
       }
     },
     defaultInfo() {
-      return {
-        plantName: 'Plant Name',
-        sciName: 'Scientific Plant Name',
-        images: [
-          'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/dsc-5454_orig.jpg',
-          'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/dsc-7528_orig.jpg',
-          'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/20090626-uwa-grounds2-007_orig.jpg'
-        ],
-        description:
-          'Plants are mainly multicellular, predominantly photosynthetic eukaryotes of the kingdom Plantae. Historically, plants were treated as one of two kingdoms including all living things that were not animals, and all algae and fungi were treated as plants.'
-      }
+      return defaultInfo
     }
   },
   watch: {
@@ -126,7 +116,7 @@ export default {
           // Plot all instances
           plant.instances.forEach(instance => {
             const markerInst = this.createMarkerInstance(plant, instance)
-            this.addListenerToMarker(markerInst, plant)
+            this.addListenerToMarker(markerInst, plant, instance)
             this.markerInstances.push(markerInst)
           })
         })
@@ -139,8 +129,8 @@ export default {
       this.markerInstances = []
     },
     createMarkerInstance(plant, instance) {
-      const icon = iconPaths.hasOwnProperty(plant.type)
-                  ? iconPaths[plant.type]
+      const icon = iconPaths.hasOwnProperty(plant.icon)
+                  ? iconPaths[plant.icon]
                   : iconPaths.info
       Object.keys(iconStyle).forEach(style => {
         icon[style] = iconStyle[style]
@@ -152,7 +142,10 @@ export default {
             fontWeight: 'Bold',
             color: '#444444'
           },
-        position: instance.location,
+        position: {
+          lat: instance.location.coordinates[0],
+          lng: instance.location.coordinates[1]
+        },
         icon: {
           labelOrigin: new this.google.maps.Point(12, -5),
           ...icon
@@ -160,9 +153,10 @@ export default {
         map: this.map
       })
     },
-    addListenerToMarker(markerInstance, plant) {
+    addListenerToMarker(markerInstance, plant, instance) {
       markerInstance.addListener('click', () => {
         this.plantInfo = plant
+        this.plantInfo.instances = instance
         this.plantInfo.images = plant.images || defaultInfo.images
         this.infoDrawer = true
       })
