@@ -8,9 +8,8 @@ const getToken = req => {
   const tokenString = req.cookies['auth._token.auth0']
     ? req.cookies['auth._token.auth0']
     : req.headers.authorization
-  const tokenMatcher = /(?<=Bearer ).+/
-  const match = tokenMatcher.exec(tokenString)
-  return match ? match[0] : null
+  const tokenMatch = /(?<=Bearer ).+/.exec(tokenString)
+  return tokenMatch.length > 0 ? tokenMatch[0] : null
 }
 
 const checkJwt = expressjwt({

@@ -16,7 +16,6 @@
 import { mapState } from 'vuex'
 // eslint-disable-next-line import/order
 import PlantInfo from './PlantInfo.vue'
-import { plants } from '@/assets/plantdb.json'
 import iconData from '@/assets/js/plantIcons.js'
 import { uwaMapSettings } from '@/assets/js/mapSettings'
 // eslint-disable-next-line import/order
@@ -54,6 +53,7 @@ export default {
     google: null,
     markerInstances: [],
     userMarker: null,
+    plants: null,
     infoDrawer: false,
     plantInfo: defaultInfo
   }),
@@ -119,11 +119,12 @@ export default {
     }
   },
   methods: {
-    loadMarkers() {
+    async loadMarkers() {
       if (this.map && this.google) {
         this.clearMarkers()        
+        await this.loadPlants()
         // Create new markers and store them
-        plants.forEach((plant, index) => {
+        this.plants.forEach((plant, index) => {
           // Plot all instances
           plant.instances.forEach(instance => {
             const markerInst = this.createMarkerInstance(plant, instance)
@@ -133,6 +134,10 @@ export default {
         })
       }
     },
+    async loadPlants() {
+      const data = await this.$axios.$get('/api/flora')
+      this.plants = data
+    },
     clearMarkers() {
       this.markerInstances.forEach(marker => {
         marker.setMap(null)
@@ -140,8 +145,8 @@ export default {
       this.markerInstances = []
     },
     createMarkerInstance(plant, instance) {
-      const icon = iconPaths.hasOwnProperty(plant.type)
-                  ? iconPaths[plant.type]
+      const icon = iconPaths.hasOwnProperty(plant.icon)
+                  ? iconPaths[plant.icon]
                   : iconPaths.info
       Object.keys(iconStyle).forEach(style => {
         icon[style] = iconStyle[style]
@@ -153,7 +158,10 @@ export default {
             fontWeight: 'Bold',
             color: '#444444'
           },
-        position: instance.location,
+        position: {
+          lat: instance.location.coordinates[0],
+          lng: instance.location.coordinates[1]
+        },
         icon: {
           labelOrigin: new this.google.maps.Point(12, -5),
           ...icon
@@ -164,7 +172,7 @@ export default {
     addListenerToMarker(markerInstance, plant) {
       markerInstance.addListener('click', () => {
         this.plantInfo = plant
-        this.plantInfo.images = plant.images || defaultInfo.images
+        this.plantInfo.images = plant.images.length > 0 ? plant.images : defaultInfo.images
         this.infoDrawer = true
       })
     }
