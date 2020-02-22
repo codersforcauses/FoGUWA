@@ -1,71 +1,40 @@
 <template>
   <v-layout name="panel-and-map">
     <v-flex xs12 md6 lg5 name="panel">
-      <v-layout wrap name="searchbar-card">
-        <v-flex name="searchbar">
-          <v-autocomplete
-            :items="plants"
-            dense
-            filled
-            label="Search for plant..."
-            class="mt-4 mx-4"
-          >
-          </v-autocomplete>
-        </v-flex>
-        <v-flex name="card">
-          <plant-card :plant="samplePlant">
-          </plant-card>
-        </v-flex>
-      </v-layout>
+      <v-toolbar fixed color="transparent">
+        <v-autocomplete
+          :items="plants"
+          item-text="name"
+          item-value="id"
+          label="Search for plants..."
+          hide-details
+        />
+      </v-toolbar>
+      <v-sheet height="calc(100vh - 158px)" style="overflow-y: auto;">
+        <NuxtChild :plants="plants" />
+      </v-sheet>
     </v-flex>
-    <v-flex name="map" style="border: 3px solid black; height:600px">
+    <v-flex height="100vh" tile>
+      <uwa-plant-map ref="plantMap" />
     </v-flex>
   </v-layout>
 </template>
 
 <script>
-import plantCard from '~/components/other/plantCard.vue'
+import UWAPlantMap from '~/components/UWAPlantMap.vue'
 
 export default {
-  components:{
-    'plant-card': plantCard
+  components: {
+    'uwa-plant-map': UWAPlantMap
   },
   data() {
     return {
       loading: false,
       search: null,
       select: null,
-      plants: ['plant1', 'plant2', 'plant3'], // need DB
       hover: false,
       editView: false,
-      plant: {},
-      // confirmDelete: false,
-      // displayForm: 1,
-      samplePlant:{
-        name:'Cactus',
-        scientificName: 'Cactaceae',
-        description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        icon: 'mdi-mushroom',
-        instance:[
-          {
-            location:{
-              type:'',
-              coordinates:[100,100]
-            },
-            heading: 'The cactus near the pond',
-            description:'it is right next to the pond',
-          },
-          {
-            location:{
-              type:'',
-              coordinates:[100,100]
-            },
-            heading: 'The very old cactus',
-            description:'he was born in 1950s',
-          }
-        ],
-      }
-
+      plants: [],
     }
   },
   watch: {
@@ -83,6 +52,9 @@ export default {
       }})
     }
   },
+  async mounted() {
+    await this.loadPlants()
+  },
   methods: {
     querySelections(v) {
       this.loading = true
@@ -93,6 +65,10 @@ export default {
         })
         this.loading = false
       }, 500)
+    },
+    async loadPlants() {
+      const data = await this.$axios.$get('/api/flora')
+      this.plants = data
     }
   }
 }
