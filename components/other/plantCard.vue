@@ -112,24 +112,36 @@
         </v-row>
         <v-row>
           <v-card-actions class="mx-7 mb-6">
-            <p class="font-weight-light">
+            <p class="font-weight-light ma-0">
               Choose icon &emsp;
             </p>
-            <v-btn color="pink" fab small outlined>
-              <v-icon>mdi-flower</v-icon>
-            </v-btn>
-            <v-btn color="pink lighten-3" fab small outlined>
-              <v-icon>mdi-mushroom</v-icon>
-            </v-btn>
-            <v-btn color="orange" fab outlined small>
-              <v-icon>mdi-carrot</v-icon>
-            </v-btn>
-            <v-btn color="light-green" fab small outlined>
-              <v-icon>mdi-leaf</v-icon>
-            </v-btn>
-            <v-btn color="green" fab small outlined>
-              <v-icon>mdi-tree</v-icon>
-            </v-btn>
+            <v-btn-toggle v-model="icon">
+              <v-btn color="pink" icon outlined class="round mx-1">
+                <v-icon :color="icon === 0 ? 'pink' : 'gray'">
+                  mdi-flower
+                </v-icon>
+              </v-btn>
+              <v-btn color="pink lighten-3" icon outlined class="round mx-1">
+                <v-icon :color="icon === 1 ? 'pink lighten-3' : 'gray'">
+                  mdi-mushroom
+                </v-icon>
+              </v-btn>
+              <v-btn color="orange" icon outlined class="round mx-1">
+                <v-icon :color="icon === 2 ? 'orange' : 'gray'">
+                  mdi-carrot
+                </v-icon>
+              </v-btn>
+              <v-btn color="light-green" icon outlined class="round mx-1">
+                <v-icon :color="icon === 3 ? 'light-green' : 'gray'">
+                  mdi-leaf
+                </v-icon>
+              </v-btn>
+              <v-btn color="green" icon outlined class="round mx-1">
+                <v-icon :color="icon === 4 ? 'green' : 'gray'">
+                  mdi-tree
+                </v-icon>
+              </v-btn>
+            </v-btn-toggle>
           </v-card-actions>
         </v-row>
         <v-row>
@@ -169,6 +181,7 @@ export default {
     confirmDelete: false,
     displayForm: 1,
     showByIndex: null,
+    icon: 1,
   })
 }
 </script>
@@ -181,5 +194,9 @@ export default {
   width: 100px;
   display: flex;
   flex-direction: row;
+}
+.round {
+  border-radius: 50% !important;
+  border-width: 3px !important;
 }
 </style>
