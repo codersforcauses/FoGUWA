@@ -15,7 +15,7 @@ const floraSchema = new mongoose.Schema({
   icon: {
     type: String,
     required: true,
-    enum: ['leaf', 'flower_1', 'flower_2', 'tree']
+    enum: ['leaf', 'tulip', 'lotus', 'tree', 'other']
   },
   instances: [
     {
@@ -24,6 +24,12 @@ const floraSchema = new mongoose.Schema({
           type: String,
           enum: ['Point'],
           required: true
+        },
+        heading: {
+          type: String
+        },
+        description: {
+          type: String
         },
         coordinates: {
           type: [Number],

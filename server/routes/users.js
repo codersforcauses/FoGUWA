@@ -7,6 +7,7 @@ const { updateModel } = require('./routeUtilities')
 const Users = mongoose.model('User')
 const router = express.Router()
 
+// Remove password from returned json
 const sanitiseUser = ({ name, email, _id }) => ({
   name,
   email,
