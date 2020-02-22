@@ -72,12 +72,12 @@ module.exports = {
     theme: {
       themes: {
         light: {
-          primary: '#639700',
-          secondary: '#FF8F00',
-          info: '#26A69A',
-          warning: '#FFC107',
-          error: '#DD2C00',
-          success: '#00E676'
+          primary: '#3F51B5',
+          secondary: '#F7AEF8',
+          info: '#907AD6',
+          warning: '#D3BE70',
+          error: '#EF7674',
+          success: '#8BE8CB'
         }
       },
       options: {

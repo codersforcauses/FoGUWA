@@ -50,6 +50,6 @@ const info = {
   path:
   "M11.93,2a10,10,0,1,0,10,10A10,10,0,0,0,11.93,2ZM13,17H11V11h2Zm0-8H11V7h2Z",
   fillColor: '#88BBEE',
-  mdiName: 'mdi-information'
+  mdiName: 'mdi-information',
 }
-export default { info, leaf, tree, tulip, lotus, iconStyle }
+export default {info, leaf, tree, tulip, lotus, iconStyle}

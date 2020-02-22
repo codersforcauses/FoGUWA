@@ -13,13 +13,10 @@
           <v-col>
             <v-card-title class="pt-2 pl-6">
               {{ plant.name }}
-              <v-chip color="indigo darken-3" small outlined class="ml-4">
+              <v-chip v-show="!!plant.scientificName" color="indigo darken-3" small outlined class="ml-4">
                 <i>{{ plant.scientificName }}</i>
               </v-chip>
             </v-card-title>
-            <!-- <v-card-subtitle class="pl-6">
-              {{ plant.instance[0].heading }}
-            </v-card-subtitle> -->
           </v-col>
           <v-card-actions class="mr-2">
             <v-btn color="indigo" text dark @click="displayForm++">
@@ -115,30 +112,18 @@
             <p class="font-weight-light ma-0">
               Choose icon &emsp;
             </p>
-            <v-btn-toggle v-model="icon">
-              <v-btn color="pink" icon outlined class="round mx-1">
-                <v-icon :color="icon === 0 ? 'pink' : 'gray'">
-                  mdi-flower
-                </v-icon>
-              </v-btn>
-              <v-btn color="pink lighten-3" icon outlined class="round mx-1">
-                <v-icon :color="icon === 1 ? 'pink lighten-3' : 'gray'">
-                  mdi-mushroom
-                </v-icon>
-              </v-btn>
-              <v-btn color="orange" icon outlined class="round mx-1">
-                <v-icon :color="icon === 2 ? 'orange' : 'gray'">
-                  mdi-carrot
-                </v-icon>
-              </v-btn>
-              <v-btn color="light-green" icon outlined class="round mx-1">
-                <v-icon :color="icon === 3 ? 'light-green' : 'gray'">
-                  mdi-leaf
-                </v-icon>
-              </v-btn>
-              <v-btn color="green" icon outlined class="round mx-1">
-                <v-icon :color="icon === 4 ? 'green' : 'gray'">
-                  mdi-tree
+            <v-btn-toggle v-model="selectedBtn">
+              <v-btn
+                v-for="(icon, i) in icons"
+                :key="i"
+                :color="icon.fillColor"
+                icon
+                outlined
+                class="round mx-1"
+                :style="{ borderColor: `${selectedBtn === getIconIndex(i) ? icon.fillColor: 'grey'} !important` }"
+              >
+                <v-icon :color="selectedBtn === getIconIndex(i) ? icon.fillColor: 'grey'">
+                  {{ icon.mdiName }}
                 </v-icon>
               </v-btn>
             </v-btn-toggle>
@@ -170,6 +155,8 @@
 </template>
 
 <script>
+import iconData from '@/assets/js/plantIcons'
+const { iconStyle, ...icons } = iconData
 export default {
   props:{
     plant:{
@@ -179,7 +166,7 @@ export default {
         name: 'Cactus',
         scientificName: 'Cactaceae',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        icon: 'mdi-mushroom',
+        icon: 'leaf',
         instance: [
           {
             location: {
@@ -198,16 +185,42 @@ export default {
             description: 'he was born in 1950s',
           }
         ],
-      })
+      } )
     }
-    
   },
   data: () => ({
     confirmDelete: false,
     displayForm: 1,
     showByIndex: null,
-    icon: 1,
-  })
+    selectedBtn: 0,
+  }),
+  computed: {
+    icons() {
+      return icons
+    },
+    // iconSelected() {
+    //   return this.getIconIndex(this.plant.icon)
+    // },
+  },
+  mounted() {
+    this.selectedBtn = this.getIconIndex(this.plant.icon)
+  },
+  updated() {
+    this.selectedBtn = this.getIconIndex(this.plant.icon)
+  },
+  methods: {
+    getIconIndex(iconName){// this requires for the button group to work
+      const iconIndexList = [
+        "info",
+        "leaf",
+        "tree",
+        "tulip",
+        "lotus"
+      ]
+      return iconIndexList.indexOf(iconName);
+    }
+  }
+  
 }
 </script>
 
@@ -222,6 +235,6 @@ export default {
 }
 .round {
   border-radius: 50% !important;
-  border-width: 3px !important;
+  border-width: 2px !important;
 }
 </style>
