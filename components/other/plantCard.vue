@@ -7,8 +7,8 @@
           height="150px"
         ></v-img>
         <v-row>
-          <v-icon large text icon color="pink lighten-3" class="ml-3 pl-6">
-            mdi-mushroom
+          <v-icon large text icon color="icons[plant.icon].fillColor" class="ml-3 pl-6">
+            {{ icons[plant.icon].mdiName }}
           </v-icon>
           <v-col>
             <v-card-title class="pt-2 pl-6">
