@@ -7,24 +7,24 @@
           height="150px"
         ></v-img>
         <v-row>
-          <v-icon large text icon color="icons[plant.icon].fillColor" class="ml-3 pl-6">
+          <v-icon large text icon :color="icons[plant.icon].fillColor " class="ml-3 pl-6">
             {{ icons[plant.icon].mdiName }}
           </v-icon>
           <v-col>
             <v-card-title class="pt-2 pl-6">
               {{ plant.name }}
-              <v-chip v-show="!!plant.scientificName" color="indigo darken-3" small outlined class="ml-4">
+              <v-chip v-show="!!plant.scientificName" color="primary" small outlined class="ml-4">
                 <i>{{ plant.scientificName }}</i>
               </v-chip>
             </v-card-title>
           </v-col>
           <v-card-actions class="mr-2">
-            <v-btn color="indigo" text dark @click="displayForm++">
+            <v-btn color="primary" text dark @click="displayForm++">
               EDIT
             </v-btn>
             <v-dialog v-model="confirmDelete" persistent max-width="290">
               <template v-slot:activator="{ on }">
-                <v-btn color="indigo" text class="mr-3" v-on="on">
+                <v-btn color="primary" text class="mr-3" v-on="on">
                   DELETE
                 </v-btn>
               </template>
@@ -35,10 +35,10 @@
                 <v-card-text>probably display the name of the plant they are about to delete here</v-card-text>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="indigo" text @click="confirmDelete = false">
+                  <v-btn color="primary" text @click="confirmDelete = false">
                     NO
                   </v-btn>
-                  <v-btn color="indigo" dark @click="confirmDelete = true">
+                  <v-btn color="primary" dark @click="confirmDelete = true">
                     YES
                   </v-btn>
                 </v-card-actions>
@@ -68,13 +68,13 @@
             </v-list-item-content>
 
             <v-list-item-action v-show="showByIndex === i" class="action">
-              <v-btn icon color="indigo">
+              <v-btn icon color="primary">
                 <v-icon>mdi-pencil</v-icon>
               </v-btn>
-              <v-btn icon color="indigo">
+              <v-btn icon color="primary">
                 <v-icon>mdi-delete</v-icon>
               </v-btn>
-              <v-btn icon color="indigo">
+              <v-btn icon color="primary">
                 <v-icon>my_location</v-icon>
               </v-btn>
             </v-list-item-action>
@@ -112,7 +112,8 @@
             <p class="font-weight-light ma-0">
               Choose icon &emsp;
             </p>
-            <v-btn-toggle v-model="selectedBtn">
+            <v-btn-toggle :v-model="selectedBtn">
+              {{ selectedBtn }}
               <v-btn
                 v-for="(icon, i) in icons"
                 :key="i"
@@ -141,11 +142,11 @@
           ></v-textarea>
         </v-row>
         <v-card-actions class="px-4 pb-4">
-          <v-btn color="indigo" text @click="displayForm--">
+          <v-btn color="primary" text @click="displayForm--">
             BACK
           </v-btn>
           <v-spacer></v-spacer>
-          <v-btn color="indigo" dark>
+          <v-btn color="primary" dark>
             SAVE
           </v-btn>
         </v-card-actions>
@@ -211,7 +212,7 @@ export default {
   methods: {
     getIconIndex(iconName){// this requires for the button group to work
       const iconIndexList = [
-        "info",
+        "other",
         "leaf",
         "tree",
         "tulip",
