@@ -1,7 +1,7 @@
 <template>
   <v-card class="mx-4">
     <v-window v-model="displayForm">
-      <v-window-item :value="1">
+      <v-window-item :value="2">
         <v-img
           src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
           height="150px"
@@ -68,7 +68,7 @@
             </v-list-item-content>
 
             <v-list-item-action v-show="showByIndex === i" class="action">
-              <v-btn icon color="primary">
+              <v-btn icon color="primary" @click="displayForm--;selectThisInst=i">
                 <v-icon>mdi-pencil</v-icon>
               </v-btn>
               <v-btn icon color="primary">
@@ -81,7 +81,7 @@
           </v-list-item>
         </v-list>
       </v-window-item>
-      <v-window-item :value="2">
+      <v-window-item :value="3">
         <v-row class="mx-2 mb-0">
           <v-col class="pb-0">
             <v-text-field
@@ -139,10 +139,49 @@
             :value="plant.description"
             class="mx-8"
             rows="10"
+            no-resize
           ></v-textarea>
         </v-row>
         <v-card-actions class="px-4 pb-4">
           <v-btn color="primary" text @click="displayForm--">
+            BACK
+          </v-btn>
+          <v-spacer></v-spacer>
+          <v-btn color="primary" dark>
+            SAVE
+          </v-btn>
+        </v-card-actions>
+      </v-window-item>
+      <v-window-item :value="1">
+        <v-row class="mx-5 mt-5 mb-0 pb-0">
+          <v-text-field
+            clearable
+            clear-icon="cancel"
+            label="Optional heading"
+            outlined
+            dense
+            rows="1"
+            :v-model="selectThisInst"
+            :value="plant.instance[selectThisInst].heading"
+          ></v-text-field>
+          <v-btn outlined color="secondary darken-2" class="ml-3">
+            <v-icon>my_location</v-icon>&nbsp;move on map
+          </v-btn>
+        </v-row>
+        <v-row>
+          <v-textarea
+            clearable
+            clear-icon="cancel"
+            label="Description"
+            outlined
+            :value="plant.instance[selectThisInst].description"
+            class="mx-8"
+            rows="10"
+            no-resize
+          ></v-textarea>
+        </v-row>
+        <v-card-actions class="px-4 pb-4 pt-0">
+          <v-btn color="primary" text @click="displayForm++">
             BACK
           </v-btn>
           <v-spacer></v-spacer>
@@ -191,9 +230,10 @@ export default {
   },
   data: () => ({
     confirmDelete: false,
-    displayForm: 1,
+    displayForm: 2,
     showByIndex: null,
     selectedBtn: 0,
+    selectThisInst:0
   }),
   computed: {
     icons() {
