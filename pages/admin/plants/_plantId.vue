@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <plant-card :plant="selectedPlant($route.params.plantId)[0]" />
+    <plant-card :plant="selectedPlant($route.params.plantId)" />
   </v-card>
 </template>
 
@@ -19,7 +19,7 @@ export default {
   },
   methods: {
     selectedPlant(id) {
-      return this.plants.filter(plant => plant._id === id)
+      return this.plants.find(({ _id }) => _id === id)
     }
   }
 }
