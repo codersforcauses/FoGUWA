@@ -1,8 +1,8 @@
 <template>
-  <v-card>
-    <NuxtChild :plants="plants" />
-    <plant-list :plants="plants" />
-  </v-card>
+  <div style="height: 100%">
+    <NuxtChild v-if="$route.params.plantId" :plants="plants" />
+    <plant-list v-else :plants="plants" />
+  </div>
 </template>
 
 <script>

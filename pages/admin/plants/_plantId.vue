@@ -1,7 +1,5 @@
 <template>
-  <v-card>
-    <plant-card :plant="selectedPlant($route.params.plantId)[0]" />
-  </v-card>
+  <plant-card :plant="selectedPlant($route.params.plantId)" />
 </template>
 
 <script>
@@ -19,7 +17,7 @@ export default {
   },
   methods: {
     selectedPlant(id) {
-      return this.plants.filter(plant => plant._id === id)
+      return this.plants.find(plant => plant._id === id)
     }
   }
 }
