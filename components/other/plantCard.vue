@@ -154,7 +154,8 @@
       </v-window-item>
       <v-window-item :value="1">
         <v-row class="mx-5 mt-5 mb-0 pb-0">
-          <v-text-field
+          <code>{{ JSON.stringify(plant) }}</code>
+          <!-- <v-text-field
             clearable
             clear-icon="cancel"
             label="Optional heading"
@@ -163,13 +164,13 @@
             rows="1"
             :v-model="selectThisInst"
             :value="plant.instance[selectThisInst].heading"
-          ></v-text-field>
+          ></v-text-field> -->
           <v-btn outlined color="secondary darken-2" class="ml-3">
             <v-icon>my_location</v-icon>&nbsp;move on map
           </v-btn>
         </v-row>
         <v-row>
-          <v-textarea
+          <!-- <v-textarea
             clearable
             clear-icon="cancel"
             label="Description"
@@ -178,7 +179,7 @@
             class="mx-8"
             rows="10"
             no-resize
-          ></v-textarea>
+          ></v-textarea> -->
         </v-row>
         <v-card-actions class="px-4 pb-4 pt-0">
           <v-btn color="primary" text @click="displayForm++">
