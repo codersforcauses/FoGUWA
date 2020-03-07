@@ -49,12 +49,32 @@ export default {
     'google-map-loader': GoogleMapLoader,
     'plant-info': PlantInfo
   },
+  props: {
+    plants: {
+      type: Array,
+      default: () => [
+        {
+          name: "Swamp banksia",
+          scientificName: "Banksia littoralis",
+          icon: "lotus",
+          description: "It is a tree in the plant genus Banksia and is found in south west Western Australia from the south eastern metropolitan area of Perth to the Stirling Range and Albany. It grows in peaty sand, low-lying and seasonally-damp areas along water courses. It possesses epicormic buds that are hidden under its bark and its yellow-orange flowers bloom between March and August.",
+          instances: [
+            {
+              "location": {
+              "type": "Point",
+              "coordinates": [-31.978303, 115.816732]
+              }
+           }
+          ]
+        }
+      ],
+    }
+  },
   data: () => ({
     map: null,
     google: null,
     markerInstances: [],
     userMarker: null,
-    plants: null,
     infoDrawer: false,
     plantInfo: defaultInfo
   }),
@@ -119,10 +139,9 @@ export default {
     }
   },
   methods: {
-    async loadMarkers() {
+    loadMarkers() {
       if (this.map && this.google) {
         this.clearMarkers()        
-        await this.loadPlants()
         // Create new markers and store them
         this.plants.forEach((plant, index) => {
           // Plot all instances
@@ -133,10 +152,6 @@ export default {
           })
         })
       }
-    },
-    async loadPlants() {
-      const data = await this.$axios.$get('/api/flora')
-      this.plants = data
     },
     clearMarkers() {
       this.markerInstances.forEach(marker => {
