@@ -1,7 +1,5 @@
 <template>
-  <v-card>
-    <plant-card :plant="selectedPlant($route.params.plantId)" />
-  </v-card>
+  <plant-card :plant="selectedPlant($route.params.plantId)" />
 </template>
 
 <script>

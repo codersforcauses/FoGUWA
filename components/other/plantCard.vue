@@ -2,6 +2,21 @@
   <v-card class="mx-4">
     <v-window v-model="displayForm">
       <v-window-item :value="2">
+        <v-btn
+          fab
+          absolute
+          left
+          small
+          depressed
+          color="#00000077"
+          :ripple="false"
+          class="mt-2"
+          @click="$router.go(-1)"
+        >
+          <v-icon color="white">
+            mdi-arrow-left
+          </v-icon>
+        </v-btn>
         <v-img
           src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
           height="150px"
@@ -54,7 +69,6 @@
         <v-row>
           <v-divider class="mx-3"></v-divider>
         </v-row>
-
         <v-list>
           <v-list-item
             v-for="(instance,i) in plant.instance"
@@ -66,7 +80,6 @@
             <v-list-item-content>
               <v-list-item-title>{{ instance.heading }}</v-list-item-title>
             </v-list-item-content>
-
             <v-list-item-action v-show="showByIndex === i" class="action">
               <v-btn icon color="primary" @click="displayForm--;selectThisInst=i">
                 <v-icon>mdi-pencil</v-icon>
@@ -134,7 +147,7 @@
           <v-textarea
             clearable
             clear-icon="cancel"
-            label="Description"
+            label="Name"
             outlined
             :value="plant.description"
             class="mx-8"
@@ -180,13 +193,33 @@
             rows="10"
             no-resize
           ></v-textarea> -->
+          <v-card-actions class="px-4 pb-4 pt-0">
+            <v-btn color="primary" text @click="displayForm++">
+              BACK
+            </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn color="primary" dark>
+              SAVE
+            </v-btn>
+          </v-card-actions>
         </v-row>
-        <v-card-actions class="px-4 pb-4 pt-0">
-          <v-btn color="primary" text @click="displayForm++">
+        <v-row>
+          <v-textarea
+            clearable
+            clear-icon="cancel"
+            label="Description"
+            outlined
+            :value="plant.description"
+            class="mx-8"
+            rows="10"
+          ></v-textarea>
+        </v-row>
+        <v-card-actions class="px-4 pb-4">
+          <v-btn color="indigo" text @click="displayForm--">
             BACK
           </v-btn>
           <v-spacer></v-spacer>
-          <v-btn color="primary" dark>
+          <v-btn color="indigo" dark>
             SAVE
           </v-btn>
         </v-card-actions>
