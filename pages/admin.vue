@@ -1,21 +1,12 @@
 <template>
   <v-layout name="panel-and-map">
     <v-flex xs12 md6 lg5 name="panel">
-      <v-toolbar fixed color="transparent">
-        <v-autocomplete
-          :items="plants"
-          item-text="name"
-          item-value="id"
-          label="Search for plants..."
-          hide-details
-        />
-      </v-toolbar>
-      <v-sheet height="calc(100vh - 158px)" style="overflow-y: auto;">
+      <v-sheet height="calc(100vh - 92px)" style="overflow-y: auto;">
         <NuxtChild :plants="plants" />
       </v-sheet>
     </v-flex>
     <v-flex height="100vh" tile>
-      <uwa-plant-map ref="plantMap" />
+      <uwa-plant-map :plants="plants" />
     </v-flex>
   </v-layout>
 </template>

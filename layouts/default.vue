@@ -4,7 +4,7 @@
     <v-content class="pa-0">
       <v-card tile height="100%" width="100%">
         <toolbar v-model="drawer" :is-index="isIndex" @log="handleLog" />
-        <v-container :fill-height="isIndex" fluid class="pa-0 mx-0">
+        <v-container :fill-height="isIndex" class="pa-0 mx-0">
           <nuxt />
         </v-container>
         <v-snackbar
