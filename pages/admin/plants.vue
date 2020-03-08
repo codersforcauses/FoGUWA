@@ -1,21 +1,34 @@
 <template>
-  <div style="height: 100%">
-    <NuxtChild v-if="$route.params.plantId" :plants="plants" />
-    <plant-list v-else :plants="plants" />
-  </div>
+  <v-layout>
+    <v-flex xs12 md6 lg5>
+      <v-sheet height="calc(100vh - 92px)" style="overflow-y: auto;">
+        <nuxt-child :plants="plants" />
+      </v-sheet>
+    </v-flex>
+    <v-flex height="100vh">
+      <uwa-plant-map :plants="plants" />
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
-  import PlantList from '~/components/other/PlantList.vue'
+  import UWAPlantMap from '~/components/UWAPlantMap.vue'
+  
   export default {
     components: {
-      'plant-list': PlantList
+      'uwa-plant-map': UWAPlantMap
     },
-    props: {
-      plants: {
-        type: Array,
-        required: true
+    data: () => ({
+      plants: []
+    }),
+    async mounted() {
+      await this.loadPlants()
+      },
+    methods: {
+      async loadPlants() {
+        const data = await this.$axios.$get('/api/flora')
+        this.plants = data
       }
-    }
+    },
   }
 </script>

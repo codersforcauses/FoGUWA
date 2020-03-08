@@ -2,7 +2,7 @@
   <v-toolbar
     :absolute="isIndex"
     :fixed="!isIndex"
-    :style="{ margin: margin }"
+    :style="{ margin: margin, zIndex: 5 }"
     height="56"
   >
     <v-app-bar-nav-icon @click="$emit('input', !value)" />
