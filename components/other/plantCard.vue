@@ -117,7 +117,6 @@
             Choose icon &emsp;
           </p>
           <v-btn-toggle :v-model="selectedBtn">
-            {{ selectedBtn }}
             <v-btn
               v-for="(icon, i) in icons"
               :key="i"
