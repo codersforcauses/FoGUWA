@@ -5,8 +5,7 @@ const { addFlora } = require('../controllers/flora')
 
 const parseJSON = JSONfile => {
   const rawdata = fs.readFileSync(JSONfile)
-  const data = JSON.parse(rawdata)
-  return data
+  return JSON.parse(rawdata)
 }
 
 const seedFactory = async (dataJSON, promiseFunction, seedName) => {
