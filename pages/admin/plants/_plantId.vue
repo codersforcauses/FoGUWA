@@ -3,11 +3,11 @@
 </template>
 
 <script>
-import plantCard from '~/components/other/PlantCard.vue'
+import PlantCard from '~/components/other/PlantCard.vue'
 
 export default {
   components: {
-    'plant-card': plantCard
+    'plant-card': PlantCard
   },
   props: {
     plants: {
