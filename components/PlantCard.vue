@@ -3,24 +3,35 @@
     <v-window-item :value="2">
       <v-btn
         fab
-        absolute
+        :absolute="plant.images.length > 0"
         left
         small
         depressed
         color="#00000077"
         :ripple="false"
         class="mt-2"
-        @click="$router.go(-1)"
+        @click="$router.replace({ path: '/admin/plants' })"
       >
         <v-icon color="white">
           mdi-arrow-left
         </v-icon>
       </v-btn>
-      <v-img
-        src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+      <v-carousel
+        v-if="plant.images.length > 0"
+        hide-delimiters
+        cycle
+        interval="3500"
+        show-arrows-on-hover
+        :show-arrows="plant.images.length > 1"
         height="150px"
-      ></v-img>
-      <div class="d-flex">
+      >
+        <v-carousel-item v-for="(image, i) in plant.images" :key="i">
+          <v-img :src="image"></v-img>
+        </v-carousel-item>
+      </v-carousel>
+      <div
+        class="d-flex"
+      >
         <v-icon text icon :color="icons[plant.icon].fillColor" size="42" class="ml-3 pl-6">
           {{ icons[plant.icon].mdiName }}
         </v-icon>
@@ -93,7 +104,6 @@
       <div class="mt-8">
         <v-text-field
           clearable
-          clear-icon="cancel"
           label="Name"
           outlined
           dense
@@ -103,7 +113,6 @@
         ></v-text-field>
         <v-text-field
           clearable
-          clear-icon="cancel"
           label="Scientific Name"
           no-resize
           outlined
@@ -134,7 +143,6 @@
         </v-card-actions>
         <v-textarea
           clearable
-          clear-icon="cancel"
           label="Name"
           outlined
           :value="plant.description"
@@ -142,6 +150,15 @@
           rows="10"
           no-resize
         ></v-textarea>
+        <v-text-field
+          clearable
+          label="Name"
+          outlined
+          dense
+          rows="1"
+          :value="plant.name"
+          class="mx-4"
+        ></v-text-field>
         <v-card-actions class="px-4 pb-4">
           <v-btn color="primary" text @click="displayForm--">
             BACK
@@ -224,29 +241,20 @@ export default {
       type: Object,
       // required:true,
       default: () => ({
-        name: 'Cactus',
-        scientificName: 'Cactaceae',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-        icon: 'leaf',
+        name: '',
+        scientificName: '',
+        description: '',
+        icon: 'lotus',
         instance: [
           {
             location: {
-              type: '',
-              coordinates: [100,100]
+              type: 'Point',
+              coordinates: [-31.976764, 115.818220]
             },
-            heading: 'The cactus near the pond',
-            description: 'it is right next to the pond',
-          },
-          {
-            location: {
-              type: '',
-              coordinates: [100,100]
-            },
-            heading: 'The very old cactus',
-            description: 'he was born in 1950s',
           }
         ],
-      } )
+        images: []
+      })
     }
   },
   data: () => ({
@@ -296,7 +304,7 @@ export default {
   flex-direction: row;
 }
 .round {
-  border-radius: 50% !important;
-  border-width: 2px !important;
+  border-radius: 50%;
+  border-width: 2px;
 }
 </style>
