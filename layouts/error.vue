@@ -17,7 +17,7 @@
           class="mt-4"
         >
           <v-icon dark class="mr-2">
-            arrow_back
+            mdi-arrow-left
           </v-icon>
           Return to Home page
         </v-btn>
@@ -44,7 +44,7 @@ export default {
     }
   },
   data: () => ({
-    pageNotFound: '404 Not Found',
+    pageNotFound: '404: Page Not Found',
     otherError: 'An error occurred'
   })
 }

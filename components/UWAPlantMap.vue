@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 // eslint-disable-next-line import/order
 import iconData from '@/assets/js/plantIcons.js'
 import { uwaMapSettings } from '@/assets/js/mapSettings'
@@ -31,22 +31,7 @@ export default {
   props: {
     plants: {
       type: Array,
-      default: () => [
-        {
-          name: "Swamp banksia",
-          scientificName: "Banksia littoralis",
-          icon: "lotus",
-          description: "It is a tree in the plant genus Banksia and is found in south west Western Australia from the south eastern metropolitan area of Perth to the Stirling Range and Albany. It grows in peaty sand, low-lying and seasonally-damp areas along water courses. It possesses epicormic buds that are hidden under its bark and its yellow-orange flowers bloom between March and August.",
-          instances: [
-            {
-              "location": {
-              "type": "Point",
-              "coordinates": [-31.978303, 115.816732]
-              }
-           }
-          ]
-        }
-      ],
+      required: true
     }
   },
   data: () => ({
@@ -103,6 +88,9 @@ export default {
     }
   },
   methods: {
+    ...mapMutations({
+      setPlant: 'plants/setSelectedPlant'
+    }),
     loadMarkers() {
       if (this.map && this.google) {
         this.clearMarkers()        
@@ -151,6 +139,7 @@ export default {
     addListenerToMarker(markerInstance, plant) {
       markerInstance.addListener('click', () => {
         this.$emit('plant-clicked', plant)
+        this.setPlant(plant)
       })
     }
   }

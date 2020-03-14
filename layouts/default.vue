@@ -77,7 +77,7 @@ export default {
 <style>
 ::-moz-selection,
 ::selection {
-  background: #c0df68;
+  background: #3F51B533;
   text-shadow: none;
 }
 </style>
