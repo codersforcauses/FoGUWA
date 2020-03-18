@@ -6,7 +6,7 @@
 </template>
 
 <script>
-  import PlantList from '~/components/PlantList.vue'
+  import PlantList from '~/components/admin/PlantList'
 
   export default {
     components: {

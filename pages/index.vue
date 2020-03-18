@@ -12,9 +12,11 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import PlantInfo from './../components/PlantInfo'
 import UWAPlantMap from '~/components/UWAPlantMap.vue'
+import iconData from '@/assets/js/plantIcons.js'
+const { iconPaths } = iconData
 
 export default {
   components: {
@@ -26,15 +28,19 @@ export default {
     plantInfo: null
   }),
   computed: {
-      ...mapGetters({
-        plants: 'plants/plants',
-        plant: 'plants/selectedPlant'
-      }),
-    },
+    ...mapGetters({
+      plants: 'plants/plants',
+      plant: 'plants/selectedPlant'
+    }),
+  },
   mounted(){
     this.loadPlants()
+    this.setPlantIcons(iconPaths)
   },
   methods: {
+    ...mapMutations({
+      setPlantIcons: 'plants/setPlantIcons'
+    }),
     ...mapActions({
       loadPlants: 'plants/loadPlants'
     }),

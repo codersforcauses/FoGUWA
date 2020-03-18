@@ -12,21 +12,30 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
-import UWAPlantMap from '~/components/UWAPlantMap.vue'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
+import UWAPlantMap from '~/components/UWAPlantMap'
+import iconData from '@/assets/js/plantIcons.js'
+const { iconPaths } = iconData
+
+
 export default {
   components: {
     'uwa-plant-map': UWAPlantMap
   },
   computed: {
     ...mapGetters({
-      plants: 'plants/plants'
+      plants: 'plants/plants',
+      getPlantIcon: 'plants/getPlantIcon'
     }),
   },
   mounted() {
     this.loadPlants()
+    this.setPlantIcons(iconPaths)
   },
   methods: {
+    ...mapMutations({
+      setPlantIcons: 'plants/setPlantIcons'
+    }),
     ...mapActions({
       loadPlants: 'plants/loadPlants'
     }),

@@ -1,6 +1,7 @@
 const state = () => ({
   plants: [],
-  selectedPlant: null
+  selectedPlant: null,
+  plantIcons: []
 })
 
 const getters = {
@@ -12,7 +13,16 @@ const getters = {
   },
   selectedPlant (state) {
     return state.selectedPlant
+  },
+  getAllPlantIcons (state) {
+    return state.plantIcons
+  },
+  getPlantIcon: (state) => (plantName) => {
+    return state.plantIcons.hasOwnProperty(plantName)
+    ? state.plantIcons[plantName]
+    : state.plantIcons.info
   }
+
 }
 
 const mutations = {
@@ -21,7 +31,10 @@ const mutations = {
   },
   setSelectedPlant (state, plant) {
     state.selectedPlant = plant
-  }
+  },
+  setPlantIcons (state, icons) {
+    state.plantIcons = icons
+  }, 
 }
 
 const actions = {
