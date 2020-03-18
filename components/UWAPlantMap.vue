@@ -7,13 +7,11 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
-// eslint-disable-next-line import/order
-import iconData from '@/assets/js/plantIcons.js'
-import { uwaMapSettings } from '@/assets/js/mapSettings'
-// eslint-disable-next-line import/order
+import { mapState, mapMutations, mapGetters } from 'vuex'
 import GoogleMapLoader from './GoogleMapLoader'
-const { iconStyle, ...iconPaths } = iconData
+import iconData from '@/assets/js/plantIcons'
+import { uwaMapSettings } from '@/assets/js/mapSettings'
+const { iconStyle } = iconData
 
 // Use https://www.gps-coordinates.net/ to easily fetch coordinates
 const UWA_BOUNDS = {
@@ -42,6 +40,9 @@ export default {
   }),
   computed: {
     ...mapState(['position']),
+    ...mapGetters({
+      getPlantIcon: 'plants/getPlantIcon'
+    }),
     mapConfig() {
       return {
         center: UWA_COORDS,
@@ -112,9 +113,7 @@ export default {
       this.markerInstances = []
     },
     createMarkerInstance(plant, instance) {
-      const icon = iconPaths.hasOwnProperty(plant.icon)
-                  ? iconPaths[plant.icon]
-                  : iconPaths.info
+      const icon = this.getPlantIcon(plant.icon)
       Object.keys(iconStyle).forEach(style => {
         icon[style] = iconStyle[style]
       })
