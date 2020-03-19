@@ -52,4 +52,9 @@ const other = {
   fillColor: '#88BBEE',
   mdiName: 'mdi-information',
 }
-export default {other, leaf, tree, tulip, lotus, iconStyle}
+
+const iconPaths = {
+  leaf, tree, tulip, lotus, other
+}
+
+export default { iconPaths, iconStyle }

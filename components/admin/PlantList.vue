@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import iconData from '@/assets/js/plantIcons.js'
+import { mapGetters } from 'vuex'
 
 export default {
   props: {
@@ -35,11 +35,10 @@ export default {
       required: true
     }
   },
-  methods: {
-    getPlantIcon(icon) {
-      const { iconStyle, ...icons } = iconData
-      return icons[icon] ? icons[icon] : icons.info
-    },
-  },
+  computed: {
+    ...mapGetters({
+      getPlantIcon: 'plants/getPlantIcon'
+    }),
+  }
 }
 </script>

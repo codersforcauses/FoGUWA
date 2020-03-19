@@ -1,24 +1,26 @@
 <template>
-  <plant-card :plant="selectedPlant($route.params.plantId)" />
+  <div>
+    <plant-card v-if="plant" :plant="plant" :icon="getPlantIcon(plant.icon)" />
+    <v-skeleton-loader v-else type="article" class="mx-auto" />
+  </div>
 </template>
 
 <script>
-import plantCard from '~/components/other/PlantCard.vue'
+  import { mapGetters } from 'vuex'
+  import PlantCard from '~/components/admin/PlantCard.vue'
 
-export default {
-  components: {
-    'plant-card': plantCard
-  },
-  props: {
-    plants: {
-      type: Array,
-      required: true
-    }
-  },
-  methods: {
-    selectedPlant(id) {
-      return this.plants.find(({ _id }) => _id === id)
+  export default {
+    components: {
+      'plant-card': PlantCard
+    },
+    computed: {
+      ...mapGetters({
+        getPlant: 'plants/getPlantFromId',
+        getPlantIcon: 'plants/getPlantIcon'
+      }),
+      plant() {
+        return this.getPlant(this.$route.params.plantId)
+      }
     }
   }
-}
 </script>

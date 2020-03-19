@@ -1,13 +1,13 @@
 <template>
   <div>
-    <NuxtChild v-if="$route.params.plantId" :plants="plants" />
-    <plant-list :plants="plants" />
+    <NuxtChild v-if="plantInfo" />
+    <plant-list v-else :plants="plants" />
   </div>
 </template>
 
 <script>
-  import PlantList from '~/components/other/PlantList.vue'
-  
+  import PlantList from '~/components/admin/PlantList'
+
   export default {
     components: {
       'plant-list': PlantList
@@ -18,14 +18,8 @@
         required: true
       }
     },
-    data() {
-      return {
-        loading: false,
-        search: null,
-        select: null,
-        hover: false,
-        editView: false,
-      }
-    }
+    data: () => ({
+      plantInfo: false,
+    })
   }
 </script>

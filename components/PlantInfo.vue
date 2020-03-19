@@ -23,25 +23,26 @@
     </v-btn>
     <v-card flat>
       <v-carousel
+        v-if="plant.images"
         hide-delimiters
         cycle
         interval="3500"
         show-arrows-on-hover
-        :show-arrows="plantInfo.images.length > 1"
+        :show-arrows="plant.images.length > 1"
         height="60%"
       >
-        <v-carousel-item v-for="(image, i) in plantInfo.images" :key="i">
+        <v-carousel-item v-for="(image, i) in plant.images" :key="i">
           <v-img :src="image"></v-img>
         </v-carousel-item>
       </v-carousel>
       <v-card-title primary-title>
-        {{ plantInfo.name }}
+        {{ plant.name }}
       </v-card-title>
       <v-card-subtitle>
-        <em>{{ plantInfo.scientificName }}</em>
+        <em>{{ plant.scientificName }}</em>
       </v-card-subtitle>
       <v-card-text>
-        {{ plantInfo.description }}
+        {{ plant.description }}
       </v-card-text>
     </v-card>
   </v-navigation-drawer>
@@ -52,9 +53,23 @@ export default {
   name: 'PlantInfo',
   props: {
     value: Boolean,
-    plantInfo: {
+    plant: {
       type: Object,
-      required: true
+      default: () => ({
+        name: '',
+        scientificName: '',
+        description: '',
+        icon: 'lotus',
+        instance: [
+          {
+            location: {
+              type: 'Point',
+              coordinates: [-31.976764, 115.818220]
+            },
+          }
+        ],
+        images: []
+      })
     }
   },
   computed: {

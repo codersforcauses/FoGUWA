@@ -1,9 +1,9 @@
 <template>
   <v-layout>
     <plant-info
-      v-if="this.$route.name==='index'"
+      v-if="this.$route.name ==='index' && plant"
       v-model="infoDrawer"
-      :plant-info="plantInfo"
+      :plant="plant"
     />
     <v-card height="100%" width="100%" tile>
       <uwa-plant-map :plants="plants" @plant-clicked="handlePlantClick" />
@@ -12,8 +12,11 @@
 </template>
 
 <script>
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import PlantInfo from './../components/PlantInfo'
 import UWAPlantMap from '~/components/UWAPlantMap.vue'
+import iconData from '@/assets/js/plantIcons.js'
+const { iconPaths } = iconData
 
 export default {
   components: {
@@ -21,30 +24,28 @@ export default {
     'plant-info': PlantInfo
   },
   data: () => ({
-    plants: [],
     infoDrawer: false,
-    plantInfo: {
-      plantName: '',
-      sciName: '',
-      images: [],
-      description: ''
-    }
+    plantInfo: null
   }),
+  computed: {
+    ...mapGetters({
+      plants: 'plants/plants',
+      plant: 'plants/selectedPlant'
+    }),
+  },
   mounted(){
     this.loadPlants()
+    this.setPlantIcons(iconPaths)
   },
   methods: {
-    async loadPlants() {
-      const data = await this.$axios.$get('/api/flora')
-      this.plants = data
-    },
+    ...mapMutations({
+      setPlantIcons: 'plants/setPlantIcons'
+    }),
+    ...mapActions({
+      loadPlants: 'plants/loadPlants'
+    }),
     handlePlantClick(plant) {
       this.infoDrawer = true
-      this.plantInfo = plant
-      const defaultImage = [
-        'https://www.delorainedental.com.au/wp-content/uploads/2016/10/orionthemes-placeholder-image.png'
-      ]
-      this.plantInfo.images = plant.images.length > 0 ? plant.images : defaultImage 
     }
   }
 }

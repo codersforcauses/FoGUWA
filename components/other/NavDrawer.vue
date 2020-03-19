@@ -50,25 +50,25 @@ export default {
   data: () => ({
     items: [
       {
-        icon: 'map',
+        icon: 'mdi-map-marker-circle',
         title: 'Map',
         to: '/'
       },
       {
-        icon: 'info',
+        icon: 'mdi-information-outline',
         title: 'About',
         to: '/about'
       }
     ],
     login: {
-      icon: 'person',
+      icon: 'mdi-account-outline',
       title: 'Login',
       to: '/login'
     }
   }),
   computed: {
     user() {
-      return (this.$auth || {}).user || null
+      return this.$auth?.user
     },
     panel: {
       get() {
@@ -85,8 +85,8 @@ export default {
     async auth() {
       try {
         await this.$auth.loginWith('auth0')
-      } catch (e) {
-        this.error = e.response.data.message
+      } catch ({ response }) {
+        this.error = response.data.message
       }
     }
   }
