@@ -48,15 +48,6 @@
       rows="10"
       no-resize
     ></v-textarea>
-    <v-text-field
-      clearable
-      label="Name"
-      outlined
-      dense
-      rows="1"
-      :value="plant.name"
-      class="mx-4"
-    ></v-text-field>
     <v-card-actions class="px-4 pb-4">
       <v-btn color="primary" text @click="emitBack">
         BACK

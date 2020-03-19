@@ -1,61 +1,53 @@
 <template>
-  <div>
-    <v-row class="mx-5 mt-5 mb-0 pb-0">
-      <code>{{ JSON.stringify(plant) }}</code>
-      <!-- <v-text-field
-          clearable
-          clear-icon="cancel"
-          label="Optional heading"
-          outlined
-          dense
-          rows="1"
-          :v-model="selectThisInst"
-          :value="plant.instance[selectThisInst].heading"
-        ></v-text-field> -->
-      <v-btn outlined color="secondary darken-2" class="ml-3">
-        <v-icon>my_location</v-icon>&nbsp;move on map
-      </v-btn>
-    </v-row>
-    <v-row>
-      <!-- <v-textarea
-          clearable
-          clear-icon="cancel"
-          label="Description"
-          outlined
-          :value="plant.instance[selectThisInst].description"
-          class="mx-8"
-          rows="10"
-          no-resize
-        ></v-textarea> -->
-      <v-card-actions class="px-4 pb-4 pt-0">
-        <v-btn color="primary" text @click="displayForm++">
-          BACK
-        </v-btn>
-        <v-spacer></v-spacer>
-        <v-btn color="primary" dark>
-          SAVE
-        </v-btn>
-      </v-card-actions>
-    </v-row>
-    <v-row>
-      <v-textarea
-        clearable
-        clear-icon="cancel"
-        label="Description"
-        outlined
-        :value="plant.description"
-        class="mx-8"
-        rows="10"
-      ></v-textarea>
-    </v-row>
+  <div class="mt-8">
+    <v-text-field
+      clearable
+      label="Heading"
+      outlined
+      dense
+      rows="1"
+      :value="instance.heading"
+      class="mx-4"
+    ></v-text-field>
+    <v-textarea
+      clearable
+      label="Description"
+      outlined
+      :value="instance.description"
+      class="mx-4"
+      rows="10"
+      no-resize
+    ></v-textarea>
+    <v-btn outlined color="primary" class="ml-3">
+      <v-icon>mdi-crosshairs-gps</v-icon>&nbsp;move on map
+    </v-btn>
+    <v-chip label outlined small>
+      {{ "Lat: " + instance.location.coordinates[0] + " Long: " + instance.location.coordinates[1] }}
+    </v-chip>
     <v-card-actions class="px-4 pb-4">
-      <v-btn color="indigo" text @click="displayForm--">
+      <v-btn color="primary" text @click="emitBack">
         BACK
       </v-btn>
       <v-spacer></v-spacer>
-      <v-btn color="indigo" dark>
+      <v-btn color="primary" dark>
         SAVE
       </v-btn>
     </v-card-actions>
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    instance: {
+      type: Object,
+      required: true
+    }
+  },
+  methods: {
+    emitBack(){
+      this.$emit('back')
+    }
+  }
+}
+</script>

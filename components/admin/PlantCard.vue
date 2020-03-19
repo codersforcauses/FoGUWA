@@ -45,7 +45,7 @@
           </v-chip>
         </v-col>
         <v-card-actions class="mr-2">
-          <v-btn color="primary" text dark @click="displayForm++">
+          <v-btn color="primary" text dark @click="displayForm = 3">
             EDIT
           </v-btn>
         </v-card-actions>
@@ -65,6 +65,7 @@
           class="list-item"
           @mouseover.native="instanceHovered = i"
           @mouseout.native="instanceHovered = -1"
+          @instanceEdit="handleInstanceEdit"
         />
       </v-list>
       <v-btn 
@@ -81,7 +82,7 @@
       <plant-edit :plant="plant" @back="handleBackClick" />
     </v-window-item>
     <v-window-item :value="1">
-      <instance-edit />
+      <instance-edit :instance="instanceSelected" @back="handleBackClick" />
     </v-window-item>
   </v-window>
 </template>
@@ -126,11 +127,15 @@ export default {
   data: () => ({
     displayForm: 2,
     instanceHovered: -1,
-    selectThisInst: 0
+    instanceSelected: null
   }),
   methods: {
     handleBackClick(){
-      this.displayForm--
+      this.displayForm = 2
+    },
+    handleInstanceEdit(instance){
+      this.displayForm = 1
+      this.instanceSelected = instance
     }
   }
 }

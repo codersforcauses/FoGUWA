@@ -1,10 +1,10 @@
 <template>
-  <v-list-item dense class="ml-3" @click="console.log('Focus')">
+  <v-list-item dense class="ml-3">
     <v-list-item-content>
       <v-list-item-title>{{ plantInstance.heading || plant.name }}</v-list-item-title>
     </v-list-item-content>
     <v-list-item-action v-show="instanceHovered" class="action">
-      <v-btn icon color="primary" @click="console.log('Edit')">
+      <v-btn icon color="primary" @click="emitInstanceEdit">
         <v-icon>mdi-pencil</v-icon>
       </v-btn>
       <v-dialog v-model="confirmDelete" persistent max-width="400">
@@ -17,7 +17,7 @@
           <v-card-title class="headline">
             Delete this plant instance?
           </v-card-title>
-          <v-card-text>You are about to delete {{ plantInstance.heading }}. Would you like to proceed</v-card-text>
+          <v-card-text>You are about to delete {{ plantInstance.heading || plant.name }}. Would you like to proceed?</v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="primary" text @click="confirmDelete = false">
@@ -62,6 +62,11 @@ export default {
   computed: {
     instanceHovered() {
       return this.instanceIndex === this.indexSelected
+    }
+  },
+  methods: {
+    emitInstanceEdit(){
+      this.$emit("instanceEdit", this.plantInstance)
     }
   }
 }
