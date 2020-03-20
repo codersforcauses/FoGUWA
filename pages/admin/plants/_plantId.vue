@@ -6,7 +6,7 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+  import { mapGetters, mapMutations } from 'vuex'
   import PlantCard from '~/components/admin/PlantCard.vue'
 
   export default {
@@ -21,6 +21,14 @@
       plant() {
         return this.getPlant(this.$route.params.plantId)
       }
+    },
+    mounted() {
+      this.setPlant(this.plant)
+    },
+    methods: {
+      ...mapMutations({
+        setPlant: 'plants/setSelectedPlant'
+      }),
     }
   }
 </script>
