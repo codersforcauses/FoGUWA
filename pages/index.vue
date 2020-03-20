@@ -30,7 +30,7 @@ export default {
   computed: {
     ...mapGetters({
       plants: 'plants/plants',
-      plant: 'plants/selectedPlant'
+      plant: 'plants/getSelectedPlant'
     }),
   },
   mounted(){
