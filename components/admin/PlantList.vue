@@ -13,6 +13,9 @@
           </v-list-item-title>
           <v-list-item-subtitle>
             {{ plant.scientificName }}
+            <v-chip v-if="plant.instances.length > 1" x-small>
+              {{ plant.instances.length }}
+            </v-chip>
           </v-list-item-subtitle>
         </v-list-item-content>
         <v-list-item-action>
