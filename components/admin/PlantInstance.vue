@@ -1,16 +1,20 @@
 <template>
-  <v-list-item dense class="ml-3">
+  <v-list-item dense class="ml-3" @click="emitInstanceCenter">
     <v-list-item-content>
       <v-list-item-title>{{ plantInstance.heading || plant.name }}</v-list-item-title>
     </v-list-item-content>
     <v-list-item-action v-show="instanceHovered" class="action">
       <v-btn icon color="primary" @click="emitInstanceEdit">
-        <v-icon>mdi-pencil</v-icon>
+        <v-icon>
+          mdi-pencil
+        </v-icon>
       </v-btn>
       <v-dialog v-model="confirmDelete" persistent max-width="400">
         <template v-slot:activator="{ on }">
           <v-btn color="primary" icon v-on="on">
-            <v-icon>mdi-delete</v-icon>
+            <v-icon>
+              mdi-delete
+            </v-icon>
           </v-btn>
         </template>
         <v-card>
@@ -29,8 +33,10 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-      <v-btn icon color="primary">
-        <v-icon>mdi-crosshairs-gps</v-icon>
+      <v-btn icon color="primary" @click="emitInstanceCenter">
+        <v-icon>
+          mdi-crosshairs-gps
+        </v-icon>
       </v-btn>
     </v-list-item-action>
   </v-list-item>
@@ -67,7 +73,19 @@ export default {
   methods: {
     emitInstanceEdit(){
       this.$emit("instanceEdit", this.plantInstance)
+    },
+    emitInstanceCenter(){
+      this.$emit("instanceCenter", this.plantInstance)
     }
   }
 }
 </script>
+
+<style>
+  .action {
+    width: 100px;
+    display: flex;
+    flex-direction: row;
+    padding: 0px;
+  }
+</style>

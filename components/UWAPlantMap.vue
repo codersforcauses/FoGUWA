@@ -37,15 +37,19 @@ export default {
     google: null,
     markerInstances: [],
     userMarker: null,
+    mapCenter: UWA_COORDS
   }),
   computed: {
     ...mapState(['position']),
     ...mapGetters({
-      getPlantIcon: 'plants/getPlantIcon'
+      getPlantIcon: 'plants/getPlantIcon',
+      selectedPlant: 'plants/getSelectedPlant',
+      selectedInstance: 'plants/getSelectedInstance',
+      centeredInstance: 'plants/getCenteredInstance'
     }),
     mapConfig() {
       return {
-        center: UWA_COORDS,
+        center: this.mapCenter,
         restriction: {
           latLngBounds: UWA_BOUNDS,
           strictBounds: false
@@ -55,7 +59,7 @@ export default {
         maxZoom: 21,
         ...uwaMapSettings
       }
-    }
+    },
   },
   watch: {
     map(val) {
@@ -67,9 +71,16 @@ export default {
     markers(val) {
       this.loadMarkers()
     },
+    centeredInstance(instance){
+      if(instance){
+        const [ lat, lng ] = instance.location.coordinates
+        this.setCenter({ lat, lng })
+        this.setCenterNull()
+      }
+    },
     position() {
-      if (this.userMarker === null) {
-        if (this.position !== null) {
+      if (!this.userMarker) {
+        if (this.position) {
           this.userMarker = new this.google.maps.Marker({
             position: this.position,
             icon: {
@@ -90,7 +101,10 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setPlant: 'plants/setSelectedPlant'
+      setPlant: 'plants/setSelectedPlant',
+      setInstance: 'plants/setSelectedInstance',
+      setInstanceMarker: 'plants/setInstanceMarker',
+      setCenterNull: 'plants/setCenteredNull'
     }),
     loadMarkers() {
       if (this.map && this.google) {
@@ -98,10 +112,11 @@ export default {
         // Create new markers and store them
         this.plants.forEach((plant, index) => {
           // Plot all instances
-          plant.instances.forEach(instance => {
+          plant.instances.map(instance => {
             const markerInst = this.createMarkerInstance(plant, instance)
-            this.addListenerToMarker(markerInst, plant)
+            this.addListenerToMarker(markerInst, plant, instance)
             this.markerInstances.push(markerInst)
+            this.setInstanceMarker({ instance, marker: markerInst })
           })
         })
       }
@@ -132,14 +147,18 @@ export default {
           labelOrigin: new this.google.maps.Point(12, -5),
           ...icon
         },
-        map: this.map
+        map: this.map,
       })
     },
-    addListenerToMarker(markerInstance, plant) {
+    addListenerToMarker(markerInstance, plant, instance) {
       markerInstance.addListener('click', () => {
-        this.$emit('plant-clicked', plant)
+        this.$emit('plant-clicked', plant, instance)
         this.setPlant(plant)
+        this.setInstance(instance)
       })
+    },
+    setCenter(coords) {
+      this.map.setCenter(coords)
     }
   }
 }

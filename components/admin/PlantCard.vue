@@ -55,6 +55,9 @@
       </v-card-text>
       <v-divider />
       <v-list>
+        <v-subheader class="ml-3">
+          Locations
+        </v-subheader>
         <plant-instance
           v-for="(instance,i) in plant.instances"
           :key="i"
@@ -66,6 +69,7 @@
           @mouseover.native="instanceHovered = i"
           @mouseout.native="instanceHovered = -1"
           @instanceEdit="handleInstanceEdit"
+          @instanceCenter="handleCentered"
         />
       </v-list>
       <v-btn 
@@ -82,12 +86,13 @@
       <plant-edit :plant="plant" @back="handleBackClick" />
     </v-window-item>
     <v-window-item :value="1">
-      <instance-edit :instance="instanceSelected" @back="handleBackClick" />
+      <instance-edit :instance="getSelected" @back="handleBackClick" />
     </v-window-item>
   </v-window>
 </template>
 
 <script>
+import { mapMutations, mapGetters } from 'vuex'
 import PlantEdit from './PlantEdit'
 import InstanceEdit from './InstanceEdit'
 import PlantInstance from './PlantInstance'
@@ -127,15 +132,26 @@ export default {
   data: () => ({
     displayForm: 2,
     instanceHovered: -1,
-    instanceSelected: null
   }),
+  computed: {
+    ...mapGetters({
+      getSelected: "plants/getSelectedInstance"
+    })
+  },
   methods: {
+    ...mapMutations({
+      setInstance: 'plants/setSelectedInstance',
+      centerInstance: 'plants/setCenteredInstance',
+      nullCenter: 'plants/setCenteredNull'
+    }),
     handleBackClick(){
       this.displayForm = 2
     },
     handleInstanceEdit(instance){
       this.displayForm = 1
-      this.instanceSelected = instance
+    },
+    handleCentered(instance){
+      this.centerInstance(instance)
     }
   }
 }
@@ -144,14 +160,5 @@ export default {
 <style>
 .list-item {
   min-height: 60px;
-}
-.action {
-  width: 100px;
-  display: flex;
-  flex-direction: row;
-}
-.round {
-  border-radius: 50%;
-  border-width: 2px;
 }
 </style>
