@@ -144,10 +144,13 @@ export default {
           lng: instance.location.coordinates[1]
         },
         icon: {
-          labelOrigin: new this.google.maps.Point(12, -5),
+          labelOrigin: new this.google.maps.Point(10, -5),
+          anchor: new this.google.maps.Point(10, 15),
           ...icon
         },
+        crossOnDrag: false,
         map: this.map,
+        draggable: true
       })
     },
     addListenerToMarker(markerInstance, plant, instance) {
