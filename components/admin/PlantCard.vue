@@ -138,16 +138,19 @@ export default {
       getSelected: "plants/getSelectedInstance"
     })
   },
+  mounted(){
+    this.setPlant(this.plant)
+  },
   methods: {
     ...mapMutations({
-      setInstance: 'plants/setSelectedInstance',
       centerInstance: 'plants/setCenteredInstance',
-      nullCenter: 'plants/setCenteredNull'
+      setPlant: 'plants/setSelectedPlant'
     }),
     handleBackClick(){
       this.displayForm = 2
     },
     handleInstanceEdit(instance){
+      this.centerInstance(instance)
       this.displayForm = 1
     },
     handleCentered(instance){

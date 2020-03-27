@@ -4,6 +4,7 @@
       v-if="this.$route.name ==='index' && plant"
       v-model="infoDrawer"
       :plant="plant"
+      :instance="instance"
     />
     <v-card height="100%" width="100%" tile>
       <uwa-plant-map :plants="plants" @plant-clicked="handlePlantClick" />
@@ -30,7 +31,8 @@ export default {
   computed: {
     ...mapGetters({
       plants: 'plants/plants',
-      plant: 'plants/getSelectedPlant'
+      plant: 'plants/getSelectedPlant',
+      instance: 'plants/getSelectedInstance'
     }),
   },
   mounted(){

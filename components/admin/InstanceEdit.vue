@@ -25,7 +25,7 @@
       {{ "Lat: " + instance.location.coordinates[0] + " Long: " + instance.location.coordinates[1] }}
     </v-chip>
     <v-card-actions class="px-4 pb-4">
-      <v-btn color="primary" text @click="emitBack">
+      <v-btn color="primary" text @click="$emit('back')">
         BACK
       </v-btn>
       <v-spacer></v-spacer>
@@ -37,6 +37,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   props: {
     instance: {
@@ -44,10 +46,10 @@ export default {
       required: true
     }
   },
-  methods: {
-    emitBack(){
-      this.$emit('back')
-    }
+  computed: {
+    ...mapGetters({
+      instanceMarker: 'plants/getMarker'
+    })
   }
 }
 </script>

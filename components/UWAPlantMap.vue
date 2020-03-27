@@ -150,7 +150,6 @@ export default {
         },
         crossOnDrag: false,
         map: this.map,
-        draggable: true
       })
     },
     addListenerToMarker(markerInstance, plant, instance) {

@@ -35,15 +35,26 @@
           <v-img :src="image"></v-img>
         </v-carousel-item>
       </v-carousel>
-      <v-card-title primary-title>
-        {{ plant.name }}
-      </v-card-title>
-      <v-card-subtitle>
-        <em>{{ plant.scientificName }}</em>
-      </v-card-subtitle>
-      <v-card-text>
-        {{ plant.description }}
-      </v-card-text>
+      <div v-if="plant">
+        <v-card-title primary-title>
+          {{ plant.name }}
+        </v-card-title>
+        <v-card-subtitle>
+          <em>{{ plant.scientificName }}</em>
+        </v-card-subtitle>
+        <v-card-text>
+          {{ plant.description }}
+        </v-card-text>
+      </div>
+      <div v-if="instance.heading || instance.description">
+        <v-divider />
+        <v-subheader>
+          {{ instance.heading }}
+        </v-subheader>
+        <v-card-text>
+          {{ instance.description }}
+        </v-card-text>
+      </div>
     </v-card>
   </v-navigation-drawer>
 </template>
@@ -55,22 +66,12 @@ export default {
     value: Boolean,
     plant: {
       type: Object,
-      default: () => ({
-        name: '',
-        scientificName: '',
-        description: '',
-        icon: 'lotus',
-        instance: [
-          {
-            location: {
-              type: 'Point',
-              coordinates: [-31.976764, 115.818220]
-            },
-          }
-        ],
-        images: []
-      })
-    }
+      default: null
+    },
+    instance: {
+      type: Object,
+      default: null
+    },
   },
   computed: {
     plantInfoVisible: {

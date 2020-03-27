@@ -20,7 +20,7 @@
       class="mx-4"
     ></v-text-field>
     <v-card-actions class="mx-4 mb-6">
-      <p class="font-weight-light ma-0">
+      <p class="ma-0">
         Choose icon &emsp;
       </p>
       <v-btn-toggle :v-model="selectedBtn">
@@ -30,8 +30,9 @@
           :color="icon.fillColor"
           icon
           outlined
+          fab
           class="round mx-1"
-          :style="{ borderColor: `${selectedBtn === getIconIndex(i) ? icon.fillColor: 'grey'} !important` }"
+          :style="{ borderColor: `${selectedBtn === getIconIndex(i) ? icon.fillColor : 'grey'} !important` }"
         >
           <v-icon :color="selectedBtn === getIconIndex(i) ? icon.fillColor: 'grey'">
             {{ icon.mdiName }}
@@ -101,3 +102,10 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+  .round {
+    border-radius: 50% !important;
+    border-width: 2px !important;
+  }
+</style>
