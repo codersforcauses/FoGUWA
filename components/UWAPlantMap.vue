@@ -160,7 +160,7 @@ export default {
       })
     },
     setCenter(coords) {
-      this.map.setCenter(coords)
+      this.map.panTo(coords)
     }
   }
 }
