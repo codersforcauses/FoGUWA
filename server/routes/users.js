@@ -38,8 +38,12 @@ router.get('/users/:id', checkJwt, restrictAccess, async (req, res) => {
 })
 
 router.get('/userinfo', checkJwt, async (req, res) => {
-  const user = await findUser(req)
-  res.send(user)
+  try {
+    const user = await findUser(req)
+    res.send(user)
+  } catch (error) {
+    res.status(401).json({ message: error.message })
+  }
 })
 
 router.post('/users', checkJwt, restrictAccess, async (req, res) => {
