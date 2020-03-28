@@ -6,23 +6,23 @@
       <slot :google="google" :map="map" />
     </template>
     <!-- Loading icon/message as JS API is fetched. -->
-    <v-row
+    <div
       v-show="!google || !map"
-      align-center
-      justify-center
       column
       fluid
-      fill-height
+      style="height:100%;"
+      class="d-flex flex-column align-center justify-center"
     >
       <v-progress-circular
         :size="70"
         :width="7"
         indeterminate
         color="primary"
-        class="mb-4"
       />
-      <span>Loading map...</span>
-    </v-row>
+      <span class="mt-5">
+        Loading map...
+      </span>
+    </div>
   </div>
 </template>
 
