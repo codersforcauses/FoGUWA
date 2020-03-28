@@ -13,8 +13,8 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
-import UWAPlantMap from '~/components/UWAPlantMap'
 import iconData from '@/assets/js/plantIcons.js'
+import UWAPlantMap from '~/components/UWAPlantMap'
 const { iconPaths } = iconData
 
 

@@ -14,9 +14,10 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+import iconData from '@/assets/js/plantIcons.js'
+// eslint-disable-next-line import/order
 import PlantInfo from './../components/PlantInfo'
 import UWAPlantMap from '~/components/UWAPlantMap.vue'
-import iconData from '@/assets/js/plantIcons.js'
 const { iconPaths } = iconData
 
 export default {
