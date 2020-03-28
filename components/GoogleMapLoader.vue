@@ -6,7 +6,7 @@
       <slot :google="google" :map="map" />
     </template>
     <!-- Loading icon/message as JS API is fetched. -->
-    <v-col
+    <div
       v-show="!google || !map"
       column
       fluid
@@ -22,7 +22,7 @@
       <span class="mt-5">
         Loading map...
       </span>
-    </v-col>
+    </div>
   </div>
 </template>
 
