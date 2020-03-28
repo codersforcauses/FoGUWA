@@ -60,7 +60,7 @@ export default {
         to: '/about'
       },
       {
-        icon: 'mdi-flower',
+        icon: 'mdi-tree-outline',
         title: 'Plant',
         to: '/admin/plants'
       },
