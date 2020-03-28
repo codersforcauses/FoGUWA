@@ -28,6 +28,7 @@
 
 <!-- Don't change anything within script-->
 <script>
+
 export default {
   layout: 'empty',
   props: {
@@ -49,5 +50,8 @@ export default {
   })
 }
 </script>
+
+<script src="https://unpkg.com/zdog@1/dist/zdog.dist.min.js"></script>
+
 
 <style scoped></style>
