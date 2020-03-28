@@ -58,6 +58,16 @@ export default {
         icon: 'mdi-information-outline',
         title: 'About',
         to: '/about'
+      },
+      {
+        icon: 'mdi-flower',
+        title: 'Plant',
+        to: '/admin/plants'
+      },
+      {
+        icon: 'mdi-account-multiple-outline',
+        title: 'Users',
+        to: '/admin/users'
       }
     ],
     login: {

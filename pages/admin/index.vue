@@ -1,78 +1,18 @@
 <template>
-  <v-container class="pa-4 text-center">
-    <v-row class="fill-height" align="center" justify="center">
-      <template v-for="(item, i) in items">
-        <v-col
-          :key="i"
-          cols="12"
-          md="4"
-        >
-          <v-hover v-slot:default="{ hover }">
-            <v-card
-              :elevation="hover ? 12 : 2"
-              :class="{ 'on-hover': hover } "
-              class="ma-3"
-              :to="item.to"
-            >
-              <v-img
-                :src="item.img"
-                height="300px"
-              >
-                <v-card-title class="display-2 white--text font-weight-light">
-                  <v-row
-                    class="d-flex flex-column align-center ma-auto"
-                  >
-                    <p
-                      class="text-center ma-0"
-                      :class="{'on-hover':hover}"
-                    >
-                      {{ item.title }}
-                    </p>
-                  </v-row>
-                </v-card-title>
-              </v-img>
-            </v-card>
-          </v-hover>
-        </v-col>
-      </template>
-    </v-row>
-  </v-container>
+  <div class="text-center ma-12">
+    <v-progress-circular
+      :size="70"
+      :width="7"
+      indeterminate
+      color="primary"
+      class="mb-4"
+    />
+  </div>
 </template>
-
 <script>
-  export default {
-    data: () => ({
-      items: [
-        {
-          title: 'Users',
-          img: 'https://images.pexels.com/photos/3774040/pexels-photo-3774040.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-          to: '/admin/users/',
-        },
-        {
-          title: 'Plants',
-          img: 'https://images.pexels.com/photos/797797/pexels-photo-797797.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940',
-          to: '/admin/plants/'
-        },
-        
-      ],
-    }),
+export default {
+  mounted(){
+    this.$router.replace({ path: '/admin/plants' })
   }
-</script>
-
-<style scoped>
-.v-card {
-  transition: opacity .4s ease-in-out;
 }
-
-.v-card:not(.on-hover) {
-  opacity: 0.6;
- }
-
- p.on-hover{animation:tracking-in-expand .7s cubic-bezier(.215,.61,.355,1.000) both}
- p:not(.on-hover){
-   opacity:0;
- }
-
-@keyframes tracking-in-expand{0%{letter-spacing:-.05em;opacity:0}40%{opacity:.6}100%{opacity:1}}
-</style>
-
+</script>
