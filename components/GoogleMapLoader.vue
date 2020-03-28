@@ -14,8 +14,8 @@
       class="d-flex flex-column align-center justify-center"
     >
       <v-progress-circular
-        size="70"
-        width="7"
+        :size="70"
+        :width="7"
         indeterminate
         color="primary"
       />
