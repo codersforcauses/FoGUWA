@@ -15,16 +15,10 @@ const floraSchema = new mongoose.Schema({
   icon: {
     type: String,
     required: true,
-    enum: ['leaf', 'flower_1', 'flower_2', 'tree']
+    enum: ['leaf', 'tulip', 'lotus', 'tree', 'other']
   },
   instances: [
     {
-      title: {
-        type: String
-      },
-      description: {
-        type: String
-      },
       location: {
         type: {
           type: String,
@@ -35,7 +29,13 @@ const floraSchema = new mongoose.Schema({
           type: [Number],
           required: true
         }
-      }
+      },
+      heading: {
+        type: String
+      },
+      description: {
+        type: String
+      },
     }
   ],
   images: {

@@ -16,7 +16,6 @@
 import { mapState } from 'vuex'
 // eslint-disable-next-line import/order
 import PlantInfo from './PlantInfo.vue'
-import plants from '@/assets/plantdb.json'
 import iconData from '@/assets/js/plantIcons.js'
 import { uwaMapSettings } from '@/assets/js/mapSettings'
 // eslint-disable-next-line import/order
@@ -54,6 +53,7 @@ export default {
     google: null,
     markerInstances: [],
     userMarker: null,
+    plants: null,
     infoDrawer: false,
     plantInfo: defaultInfo
   }),
@@ -104,15 +104,17 @@ export default {
         this.userMarker = null
       } else {
         this.userMarker.setPosition(this.position)
+        this.map.panTo(this.position)
       }
     }
   },
   methods: {
-    loadMarkers() {
+    async loadMarkers() {
       if (this.map && this.google) {
         this.clearMarkers()        
+        await this.loadPlants()
         // Create new markers and store them
-        plants.forEach((plant, index) => {
+        this.plants.forEach((plant, index) => {
           // Plot all instances
           plant.instances.forEach(instance => {
             const markerInst = this.createMarkerInstance(plant, instance)
@@ -121,6 +123,10 @@ export default {
           })
         })
       }
+    },
+    async loadPlants() {
+      const data = await this.$axios.$get('/api/flora')
+      this.plants = data
     },
     clearMarkers() {
       this.markerInstances.forEach(marker => {
@@ -156,8 +162,7 @@ export default {
     addListenerToMarker(markerInstance, plant, instance) {
       markerInstance.addListener('click', () => {
         this.plantInfo = plant
-        this.plantInfo.instances = instance
-        this.plantInfo.images = plant.images || defaultInfo.images
+        this.plantInfo.images = plant.images
         this.infoDrawer = true
       })
     }

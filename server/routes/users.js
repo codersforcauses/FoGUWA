@@ -1,19 +1,20 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const { checkJwt } = require('../authentication.js')
+const { checkJwt, restrictAccess } = require('../authentication')
+const { findUser } = require('../authentication')
 const { addUser } = require('../seeder/index')
 const { updateModel } = require('./routeUtilities')
-
 const Users = mongoose.model('User')
 const router = express.Router()
 
+// Remove password from returned json
 const sanitiseUser = ({ name, email, _id }) => ({
   name,
   email,
   _id
 })
 
-router.get('/users', checkJwt, async (req, res) => {
+router.get('/users', checkJwt, restrictAccess, async (req, res) => {
   try {
     const users = await Users.find()
     res.json(
@@ -24,7 +25,7 @@ router.get('/users', checkJwt, async (req, res) => {
   }
 })
 
-router.get('/users/:id', checkJwt, async (req, res) => {
+router.get('/users/:id', checkJwt, restrictAccess, async (req, res) => {
   if (mongoose.Types.ObjectId.isValid(req.params.id)) {
     try {
       const user = await Users.findById(req.params.id)
@@ -36,7 +37,12 @@ router.get('/users/:id', checkJwt, async (req, res) => {
   return res.status(400).json('Invalid objectId')
 })
 
-router.post('/users', checkJwt, async (req, res) => {
+router.get('/userinfo', checkJwt, async (req, res) => {
+  const user = await findUser(req)
+  res.send(user)
+})
+
+router.post('/users', checkJwt, restrictAccess, async (req, res) => {
   try { 
     const user = await addUser(req.body)
     res.json(sanitiseUser(user))
@@ -45,7 +51,7 @@ router.post('/users', checkJwt, async (req, res) => {
   }
 })
 
-router.patch('/users/:id', checkJwt, async (req, res) => {
+router.patch('/users/:id', checkJwt, restrictAccess, async (req, res) => {
   const update = { ...req.body }
   delete update._id
   delete update.email
@@ -60,7 +66,7 @@ router.patch('/users/:id', checkJwt, async (req, res) => {
   return res.status(400).json('Invalid objectId')
 })
 
-router.delete('/users/:id', checkJwt, async (req, res) => {
+router.delete('/users/:id', checkJwt, restrictAccess, async (req, res) => {
   if (mongoose.Types.ObjectId.isValid(req.params.id)) {
     try {
       const user = await Users.findByIdAndDelete(req.params.id)
