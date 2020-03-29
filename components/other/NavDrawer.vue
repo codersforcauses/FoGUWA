@@ -40,7 +40,6 @@
           </v-btn>
         </v-list-item-action>
       </v-list-item>
-      </v-list>
       <v-btn
         v-else
         block
