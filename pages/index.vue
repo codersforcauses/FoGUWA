@@ -21,6 +21,7 @@ import UWAPlantMap from '~/components/UWAPlantMap.vue'
 const { iconPaths } = iconData
 
 export default {
+  auth: false,
   components: {
     'uwa-plant-map': UWAPlantMap,
     'plant-info': PlantInfo

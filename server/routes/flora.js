@@ -1,6 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const { checkJwt } = require('../authentication.js')
+const { checkJwt, restrictAccess } = require('../authentication.js')
 const { addFlora } = require('../seeder/index')
 const { updateModel } = require('./routeUtilities')
 
@@ -28,7 +28,7 @@ router.get('/flora/:id', async (req, res) => {
   return res.status(400).json('Invalid objectId')
 })
 
-router.post('/flora', checkJwt, async (req, res) => {
+router.post('/flora', checkJwt, restrictAccess, async (req, res) => {
   try {
     const flora = await addFlora(req.body)
     res.json(flora)
@@ -37,7 +37,7 @@ router.post('/flora', checkJwt, async (req, res) => {
   }
 })
 
-router.patch('/flora/:id', checkJwt, async (req, res) => {
+router.patch('/flora/:id', checkJwt, restrictAccess, async (req, res) => {
   const update = { ...req.body }
   delete update._id
   if (mongoose.Types.ObjectId.isValid(req.params.id)) {
@@ -51,7 +51,7 @@ router.patch('/flora/:id', checkJwt, async (req, res) => {
   return res.status(400).json('Invalid objectId')
 })
 
-router.delete('/flora/:id', checkJwt, async (req, res) => {
+router.delete('/flora/:id', checkJwt, restrictAccess, async (req, res) => {
   if (mongoose.Types.ObjectId.isValid(req.params.id)) {
     try {
       const flora = await Flora.findByIdAndDelete(req.params.id)
