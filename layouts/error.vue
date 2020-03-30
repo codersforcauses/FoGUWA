@@ -58,9 +58,9 @@ export default {
     // },
 /* eslint-disable no-new */
     addShapes(){
-      const color = "#b1d3c3"  
-      const colorLighter = "#b5d7c7"  
-      const colorDarker = "#a7c9b9"  
+      const color = "#70cf94"  
+      const colorLighter = "#76d69a"  
+      const colorDarker = "#6bc78e"  
       // Ground 1
       new zdog.Shape({
         addTo: this.illo,
