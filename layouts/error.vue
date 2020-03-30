@@ -2,6 +2,9 @@
   <div>
     <canvas id="canvas" width="500" height="500" @onResize="handleResize" @mousemove="setMouse">
     </canvas>
+    <p id="text">
+      This page does not exist...
+    </p>
   </div>
 </template>
 
@@ -27,17 +30,19 @@ export default {
     mouseFromCenterY: 0
   }),
   mounted() {
-    this.canvas = document.getElementById("canvas")
-    const rect = this.canvas.getBoundingClientRect()
-    this.canvasWidth = rect.width
-    this.canvasHeight = rect.height
-    this.illo = new zdog.Illustration({
-      element: this.canvas,
-      resize: true,
-      zoom: 1.5
+    this.$nextTick(() => {
+      this.canvas = document.getElementById("canvas")
+      const rect = this.canvas.getBoundingClientRect()
+      this.canvasWidth = rect.width
+      this.canvasHeight = rect.height
+      this.illo = new zdog.Illustration({
+        element: this.canvas,
+        resize: true,
+        zoom: 1.5
+      })
+      this.addShapes()
+      this.faceMouse()
     })
-    this.addShapes()
-    this.faceMouse()
   },
   // ready () {
   //   window.addEventListener('resize', this.handleResize)
@@ -53,16 +58,167 @@ export default {
     // },
 /* eslint-disable no-new */
     addShapes(){
+      const color = "#b1d3c3"  
+      const colorLighter = "#b5d7c7"  
+      const colorDarker = "#a7c9b9"  
+      // Ground 1
+      new zdog.Shape({
+        addTo: this.illo,
+        path: [
+          { x: -30, y: 50 },
+          { x: 30, y: 50 }
+        ],
+        translate: { x: -60 },
+        closed: false,
+        stroke: 5,
+        color,
+      });
+      // Tree 1
+      new zdog.Shape({
+        addTo: this.illo,
+        path: [
+          { x: -10, y: 50 },
+          { x:  -10, y: -50 },
+          { bezier: [
+            { x: -10, y: -50 },
+            { x: -50, y: 20 },
+            { x: -10, y: 20 }
+          ] },
+          { move: { x: 0, y: 50 } },
+          { x: 0, y: -30 },
+          { bezier: [
+            { x: 0, y: -30 },
+            { x: 30, y: 20 },
+            { x: 0, y: 20 }
+          ] },
+        ],
+        translate: { x: -60 },
+        closed: false,
+        stroke: 5,
+        fill: true,
+        color,
+      });
+
+      // Ground 2
+      new zdog.Shape({
+        addTo: this.illo,
+        path: [
+          { x: -30, y: 50 },
+          { x: 30, y: 50 }
+        ],
+        translate: { x: 0, z: -50 },
+        closed: false,
+        stroke: 5,
+        color,
+      });
+      // Tree 2
+      new zdog.Shape({
+        addTo: this.illo,
+        path: [
+          { x: 0, y: 50 },
+          { x:  0, y: -40 },
+        ],
+        translate: { x: 0, z: -50 },
+        closed: false,
+        stroke: 5,
+        fill: true,
+        color,
+      });
+      // Forward leaves
       new zdog.Ellipse({
         addTo: this.illo,
-        diameter: 80,
-        stroke: 20,
-        color: '#636',
-      })
+        diameter: 15,
+        translate: { x: -20, y: 0, z: -40 },
+        stroke: 5,
+        fill: true,
+        color: colorDarker,
+      });
+      // Branch forward
+      new zdog.Shape({
+        addTo: this.illo,
+        path: [
+          { x: 0, y: 15 },
+          { x: -20, y: 0, z: 10 },
+        ],
+        translate: { x: 0, z: -50 },
+        closed: false,
+        stroke: 5,
+        fill: true,
+        color: colorDarker,
+      });
+      // Backward leaves
+      new zdog.Ellipse({
+        addTo: this.illo,
+        diameter: 15,
+        translate: { x: 20, y: 10, z: -60 },
+        stroke: 5,
+        fill: true,
+        color: colorLighter,
+      });
+      // Branch backward
+      new zdog.Shape({
+        addTo: this.illo,
+        path: [
+          { x: 0, y: 25 },
+          { x:  20, y: 10, z: -10 },
+        ],
+        translate: { x: 0, z: -50 },
+        closed: false,
+        stroke: 5,
+        fill: true,
+        color: colorLighter,
+      });
+      // Main leaves
+      new zdog.Ellipse({
+        addTo: this.illo,
+        diameter: 50,
+        translate: { y: -20, z: -50 },
+        stroke: 5,
+        fill: true,
+        color,
+      });
+
+      // Ground 3
+      new zdog.Shape({
+        addTo: this.illo,
+        path: [
+          { x: -30, y: 50 },
+          { x: 30, y: 50 }
+        ],
+        translate: { x: 60 },
+        closed: false,
+        stroke: 5,
+        color,
+      });
+      // Tree 3
+      new zdog.Shape({
+        addTo: this.illo,
+        path: [
+          { x: -10, y: 50 },
+          { x:  -10, y: -50 },
+          { bezier: [
+            { x: -10, y: -50 },
+            { x: -50, y: 20 },
+            { x: -10, y: 20 }
+          ] },
+          { move: { x: 0, y: 50 } },
+          { x: 0, y: -30 },
+          { bezier: [
+            { x: 0, y: -30 },
+            { x: 30, y: 20 },
+            { x: 0, y: 20 }
+          ] },
+        ],
+        translate: { x: 60 },
+        closed: false,
+        stroke: 5,
+        fill: true,
+        color,
+      });
     },
     faceMouse(){
-      this.illo.rotate.x = (this.mouseFromCenterY < 0 ? -1 : 1) * ((1 / 50) * Math.sqrt(Math.abs(this.mouseFromCenterY)))
-      this.illo.rotate.y = (this.mouseFromCenterX < 0 ? -1 : 1) * ((1 / 50) * Math.sqrt(Math.abs(this.mouseFromCenterX)))
+      this.illo.rotate.x = (this.mouseFromCenterY > 0 ? -1 : 1) * ((1 / 100) * Math.sqrt(Math.abs(this.mouseFromCenterY)))
+      this.illo.rotate.y = (this.mouseFromCenterX > 0 ? -1 : 1) * ((1 / 100) * Math.sqrt(Math.abs(this.mouseFromCenterX)))
       this.illo.updateRenderGraph()
       requestAnimationFrame( this.faceMouse )
     },
@@ -78,8 +234,18 @@ export default {
 </script>
 
 <style scoped>
+#text {
+  align-self: center;
+  font-family: 'Roboto';
+  font-weight: 600;
+  font-size: 30px;
+  color: #666;
+  position: absolute;
+  left: calc(50vw - 175px);
+  top: calc(50vh + 120px);
+}
   #canvas {
+    height: calc(100vh - 96px);
     width: 100vw;
-    height: calc(100vh - 52px)
   }
 </style>
