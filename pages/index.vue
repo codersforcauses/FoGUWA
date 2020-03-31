@@ -27,8 +27,7 @@ export default {
     'plant-info': PlantInfo
   },
   data: () => ({
-    infoDrawer: false,
-    plantInfo: null
+    infoDrawer: false
   }),
   computed: {
     ...mapGetters({
