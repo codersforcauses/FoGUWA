@@ -25,7 +25,7 @@
       move on map
     </v-btn>
     <v-chip label outlined small>
-      {{ "Lat: " + instance.location.coordinates[0] + " Long: " + instance.location.coordinates[1] }}
+      {{ "Lat: " + instance.location.coordinates[0] + " Lng: " + instance.location.coordinates[1] }}
     </v-chip>
     <v-card-actions class="px-4 pb-4">
       <v-btn color="primary" text @click="$emit('back')">
