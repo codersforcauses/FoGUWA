@@ -46,7 +46,8 @@ export default {
       getPlantIcon: 'plants/getPlantIcon',
       selectedPlant: 'plants/getSelectedPlant',
       selectedInstance: 'plants/getSelectedInstance',
-      centeredInstance: 'plants/getCenteredInstance'
+      centeredInstance: 'plants/getCenteredInstance',
+      getDraggable: 'plants/getDraggable'
     }),
     mapConfig() {
       return {
@@ -79,6 +80,18 @@ export default {
         this.setCenterNull()
       }
     },
+    getDraggable(instance){
+      if(instance){
+        const markerIndex = this.markerInstances.findIndex(( markerInstance ) => {
+          return markerInstance.instance === instance
+        })
+        this.markerInstances[markerIndex].marker.setDraggable(true)
+      } else {
+        this.markerInstances.forEach(markerInstance => {
+          markerInstance.marker.setDraggable(false)
+        })
+      }
+    },
     position() {
       if (!this.userMarker) {
         if (this.position) {
@@ -105,8 +118,9 @@ export default {
     ...mapMutations({
       setPlant: 'plants/setSelectedPlant',
       setInstance: 'plants/setSelectedInstance',
-      setInstanceMarker: 'plants/setInstanceMarker',
-      setCenterNull: 'plants/setCenteredNull'
+      setDraggable: 'plants/setDraggable',
+      setCenterNull: 'plants/setCenteredNull',
+      setInstancePositon: 'plants/setInstancePosition'
     }),
     loadMarkers() {
       if (this.map && this.google) {
@@ -117,14 +131,13 @@ export default {
           plant.instances.map(instance => {
             const markerInst = this.createMarkerInstance(plant, instance)
             this.addListenerToMarker(markerInst, plant, instance)
-            this.markerInstances.push(markerInst)
-            this.setInstanceMarker({ instance, marker: markerInst })
+            this.markerInstances.push({ instance: instance._id, marker: markerInst })
           })
         })
       }
     },
     clearMarkers() {
-      this.markerInstances.forEach(marker => {
+      this.markerInstances.forEach(({ marker }) => {
         marker.setMap(null)
       })
       this.markerInstances = []
@@ -150,6 +163,7 @@ export default {
           anchor: new this.google.maps.Point(10, 15),
           ...icon
         },
+        draggable: false,
         crossOnDrag: false,
         map: this.map,
       })
@@ -160,6 +174,12 @@ export default {
         this.setPlant(plant)
         this.setInstance(instance)
       })
+      this.google.maps.event.addListener(markerInstance, 'dragend', () => {
+        this.handleDrag(markerInstance, instance)
+      })
+    },
+    handleDrag(marker, instance){
+      this.setInstancePositon({ instance, position: [marker.position.lat(), marker.position.lng()] })
     },
     setCenter(coords) {
       this.map.panTo(coords)

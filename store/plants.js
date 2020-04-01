@@ -1,9 +1,9 @@
 const state = () => ({
   plants: [],
-  instanceMarkers: [],
   selectedPlant: null,
   selectedInstance: null,
   centeredInstance: null,
+  draggableInstance: null,
   plantIcons: []
 })
 
@@ -15,13 +15,25 @@ const getters = {
     return state.plants.find(({ _id }) => _id === id)
   },
   getSelectedPlant (state) {
-    return state.selectedPlant
+    return state.plants.find(plant => plant._id === state.selectedPlant)
   },
   getSelectedInstance (state) {
-    return state.selectedInstance
+    let res = null
+    let targetInstance = null
+    state.plants.forEach(plant => {
+      res = plant.instances.find(instance => instance._id === state.selectedInstance)
+      if(res) targetInstance = res
+    })
+    return targetInstance
   },
   getCenteredInstance (state) {
-    return state.centeredInstance
+    let res = null
+    let targetInstance = null
+    state.plants.forEach(plant => {
+      res = plant.instances.find(instance => instance._id === state.centeredInstance)
+      if(res) targetInstance = res
+    })
+    return targetInstance
   },
   getAllPlantIcons (state) {
     return state.plantIcons
@@ -31,8 +43,8 @@ const getters = {
     ? state.plantIcons[plantName]
     : state.plantIcons.info
   },
-  getMarker: (state) => instanceId => {
-    return state.instanceMarkers.find(instance => instance.id === instanceId)
+  getDraggable (state) {
+    return state.draggableInstance
   }
 }
 
@@ -41,14 +53,14 @@ const mutations = {
     state.plants = plants
   },
   setSelectedPlant (state, plant) {
-    state.selectedPlant = plant
+    state.selectedPlant = plant._id
   },
   setSelectedInstance (state, instance) {
-    state.selectedInstance = instance
+    state.selectedInstance = instance._id
   },
   setCenteredInstance (state, instance) {
-    state.centeredInstance = instance
-    state.selectedInstance = instance
+    state.centeredInstance = instance._id
+    state.selectedInstance = instance._id
   },
   setCenteredNull (state) {
     state.centeredInstance = null
@@ -56,8 +68,17 @@ const mutations = {
   setPlantIcons (state, icons) {
     state.plantIcons = icons
   },
-  setInstanceMarker (state, { instance, marker }) {
-    state.instanceMarkers.push({ id: instance._id, draggable: marker.setDraggable })
+  setDraggable (state, instanceId) {
+    state.draggableInstance = instanceId
+  },
+  setInstancePosition(state, { instance, position }){
+    let res = null
+    let targetInstance = null
+    state.plants.forEach(plant => {
+      res = plant.instances.find(candidateInstance => candidateInstance._id === instance._id)
+      if (res) targetInstance = res
+    })
+    if(targetInstance) targetInstance.location.coordinates = position
   }
 }
 

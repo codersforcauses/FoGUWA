@@ -18,7 +18,7 @@
       rows="10"
       no-resize
     ></v-textarea>
-    <v-btn outlined color="primary" class="ml-3">
+    <v-btn outlined color="primary" class="ml-3" @click="handleMarkerMove">
       <v-icon class="mr-2">
         mdi-crosshairs-gps
       </v-icon>
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapMutations } from 'vuex'
 
 export default {
   props: {
@@ -49,10 +49,18 @@ export default {
       required: true
     }
   },
-  computed: {
-    ...mapGetters({
-      instanceMarker: 'plants/getMarker'
-    })
+  data: () => ({
+    draggable: false
+  }),
+  methods: {
+    ...mapMutations({
+      setDraggable: 'plants/setDraggable',
+      centerInstance: 'plants/setCenteredInstance'
+    }),
+    handleMarkerMove(){
+      this.centerInstance(this.instance)
+      this.setDraggable(this.instance._id)
+    }
   }
 }
 </script>
