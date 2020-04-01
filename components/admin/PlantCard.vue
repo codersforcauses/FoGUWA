@@ -1,5 +1,5 @@
 <template>
-  <v-window v-model="displayForm">
+  <v-window v-if="plant" v-model="displayForm">
     <v-window-item :value="2">
       <v-btn
         v-if="plant.images.length > 0"
@@ -106,23 +106,7 @@ export default {
   props:{
     plant:{
       type: Object,
-      default: () => ({
-        name: '',
-        scientificName: '',
-        description: '',
-        icon: 'lotus',
-        instance: [
-          {
-            heading: '',
-            description: '',
-            location: {
-              type: 'Point',
-              coordinates: [-31.976764, 115.818220]
-            },
-          }
-        ],
-        images: []
-      })
+      required: true
     },
     icon: {
       type: Object,
@@ -139,7 +123,7 @@ export default {
     })
   },
   mounted(){
-    this.setPlant(this.plant)
+    this.setPlant(this.plant._id)
   },
   methods: {
     ...mapMutations({

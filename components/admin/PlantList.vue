@@ -18,11 +18,6 @@
             </v-chip>
           </v-list-item-subtitle>
         </v-list-item-content>
-        <v-list-item-action>
-          <v-btn color="indigo" text dark @click="editView = !editView">
-            EDIT
-          </v-btn>
-        </v-list-item-action>
       </v-list-item>  
     </v-list>
   </v-sheet>
