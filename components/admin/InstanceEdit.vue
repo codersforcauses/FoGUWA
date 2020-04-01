@@ -22,7 +22,7 @@
       <v-icon class="mr-2">
         mdi-crosshairs-gps
       </v-icon>
-      move on map
+      {{ draggable ? "lock position" : "move on map" }}
     </v-btn>
     <v-chip label outlined small>
       {{ "Lat: " + instance.location.coordinates[0] + " Lng: " + instance.location.coordinates[1] }}
@@ -58,8 +58,15 @@ export default {
       centerInstance: 'plants/setCenteredInstance'
     }),
     handleMarkerMove(){
-      this.centerInstance(this.instance)
-      this.setDraggable(this.instance._id)
+      if(!this.draggable){
+        this.centerInstance(this.instance)
+        this.setDraggable(this.instance._id)
+        this.draggable = true
+      } else {
+        this.setDraggable(null)
+        this.draggable = false
+      }
+      
     }
   }
 }
