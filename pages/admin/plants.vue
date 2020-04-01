@@ -39,8 +39,8 @@ export default {
     ...mapActions({
       loadPlants: 'plants/loadPlants'
     }),
-    handlePlantClick(plant) {
-      this.$router.replace({ path: '/admin/plants/' + plant._id })
+    handlePlantClick(payload) {
+      this.$router.replace({ path: '/admin/plants/' + payload.plant._id })
     }
   },
 }

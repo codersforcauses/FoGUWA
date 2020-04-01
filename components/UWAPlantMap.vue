@@ -156,7 +156,7 @@ export default {
     },
     addListenerToMarker(markerInstance, plant, instance) {
       markerInstance.addListener('click', () => {
-        this.$emit('plant-clicked', plant, instance)
+        this.$emit('plant-clicked', { plant, instance })
         this.setPlant(plant)
         this.setInstance(instance)
       })

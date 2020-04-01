@@ -47,7 +47,7 @@ export default {
     ...mapActions({
       loadPlants: 'plants/loadPlants'
     }),
-    handlePlantClick(plant) {
+    handlePlantClick(payload) {
       this.infoDrawer = true
     }
   }
