@@ -9,9 +9,9 @@
 <script>
 import { mapState, mapMutations, mapGetters } from 'vuex'
 import { uwaMapSettings } from '@/assets/js/mapSettings'
-import iconData from '@/assets/js/plantIcons'
-// eslint-disable-next-line import/order
 import GoogleMapLoader from './GoogleMapLoader'
+// eslint-disable-next-line import/order
+import iconData from '@/assets/js/plantIcons'
 const { iconStyle } = iconData
 
 // Use https://www.gps-coordinates.net/ to easily fetch coordinates
