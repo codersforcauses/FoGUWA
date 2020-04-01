@@ -19,7 +19,10 @@
       no-resize
     ></v-textarea>
     <v-btn outlined color="primary" class="ml-3">
-      <v-icon>mdi-crosshairs-gps</v-icon>&nbsp;move on map
+      <v-icon class="mr-2">
+        mdi-crosshairs-gps
+      </v-icon>
+      move on map
     </v-btn>
     <v-chip label outlined small>
       {{ "Lat: " + instance.location.coordinates[0] + " Long: " + instance.location.coordinates[1] }}
