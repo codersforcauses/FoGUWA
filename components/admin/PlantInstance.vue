@@ -27,7 +27,7 @@
             <v-btn color="primary" text @click="confirmDelete = false">
               NO
             </v-btn>
-            <v-btn color="primary" dark @click="confirmDelete = true">
+            <v-btn color="primary" dark @click="handleDelete">
               YES
             </v-btn>
           </v-card-actions>
@@ -43,6 +43,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   props: {
     plant: {
@@ -71,6 +73,12 @@ export default {
     }
   },
   methods: {
+    ...mapActions({
+      deletePlant: 'plants/deletePlant'
+    }),
+    handleDelete(){
+      this.deletePlant(this.plant._id)
+    },
     emitInstanceEdit(){
       this.$emit("instanceEdit", this.plantInstance)
     },

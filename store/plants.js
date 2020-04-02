@@ -69,9 +69,13 @@ const mutations = {
   setDraggable (state, instanceId) {
     state.draggableInstance = instanceId
   },
-  setInstancePosition(state, { instance, position }){
+  setInstancePosition(state, { instance, position }) {
     const targetInstance = getInstance(state, instance._id)
     if(targetInstance) targetInstance.location.coordinates = position
+  },
+  deletePlant(state, plantId) {
+    const plantIndex = state.plants.findIndex(plant => plant._id === plantId)
+    state.plants.splice(plantIndex, 1)
   }
 }
 
@@ -79,6 +83,10 @@ const actions = {
   async loadPlants ({commit}) {
     const data = await this.$axios.$get('/api/flora')
     commit('setPlants', data)
+  },
+  async deletePlant ({commit}, plantId) {
+    const result = await this.$axios.$delete('/api/flora/' + plantId)
+    if(result.status) commit('deletePlant', plantId) // DOTH NOT WORK find out what result looks like
   }
 }
 
