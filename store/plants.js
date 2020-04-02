@@ -7,6 +7,16 @@ const state = () => ({
   plantIcons: []
 })
 
+const getInstance = (state, instanceId) => {
+  let res = null
+    let targetInstance = null
+    state.plants.forEach(plant => {
+      res = plant.instances.find(instance => instance._id === instanceId)
+      if(res) targetInstance = res
+    })
+    return targetInstance
+}
+
 const getters = {
   plants (state) {
     return state.plants
@@ -18,22 +28,10 @@ const getters = {
     return state.plants.find(plant => plant._id === state.selectedPlant)
   },
   getSelectedInstance (state) {
-    let res = null
-    let targetInstance = null
-    state.plants.forEach(plant => {
-      res = plant.instances.find(instance => instance._id === state.selectedInstance)
-      if(res) targetInstance = res
-    })
-    return targetInstance
+    return getInstance(state, state.selectedInstance)
   },
   getCenteredInstance (state) {
-    let res = null
-    let targetInstance = null
-    state.plants.forEach(plant => {
-      res = plant.instances.find(instance => instance._id === state.centeredInstance)
-      if(res) targetInstance = res
-    })
-    return targetInstance
+    return getInstance(state, state.centeredInstance)
   },
   getAllPlantIcons (state) {
     return state.plantIcons
