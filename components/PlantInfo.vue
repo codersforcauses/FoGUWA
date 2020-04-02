@@ -48,7 +48,7 @@
       </div>
       <div v-if="instance.heading || instance.description">
         <v-divider />
-        <v-subheader>
+        <v-subheader class="font-weight-bold">
           {{ instance.heading }}
         </v-subheader>
         <v-card-text>

@@ -9,12 +9,12 @@ const state = () => ({
 
 const getInstance = (state, instanceId) => {
   let res = null
-    let targetInstance = null
-    state.plants.forEach(plant => {
-      res = plant.instances.find(instance => instance._id === instanceId)
-      if(res) targetInstance = res
-    })
-    return targetInstance
+  let targetInstance = null
+  state.plants.forEach(plant => {
+    res = plant.instances.find(instance => instance._id === instanceId)
+    if(res) targetInstance = res
+  })
+  return targetInstance
 }
 
 const getters = {
@@ -70,12 +70,7 @@ const mutations = {
     state.draggableInstance = instanceId
   },
   setInstancePosition(state, { instance, position }){
-    let res = null
-    let targetInstance = null
-    state.plants.forEach(plant => {
-      res = plant.instances.find(candidateInstance => candidateInstance._id === instance._id)
-      if (res) targetInstance = res
-    })
+    const targetInstance = getInstance(state, instance._id)
     if(targetInstance) targetInstance.location.coordinates = position
   }
 }
