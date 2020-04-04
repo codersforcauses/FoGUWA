@@ -8,8 +8,8 @@
 
 <script>
 import { mapState, mapMutations, mapGetters } from 'vuex'
-import { uwaMapSettings } from '@/assets/js/mapSettings'
 import GoogleMapLoader from './GoogleMapLoader'
+import { uwaMapSettings } from '@/assets/js/mapSettings'
 // eslint-disable-next-line import/order
 import iconData from '@/assets/js/plantIcons'
 const { iconStyle } = iconData
