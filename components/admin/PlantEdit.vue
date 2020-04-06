@@ -19,6 +19,15 @@
       :value="plant.scientificName"
       class="mx-4"
     ></v-text-field>
+    <v-textarea
+      clearable
+      label="Description"
+      outlined
+      :value="plant.description"
+      class="mx-4"
+      rows="10"
+      no-resize
+    ></v-textarea>
     <v-card-actions class="mx-4 mb-6">
       <p class="ma-0">
         Choose icon &emsp;
@@ -40,15 +49,6 @@
         </v-btn>
       </v-btn-toggle>
     </v-card-actions>
-    <v-textarea
-      clearable
-      label="Description"
-      outlined
-      :value="plant.description"
-      class="mx-4"
-      rows="10"
-      no-resize
-    ></v-textarea>
     <v-card-actions class="px-4 pb-4">
       <v-btn color="primary" text @click="emitBack">
         BACK
