@@ -42,7 +42,7 @@
     </v-card-actions>
     <v-textarea
       clearable
-      label="Name"
+      label="Description"
       outlined
       :value="plant.description"
       class="mx-4"
@@ -105,6 +105,8 @@ export default {
 
 <style scoped>
   .round {
+    height: 50px !important;
+    width: 50px !important;
     border-radius: 50% !important;
     border-width: 2px !important;
   }
