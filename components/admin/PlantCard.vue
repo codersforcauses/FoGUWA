@@ -18,16 +18,16 @@
         </v-icon>
       </v-btn>
       <v-carousel
-        v-if="plant.images.length > 0"
+        v-show="plant.images.length > 0"
         hide-delimiters
         cycle
         interval="3500"
         show-arrows-on-hover
         :show-arrows="plant.images.length > 1"
-        height="150px"
+        height="450px"
       >
         <v-carousel-item v-for="(image, i) in plant.images" :key="i">
-          <v-img :src="image"></v-img>
+          <v-img :src="image" height="450px" />
         </v-carousel-item>
       </v-carousel>
       <div
