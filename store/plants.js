@@ -1,20 +1,27 @@
 const state = () => ({
   plants: [],
+  tempPlant: null,
   selectedPlant: null,
   selectedInstance: null,
   centeredInstance: null,
   draggableInstance: null,
-  plantIcons: []
+  plantIcons: [],
+  updateMap: false,
 })
 
-const getInstance = (state, instanceId) => {
-  let res = null
-  let targetInstance = null
-  state.plants.forEach(plant => {
-    res = plant.instances.find(instance => instance._id === instanceId)
-    if(res) targetInstance = res
-  })
-  return targetInstance
+const getInstance = (plants, instanceId) => {
+  for (const plant of plants) {
+    for (const instance of plant.instances) {
+      if (instance._id === instanceId) return instance
+    }
+  }
+}
+const getPlantFromInstance = (plants, instanceId) => {
+  for (const plant of plants) {
+    for (const instance of plant.instances) {
+      if (instance._id === instanceId) return plant
+    }
+  }
 }
 
 const getters = {
@@ -28,10 +35,10 @@ const getters = {
     return state.plants.find(plant => plant._id === state.selectedPlant)
   },
   getSelectedInstance (state) {
-    return getInstance(state, state.selectedInstance)
+    return getInstance(state.plants, state.selectedInstance)
   },
   getCenteredInstance (state) {
-    return getInstance(state, state.centeredInstance)
+    return getInstance(state.plants, state.centeredInstance)
   },
   getAllPlantIcons (state) {
     return state.plantIcons
@@ -43,6 +50,9 @@ const getters = {
   },
   getDraggable (state) {
     return state.draggableInstance
+  },
+  updateMap(state) {
+    return state.updateMap
   }
 }
 
@@ -50,11 +60,29 @@ const mutations = {
   setPlants (state, plants) {
     state.plants = plants
   },
+  setPlant (state, plant) {
+    const plantIndex = state.plants.findIndex(targetPlant => targetPlant._id === plant.Id)
+    state.plants[plantIndex] = plant
+  },
+  setTempPlant (state, plant){
+    state.tempPlant = JSON.parse(JSON.stringify(plant))
+  },
+  revertTempPlant (state) {
+    const plantIndex = state.plants.findIndex(plant => plant._id === state.tempPlant._id)
+    state.plants[plantIndex] = state.tempPlant
+    state.tempPlant = null
+  },
   setSelectedPlant (state, plant) {
     state.selectedPlant = plant._id
   },
+  setSelectedPlantNull (state) {
+    state.selectedPlant = null
+  },
   setSelectedInstance (state, instance) {
     state.selectedInstance = instance._id
+  },
+  setSelectedInstanceNull (state) {
+    state.selectedInstance = null
   },
   setCenteredInstance (state, instance) {
     state.centeredInstance = instance._id
@@ -76,6 +104,17 @@ const mutations = {
   deletePlant(state, plantId) {
     const plantIndex = state.plants.findIndex(plant => plant._id === plantId)
     state.plants.splice(plantIndex, 1)
+  },
+  deleteInstance(state, { plantId, instanceId }) {
+    const plant = state.plants.find(plant => plant._id === plantId)
+    const instanceIndex = plant.instances.findIndex(instance => instance._id === instanceId)
+    plant.instances.splice(instanceIndex, 1)
+  },
+  updateMap(state) {
+    state.updateMap = true
+  },
+  mapUpdated(state) {
+    state.updateMap = false
   }
 }
 
@@ -84,9 +123,29 @@ const actions = {
     const data = await this.$axios.$get('/api/flora')
     commit('setPlants', data)
   },
-  async deletePlant ({commit}, plantId) {
-    const result = await this.$axios.$delete('/api/flora/' + plantId)
-    if(result.status) commit('deletePlant', plantId) // DOTH NOT WORK find out what result looks like
+  deleteInstance ({ commit, getters }, instanceId) {
+    const { plants } = getters
+    const plant = getPlantFromInstance(plants, instanceId)
+    commit('setTempPlant', plant)
+    commit('deleteInstance', { plantId: plant._id, instanceId })
+    this.$axios.patch('/api/flora/' + plant._id, plant).then(() => {
+      commit('setTempPlant', null)
+    }).catch(err => {
+      console.log(err);
+      commit('revertTempPlant')
+    })
+    commit('updateMap')
+  },
+  deletePlant ({commit}, plantId) {
+    this.$axios.delete('/api/flora/' + plantId).then((res) => {
+      commit('deletePlant', plantId)
+      commit('setCenteredNull')
+      commit('setSelectedPlantNull')
+      commit('setSelectedInstanceNull')
+      commit('updateMap')
+    }).catch((err) => {
+      commit('setError', err, { root: true })
+    })
   }
 }
 
