@@ -1,22 +1,6 @@
 <template>
   <v-window v-if="plant" v-model="displayForm">
     <v-window-item :value="2">
-      <v-btn
-        v-if="plant.images.length > 0"
-        fab
-        absolute
-        left
-        small
-        depressed
-        color="#00000077"
-        :ripple="false"
-        class="mt-2 ml-6"
-        @click="$router.replace({ path: '/admin/plants' })"
-      >
-        <v-icon color="white">
-          mdi-arrow-left
-        </v-icon>
-      </v-btn>
       <v-carousel
         v-if="plant.images.length > 0"
         hide-delimiters
@@ -73,7 +57,6 @@
         />
       </v-list>
       <v-btn 
-        v-if="plant.images.length === 0"
         color="primary"
         text
         class="ml-3"
@@ -86,7 +69,7 @@
       <plant-edit :plant="plant" @back="handleBackClick" />
     </v-window-item>
     <v-window-item :value="1">
-      <instance-edit :instance="getSelected" @back="handleBackClick" />
+      <instance-edit :instance="getSelectedInstance" @back="handleBackClick" />
     </v-window-item>
   </v-window>
 </template>
@@ -119,16 +102,20 @@ export default {
   }),
   computed: {
     ...mapGetters({
-      getSelected: "plants/getSelectedInstance"
+      getSelectedInstance: "plants/getSelectedInstance",
+      getSelectedPlant: "plants/getSelectedPlant"
     })
   },
-  mounted(){
-    this.setPlant(this.plant._id)
+  watch: {
+    getSelectedPlant(val) {
+      console.log(val)
+      if(val === null) this.$router.replace({ path: '/admin/plants' })
+    }
   },
   methods: {
     ...mapMutations({
       centerInstance: 'plants/setCenteredInstance',
-      setPlant: 'plants/setSelectedPlant'
+      setSelectedPlant: 'plants/setSelectedPlant'
     }),
     handleBackClick(){
       this.displayForm = 2

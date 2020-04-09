@@ -9,7 +9,7 @@
           mdi-pencil
         </v-icon>
       </v-btn>
-      <v-dialog v-model="confirmDelete" persistent max-width="400">
+      <v-dialog v-model="deleteInstanceModel" persistent max-width="400">
         <template v-slot:activator="{ on }">
           <v-btn color="primary" icon v-on="on">
             <v-icon>
@@ -18,13 +18,21 @@
           </v-btn>
         </template>
         <v-card>
-          <v-card-title class="headline">
+          <v-card-title v-if="oneInstanceRemaining" class="headline">
+            Delete this entire plant?
+          </v-card-title>
+          <v-card-title v-else class="headline">
             Delete this plant instance?
           </v-card-title>
-          <v-card-text>You are about to delete {{ plantInstance.heading || plant.name }}. Would you like to proceed?</v-card-text>
+          <v-card-text v-if="oneInstanceRemaining">
+            You are about to competely delete {{ plant.name }}. Would you like to proceed?
+          </v-card-text>
+          <v-card-text v-else>
+            You are about to delete a location of {{ plant.name }}. Would you like to proceed?
+          </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" text @click="confirmDelete = false">
+            <v-btn color="primary" text @click="deleteInstanceModel = false">
               NO
             </v-btn>
             <v-btn color="primary" dark @click="handleDelete">
@@ -65,19 +73,25 @@ export default {
     }
   },
   data: () => ({
-    confirmDelete: false,
+    deleteInstanceModel: false,
   }),
   computed: {
     instanceHovered() {
       return this.instanceIndex === this.indexSelected
+    },
+    oneInstanceRemaining() {
+      return this.plant.instances.length <= 1
     }
   },
   methods: {
     ...mapActions({
+      deleteInstance: 'plants/deleteInstance',
       deletePlant: 'plants/deletePlant'
     }),
     handleDelete(){
-      this.deletePlant(this.plant._id)
+      if(this.oneInstanceRemaining) this.deletePlant(this.plant._id)
+      else this.deleteInstance(this.plantInstance._id)
+      this.deleteInstanceModel = false
     },
     emitInstanceEdit(){
       this.$emit("instanceEdit", this.plantInstance)
