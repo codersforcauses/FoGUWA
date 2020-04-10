@@ -21,7 +21,10 @@
           <v-card-title class="headline">
             Delete this plant instance?
           </v-card-title>
-          <v-card-text>You are about to delete {{ plantInstance.heading || plant.name }}. Would you like to proceed?</v-card-text>
+          <v-card-text>
+            You are about to delete {{ plantInstance.heading || plant.name }}.
+            Would you like to proceed?
+          </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="primary" text @click="confirmDelete = false">
