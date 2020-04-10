@@ -8,7 +8,7 @@ const getToken = req => {
     ? req.cookies['auth._token.auth0']
     : req.headers.authorization
   const tokenMatch = /(?<=Bearer ).+/.exec(tokenString)
-  return (tokenMatch || {}).length > 0 ? tokenMatch[0] : null
+  return (tokenMatch || []).length > 0 ? tokenMatch[0] : null
 }
 
 const checkJwt = expressjwt({
@@ -45,7 +45,7 @@ const findUser = async req => {
     const { name, _id } = adminObject
     return { name, _id } || null
   } catch (error) {
-    if(error.response.statusText === 'Unauthorized') throw new Error('User is unauthrorized')
+    if(error.response.statusText === 'Unauthorized') throw new Error('User is unauthrorised')
   }
 }
 
@@ -60,7 +60,7 @@ const userIsAdmin = async req => {
 
 const restrictAccess = async (req, res, next) => {
   const isAdmin = await userIsAdmin(req)
-  isAdmin ? next() : res.send('Access Denied')
+  isAdmin ? next() : res.status(401).json({ message: 'Access Denied' })
 }
 
 module.exports = { checkJwt, getToken, getUserInfo, restrictAccess, findUser, userIsAdmin }
