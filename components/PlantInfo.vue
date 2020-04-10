@@ -66,7 +66,7 @@ export default {
     value: Boolean,
     plant: {
       type: Object,
-      default: null
+      required: true
     },
     instance: {
       type: Object,
