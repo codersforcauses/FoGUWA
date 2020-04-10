@@ -1,22 +1,6 @@
 <template>
   <v-window v-if="plant" v-model="displayForm">
     <v-window-item :value="2">
-      <v-btn
-        v-if="plant.images.length > 0"
-        fab
-        absolute
-        left
-        small
-        depressed
-        color="#00000077"
-        :ripple="false"
-        class="mt-2 ml-6"
-        @click="$router.replace({ path: '/admin/plants' })"
-      >
-        <v-icon color="white">
-          mdi-arrow-left
-        </v-icon>
-      </v-btn>
       <v-carousel
         v-if="plant.images.length > 0"
         hide-delimiters
@@ -24,10 +8,10 @@
         interval="3500"
         show-arrows-on-hover
         :show-arrows="plant.images.length > 1"
-        height="150px"
+        height="400px"
       >
         <v-carousel-item v-for="(image, i) in plant.images" :key="i">
-          <v-img :src="image"></v-img>
+          <v-img :src="image" height="400px"></v-img>
         </v-carousel-item>
       </v-carousel>
       <div
@@ -73,7 +57,6 @@
         />
       </v-list>
       <v-btn 
-        v-if="plant.images.length === 0"
         color="primary"
         text
         class="ml-3"
