@@ -73,7 +73,17 @@ export default {
       }
     },
     defaultInfo() {
-      return defaultInfo
+      return {
+        plantName: 'Plant Name',
+        sciName: 'Scientific Plant Name',
+        images: [
+          'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/dsc-5454_orig.jpg',
+          'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/dsc-7528_orig.jpg',
+          'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/20090626-uwa-grounds2-007_orig.jpg'
+        ],
+        description:
+          'Plants are mainly multicellular, predominantly photosynthetic eukaryotes of the kingdom Plantae. Historically, plants were treated as one of two kingdoms including all living things that were not animals, and all algae and fungi were treated as plants.'
+      }
     }
   },
   watch: {
@@ -118,7 +128,7 @@ export default {
           // Plot all instances
           plant.instances.forEach(instance => {
             const markerInst = this.createMarkerInstance(plant, instance)
-            this.addListenerToMarker(markerInst, plant, instance)
+            this.addListenerToMarker(markerInst, plant)
             this.markerInstances.push(markerInst)
           })
         })
@@ -159,7 +169,7 @@ export default {
         map: this.map
       })
     },
-    addListenerToMarker(markerInstance, plant, instance) {
+    addListenerToMarker(markerInstance, plant) {
       markerInstance.addListener('click', () => {
         this.plantInfo = plant
         this.plantInfo.images = plant.images
