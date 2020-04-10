@@ -76,7 +76,7 @@
     "description": "Jarrah, djarraly in Noongar language, also known as the Swan River mahogany, naturally occurs in the south-west corner of Western Australia, where rainfall generally exceeds 600mm. It is found as far as Mooliabeenee, Clackline, Narrogin, and the Stirling Range. Its northern limit is Mount Peron near Jurien Bay. However, there are also outliers in Kulin and Tutanning in the Pingelly Shire. The plant may take the form of a mallee, a multi-stemmed eucalypt, in Mount Lesueur and the Stirling Range. It typically grows in soils derived from ironstone. Jarrah gum nuts are an important food source for the threatened Forest red-tailed black cockatoo that often visit the campus. Its flowers are an important food source for birds and insects.",
     "instances": [
       {
-        "title": "Dead",
+        "heading": "Dead",
         "description": "Jarrahs prefer acidic soils but when they are irrigated with alkaline bore water, the soil pH increases. As a result, several micronutrients that are readily available for uptake by roots become poorly available. As a result, the leaves that need these micronutrients, become ‘chlorotic’ i.e. loss of the normal green coloration of leaves of plants, characterised by pale leaf lamina. If no action is taken, the trees will succumb, which sadly happened with many jarrahs that would have been older than the university itself. The cure is easy and cheap – acidify the soil back to its original pH by spreading iron sulfate below the canopy.",
         "location": {
           "type": "Point",
@@ -84,7 +84,7 @@
         }
       },
       {
-        "title": "Yellowing Bark",
+        "heading": "Yellowing Bark",
         "description": "The water pumped up from the ground in Perth Western suburbs comes from limestone caves below the surface. As a result, the irrihgation water is alkaline, and this raises the pH of the soil, and renders micronutrients such as iron , manganese, zinc and copper poorly available. Species such as jarrah and banksias are adapted to acidic soils, and cannot cope with an increase in soil pH. Their leaves turn yellow, branches die, and eventually the trees succumb. The cure is easy and cheap: acidify the soil back to its original pH. That can be done by spreading iron sulfate below the canopy.  Friends of the Grounds have done exactly that, and thus stopped further decline of some of the affected trees. Volunteers are welcome to assist with this activity.",
         "location": {
           "type": "Point",
