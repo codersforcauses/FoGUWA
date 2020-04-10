@@ -23,15 +23,16 @@
     </v-btn>
     <v-card flat>
       <v-carousel
+        v-if="plantInfo.images.length > 0"
         hide-delimiters
         cycle
         interval="3500"
         show-arrows-on-hover
         :show-arrows="plantInfo.images.length > 1"
-        height="30vh"
+        height="400px"
       >
         <v-carousel-item v-for="(image, i) in plantInfo.images" :key="i">
-          <v-img :src="image"></v-img>
+          <v-img :src="image" height="400px"></v-img>
         </v-carousel-item>
       </v-carousel>
       <v-card-title headline>
@@ -44,10 +45,10 @@
         {{ plantInfo.description }}
       </v-card-text>
       <v-card-subtitle style="color: rgb(0,0,0,0.87); font-weight: bold;">
-        {{ plantInfo.instances ? plantInfo.instances.title : "" }}
+        {{ plantInfo.instance ? plantInfo.instance.title : "" }}
       </v-card-subtitle>
       <v-card-text>
-        {{ plantInfo.instances ? plantInfo.instances.description : "" }}
+        {{ plantInfo.instance ? plantInfo.instance.description : "" }}
       </v-card-text>
     </v-card>
   </v-navigation-drawer>
