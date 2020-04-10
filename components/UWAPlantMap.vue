@@ -128,7 +128,7 @@ export default {
         // Create new markers and store them
         this.plants.forEach((plant, index) => {
           // Plot all instances
-          plant.instances.map(instance => {
+          plant.instances.forEach(instance => {
             const markerInst = this.createMarkerInstance(plant, instance)
             this.addListenerToMarker(markerInst, plant, instance)
             this.markerInstances.push({ instance: instance._id, marker: markerInst })
