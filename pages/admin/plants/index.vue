@@ -1,8 +1,5 @@
 <template>
-  <div>
-    <NuxtChild v-if="plantInfo" />
-    <plant-list v-else :plants="plants" />
-  </div>
+  <plant-list :plants="plants" />
 </template>
 
 <script>
@@ -17,9 +14,6 @@
         type: Array,
         required: true
       }
-    },
-    data: () => ({
-      plantInfo: false,
-    })
+    }
   }
 </script>
