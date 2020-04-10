@@ -82,8 +82,8 @@
 
 <script>
 export default {
-  head: {
+  head: () => ({
     title: 'About Us'
-  }
+  })
 }
 </script>
