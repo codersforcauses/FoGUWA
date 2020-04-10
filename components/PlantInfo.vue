@@ -23,15 +23,16 @@
     </v-btn>
     <v-card flat>
       <v-carousel
+        v-if="plantInfo.images.length > 0"
         hide-delimiters
         cycle
         interval="3500"
         show-arrows-on-hover
         :show-arrows="plantInfo.images.length > 1"
-        height="60%"
+        height="400px"
       >
         <v-carousel-item v-for="(image, i) in plantInfo.images" :key="i">
-          <v-img :src="image"></v-img>
+          <v-img :src="image" height="400px"></v-img>
         </v-carousel-item>
       </v-carousel>
       <v-card-title primary-title>
