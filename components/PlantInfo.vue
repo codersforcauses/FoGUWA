@@ -28,13 +28,13 @@
         interval="3500"
         show-arrows-on-hover
         :show-arrows="plantInfo.images.length > 1"
-        height="40vh"
+        height="60%"
       >
         <v-carousel-item v-for="(image, i) in plantInfo.images" :key="i">
           <v-img :src="image"></v-img>
         </v-carousel-item>
       </v-carousel>
-      <v-card-title headline>
+      <v-card-title primary-title>
         {{ plantInfo.name }}
       </v-card-title>
       <v-card-subtitle>
@@ -42,12 +42,6 @@
       </v-card-subtitle>
       <v-card-text>
         {{ plantInfo.description }}
-      </v-card-text>
-      <v-card-subtitle style="color: rgb(0,0,0,0.87); font-weight: bold;">
-        {{ plantInfo.instances ? plantInfo.instances.title : "" }}
-      </v-card-subtitle>
-      <v-card-text>
-        {{ plantInfo.instances ? plantInfo.instances.description : "" }}
       </v-card-text>
     </v-card>
   </v-navigation-drawer>
