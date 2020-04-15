@@ -1,4 +1,4 @@
-import zdog from "zdog"
+import zdog from 'zdog'
 /* eslint-disable no-new */
 
 const fourTree = (offset, color, illustration) => {
