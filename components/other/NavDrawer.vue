@@ -5,39 +5,53 @@
     </template>
     <v-list>
       <v-list-item
-        v-for="(item, i) in items"
-        :key="i"
-        :to="item.to"
+        v-for="{ icon, title, to } in items"
+        :key="title"
+        :to="to"
         router
         exact
         active-class="primary--text"
       >
         <v-list-item-action>
-          <v-icon>{{ item.icon }}</v-icon>
+          <v-icon> {{ icon }} </v-icon>
         </v-list-item-action>
         <v-list-item-content>
-          <v-list-item-title v-text="item.title" />
+          <v-list-item-title v-text="title" />
         </v-list-item-content>
       </v-list-item>
-      <v-list-item
-        v-if="!user"
-        :to="login.to"
-        active-class="primary--text"
-        router
-        exact
+    </v-list>
+    <template v-slot:append>
+      <v-divider />
+      <v-list-item v-if="$store.state.auth.loggedIn" two-line>
+        <v-list-item-avatar color="light-blue" class="mr-4">
+          <v-img :src="user.picture" />
+        </v-list-item-avatar>
+        <v-list-item-content>
+          <v-list-item-title>
+            {{ user.nickname }}
+          </v-list-item-title>
+          <v-list-item-subtitle>User</v-list-item-subtitle>
+        </v-list-item-content>
+        <v-list-item-action>
+          <v-btn icon @click="logout">
+            <v-icon color="grey lighten-1">
+              mdi-logout
+            </v-icon>
+          </v-btn>
+        </v-list-item-action>
+      </v-list-item>
+      <v-btn
+        v-else
+        block
+        text
+        tile
+        dark 
+        color="primary"
         @click="auth"
       >
-        <v-list-item-action>
-          <v-icon>{{ login.icon }}</v-icon>
-        </v-list-item-action>
-        <v-list-item-content>
-          <v-list-item-title v-text="login.title" />
-        </v-list-item-content>
-      </v-list-item>
-      <p v-else>
-        {{ user.name }}
-      </p>
-    </v-list>
+        Admin Login
+      </v-btn>
+    </template>
   </v-navigation-drawer>
 </template>
 
@@ -80,6 +94,9 @@ export default {
         }
       }
     }
+    // initials() {
+    //   return `${this.name.first.charAt(0)}${this.name.last.charAt(0)}`
+    // }
   },
   methods: {
     async auth() {
@@ -88,6 +105,28 @@ export default {
       } catch (e) {
         this.error = e.response.data.message
       }
+    },
+
+    async logout() {
+      try {
+        await this.$auth.logout('auth0')
+      } catch (e) {
+        this.error = e.response.data.message
+      }
+    },
+    async getUserInfo() {
+      try {
+        const userInfo = await this.$axios.$get('/api/userinfo')
+        return {
+          ...this.user,
+          ...userInfo
+        }
+      } catch (error) {
+        return {}
+      }
+    },
+    getUser() {
+      return this.getUserInfo
     }
   }
 }

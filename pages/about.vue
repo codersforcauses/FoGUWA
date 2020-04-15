@@ -65,7 +65,8 @@
             href="https://codersforcauses.org/landing"
             class="primary--text"
           >
-            Coders for Causes website <br />
+            Coders for Causes website
+            <br />
           </a>
           <a
             target="blank"
@@ -82,6 +83,7 @@
 
 <script>
 export default {
+  auth: false,
   head: () => ({
     title: 'About Us'
   })
