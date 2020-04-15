@@ -11,6 +11,7 @@
         router
         exact
         active-class="primary--text"
+        nuxt
       >
         <v-list-item-action>
           <v-icon> {{ icon }} </v-icon>
@@ -27,6 +28,7 @@
           router
           exact
           active-class="primary--text"
+          nuxt
         >
           <v-list-item-action>
             <v-icon> {{ icon }} </v-icon>
