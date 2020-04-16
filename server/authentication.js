@@ -44,8 +44,8 @@ const findUser = async req => {
     const adminObject = await findUserByEmail(email) // Returns null on non admin
     const { name, _id } = adminObject
     return adminObject ? { name, _id } : null
-  } catch (error) {
-    if(error.response.statusText === 'Unauthorized') throw new Error('User is unauthrorised')
+  } catch ({ response }) {
+    if(response.statusText === 'Unauthorized') throw new Error('User is unauthrorised')
   }
 }
 
