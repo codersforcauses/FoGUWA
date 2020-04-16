@@ -1,6 +1,7 @@
 const expressjwt = require('express-jwt')
 const jwksRsa = require('jwks-rsa')
 const axios = require('axios')
+const consola = require('consola')
 const { findUserByEmail } = require('./controllers/users.js')
 
 const getToken = req => {
@@ -54,6 +55,7 @@ const userIsAdmin = async req => {
     const adminObject = await findUser(req)
     return !!adminObject
   } catch (error) {
+    consola.log(error)
     return false
   }
 }
