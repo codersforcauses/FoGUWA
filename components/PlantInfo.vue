@@ -23,7 +23,7 @@
     </v-btn>
     <v-card flat>
       <v-carousel
-        v-if="plantInfo.images.length > 0"
+        v-show="plantInfo.images.length > 0"
         hide-delimiters
         cycle
         interval="3500"
