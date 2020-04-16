@@ -1,11 +1,11 @@
 [
   {
-  "name": {
-    "first": "FoG",
-    "last": "UWA"
-  },
-  "email": "admin@fog.com",
-  "password": "authpass"
+    "name": {
+      "first": "FoG",
+      "last": "UWA"
+    },
+    "email": "admin@fog.com",
+    "password": "authpass"
   },
   {
     "name": {
