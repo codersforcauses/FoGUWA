@@ -84,8 +84,8 @@
 <script>
 export default {
   auth: false,
-  head: {
+  head: () => ({
     title: 'About Us'
-  }
+  })
 }
 </script>
