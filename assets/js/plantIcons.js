@@ -44,7 +44,7 @@ const lotus = {
 
 const info = {
   path:
-  'M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z',
+  "M11.93,2a10,10,0,1,0,10,10A10,10,0,0,0,11.93,2ZM13,17H11V11h2Zm0-8H11V7h2Z",
   fillColor: '#88BBEE'
 }
 export default { info, leaf, tree, tulip, lotus, iconStyle }
