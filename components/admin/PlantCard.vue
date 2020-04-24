@@ -71,6 +71,16 @@
           @instanceEdit="handleInstanceEdit"
           @instanceCenter="handleCentered"
         />
+        <v-list-item dense class="ml-3">
+          <v-list-item-content>
+            <v-list-item-title>
+              <v-icon text icon>
+                mdi-plus-circle-outline
+              </v-icon>
+              ADD INSTANCE
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
       <v-btn 
         v-if="plant.images.length === 0"
@@ -111,11 +121,34 @@ export default {
     icon: {
       type: Object,
       required: true
-    }
+    },
+    // newInstance:{
+    //   type: Object,
+    //   required:false,
+    //   default:() => (
+    //     {
+    //     heading: "",
+    //     description: "",
+    //     location: {
+    //       "type": "Point",
+    //       "coordinates": [-32, 115]
+    //     }
+    //   }
+    //   )
+    // }
   },
   data: () => ({
     displayForm: 2,
     instanceHovered: -1,
+    newInstance:
+    {
+        heading: "",
+        description: "",
+        location: {
+          "type": "Point",
+          "coordinates": [-32, 115]
+        }
+      }
   }),
   computed: {
     ...mapGetters({

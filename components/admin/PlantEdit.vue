@@ -42,7 +42,7 @@
     </v-card-actions>
     <v-textarea
       clearable
-      label="Name"
+      label="Description"
       outlined
       :value="plant.description"
       class="mx-4"
