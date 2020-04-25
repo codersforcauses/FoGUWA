@@ -1,22 +1,6 @@
 <template>
   <v-window v-if="plant" v-model="displayForm">
     <v-window-item :value="2">
-      <v-btn
-        v-if="plant.images.length > 0"
-        fab
-        absolute
-        left
-        small
-        depressed
-        color="#00000077"
-        :ripple="false"
-        class="mt-2 ml-6"
-        @click="$router.push({ path: '/admin/plants' })"
-      >
-        <v-icon color="white">
-          mdi-arrow-left
-        </v-icon>
-      </v-btn>
       <v-carousel
         v-show="plant.images.length > 0"
         hide-delimiters
@@ -24,7 +8,7 @@
         interval="3500"
         show-arrows-on-hover
         :show-arrows="plant.images.length > 1"
-        height="450px"
+        height="400px"
       >
         <v-carousel-item v-for="(image, i) in plant.images" :key="i">
           <v-img :src="image" height="450px" />
@@ -83,7 +67,6 @@
         </v-list-item>
       </v-list>
       <v-btn 
-        v-if="plant.images.length === 0"
         color="primary"
         text
         class="ml-3"
@@ -93,10 +76,10 @@
       </v-btn>
     </v-window-item>
     <v-window-item :value="3">
-      <plant-edit :plant="plant" @back="handleBackClick" />
+      <plant-edit :plant-value="plant" @back="handleBackClick" />
     </v-window-item>
     <v-window-item :value="1">
-      <instance-edit :instance="getSelected" @back="handleBackClick" />
+      <instance-edit :instance="getSelectedInstance" @back="handleBackClick" />
     </v-window-item>
     <v-window-item :value="4">
       <instance-edit @back="handleBackClick" />
@@ -141,16 +124,20 @@ export default {
   }),
   computed: {
     ...mapGetters({
-      getSelected: "plants/getSelectedInstance"
+      getSelectedInstance: "plants/getSelectedInstance",
+      getSelectedPlant: "plants/getSelectedPlant"
     })
   },
-  mounted(){
-    this.setPlant(this.plant._id)
+  watch: {
+    getSelectedPlant(val) {
+      console.log(val)
+      if(val === null) this.$router.replace({ path: '/admin/plants' })
+    }
   },
   methods: {
     ...mapMutations({
       centerInstance: 'plants/setCenteredInstance',
-      setPlant: 'plants/setSelectedPlant'
+      setSelectedPlant: 'plants/setSelectedPlant'
     }),
     handleBackClick(){
       this.displayForm = 2

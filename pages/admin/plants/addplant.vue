@@ -1,6 +1,6 @@
 <template>
   <div>
-    <plant-edit :plant="plant" @back="$router.push({ path: '/admin/plants' })"></plant-edit>
+    <plant-edit @back="$router.push({ path: '/admin/plants' })"></plant-edit>
   </div>
 </template>
 
@@ -9,27 +9,6 @@ import PlantEdit from '~/components/admin/PlantEdit'
   export default {
     components: {
       'plant-edit': PlantEdit
-    },
-    props: {
-      plant: {
-        type: Object,
-        required: false,
-        default:() => ({
-          name: "",
-          scientificName: "",
-          images: [],
-          icon: "other",
-          description: "",
-          instances: [
-            {
-              location: {
-                type: "Point",
-                coordinates: [-32, 115]
-              }
-            }
-          ]
-        })
-      }
     }
   }
 </script>

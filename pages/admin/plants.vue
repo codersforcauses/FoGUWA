@@ -34,12 +34,16 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setPlantIcons: 'plants/setPlantIcons'
+      setPlantIcons: 'plants/setPlantIcons',
+      setSelectedPlant: 'plants/setSelectedPlant',
+      setSelectedInstance: 'plants/setSelectedInstance'
     }),
     ...mapActions({
       loadPlants: 'plants/loadPlants'
     }),
     handlePlantClick(payload) {
+      this.setSelectedPlant(payload.plant)
+      this.setSelectedInstance(payload.instance)
       this.$router.replace({ path: '/admin/plants/' + payload.plant._id })
     }
   },
