@@ -11,7 +11,7 @@
         color="#00000077"
         :ripple="false"
         class="mt-2 ml-6"
-        @click="$router.replace({ path: '/admin/plants' })"
+        @click="$router.push({ path: '/admin/plants' })"
       >
         <v-icon color="white">
           mdi-arrow-left
@@ -71,7 +71,7 @@
           @instanceEdit="handleInstanceEdit"
           @instanceCenter="handleCentered"
         />
-        <v-list-item dense class="ml-3">
+        <v-list-item dense class="ml-3" @click="displayForm = 4">
           <v-list-item-content>
             <v-list-item-title>
               <v-icon text icon>
@@ -87,7 +87,7 @@
         color="primary"
         text
         class="ml-3"
-        @click="$router.replace({ path: '/admin/plants' })"
+        @click="$router.push({ path: '/admin/plants' })"
       >
         BACK
       </v-btn>
@@ -97,6 +97,9 @@
     </v-window-item>
     <v-window-item :value="1">
       <instance-edit :instance="getSelected" @back="handleBackClick" />
+    </v-window-item>
+    <v-window-item :value="4">
+      <instance-edit @back="handleBackClick" />
     </v-window-item>
   </v-window>
 </template>
@@ -122,20 +125,6 @@ export default {
       type: Object,
       required: true
     },
-    // newInstance:{
-    //   type: Object,
-    //   required:false,
-    //   default:() => (
-    //     {
-    //     heading: "",
-    //     description: "",
-    //     location: {
-    //       "type": "Point",
-    //       "coordinates": [-32, 115]
-    //     }
-    //   }
-    //   )
-    // }
   },
   data: () => ({
     displayForm: 2,

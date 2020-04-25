@@ -107,5 +107,7 @@ export default {
   .round {
     border-radius: 50% !important;
     border-width: 2px !important;
+    width: 3rem !important;
+    height: 3rem !important;
   }
 </style>

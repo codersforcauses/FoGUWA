@@ -46,7 +46,14 @@ export default {
   props: {
     instance: {
       type: Object,
-      required: true
+      default: () => ({
+          location: {
+            type: "Point",
+            coordinates: [-32, 115]
+          },
+          heading: "",
+          description: ""
+      })
     }
   },
   data: () => ({

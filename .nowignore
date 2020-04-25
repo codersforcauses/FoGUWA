@@ -1,1 +1,13 @@
-.nuxt
+.nuxt/
+.github/
+.codeclimate.yml
+.eslintrc
+.gitignore
+.prettierrc
+.travis.yml
+jest.config.js
+LICENSE
+lighthouserc.json
+README.md
+CODE_OF_CONDUCT.md
+test/

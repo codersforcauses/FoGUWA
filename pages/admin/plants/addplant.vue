@@ -1,6 +1,6 @@
 <template>
   <div>
-    <plant-edit :plant="plant"></plant-edit>
+    <plant-edit :plant="plant" @back="$router.push({ path: '/admin/plants' })"></plant-edit>
   </div>
 </template>
 
