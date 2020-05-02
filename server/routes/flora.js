@@ -28,7 +28,7 @@ router.get('/flora/:id', async (req, res) => {
   return res.status(400).json('Invalid objectId')
 })
 
-router.post('/flora', checkJwt, restrictAccess, async (req, res) => {
+router.post('/flora', async (req, res) => {
   try {
     const flora = await addFlora(req.body)
     res.json(flora)

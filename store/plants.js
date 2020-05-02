@@ -116,8 +116,8 @@ const mutations = {
   mapUpdated(state) {
     state.updateMap = false
   },
-  addPlant(state,plant){
-    state.plants.append(plant);
+  addPlant(state, plant){
+    state.plants.push(plant);
   }
 }
 
@@ -150,13 +150,10 @@ const actions = {
       commit('setError', err, { root: true })
     })
   },
-  createPlant({commit},plant){
-    this.$axios.post('/api/flora',plant).then((res)=>{
-      commit('addPlant',res);
-      console.log(res);
-    }).catch((err)=>{
-      console.log(err);
-    })
+  async createPlant({commit}, plant){
+    const res = await this.$axios.post('/api/flora', plant)
+    commit('addPlant', res.data);
+    return res.data._id
   }
 }
 

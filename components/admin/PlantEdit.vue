@@ -74,14 +74,7 @@ export default {
           images: [],
           icon: "other",
           description: "",
-          instances: [
-            {
-              location: {
-                type: "Point",
-                coordinates: [-32, 115]
-              }
-            }
-          ]
+          instances: []
         })
     }
   },
@@ -115,13 +108,13 @@ export default {
     emitBack(){
       this.$emit('back')
     },
-    saveOrUpdatePlant(){      
+    async saveOrUpdatePlant(){      
       if(this.$route.params.plantId) {
 
         console.log('update')
       } else {
-        this.addPlant(this.plant);
-        console.log('save', this.plant)
+        const newPlantID = await this.addPlant(this.plant);
+        this.$router.push({ path: '/admin/plants/' + newPlantID })
       }
     },
     ...mapActions({
