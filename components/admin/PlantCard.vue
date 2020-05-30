@@ -55,7 +55,7 @@
           @instanceEdit="handleInstanceEdit"
           @instanceCenter="handleCentered"
         />
-        <v-list-item dense class="ml-3" @click="displayForm = 4">
+        <v-list-item dense class="ml-3" @click="handleInstanceAdd">
           <v-list-item-content>
             <v-list-item-title>
               <v-icon text icon>
@@ -81,14 +81,11 @@
     <v-window-item :value="1">
       <instance-edit :instance="getSelectedInstance" @back="handleBackClick" />
     </v-window-item>
-    <v-window-item :value="4">
-      <instance-edit @back="handleBackClick" />
-    </v-window-item>
   </v-window>
 </template>
 
 <script>
-import { mapMutations, mapGetters } from 'vuex'
+import { mapMutations, mapGetters, mapActions } from 'vuex'
 import PlantEdit from './PlantEdit'
 import InstanceEdit from './InstanceEdit'
 import PlantInstance from './PlantInstance'
@@ -130,11 +127,13 @@ export default {
   },
   watch: {
     getSelectedPlant(val) {
-      console.log(val)
       if(val === null) this.$router.replace({ path: '/admin/plants' })
     }
   },
   methods: {
+    ...mapActions({
+      addInstance: 'plants/createInstance'
+    }),
     ...mapMutations({
       centerInstance: 'plants/setCenteredInstance',
       setSelectedPlant: 'plants/setSelectedPlant'
@@ -148,6 +147,10 @@ export default {
     },
     handleCentered(instance){
       this.centerInstance(instance)
+    },
+    handleInstanceAdd(){
+      this.addInstance(this.getSelectedPlant)
+      this.displayForm = 1
     }
   }
 }

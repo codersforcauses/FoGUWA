@@ -81,12 +81,12 @@ const mutations = {
   setSelectedInstance (state, instance) {
     state.selectedInstance = instance._id
   },
-  setSelectedInstanceNull (state) {
-    state.selectedInstance = null
-  },
   setCenteredInstance (state, instance) {
     state.centeredInstance = instance._id
     state.selectedInstance = instance._id
+  },
+  setSelectedInstanceNull (state) {
+    state.selectedInstance = null
   },
   setCenteredNull (state) {
     state.centeredInstance = null
@@ -98,8 +98,10 @@ const mutations = {
     state.draggableInstance = instanceId
   },
   setInstancePosition(state, { instance, position }) {
+    console.log(state.plants[0]) // !! This do weird thing
     const targetInstance = getInstance(state, instance._id)
     if(targetInstance) targetInstance.location.coordinates = position
+    console.log(state.plants[0])
   },
   deletePlant(state, plantId) {
     const plantIndex = state.plants.findIndex(plant => plant._id === plantId)
@@ -118,7 +120,19 @@ const mutations = {
   },
   addPlant(state, plant){
     state.plants.push(plant);
+  },
+  addInstance(state, { plant, instance }){
+    plant.instances.push(instance)
+  },
+  editInstance(state, { plant, instanceId, editData }){
+    const instance = plant.instances.find(instance => instance._id === instanceId)
+    console.log(plant)
+    Object.keys(editData).forEach(key => {
+      instance[key] = editData[key]
+    })
+    console.log(plant)
   }
+  
 }
 
 const actions = {
@@ -154,6 +168,51 @@ const actions = {
     const res = await this.$axios.post('/api/flora', plant)
     commit('addPlant', res.data);
     return res.data._id
+  },
+  async createInstance({ commit, getters }) {
+    const plant = getters.getSelectedPlant
+    commit('addInstance',
+    { plant, instance: { location: {
+      coordinates: [
+        -31.976764, 115.818220
+      ],
+      type: 'Point'
+    }}})
+    try {
+      const { data } = await this.$axios.patch('/api/flora/' + plant._id, plant)
+      if (!data) {
+        console.log('Patch failed')
+        commit('setError', 'Failed to add plant instance', { root: true })
+      }
+      const { instances } = data
+      const instanceLength = instances.length
+      commit('setCenteredInstance', instances[instanceLength - 1])
+      commit('setPlant', data)
+      commit('updateMap')
+    } catch (err) {
+      console.log(err)
+    }
+  },
+  async editInstance({ commit, getters }, editData){
+    const plant = getters.getSelectedPlant
+    const instanceId = getters.getSelectedInstance._id
+    commit('editInstance', { plant, instanceId, editData })
+    try {
+      const { data } = await this.$axios.patch('/api/flora/' + plant._id, plant)
+      if (!data) {
+        console.log('Patch failed')
+        commit('setError', 'Failed to add plant instance', { root: true })
+      }
+      commit('setCenteredInstance', instanceId)
+      commit('setPlant', data)
+      commit('updateMap')
+    } catch (err) {
+      console.log(err)
+    }
+  },
+  async syncSelectedPlant({getters}){
+    const plant = getters.getSelectedPlant
+    await this.$axios.patch('/api/flora/' + plant._id, plant)
   }
 }
 

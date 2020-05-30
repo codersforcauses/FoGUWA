@@ -1,19 +1,19 @@
 <template>
   <div class="mt-8">
     <v-text-field
+      v-model="heading"
       clearable
       label="Heading"
       outlined
       dense
       rows="1"
-      :value="instance.heading"
       class="mx-4"
     ></v-text-field>
     <v-textarea
+      v-model="description"
       clearable
       label="Description"
       outlined
-      :value="instance.description"
       class="mx-4"
       rows="10"
       no-resize
@@ -32,7 +32,7 @@
         BACK
       </v-btn>
       <v-spacer></v-spacer>
-      <v-btn color="primary" dark>
+      <v-btn color="primary" dark @click="handleInstanceSave">
         SAVE
       </v-btn>
     </v-card-actions>
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapMutations, mapActions } from 'vuex'
 
 export default {
   props: {
@@ -57,9 +57,25 @@ export default {
     }
   },
   data: () => ({
+    heading: '',
+    description: '',
     draggable: false
   }),
+  watch: {
+    instance() {
+      this.heading = this.instance.heading
+      this.description = this.instance.description
+    },
+  },
+  mounted() {
+    this.heading = this.instance.heading
+    this.description = this.instance.description
+  },
   methods: {
+    ...mapActions({
+      editInstance: 'plants/editInstance',
+      syncSelectedPlant: 'plants/syncSelectedPlant'
+    }),
     ...mapMutations({
       setDraggable: 'plants/setDraggable',
       centerInstance: 'plants/setCenteredInstance'
@@ -72,8 +88,17 @@ export default {
       } else {
         this.setDraggable(null)
         this.draggable = false
+        this.syncSelectedPlant()
       }
       
+    },
+    handleInstanceSave(){
+      const editData = {
+        heading : this.heading,
+        description : this.description,
+      }
+      this.editInstance(editData)
+      this.$emit('back')
     }
   }
 }
