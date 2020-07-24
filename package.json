@@ -19,9 +19,11 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "nuxt": "^2.0.0",
     "@nuxtjs/auth": "^4.8.5",
     "@nuxtjs/axios": "^5.9.2",
     "@nuxtjs/pwa": "3.0.0-beta.16",
+    "@nuxtjs/vuetify": "^1.0.0",
     "cookie-parser": "^1.4.4",
     "cross-env": "^5.2.0",
     "dotenv": "^8.0.0",
@@ -30,13 +32,11 @@
     "google-maps-api-loader": "^1.1.1",
     "jwks-rsa": "^1.6.0",
     "mongodb": "^3.4.1",
-    "mongoose": "^5.8.1",
-    "nuxt": "^2.0.0"
+    "mongoose": "^5.8.1"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^1.0.1",
     "@nuxtjs/eslint-module": "^1.0.0",
-    "@nuxtjs/vuetify": "^1.0.0",
     "@vue/test-utils": "^1.0.0-beta.27",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
