@@ -11,6 +11,7 @@
         router
         exact
         active-class="primary--text"
+        nuxt
       >
         <v-list-item-action>
           <v-icon> {{ icon }} </v-icon>
@@ -19,6 +20,26 @@
           <v-list-item-title v-text="title" />
         </v-list-item-content>
       </v-list-item>
+      <div v-if="isAdmin">
+        <v-list-item
+          v-for="{ icon, title, to } in restrictedItems"
+          :key="title"
+          :to="to"
+          router
+          exact
+          active-class="primary--text"
+          nuxt
+        >
+          <v-list-item-action>
+            <v-icon> {{ icon }} </v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title v-text="title" />
+          </v-list-item-content>
+        </v-list-item>
+        <div>
+        </div>
+      </div>
     </v-list>
     <template v-slot:append>
       <v-divider />
@@ -30,7 +51,7 @@
           <v-list-item-title>
             {{ user.nickname }}
           </v-list-item-title>
-          <v-list-item-subtitle>User</v-list-item-subtitle>
+          <v-list-item-subtitle>{{ isAdmin ? "Admin" : "Friend" }}</v-list-item-subtitle>
         </v-list-item-content>
         <v-list-item-action>
           <v-btn icon @click="logout">
@@ -56,6 +77,8 @@
 </template>
 
 <script>
+import { mapMutations, mapGetters, mapActions } from 'vuex'
+
 export default {
   props: {
     value: Boolean
@@ -84,8 +107,24 @@ export default {
       to: '/admin/users'
       }
     ],
+    restrictedItems: [
+      {
+        icon: 'mdi-spa-outline',
+        title: 'Plants',
+        to: '/admin/plants'
+      },
+      {
+        icon: 'mdi-account-multiple-outline',
+        title: 'Users',
+        to: '/admin/users'
+      }
+    ]
   }),
   computed: {
+    ...mapGetters({
+      getAdmin: 'user/getAdmin',
+      isAdmin: 'user/isAdmin'
+    }),
     user() {
       return (this.$auth || {}).user || null
     },
@@ -100,7 +139,17 @@ export default {
       }
     }
   },
+  mounted() {
+    this.loadAdmin()
+  },
   methods: {
+    ...mapMutations({
+      setAdmin: 'user/setAdmin',
+      removeAdmin: 'user/removeAdmin',
+    }),
+    ...mapActions({
+      loadAdmin: 'user/loadAdmin',
+    }),
     async auth() {
       try {
         await this.$auth.loginWith('auth0')
@@ -108,27 +157,13 @@ export default {
         this.error = e.response.data.message
       }
     },
-
     async logout() {
       try {
         await this.$auth.logout('auth0')
+        this.removeAdmin()
       } catch (e) {
         this.error = e.response.data.message
       }
-    },
-    async getUserInfo() {
-      try {
-        const userInfo = await this.$axios.$get('/api/userinfo')
-        return {
-          ...this.user,
-          ...userInfo
-        }
-      } catch (error) {
-        return {}
-      }
-    },
-    getUser() {
-      return this.getUserInfo
     }
   }
 }
