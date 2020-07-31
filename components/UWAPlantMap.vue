@@ -34,11 +34,7 @@ const UWA_COORDS = { lat: -31.976764, lng: 115.818220 }
 const defaultInfo = {
   plantName: 'Plants and Trees',
   sciName: 'Planticus Namium',
-  images: [
-    'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/dsc-5454_orig.jpg',
-    'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/dsc-7528_orig.jpg',
-    'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/20090626-uwa-grounds2-007_orig.jpg'
-  ],
+  images: [],
   description:
     'Plants are mainly multicellular, predominantly photosynthetic eukaryotes of the kingdom Plantae. Historically, plants were treated as one of two kingdoms including all living things that were not animals, and all algae and fungi were treated as plants.'
 }
