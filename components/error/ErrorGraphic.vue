@@ -1,5 +1,5 @@
 <template>
-  <canvas id="canvas" width="500" height="500" @onResize="handleResize" @mousemove="setMouse" />
+  <canvas id="canvas" width="500" height="500" @mousemove="setMouse" />
 </template>
 
 <script>
