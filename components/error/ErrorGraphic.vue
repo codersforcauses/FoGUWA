@@ -36,18 +36,7 @@ export default {
       this.faceMouse()
     })
   },
-  // ready () {
-  //   window.addEventListener('resize', this.handleResize)
-  // },
-  // beforeDestroy () {
-  //   window.removeEventListener('resize', this.handleResize)
-  // },
   methods: {
-    // handleResize(){
-    //   const rect = this.canvas.getBoundingClientRect()
-    //   this.canvasWidth = rect.width
-    //   this.canvasHeight = rect.height
-    // },
     addShapes(){
       const color = "#70cf94"  
       const colorDarker = "#6bc78e"  
