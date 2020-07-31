@@ -26,7 +26,7 @@
     "cross-env": "^5.2.0",
     "dotenv": "^8.0.0",
     "express": "^4.16.4",
-    "express-jwt": "^5.3.1",
+    "express-jwt": "^6.0.0",
     "google-maps-api-loader": "^1.1.1",
     "jwks-rsa": "^1.6.0",
     "mongodb": "^3.4.1",
