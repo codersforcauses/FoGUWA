@@ -32,7 +32,7 @@
         <span class="grey--text">Search FoGUWA</span>
       </template>
       <template v-slot:prepend-inner>
-        <v-btn @click="$emit('input', !value)" color="black" icon text>
+        <v-btn color="black" icon text @click="$emit('input', !value)">
           <v-icon>menu</v-icon>
         </v-btn>
         <v-divider class="ma-1 mr-3" light vertical />
@@ -42,12 +42,12 @@
           <v-icon>search</v-icon>
         </v-btn>
         <v-btn
-          :disabled="geoBtnLoading"
+          v-show="!geoBtnHidden && isIndex"
           :loading="geoBtnLoading"
           :color="geoBtnColor"
-          @click="geoBtnClicked"
           icon
           text
+          @click="geoBtnClicked"
         >
           <v-icon>my_location</v-icon>
         </v-btn>
@@ -57,17 +57,25 @@
         <div class="pl-2 pr-3">
           <v-icon>menu</v-icon>
         </div>
-        <div class="pl-5">{{ item.item.text }}</div>
+        <div class="pl-5">
+          {{ item.item.text }}
+        </div>
       </template>
       <template v-slot:no-data>
         <div class="no-data">
-          <v-icon color="error lighten-4" class="px-2">error_outline</v-icon>
-          <div class="px-2">Search did not yield any results</div>
+          <v-icon color="error lighten-4" class="px-2">
+            error_outline
+          </v-icon>
+          <div class="px-2">
+            Search did not yield any results
+          </div>
         </div>
       </template>
     </v-autocomplete>
 
-    <v-toolbar-title v-show="!isIndex" class="title">FoGUWA</v-toolbar-title>
+    <v-toolbar-title v-show="!isIndex" class="title">
+      FoGUWA
+    </v-toolbar-title>
   </v-toolbar>
 </template>
 

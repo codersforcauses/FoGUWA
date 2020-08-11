@@ -1,0 +1,27 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "jest": true,
+    "serviceworker": true
+  },
+  "parserOptions": {
+    "parser": "babel-eslint",
+    "sourceType": "module",
+    "ecmaVersion": 2020
+  },
+  "extends": [
+    "@nuxtjs",
+    "prettier",
+    "plugin:nuxt/recommended",
+    "plugin:vue/recommended"
+  ],
+  "plugins": ["prettier", "nuxt", "vue"],
+  "rules": {
+    "nuxt/no-cjs-in-config": "off",
+    "vue/html-quotes": ["error", "double"],
+    "vue/html-self-closing": "off"
+  }
+}

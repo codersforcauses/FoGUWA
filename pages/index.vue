@@ -10,6 +10,7 @@
 import UWAPlantMap from '~/components/UWAPlantMap.vue'
 
 export default {
+  auth: false,
   components: {
     'uwa-plant-map': UWAPlantMap
   }

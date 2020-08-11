@@ -1,8 +1,8 @@
 <template>
   <v-container>
     <v-layout row wrap>
-      <v-flex xs12 sm6 md3 lg2 class="py-3">
-        <v-img :src="require('~/assets/images/FoGUWA.jpg')" contain />
+      <v-flex xs12 sm6 md3 lg2 class="my-5">
+        <v-img :src="require('~/assets/images/FoG-logo.png')" contain />
       </v-flex>
       <v-flex xs12 sm6 md9 lg10>
         <v-card-title class="display-1">
@@ -65,7 +65,8 @@
             href="https://codersforcauses.org/landing"
             class="primary--text"
           >
-            Coders for Causes website <br />
+            Coders for Causes website
+            <br />
           </a>
           <a
             target="blank"
@@ -82,8 +83,9 @@
 
 <script>
 export default {
-  head: {
+  auth: false,
+  head: () => ({
     title: 'About Us'
-  }
+  })
 }
 </script>
