@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <nav-drawer v-model="drawer" />
-    <v-content class="pa-0">
+    <v-main class="pa-0">
       <v-card tile height="100%" width="100%">
         <toolbar v-model="drawer" :is-index="isIndex" @log="handleLog" />
         <v-container :fill-height="isIndex" fluid class="pa-0 mx-0">
@@ -15,7 +15,7 @@
           multi-line
         >
           {{ snackbarText }}
-          <v-btn color="white" text flat @click="snackbar = false">
+          <v-btn color="white" text @click="snackbar = false">
             Close
           </v-btn>
         </v-snackbar>
@@ -29,8 +29,8 @@
           {{ offlineText }}
         </v-snackbar>
       </v-card>
-    </v-content>
-    <foot />
+    </v-main>
+    <foot :is-index="isIndex" />
   </v-app>
 </template>
 
