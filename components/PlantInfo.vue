@@ -5,6 +5,7 @@
     bottom
     hide-overlay
     width="450px"
+    disable-resize-watcher
   >
     <v-btn
       fab
