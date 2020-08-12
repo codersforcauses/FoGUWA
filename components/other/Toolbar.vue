@@ -67,7 +67,7 @@
             error_outline
           </v-icon>
           <div class="px-2">
-            Search did not yield any results
+            No plants matching <code>{{ search }}</code> were found
           </div>
         </div>
       </template>
