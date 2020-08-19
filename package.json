@@ -1,9 +1,5 @@
 {
-  "name": "FoGUWA",
   "version": "1.0.0",
-  "description": "A web app to display an interactive map that shows information about the various native flora growing on the UWA campus. The map is open for all to access but the main focus is mainly the FoGUWA community.",
-  "author": "JeremiahPinto",
-  "private": true,
   "engines": {
     "node": ">= 10.0.0",
     "npm": ">= 6.0.0",
@@ -14,9 +10,8 @@
     "precommit": "yarn lint",
     "test": "jest --maxWorkers=4 --detectOpenHandles",
     "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
-    "build": "nuxt build",
-    "start": "cross-env NODE_ENV=production node server/index.js",
-    "generate": "nuxt generate"
+    "build": "nuxt generate",
+    "start": "cross-env NODE_ENV=production node server/index.js"
   },
   "dependencies": {
     "@nuxtjs/auth": "^4.8.5",
