@@ -15,11 +15,12 @@
       hide-details
       flat
       dark
+      disabled
       color="grey"
       class="theme--dark"
     >
       <template v-slot:label>
-        <span class="grey--text">Search FoGUWA</span>
+        <span class="grey--text">Search Disabled</span>
       </template>
       <template v-slot:append>
         <v-icon class="grey--text">
