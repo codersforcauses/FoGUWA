@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { loggingLevels } from '@/assets/js/logging.js'
+import { loggingLevels } from '@/util/logging.js'
 import Toolbar from '~/components/other/Toolbar.vue'
 import NavDrawer from '~/components/other/NavDrawer.vue'
 import Footer from '~/components/other/Footer.vue'

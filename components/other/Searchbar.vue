@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { loggingLevels } from '@/assets/js/logging.js'
+import { loggingLevels } from '@/util/logging.js'
 
 export default {
   props: {

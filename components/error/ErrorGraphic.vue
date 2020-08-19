@@ -4,7 +4,7 @@
 
 <script>
 import zdog from "zdog"
-import { fourTree, roundTree } from '~/assets/js/zdogShapes'
+import { fourTree, roundTree } from '~/util/zdogShapes'
 export default {
   props: {
     errorCode: {
