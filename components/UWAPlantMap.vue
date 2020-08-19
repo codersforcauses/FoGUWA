@@ -16,8 +16,9 @@
 import { mapState } from 'vuex'
 // eslint-disable-next-line import/order
 import PlantInfo from './PlantInfo.vue'
-import iconData from '@/assets/js/plantIcons.js'
-import { uwaMapSettings } from '@/assets/js/mapSettings'
+import iconData from '@/util/plantIcons.js'
+import plantData from '@/util/plantData.js'
+import { uwaMapSettings } from '@/util/mapSettings'
 // eslint-disable-next-line import/order
 import GoogleMapLoader from './GoogleMapLoader'
 const { iconStyle, ...iconPaths } = iconData
@@ -130,9 +131,8 @@ export default {
         })
       }
     },
-    async loadPlants() {
-      const data = await this.$axios.$get('/api/flora')
-      this.plants = data
+    loadPlants() {
+      this.plants = plantData
     },
     clearMarkers() {
       this.markerInstances.forEach(marker => {
@@ -160,6 +160,7 @@ export default {
         },
         icon: {
           labelOrigin: new this.google.maps.Point(12, -5),
+          anchor: new this.google.maps.Point(12, 10),
           ...icon
         },
         map: this.map
