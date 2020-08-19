@@ -50,6 +50,7 @@ export default {
     google: null,
     markerInstances: [],
     userMarker: null,
+    userTracked: false,
     plants: null,
     infoDrawer: false,
     plantInfo: defaultInfo
@@ -95,6 +96,7 @@ export default {
     },
     position() {
       if (this.userMarker === null) {
+        this.userTracked = false
         if (this.position !== null) {
           this.userMarker = new this.google.maps.Marker({
             position: this.position,
@@ -109,9 +111,13 @@ export default {
       } else if (this.position.lat === 0 && this.position.lng === 0) {
         this.userMarker.setMap(null)
         this.userMarker = null
+        this.userTracked = false
       } else {
         this.userMarker.setPosition(this.position)
-        this.map.panTo(this.position)
+        if (this.userTracked === false && this.userMarker !== null) {
+          this.map.panTo(this.position)
+          this.userTracked = true
+        }
       }
     }
   },
