@@ -57,3 +57,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.nav {
+  z-index: 999999999 !important;
+}
+</style>

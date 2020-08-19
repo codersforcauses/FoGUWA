@@ -80,4 +80,7 @@ export default {
   background: #c0df68;
   text-shadow: none;
 }
+.search-menu {
+  left: 10px !important;
+}
 </style>
