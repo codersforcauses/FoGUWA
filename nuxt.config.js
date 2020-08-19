@@ -55,16 +55,7 @@ module.exports = {
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxtjs/pwa', '@nuxtjs/axios', '@nuxtjs/auth'],
-  auth: {
-    strategies: {
-      auth0: {
-        domain: process.env.AUTH0_DOMAIN,
-        client_id: process.env.AUTH0_CLIENT_ID,
-        audience: process.env.AUTH0_AUDIENCE
-      }
-    }
-  },
+  modules: ['@nuxtjs/pwa'],
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
