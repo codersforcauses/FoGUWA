@@ -10,6 +10,7 @@
     <v-autocomplete
       v-show="isIndex"
       :items="items"
+      :filter="customFilter"
       :search-input.sync="search"
       :style="{ maxWidth: width }"
       :menu-props="{
@@ -17,6 +18,8 @@
         openOnClick: false,
         contentClass: 'search-menu'
       }"
+      item-text="name"
+      item-value="name"
       dense
       auto-select-first
       single-line
@@ -25,12 +28,11 @@
       hide-selected
       flat
       dark
-      disabled
       color="grey"
       class="theme--dark"
     >
       <template v-slot:label>
-        <span class="grey--text">Search Disabled</span>
+        <span class="grey--text">Search FOGUWA</span>
       </template>
       <template v-slot:prepend-inner>
         <v-btn color="black" icon text @click="$emit('input', !value)">
@@ -56,10 +58,12 @@
       <template v-slot:item="item">
         <!-- will need to pass in icon and colour to :items to display correct icons for the search -->
         <div class="pl-2 pr-3">
-          <v-icon>menu</v-icon>
+          <v-icon style="`color:" ${item.item.icon}`>
+            {{ item.item.icon }}
+          </v-icon>
         </div>
         <div class="pl-5">
-          {{ item.item.text }}
+          {{ item.item.name }}
         </div>
       </template>
       <template v-slot:no-data>
@@ -82,6 +86,8 @@
 
 <script>
 import { loggingLevels } from '@/util/logging.js'
+import plantData from '@/util/plantData.js'
+// import plantIcons from '@/util/plantIcons.js'
 
 export default {
   props: {
@@ -92,10 +98,11 @@ export default {
     geoBtnLoading: false,
     geoBtnColor: 'black',
     geoBtnState: 'ready',
+    geoBtnHidden: false,
     geolocatorId: null,
     userPosition: null,
     search: '',
-    items: [{ text: 'hello', value: 'world' }]
+    items: []
   }),
   computed: {
     margin() {
@@ -122,7 +129,24 @@ export default {
       this.geolocatorDisable()
     }
   },
+  mounted() {
+    this.items = plantData
+  },
   methods: {
+    customFilter (item, queryText, itemText) {
+      console.log(item)
+      console.log(queryText)
+      console.log(itemText)
+        const textOne = item.name.toLowerCase()
+        const textTwo = item.scientificName.toLowerCase()
+        const searchText = queryText.toLowerCase()
+
+        return textOne.includes(searchText) ||
+          textTwo.includes(searchText)
+    },
+    getIcon(icon) {
+
+    },
     setGeoBtnState(state) {
       switch (state) {
         case 'loading':

@@ -3,18 +3,18 @@ const state = () => ({
     lat: 0,
     lng: 0
   },
-  search: ''
+  plantFocus: 0
 })
 
 const mutations = {
-  search(state, value) {
-    state.search = value
-  },
   setPosition(state, { lat, lng }) {
     state.position = {
       lat,
       lng
     }
+  },
+  setFocusPlant(state, id) {
+    state.plantFocus = id
   }
 }
 
