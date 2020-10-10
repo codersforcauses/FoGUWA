@@ -1,5 +1,5 @@
 <template>
-  <v-sheet class="mt-5">
+  <v-sheet>
     <v-list two-line>
       <v-list-item :to="'/admin/plants/addplant'" nuxt>
         <v-list-item-avatar>
