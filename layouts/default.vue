@@ -15,7 +15,7 @@
           multi-line
         >
           {{ snackbarText }}
-          <v-btn color="white" text flat @click="snackbar = false">
+          <v-btn color="white" text @click="snackbar = false">
             Close
           </v-btn>
         </v-snackbar>
