@@ -3,8 +3,8 @@
     "name": "Swamp banksia",
     "scientificName": "Banksia littoralis",
     "images": [
-      "https://scontent.fper6-1.fna.fbcdn.net/v/t1.0-9/83091680_2875691172452030_148820363403329536_o.jpg?_nc_cat=102&_nc_sid=cdbe9c&_nc_ohc=S2vvBcb-nHUAX8wiPiu&_nc_ht=scontent.fper6-1.fna&oh=efbc63c3b339926e3782323778933a35&oe=5EAF3D99",
-      "https://scontent.fper6-1.fna.fbcdn.net/v/t1.0-9/1499_1116311398390025_604135333900265552_n.jpg?_nc_cat=100&_nc_sid=cdbe9c&_nc_ohc=tb1oIT7Ak1cAX_hfFit&_nc_ht=scontent.fper6-1.fna&oh=223d54432579cd18b70b6b2843d22f43&oe=5EAE12F9"
+      "swamp_banksia1.jpg",
+      "swamp_banksia2.jpg"
     ],
     "icon": "lotus",
     "description": "It is a tree in the plant genus Banksia and is found in south west Western Australia from the south eastern metropolitan area of Perth to the Stirling Range and Albany. It grows in peaty sand, low-lying and seasonally-damp areas along water courses. It possesses epicormic buds that are hidden under its bark and its yellow-orange flowers bloom between March and August.",
@@ -21,11 +21,10 @@
     "name": "Wickham's grevillea",
     "scientificName": "Grevillea wickhamii",
     "images": [
-      "https://scontent.fper5-1.fna.fbcdn.net/v/t1.0-9/p720x720/31349705_1841000392587785_852688709202477056_o.jpg?_nc_cat=101&_nc_sid=cdbe9c&_nc_ohc=8Rk8uwPI3ZQAX8Z0sHV&_nc_ht=scontent.fper5-1.fna&_nc_tp=6&oh=071ae0f91b7ef29fc71dbbdb641a769c&oe=5EAD8A39",
-      "https://scontent.fper5-1.fna.fbcdn.net/v/t1.0-9/p720x720/31295500_1841000422587782_5991512212944977920_o.jpg?_nc_cat=100&_nc_sid=cdbe9c&_nc_ohc=py3m7G9F_gcAX9wDHYT&_nc_ht=scontent.fper5-1.fna&_nc_tp=6&oh=5ff72ca6042bea899ddd68dff1aadc39&oe=5EAF9A6C",
-      "https://scontent.fper5-1.fna.fbcdn.net/v/t1.0-9/31168699_1840996792588145_6452758667941904384_n.jpg?_nc_cat=103&_nc_sid=cdbe9c&_nc_ohc=tImbn44mQLkAX858iZ2&_nc_ht=scontent.fper5-1.fna&oh=f116c49fc89942cc842442b95badab2a&oe=5EAF5737",
-      "https://scontent.fper5-1.fna.fbcdn.net/v/t1.0-9/p720x720/31284287_1840993575921800_2080878764052447232_o.jpg?_nc_cat=107&_nc_sid=cdbe9c&_nc_ohc=351_wqkWiqcAX-E6vlQ&_nc_ht=scontent.fper5-1.fna&_nc_tp=6&oh=283d62b017386e9081c31107e8ed0b20&oe=5EAEBC92",
-      "https://scontent.fper5-1.fna.fbcdn.net/v/t1.0-9/p720x720/31301012_1841000372587787_384405534406606848_o.jpg?_nc_cat=106&_nc_sid=cdbe9c&_nc_ohc=jthxGISwjAoAX83H__K&_nc_ht=scontent.fper5-1.fna&_nc_tp=6&oh=2375e62890ab6e656a7ce1d22d5f9112&oe=5EACBB0C"],
+      "grevillia1.jpg",
+      "grevillia2.jpg",
+      "grevillia3.jpg"
+    ],
     "icon": "leaf",
     "description": "It is an erect shrub or small tree that grows to 6 metres in height. Flowers bloom between April and October and are normally red but can also appear pink, orange or yellow.It is endemic to Western Australia, Northern Territory and Queensland, and grows in loam, stony or skeletal soils, red sand, laterite, sandstone, limestone and quartzite. Hence, they are often found on sand dunes, plains, rocky hills and cliffs. On the UWA campus, it is grafted on the root stock of Grevillea robusta, which naturally occur in Queensland.",
     "instances": [
@@ -41,9 +40,10 @@
     "name": "Acorn banksia",
     "scientificName": "Banksia prionotes",
     "images": [
-      "https://scontent.fper5-1.fna.fbcdn.net/v/t1.0-9/10959656_905019992852501_1678158268081251712_n.jpg?_nc_cat=109&_nc_sid=cdbe9c&_nc_ohc=on51T9M0zuQAX-2Rj8X&_nc_ht=scontent.fper5-1.fna&oh=fa834e6c5f06dfeba7269f139b91e4af&oe=5EAD52C9",
-      "https://scontent.fper5-1.fna.fbcdn.net/v/t1.0-9/p720x720/82382007_2872244632796684_8727034105616662528_o.jpg?_nc_cat=111&_nc_sid=cdbe9c&_nc_ohc=L4djjHa-c5cAX-7VVa2&_nc_ht=scontent.fper5-1.fna&_nc_tp=6&oh=88ceafcb1024a99e252eb8d4d03e9354&oe=5EAD9F15",
-      "https://scontent.fper5-1.fna.fbcdn.net/v/t31.0-8/p720x720/17038913_1430799186941243_1374028034979284315_o.jpg?_nc_cat=106&_nc_sid=cdbe9c&_nc_ohc=cKan3f5gx7IAX_4Im6k&_nc_ht=scontent.fper5-1.fna&_nc_tp=6&oh=d5b7b537091f24bf4636f92e484595fa&oe=5EAD8E6D"
+      "acorn_banksia1.jpg",
+      "acorn_banksia2.jpg",
+      "acorn_banksia3.jpg",
+      "acorn_banksia4.jpg"
     ],
     "icon": "tree",
     "description": "It is one of the more common and easy-to-grow banksias. They are adored by birds and gardeners alike. It is a non-lignotuberous tree or shrub that grows up to 10 metres in height. Flowers are cream and orange, and bloom between February and August. It grows on white, grey or yellow sand, sandy loam, brown clay, laterite and granite. Hence, it naturally occurs on sand plains, sand dunes, and undulating slopes. They are recommended for growth in Perth gardens as they are less sensitive to phosphorus and alkaline conditions compared to other banksias.",
@@ -60,9 +60,10 @@
     "name": "Marri",
     "scientificName": "Corymbia calophylla",
     "images": [
-      "https://scontent.fper6-1.fna.fbcdn.net/v/t1.0-9/84464348_2927177590636721_5734704178308055040_n.jpg?_nc_cat=101&_nc_sid=cdbe9c&_nc_ohc=CNz2x1geLFcAX_diei9&_nc_ht=scontent.fper6-1.fna&oh=ef23f8400e77d688ef49581a74a4189e&oe=5EAEA4AB",
-      "https://scontent.fper6-1.fna.fbcdn.net/v/t1.0-9/83080798_2895938237093990_834514632398864384_n.jpg?_nc_cat=106&_nc_sid=cdbe9c&_nc_ohc=W4N-YmJFeXgAX9mgQJT&_nc_ht=scontent.fper6-1.fna&oh=8384c956ea6d1b534e2d19059ba332bd&oe=5EAC9853",
-      "https://scontent.fper6-1.fna.fbcdn.net/v/t1.0-9/85060801_2927181330636347_8709442765680803840_n.jpg?_nc_cat=103&_nc_sid=cdbe9c&_nc_ohc=7W-yGo1vigwAX_B7-Ga&_nc_ht=scontent.fper6-1.fna&oh=54e8274b1e3e03f2fb7a2e5180a634e0&oe=5EACE540"
+      "marri1.jpg",
+      "marri2.jpg",
+      "marri3.jpg",
+      "marri4.jpg"
     ],
     "icon": "tulip",
     "description": "These serve as one of the major food sources for our threatened red-tailed black cockatoos and Carnaby's black cockatoo. Both are endangered as a result of habitat destruction and diminishing food sources. It is a eucalypt tree that has rough, tessellated bark and it grows to 40-60 metres in height. Flowers are white-pink and bloom between December to May. It grows on red-brown clay loam, orange-brown sandy clay, gravel, grey sand, limestone, granite and laterite. Hence, they naturally occur on hills, slopes, breakaways, wetlands, and fringing salt marches. Sadly, they are under threat from the Marri canker disease, that is aggravated by changes to soil conditions. ",
@@ -79,9 +80,9 @@
     "name": "Pin-cushion Hakea",
     "scientificName": "Hakea laurina",
     "images": [
-      "https://scontent.fper5-1.fna.fbcdn.net/v/t1.0-9/26055863_1726063904081435_4746919953437999549_n.jpg?_nc_cat=110&_nc_sid=cdbe9c&_nc_ohc=Z1liMXtam5IAX8mhEGZ&_nc_ht=scontent.fper5-1.fna&oh=3dd1b25b6f3ee872ece0cb14ddad2c64&oe=5EABF6CF",
-      "https://scontent.fper5-1.fna.fbcdn.net/v/t1.0-9/1509769_908678372486663_3881569870372009928_n.jpg?_nc_cat=105&_nc_sid=cdbe9c&_nc_ohc=iU9-cxMt6RgAX-7W8Y2&_nc_ht=scontent.fper5-1.fna&oh=c325c4307e8c41ebff6bd2f76849ce42&oe=5EAC6503",
-      "https://scontent.fper5-1.fna.fbcdn.net/v/t31.0-8/s960x960/19055503_1532369530117541_3513968468049748720_o.jpg?_nc_cat=107&_nc_sid=cdbe9c&_nc_ohc=rQCEv9P_t9kAX8sJnOO&_nc_ht=scontent.fper5-1.fna&_nc_tp=7&oh=58b69a75ece922c2e97f1329be74b6d6&oe=5EADCE94"
+      "hakea1.jpg",
+      "hakea2.jpg",
+      "hakea3.jpg"
     ],
     "icon": "leaf",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -98,9 +99,9 @@
     "name": "Jarrah",
     "scientificName": "Eucalyptus marginata",
     "images": [
-      "https://scontent.fper6-1.fna.fbcdn.net/v/t31.0-8/18422289_1498769230144238_1337462893399819938_o.jpg?_nc_cat=102&_nc_sid=cdbe9c&_nc_ohc=LH_GfmVebLgAX-NHUfs&_nc_ht=scontent.fper6-1.fna&oh=70d7cae597f9d825d41a3e1eba4fe724&oe=5EADB7FA",
-      "https://scontent.fper6-1.fna.fbcdn.net/v/t31.0-8/17855148_1474121015942393_6407136427672577639_o.jpg?_nc_cat=105&_nc_sid=cdbe9c&_nc_ohc=PpdalhvS03kAX9ZLmb6&_nc_ht=scontent.fper6-1.fna&oh=07d2e9f4d331455fb344e9af380e2489&oe=5EAEA6A8",
-      "https://scontent.fper6-1.fna.fbcdn.net/v/t31.0-8/12716082_1097387020282463_8446408675895733957_o.jpg?_nc_cat=101&_nc_sid=cdbe9c&_nc_ohc=P8UlS0UG0V4AX8yfrvz&_nc_ht=scontent.fper6-1.fna&oh=5bfaf146ffa571fb2cb1e5c2f71f56d9&oe=5EAF4D02"
+      "jarrah1.jpg",
+      "jarrah2.jpg",
+      "jarrah3.jpg"
     ],
     "icon": "tree",
     "description": "Jarrah, djarraly in Noongar language, also known as the Swan River mahogany, naturally occurs in the south-west corner of Western Australia, where rainfall generally exceeds 600mm. It is found as far as Mooliabeenee, Clackline, Narrogin, and the Stirling Range. Its northern limit is Mount Peron near Jurien Bay. However, there are also outliers in Kulin and Tutanning in the Pingelly Shire. The plant may take the form of a mallee, a multi-stemmed eucalypt, in Mount Lesueur and the Stirling Range. It typically grows in soils derived from ironstone. Jarrah gum nuts are an important food source for the threatened Forest red-tailed black cockatoo that often visit the campus. Its flowers are an important food source for birds and insects.",
@@ -127,11 +128,9 @@
     "name": "Western Australia Christmas Tree",
     "scientificName": "Nuytsia floribunda",
     "images":[
-      "https://scontent.fper5-1.fna.fbcdn.net/v/t1.0-9/15380783_1329579360396560_7644629698833704476_n.jpg?_nc_cat=109&_nc_sid=cdbe9c&_nc_ohc=jWxxI3jF1gIAX81EQjt&_nc_ht=scontent.fper5-1.fna&oh=5cac580f4946518ec4a3ff54b6df0933&oe=5EAFCADA",
-      "https://scontent.fper5-1.fna.fbcdn.net/v/t1.0-9/1743722_852545314766636_3311143003251734527_n.jpg?_nc_cat=100&_nc_sid=cdbe9c&_nc_ohc=Unfcdy5VBYwAX9Tl0-C&_nc_ht=scontent.fper5-1.fna&oh=b13cb505f4a48b8e3ed834abcb296c87&oe=5EACDFFF",
-      "https://scontent.fper5-1.fna.fbcdn.net/v/t1.0-9/10632738_843059465715221_6034792918824712644_n.jpg?_nc_cat=109&_nc_sid=cdbe9c&_nc_ohc=yadEgce06n8AX-xLOQb&_nc_ht=scontent.fper5-1.fna&oh=21106fdbd793a75bd27af2fbf0c75b56&oe=5EAD9591",
-      "https://scontent.fper5-1.fna.fbcdn.net/v/t31.0-0/p640x640/15994588_1387635054590990_2384063716681384411_o.jpg?_nc_cat=106&_nc_sid=cdbe9c&_nc_ohc=PvBT2OFZE2wAX8LAZ5B&_nc_ht=scontent.fper5-1.fna&_nc_tp=6&oh=0a5dcd81a450e2d931d975b576a27bc6&oe=5EAEB98B",
-      "https://scontent.fper5-1.fna.fbcdn.net/v/t1.0-9/s960x960/47684432_2152323858122102_6837932224105414656_o.jpg?_nc_cat=107&_nc_sid=cdbe9c&_nc_ohc=YSk8QTCKiqoAX_tbu29&_nc_ht=scontent.fper5-1.fna&_nc_tp=7&oh=b7165c64d7aee7b1c2d488cf9c2b0e0f&oe=5EAE68D1"
+      "christmas1.jpg",
+      "christmas2.jpg",
+      "christmas3.jpg"
     ],
     "icon": "tree",
     "description": "It is believed to be the largest parasitic tree in the world. It is an icon of the region it grows in, south-western Australia, and is known locally as the Western Australian Christmas Tree as its orange flowers bloom dramatically during summer. The tree is indiscriminate - it has greedy roots that can stab host plant victims up to 110m away, and they grow by attaching themselves to their hosts to draw water and nutrients.",
@@ -148,9 +147,9 @@
     "name": "Zamia Palm",
     "scientificName": "Macrozamia riedlei",
     "images": [
-      "https://scontent.fper6-1.fna.fbcdn.net/v/t1.0-9/88052719_2964270973594049_6743814256401055744_o.jpg?_nc_cat=111&_nc_sid=cdbe9c&_nc_ohc=pkWkVeXzoicAX-plqHP&_nc_ht=scontent.fper6-1.fna&oh=0ff741747c02533d824b11291321f649&oe=5EAC7B66",
-      "https://scontent.fper6-1.fna.fbcdn.net/v/t1.0-9/84267043_2896312603723220_1589390529496350720_n.jpg?_nc_cat=111&_nc_sid=cdbe9c&_nc_ohc=Wsw_UZEzB00AX9xXU7o&_nc_ht=scontent.fper6-1.fna&oh=5003a55c520c7b7845aab54a2d4744a1&oe=5EAC4CB3",
-      "https://scontent.fper6-1.fna.fbcdn.net/v/t31.0-8/13710452_1197225200298644_5405316656269732329_o.jpg?_nc_cat=106&_nc_sid=cdbe9c&_nc_ohc=K_p4tk6KXpcAX_3IANv&_nc_ht=scontent.fper6-1.fna&oh=0ade4c446305ef5f7034de1d2b2f1dd7&oe=5EABFD0A"
+      "zamia1.jpg",
+      "zamia2.jpg",
+      "zamia3.jpg"
     ],
     "icon": "tree",
     "description": "Macrozamia riedlii’s (zamia)  seeds - with their colourful fleshy covering (sarcotesta) - contain high levels of the poisonous macrozamin. Despite claims that the toxin is only in the seeds, the sarcotesta of Macrozamia riedlii actually shows 10 times higher concentrations in the sarcotesta than in the kernels (Ladd et al., 1993). Native animals do consume the sarcotesta, without obvious harm, but it is not known what their resistance to macrozamin may be based on. Emus (Dromaius novaehollandiae) carry the zamia seeds over vast distances, and appear to be important in their dispersal (Calviño-Cancela et al., 2006). Aboriginal people throughout Australia knew how to prepare the seeds or sarcotesta to reduce the toxin levels. It appears that in the southwest, Noongar people consumed the sarcotesta, whereas elsewhere in Australia they used the kernels.",
@@ -167,12 +166,12 @@
     "name": "Western Australian Peppermint",
     "scientificName": "Agonis flexuosa",
     "images":[
-      "https://scontent.fper5-1.fna.fbcdn.net/v/t31.0-8/p720x720/14712871_1269965656357931_8624774620093457029_o.jpg?_nc_cat=100&_nc_sid=cdbe9c&_nc_ohc=wI-Bu0MjqBkAX8Otwj2&_nc_ht=scontent.fper5-1.fna&_nc_tp=6&oh=b8304f9163c30f18531e493c7b09d775&oe=5EADE29D",
-      "https://scontent.fper5-1.fna.fbcdn.net/v/t31.0-8/p720x720/17917514_1474952882525873_6140477454091191258_o.jpg?_nc_cat=102&_nc_sid=cdbe9c&_nc_ohc=-kf6dl4S7LgAX_gDe_e&_nc_ht=scontent.fper5-1.fna&_nc_tp=6&oh=cc07b50fb559bb8e969c15fe7043fdba&oe=5EADFA47",
-      "https://scontent.fper5-1.fna.fbcdn.net/v/t31.0-8/p720x720/17621865_1459964424024719_7208832754545345587_o.jpg?_nc_cat=107&_nc_sid=cdbe9c&_nc_ohc=WqDaz5loW14AX990Ha8&_nc_ht=scontent.fper5-1.fna&_nc_tp=6&oh=1daf5752539c5412e9c8f78ef289de38&oe=5EAC70A2"
+      "peppermint1.jpg",
+      "peppermint2.jpg",
+      "peppermint3.jpg"
     ],
     "icon": "lotus",
-    "description": "Agonis flexuosa, peppermint. One of the more important Angiosperms on the south-western Australian coast line. Drawing and photo by Andre Jagger.\nThe Western Australian Peppermint ( ThewWillow myrtle) Agonis flexuosa (C. L. Willdenow 1809) R. Sweet (1830)\nFamily: Myrtaceae\nOrder: Myrtales\nThree botanical varieties are recognised: var. angustifolia differs from the typical var. flexuosa in having long, narrow leaves, while var. latifolia has short, broad leaves.\nSeveral selected forms of A. flexuosa are available. Popular cultivars include 'Nana', a compact form to about 4 metres, 'Variegata', a form with variegated foliage (seen in Kings Park by the toilets nearest to the boabab tree) and 'After Dark', a form with deep burgundy to purple foliage.\nThis species is regarded as a weed in all other Australian States due to its incredible ability to survive in multiple different environments and is quite invasive.\nThe plant will live in soils of various types; calcareous, sandy, loam, clay, and granitic. Near-coastal areas.\nIt is an incredibly useful plant in its native range of distribution:\na. It serves as a stabiliser for moving sand dunes\nb. It provides a windbreak and is often sculpted by such forces\nc. It provides a humus layer to soil, useful after fire for new species\nd. It provides dense thickets for protective cover for many animal species\ne. It serves to establish plant life on new and exposed soils\nf. It provides an oil from its leaves with a pungent odour (possible perfume / aroma uses ?)\ng. It provides a good rehabilitation tree and street tree in coastal areas only in the South West of Western Australia\nh. It provides abundant flowers for insects (nectar)(possible implications for the honey industry)",
+    "description": "Agonis flexuosa, peppermint. One of the more important Angiosperms on the south-western Australian coast line. \nThe Western Australian Peppermint ( ThewWillow myrtle) Agonis flexuosa (C. L. Willdenow 1809) R. Sweet (1830)\nFamily: Myrtaceae\nOrder: Myrtales\nThree botanical varieties are recognised: var. angustifolia differs from the typical var. flexuosa in having long, narrow leaves, while var. latifolia has short, broad leaves.\nSeveral selected forms of A. flexuosa are available. Popular cultivars include 'Nana', a compact form to about 4 metres, 'Variegata', a form with variegated foliage (seen in Kings Park by the toilets nearest to the boabab tree) and 'After Dark', a form with deep burgundy to purple foliage.\nThis species is regarded as a weed in all other Australian States due to its incredible ability to survive in multiple different environments and is quite invasive.\nThe plant will live in soils of various types; calcareous, sandy, loam, clay, and granitic. Near-coastal areas.\nIt is an incredibly useful plant in its native range of distribution:\na. It serves as a stabiliser for moving sand dunes\nb. It provides a windbreak and is often sculpted by such forces\nc. It provides a humus layer to soil, useful after fire for new species\nd. It provides dense thickets for protective cover for many animal species\ne. It serves to establish plant life on new and exposed soils\nf. It provides an oil from its leaves with a pungent odour (possible perfume / aroma uses ?)\ng. It provides a good rehabilitation tree and street tree in coastal areas only in the South West of Western Australia\nh. It provides abundant flowers for insects (nectar)(possible implications for the honey industry)",
     "instances": [
       {
         "location": {
@@ -185,6 +184,9 @@
   {
     "name": "Norfolk Island Pine",
     "scientificName": "Araucaria heterophylla",
+    "images":[
+      "norfolk1.jpg"
+    ],
     "icon": "tree",
     "description": "The Norfolk Island Pine or ‘living Christmas Tree’ is endemic to its’ island namesake, although it is not a true pine. It grows well in deep sand, and has a tolerance for salt and wind that make it ideal for the coastal areas and subtropical climates that it is found in. They grow relative to the area they are encapsulated in and can lose some of their youthful symmetry as they mature.",
     "instances": [
@@ -198,9 +200,9 @@
   },
   {
     "name": "Emma",
-    "scientificName": "",
+    "scientificName": "The Dancer",
     "images": [
-      "https://fremantlestuff.info/people/gregjames/works/dancer/dancer2.jpg"
+      "dancer1.jpg"
     ],
     "icon": "other",
     "description": "Bronze sculpture named 'Emma', created by Greg James at Jackson Court",
@@ -217,9 +219,9 @@
     "name": "Grass tree",
     "scientificName": "Xanthorrhoea",
     "images":[
-      "https://scontent.fper5-1.fna.fbcdn.net/v/t1.0-9/s960x960/82147543_2852291921458622_6929505810233950208_o.jpg?_nc_cat=109&_nc_sid=cdbe9c&_nc_ohc=3aG2Gf9iQqkAX_PoP3E&_nc_ht=scontent.fper5-1.fna&_nc_tp=7&oh=1c6e6591870d41c9058a574ac5d777b0&oe=5EACE5B4",
-      "https://scontent.fper5-1.fna.fbcdn.net/v/t31.0-8/p720x720/15895797_1372999479387881_7804449853637755877_o.jpg?_nc_cat=109&_nc_sid=cdbe9c&_nc_ohc=Azl-85QPJXgAX990U1C&_nc_ht=scontent.fper5-1.fna&_nc_tp=6&oh=4a29647faf57c0b84159b72b20e38a31&oe=5EADE6D9",
-      "https://scontent.fper5-1.fna.fbcdn.net/v/t31.0-8/p720x720/15392881_1325262627494900_7744531419082665344_o.jpg?_nc_cat=110&_nc_sid=cdbe9c&_nc_ohc=PA4lHbZ6xuEAX9LFwOr&_nc_ht=scontent.fper5-1.fna&_nc_tp=6&oh=6cd62eb5ad19511613a4e17787a3979d&oe=5EADFD8C"
+      "grasstree1.jpg",
+      "grasstree2.jpg",
+      "grasstree3.jpg"
     ],
     "icon": "tree",
     "description": "A wide-spread species of perennial monocot with the ability to withstand fire. It is a species of high important to the Noongar people who named it balga, and used the  gum it contains, its’ spikes for spears, and the bardi grub that would reside among its leaves",

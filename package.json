@@ -31,7 +31,8 @@
     "jwks-rsa": "^1.6.0",
     "mongodb": "^3.4.1",
     "mongoose": "^5.8.1",
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.0.0",
+    "zdog": "^1.1.2"
   },
   "devDependencies": {
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.8.3",

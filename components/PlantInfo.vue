@@ -28,11 +28,11 @@
         cycle
         interval="3500"
         show-arrows-on-hover
-        :show-arrows="plant.images.length > 1"
-        height="400px"
+        :show-arrows="plantInfo.images.length > 1"
+        height="60vh"
       >
-        <v-carousel-item v-for="(image, i) in plant.images" :key="i">
-          <v-img :src="image"></v-img>
+        <v-carousel-item v-for="(image, i) in plantInfo.images" :key="i">
+          <v-img height="100%" :src="require(`~/assets/images/plants/${image}`)"></v-img>
         </v-carousel-item>
       </v-carousel>
       <div v-if="plant">
