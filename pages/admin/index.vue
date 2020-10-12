@@ -11,6 +11,7 @@
 </template>
 <script>
 export default {
+  middleware: 'admin',
   mounted(){
     this.$router.replace({ path: '/admin/plants' })
   }

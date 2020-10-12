@@ -7,6 +7,7 @@
 <script>
 import PlantEdit from '~/components/admin/PlantEdit'
   export default {
+    middleware: 'admin',
     components: {
       'plant-edit': PlantEdit
     }

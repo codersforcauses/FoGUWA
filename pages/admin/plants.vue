@@ -19,6 +19,7 @@ const { iconPaths } = iconData
 
 
 export default {
+  middleware: 'admin',
   components: {
     'uwa-plant-map': UWAPlantMap
   },

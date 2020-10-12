@@ -10,6 +10,7 @@
   import PlantCard from '~/components/admin/PlantCard.vue'
 
   export default {
+    middleware: 'admin',
     components: {
       'plant-card': PlantCard
     },
