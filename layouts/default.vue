@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <nav-drawer v-model="drawer" />
-    <v-content class="pa-0">
+    <v-main class="pa-0">
       <v-card tile height="100%" width="100%">
         <toolbar v-model="drawer" :is-index="isIndex" @log="handleLog" />
         <v-container fluid :fill-height="isIndex" class="pa-0 mx-0">
@@ -29,7 +29,7 @@
           {{ offlineText }}
         </v-snackbar>
       </v-card>
-    </v-content>
+    </v-main>
     <foot />
   </v-app>
 </template>
