@@ -98,10 +98,8 @@ const mutations = {
     state.draggableInstance = instanceId
   },
   setInstancePosition(state, { instance, position }) {
-    console.log(state.plants[0]) // !! This do weird thing
     const targetInstance = getInstance(state, instance._id)
     if(targetInstance) targetInstance.location.coordinates = position
-    console.log(state.plants[0])
   },
   deletePlant(state, plantId) {
     const plantIndex = state.plants.findIndex(plant => plant._id === plantId)
@@ -126,11 +124,9 @@ const mutations = {
   },
   editInstance(state, { plant, instanceId, editData }){
     const instance = plant.instances.find(instance => instance._id === instanceId)
-    console.log(plant)
     Object.keys(editData).forEach(key => {
       instance[key] = editData[key]
     })
-    console.log(plant)
   }
   
 }
@@ -147,8 +143,7 @@ const actions = {
     commit('deleteInstance', { plantId: plant._id, instanceId })
     this.$axios.patch('/api/flora/' + plant._id, plant).then(() => {
       commit('setTempPlant', null)
-    }).catch(err => {
-      console.log(err);
+    }).catch(() => {
       commit('revertTempPlant')
     })
     commit('updateMap')
@@ -178,10 +173,8 @@ const actions = {
       ],
       type: 'Point'
     }}})
-    try {
       const { data } = await this.$axios.patch('/api/flora/' + plant._id, plant)
       if (!data) {
-        console.log('Patch failed')
         commit('setError', 'Failed to add plant instance', { root: true })
       }
       const { instances } = data
@@ -189,26 +182,18 @@ const actions = {
       commit('setCenteredInstance', instances[instanceLength - 1])
       commit('setPlant', data)
       commit('updateMap')
-    } catch (err) {
-      console.log(err)
-    }
   },
   async editInstance({ commit, getters }, editData){
     const plant = getters.getSelectedPlant
     const instanceId = getters.getSelectedInstance._id
     commit('editInstance', { plant, instanceId, editData })
-    try {
       const { data } = await this.$axios.patch('/api/flora/' + plant._id, plant)
       if (!data) {
-        console.log('Patch failed')
         commit('setError', 'Failed to add plant instance', { root: true })
       }
       commit('setCenteredInstance', instanceId)
       commit('setPlant', data)
       commit('updateMap')
-    } catch (err) {
-      console.log(err)
-    }
   },
   async syncSelectedPlant({getters}){
     const plant = getters.getSelectedPlant
