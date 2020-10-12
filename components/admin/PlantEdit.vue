@@ -1,24 +1,33 @@
 <template>
-  <div class="mt-8">
+  <v-form class="mt-8">
     <v-text-field
+      v-model="plant.name"
       clearable
       label="Name"
       outlined
       dense
       rows="1"
-      :value="plant.name"
       class="mx-4"
     ></v-text-field>
     <v-text-field
+      v-model="plant.scientificName"
       clearable
       label="Scientific Name"
       no-resize
       outlined
       dense
       rows="1"
-      :value="plant.scientificName"
       class="mx-4"
     ></v-text-field>
+    <v-textarea
+      v-model="plant.description"
+      clearable
+      label="Description"
+      outlined
+      class="mx-4"
+      rows="10"
+      no-resize
+    ></v-textarea>
     <v-card-actions class="mx-4 mb-6">
       <p class="ma-0">
         Choose icon &emsp;
@@ -40,39 +49,38 @@
         </v-btn>
       </v-btn-toggle>
     </v-card-actions>
-    <v-textarea
-      clearable
-      label="Name"
-      outlined
-      :value="plant.description"
-      class="mx-4"
-      rows="10"
-      no-resize
-    ></v-textarea>
     <v-card-actions class="px-4 pb-4">
       <v-btn color="primary" text @click="emitBack">
         BACK
       </v-btn>
       <v-spacer></v-spacer>
-      <v-btn color="primary" dark>
+      <v-btn color="primary" dark @click="saveOrUpdatePlant">
         SAVE
       </v-btn>
     </v-card-actions>
-  </div>
+  </v-form>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   props:{
-    plant:{
+    plantValue: {
       type: Object,
-      required: true
+      default:() => ({
+          name: "",
+          scientificName: "",
+          images: [],
+          icon: "other",
+          description: "",
+          instances: []
+        })
     }
   },
   data: () => ({
     selectedBtn: 0,
+    plant: {}
   }),
   computed: {
     ...mapGetters({
@@ -81,6 +89,7 @@ export default {
   },
   mounted() {
     this.selectedBtn = this.getIconIndex(this.plant.icon)
+    this.plant = {...this.plantValue}
   },
   updated() {
     this.selectedBtn = this.getIconIndex(this.plant.icon)
@@ -98,14 +107,30 @@ export default {
     },
     emitBack(){
       this.$emit('back')
-    }
+    },
+    async saveOrUpdatePlant(){      
+      if(this.$route.params.plantId) {
+
+        console.log('update')
+      } else {
+        const newPlantID = await this.addPlant(this.plant);
+        this.$router.push({ path: '/admin/plants/' + newPlantID })
+      }
+    },
+    ...mapActions({
+      addPlant: 'plants/createPlant'
+    })
   },
 }
 </script>
 
 <style scoped>
   .round {
+    height: 50px !important;
+    width: 50px !important;
     border-radius: 50% !important;
     border-width: 2px !important;
+    width: 3rem !important;
+    height: 3rem !important;
   }
 </style>

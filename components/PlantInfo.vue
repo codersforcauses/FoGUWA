@@ -23,16 +23,16 @@
     </v-btn>
     <v-card flat>
       <v-carousel
-        v-if="plant.images"
+        v-if="plant.images.length > 0"
         hide-delimiters
         cycle
         interval="3500"
         show-arrows-on-hover
         :show-arrows="plant.images.length > 1"
-        height="60%"
+        height="60vh"
       >
         <v-carousel-item v-for="(image, i) in plant.images" :key="i">
-          <v-img :src="image"></v-img>
+          <v-img height="100%" :src="require(`~/assets/images/plants/${image}`)"></v-img>
         </v-carousel-item>
       </v-carousel>
       <div v-if="plant">
@@ -66,7 +66,7 @@ export default {
     value: Boolean,
     plant: {
       type: Object,
-      required: true
+      default: null
     },
     instance: {
       type: Object,

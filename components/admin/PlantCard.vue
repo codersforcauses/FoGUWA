@@ -2,7 +2,7 @@
   <v-window v-if="plant" v-model="displayForm">
     <v-window-item :value="2">
       <v-carousel
-        v-if="plant.images.length > 0"
+        v-show="plant.images.length > 0"
         hide-delimiters
         cycle
         interval="3500"
@@ -11,7 +11,7 @@
         height="400px"
       >
         <v-carousel-item v-for="(image, i) in plant.images" :key="i">
-          <v-img :src="image" height="400px"></v-img>
+          <v-img height="450px" :src="require(`~/assets/images/plants/${image}`)" />
         </v-carousel-item>
       </v-carousel>
       <div
@@ -55,27 +55,37 @@
           @instanceEdit="handleInstanceEdit"
           @instanceCenter="handleCentered"
         />
+        <v-list-item dense class="ml-3" @click="handleInstanceAdd">
+          <v-list-item-content>
+            <v-list-item-title>
+              <v-icon text icon>
+                mdi-plus-circle-outline
+              </v-icon>
+              ADD INSTANCE
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
       <v-btn 
         color="primary"
         text
         class="ml-3"
-        @click="$router.replace({ path: '/admin/plants' })"
+        @click="$router.push({ path: '/admin/plants' })"
       >
         BACK
       </v-btn>
     </v-window-item>
     <v-window-item :value="3">
-      <plant-edit :plant="plant" @back="handleBackClick" />
+      <plant-edit :plant-value="plant" @back="handleBackClick" />
     </v-window-item>
     <v-window-item :value="1">
-      <instance-edit :instance="getSelected" @back="handleBackClick" />
+      <instance-edit :instance="getSelectedInstance" @back="handleBackClick" />
     </v-window-item>
   </v-window>
 </template>
 
 <script>
-import { mapMutations, mapGetters } from 'vuex'
+import { mapMutations, mapGetters, mapActions } from 'vuex'
 import PlantEdit from './PlantEdit'
 import InstanceEdit from './InstanceEdit'
 import PlantInstance from './PlantInstance'
@@ -94,24 +104,39 @@ export default {
     icon: {
       type: Object,
       required: true
-    }
+    },
   },
   data: () => ({
     displayForm: 2,
     instanceHovered: -1,
+    newInstance:
+    {
+        heading: "",
+        description: "",
+        location: {
+          "type": "Point",
+          "coordinates": [-32, 115]
+        }
+      }
   }),
   computed: {
     ...mapGetters({
-      getSelected: "plants/getSelectedInstance"
+      getSelectedInstance: "plants/getSelectedInstance",
+      getSelectedPlant: "plants/getSelectedPlant"
     })
   },
-  mounted(){
-    this.setPlant(this.plant._id)
+  watch: {
+    getSelectedPlant(val) {
+      if(val === null) this.$router.replace({ path: '/admin/plants' })
+    }
   },
   methods: {
+    ...mapActions({
+      addInstance: 'plants/createInstance'
+    }),
     ...mapMutations({
       centerInstance: 'plants/setCenteredInstance',
-      setPlant: 'plants/setSelectedPlant'
+      setSelectedPlant: 'plants/setSelectedPlant'
     }),
     handleBackClick(){
       this.displayForm = 2
@@ -122,6 +147,10 @@ export default {
     },
     handleCentered(instance){
       this.centerInstance(instance)
+    },
+    handleInstanceAdd(){
+      this.addInstance(this.getSelectedPlant)
+      this.displayForm = 1
     }
   }
 }

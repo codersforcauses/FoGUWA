@@ -28,7 +28,7 @@ router.get('/flora/:id', async (req, res) => {
   return res.status(400).json('Invalid objectId')
 })
 
-router.post('/flora', checkJwt, restrictAccess, async (req, res) => {
+router.post('/flora', async (req, res) => {
   try {
     const flora = await addFlora(req.body)
     res.json(flora)
@@ -45,7 +45,7 @@ router.patch('/flora/:id', checkJwt, restrictAccess, async (req, res) => {
       const flora = await updateModel(Flora, req.params.id, update)
       return flora ? res.json(flora) : res.status(404).json('Flora not found')
     } catch (error) {
-      return res.status(500).json(error)
+      return res.status(500).json({ error })
     }
   }
   return res.status(400).json('Invalid objectId')

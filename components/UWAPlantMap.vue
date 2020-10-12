@@ -7,10 +7,10 @@
 </template>
 
 <script>
+/* eslint-disable import/order */
 import { mapState, mapMutations, mapGetters } from 'vuex'
-import { uwaMapSettings } from '@/assets/js/mapSettings'
 import GoogleMapLoader from './GoogleMapLoader'
-// eslint-disable-next-line import/order
+import { uwaMapSettings } from '@/assets/js/mapSettings'
 import iconData from '@/assets/js/plantIcons'
 const { iconStyle } = iconData
 
@@ -47,7 +47,8 @@ export default {
       selectedPlant: 'plants/getSelectedPlant',
       selectedInstance: 'plants/getSelectedInstance',
       centeredInstance: 'plants/getCenteredInstance',
-      getDraggable: 'plants/getDraggable'
+      getDraggable: 'plants/getDraggable',
+      mapUpdate: 'plants/updateMap',
     }),
     mapConfig() {
       return {
@@ -64,14 +65,15 @@ export default {
     },
   },
   watch: {
-    map(val) {
+    map() {
       this.loadMarkers()
     },
-    google(val) {
+    google() {
       this.loadMarkers()
     },
-    markers(val) {
+    mapUpdate() {
       this.loadMarkers()
+      this.mapUpdated()
     },
     centeredInstance(instance){
       if(instance){
@@ -120,7 +122,8 @@ export default {
       setInstance: 'plants/setSelectedInstance',
       setDraggable: 'plants/setDraggable',
       setCenterNull: 'plants/setCenteredNull',
-      setInstancePositon: 'plants/setInstancePosition'
+      setInstancePositon: 'plants/setInstancePosition',
+      mapUpdated: 'plants/mapUpdated'
     }),
     loadMarkers() {
       if (this.map && this.google) {

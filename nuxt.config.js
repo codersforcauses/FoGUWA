@@ -2,6 +2,7 @@ process.env.NODE_ENV !== 'production' && require('dotenv').config()
 
 module.exports = {
   mode: 'universal',
+  telemetry: false,
   /*
    ** Headers of the page
    */

@@ -95,16 +95,6 @@ export default {
         icon: 'mdi-information-outline',
         title: 'About',
         to: '/about'
-      },
-      {
-        icon: 'mdi-tree-outline',
-        title: 'Plants',
-        to: '/admin/plants'
-      },
-      {
-      icon: 'mdi-account-multiple-outline',
-      title: 'Users',
-      to: '/admin/users'
       }
     ],
     restrictedItems: [

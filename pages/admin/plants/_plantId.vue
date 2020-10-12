@@ -6,10 +6,11 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
+  import { mapGetters, mapMutations } from 'vuex'
   import PlantCard from '~/components/admin/PlantCard.vue'
 
   export default {
+    middleware: 'admin',
     components: {
       'plant-card': PlantCard
     },
@@ -17,10 +18,20 @@
       ...mapGetters({
         getPlant: 'plants/getPlantFromId',
         getPlantIcon: 'plants/getPlantIcon',
+        getSelectedPlant: 'plants/getSelectedPlant'
       }),
       plant() {
         return this.getPlant(this.$route.params.plantId)
       }
-    }
+    },
+    mounted(){
+      if(!this.plant) this.$router.replace({ path: '/admin/plants' })
+      else this.setSelectedPlant(this.plant)
+    },
+    methods: {
+      ...mapMutations({
+        setSelectedPlant: 'plants/setSelectedPlant'
+      })
+    },
   }
 </script>
