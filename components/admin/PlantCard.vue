@@ -11,7 +11,7 @@
         height="400px"
       >
         <v-carousel-item v-for="(image, i) in plant.images" :key="i">
-          <v-img :src="image" height="450px" />
+          <v-img height="450px" :src="require(`~/assets/images/plants/${image}`)" />
         </v-carousel-item>
       </v-carousel>
       <div
