@@ -33,6 +33,9 @@ router.post('/flora', async (req, res) => {
     const flora = await addFlora(req.body)
     res.json(flora)
   } catch (error) {
+    if(error.name === 'ValidationError') {
+      return res.status(400).json(error)
+    }
     res.status(500).json(error)
   }
 })

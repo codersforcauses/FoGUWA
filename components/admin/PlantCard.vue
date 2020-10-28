@@ -32,6 +32,9 @@
           <v-btn color="primary" text dark @click="displayForm = 3">
             EDIT
           </v-btn>
+          <v-btn v-if="plant.instances.length === 0" color="error" text dark @click="handlePlantDelete">
+            DELETE
+          </v-btn>
         </v-card-actions>
       </div>
       <v-card-text class="pt-0 pb-6 px-6">
@@ -108,16 +111,7 @@ export default {
   },
   data: () => ({
     displayForm: 2,
-    instanceHovered: -1,
-    newInstance:
-    {
-        heading: "",
-        description: "",
-        location: {
-          "type": "Point",
-          "coordinates": [-32, 115]
-        }
-      }
+    instanceHovered: -1
   }),
   computed: {
     ...mapGetters({
@@ -132,12 +126,16 @@ export default {
   },
   methods: {
     ...mapActions({
-      addInstance: 'plants/createInstance'
+      addInstance: 'plants/createInstance',
+      deletePlant: 'plants/deletePlant'
     }),
     ...mapMutations({
       centerInstance: 'plants/setCenteredInstance',
       setSelectedPlant: 'plants/setSelectedPlant'
     }),
+    handlePlantDelete(){
+      if(this.deletePlant(this.plant._id)) this.$router.replace({ path: '/admin/plants' })
+    },
     handleBackClick(){
       this.displayForm = 2
     },

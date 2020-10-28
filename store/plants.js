@@ -119,6 +119,10 @@ const mutations = {
   addPlant(state, plant){
     state.plants.push(plant);
   },
+  updatePlant(state, updatedPlant){
+    const plantIndex = state.plants.findIndex(plant => plant._id === updatedPlant._id)
+    state.plants[plantIndex] = updatedPlant
+  },
   addInstance(state, { plant, instance }){
     plant.instances.push(instance)
   },
@@ -155,14 +159,29 @@ const actions = {
       commit('setSelectedPlantNull')
       commit('setSelectedInstanceNull')
       commit('updateMap')
-    }).catch((err) => {
-      commit('setError', err, { root: true })
+      return true
+    }).catch(() => {
+      commit('setError', 'Failed to delete plant', { root: true })
+      return false
     })
   },
   async createPlant({commit}, plant){
-    const res = await this.$axios.post('/api/flora', plant)
-    commit('addPlant', res.data);
-    return res.data._id
+    try {
+      const res = await this.$axios.post('/api/flora', plant)
+      commit('addPlant', res.data);
+      return res.data._id
+    } catch (error) {
+      commit('setError', 'Failed to create plant', { root: true })
+    }
+  },
+  async updatePlant({commit}, plant){
+    try {
+      const res = await this.$axios.patch('/api/flora/' + plant._id, plant)
+      commit('updatePlant', res.data);
+      return res.data._id
+    } catch (error) {
+      commit('setError', 'Failed to update plant', { root: true })
+    }
   },
   async createInstance({ commit, getters }) {
     const plant = getters.getSelectedPlant
@@ -185,6 +204,7 @@ const actions = {
   },
   async editInstance({ commit, getters }, editData){
     const plant = getters.getSelectedPlant
+    console.log(getters.getSelectedInstance);
     const instanceId = getters.getSelectedInstance._id
     commit('editInstance', { plant, instanceId, editData })
       const { data } = await this.$axios.patch('/api/flora/' + plant._id, plant)

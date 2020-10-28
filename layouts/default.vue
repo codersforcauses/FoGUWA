@@ -8,6 +8,30 @@
           <nuxt />
         </v-container>
         <v-snackbar
+          :value="errorSnack"
+          :timeout="snackbarTimeout"
+          color="error"
+          bottom
+          multi-line
+          @input="closeErrorSnack"
+        >
+          {{ errorMessage }}
+          <template v-slot:action="{ attrs }">
+            <v-btn
+              fab
+              small
+              color="white"
+              text
+              v-bind="attrs"
+              @click="closeErrorSnack"
+            >
+              <v-icon color="white">
+                mdi-close
+              </v-icon>
+            </v-btn>
+          </template>
+        </v-snackbar>
+        <v-snackbar
           v-model="snackbar"
           :timeout="snackbarTimeout"
           :color="snackbarColour"
@@ -15,9 +39,20 @@
           multi-line
         >
           {{ snackbarText }}
-          <v-btn color="white" text @click="snackbar = false">
-            Close
-          </v-btn>
+          <template v-slot:action="{ attrs }">
+            <v-btn
+              fab
+              small
+              color="white"
+              text
+              v-bind="attrs"
+              @click="snackbar = false"
+            >
+              <v-icon color="white">
+                mdi-close
+              </v-icon>
+            </v-btn>
+          </template>
         </v-snackbar>
         <v-snackbar
           v-model="$nuxt.isOffline"
@@ -36,6 +71,7 @@
 
 <script>
 import { loggingLevels } from '@/assets/js/logging.js'
+import { mapGetters } from 'vuex'
 import Toolbar from '~/components/other/Toolbar.vue'
 import NavDrawer from '~/components/other/NavDrawer.vue'
 import Footer from '~/components/other/Footer.vue'
@@ -59,7 +95,11 @@ export default {
   computed: {
     isIndex() {
       return this.$nuxt.$route.name === 'index'
-    }
+    },
+    ...mapGetters({
+      errorSnack: 'errorSnack',
+      errorMessage: 'errorMessage'
+    })
   },
   methods: {
     handleLog(event) {
@@ -69,6 +109,9 @@ export default {
       this.snackbarColour = event.type
       this.snackbarText = event.message
       this.snackbar = true
+    },
+    closeErrorSnack(event) {
+      this.$store.commit('removeError')
     }
   }
 }

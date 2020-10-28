@@ -1,7 +1,9 @@
 <template>
-  <v-form class="mt-8">
+  <v-form ref="form" v-model="formValid" lazy-validation class="mt-8">
     <v-text-field
       v-model="plant.name"
+      :rules="textRules"
+      required
       clearable
       label="Name"
       outlined
@@ -21,6 +23,8 @@
     ></v-text-field>
     <v-textarea
       v-model="plant.description"
+      :rules="textRules"
+      required
       clearable
       label="Description"
       outlined
@@ -42,6 +46,7 @@
           fab
           class="round mx-1"
           :style="{ borderColor: `${selectedBtn === getIconIndex(i) ? icon.fillColor : 'grey'} !important` }"
+          @click="plant.icon = i"
         >
           <v-icon :color="selectedBtn === getIconIndex(i) ? icon.fillColor: 'grey'">
             {{ icon.mdiName }}
@@ -54,7 +59,7 @@
         BACK
       </v-btn>
       <v-spacer></v-spacer>
-      <v-btn color="primary" dark @click="saveOrUpdatePlant">
+      <v-btn color="primary" :dark="formValid" :disabled="!formValid" @click="saveOrUpdatePlant">
         SAVE
       </v-btn>
     </v-card-actions>
@@ -79,20 +84,22 @@ export default {
     }
   },
   data: () => ({
-    selectedBtn: 0,
-    plant: {}
+    plant: {},
+    formValid: false,
+    textRules: [
+        v => !!v || 'Field is required',
+      ],
   }),
   computed: {
     ...mapGetters({
       getAllPlantIcons: 'plants/getAllPlantIcons'
-    })
+    }),
+    selectedBtn() {
+      return this.getIconIndex(this.plant.icon)
+    }
   },
-  mounted() {
-    this.selectedBtn = this.getIconIndex(this.plant.icon)
+  created() {
     this.plant = {...this.plantValue}
-  },
-  updated() {
-    this.selectedBtn = this.getIconIndex(this.plant.icon)
   },
   methods: {
     getIconIndex(iconName){
@@ -108,17 +115,20 @@ export default {
     emitBack(){
       this.$emit('back')
     },
-    async saveOrUpdatePlant(){      
-      if(this.$route.params.plantId) {
-
-        console.log('update')
-      } else {
-        const newPlantID = await this.addPlant(this.plant);
-        this.$router.push({ path: '/admin/plants/' + newPlantID })
-      }
+    async saveOrUpdatePlant(){    
+      if(this.$refs.form.validate()) {
+        if(this.$route.params.plantId) {
+          await this.updatePlant(this.plant);
+          this.emitBack()
+        } else {
+          const newPlantID = await this.addPlant(this.plant);
+          if (newPlantID) this.$router.push({ path: '/admin/plants/' + newPlantID })
+        }
+      }  
     },
     ...mapActions({
-      addPlant: 'plants/createPlant'
+      addPlant: 'plants/createPlant',
+      updatePlant: 'plants/updatePlant'
     })
   },
 }
