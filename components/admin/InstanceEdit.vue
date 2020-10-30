@@ -73,7 +73,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      editInstance: 'plants/editInstance',
+      updateInstance: 'plants/updateInstance',
       syncSelectedPlant: 'plants/syncSelectedPlant'
     }),
     ...mapMutations({
@@ -82,7 +82,7 @@ export default {
     }),
     handleMarkerMove(){
       if(!this.draggable){
-        this.centerInstance(this.instance)
+        this.centerInstance(this.instance._id)
         this.setDraggable(this.instance._id)
         this.draggable = true
       } else {
@@ -93,11 +93,12 @@ export default {
       
     },
     handleInstanceSave(){
+      if(this.draggable) this.handleMarkerMove()
       const editData = {
         heading : this.heading,
         description : this.description,
       }
-      this.editInstance(editData)
+      this.updateInstance(editData)
       this.$emit('back')
     }
   }

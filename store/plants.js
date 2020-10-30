@@ -9,48 +9,41 @@ const state = () => ({
   updateMap: false,
 })
 
-const getInstance = (plants, instanceId) => {
-  for (const plant of plants) {
-    for (const instance of plant.instances) {
-      if (instance._id === instanceId) return instance
-    }
-  }
-}
-const getPlantFromInstance = (plants, instanceId) => {
-  for (const plant of plants) {
-    for (const instance of plant.instances) {
-      if (instance._id === instanceId) return plant
-    }
-  }
-}
-
 const getters = {
-  plants (state) {
+  getPlants (state) {
     return state.plants
   },
+
   getPlantFromId: (state) => (id) => {
     return state.plants.find(({ _id }) => _id === id)
   },
+
   getSelectedPlant (state) {
-    return state.plants.find(plant => plant._id === state.selectedPlant)
+    return state.selectedPlant
   },
+
   getSelectedInstance (state) {
-    return getInstance(state.plants, state.selectedInstance)
+    return state.selectedInstance
   },
+
   getCenteredInstance (state) {
-    return getInstance(state.plants, state.centeredInstance)
+    return state.centeredInstance
   },
+
+  getDraggableInstance (state) {
+    return state.draggableInstance
+  },
+
   getAllPlantIcons (state) {
     return state.plantIcons
   },
+
   getPlantIcon: (state) => (plantName) => {
     return state.plantIcons.hasOwnProperty(plantName)
     ? state.plantIcons[plantName]
     : state.plantIcons.info
   },
-  getDraggable (state) {
-    return state.draggableInstance
-  },
+
   updateMap(state) {
     return state.updateMap
   }
@@ -60,165 +53,162 @@ const mutations = {
   setPlants (state, plants) {
     state.plants = plants
   },
-  setPlant (state, plant) {
-    const plantIndex = state.plants.findIndex(targetPlant => targetPlant._id === plant.Id)
-    state.plants[plantIndex] = plant
+
+  // Plant Core Mutations
+  addPlant(state, plant){
+    state.plants.push(plant);
   },
+
+  updatePlant(state, updatedPlant){
+    const plantIndex = state.plants.findIndex(plant => plant._id === updatedPlant._id)
+    state.plants[plantIndex] = updatedPlant
+  },
+
+  deletePlant(state, plantId) {
+    const plantIndex = state.plants.findIndex(plant => plant._id === plantId)
+    state.plants.splice(plantIndex, 1)
+  },
+
   setTempPlant (state, plant){
     state.tempPlant = JSON.parse(JSON.stringify(plant))
   },
+
   revertTempPlant (state) {
     const plantIndex = state.plants.findIndex(plant => plant._id === state.tempPlant._id)
     state.plants[plantIndex] = state.tempPlant
     state.tempPlant = null
   },
-  setSelectedPlant (state, plant) {
-    state.selectedPlant = plant._id
+
+  setSelectedPlant (state, plantId) {
+    state.selectedPlant = state.plants.find((plant) => plant._id === plantId)
   },
-  setSelectedPlantNull (state) {
-    state.selectedPlant = null
+
+  // Instance Selections
+  setSelectedInstance (state, instanceId) {
+    const plant = state.selectedPlant
+    state.selectedInstance = plant.instances.find((instance) => instance._id === instanceId)
   },
-  setSelectedInstance (state, instance) {
-    state.selectedInstance = instance._id
+
+  setCenteredInstance (state, instanceId) {
+    const plant = state.selectedPlant
+    state.centeredInstance = plant.instances.find((instance) => instance._id === instanceId)
   },
-  setCenteredInstance (state, instance) {
-    state.centeredInstance = instance._id
-    state.selectedInstance = instance._id
+
+  setDraggableInstance (state, instanceId) {
+    const plant = state.selectedPlant
+    state.draggableInstance = plant.instances.find((instance) => instance._id === instanceId)
   },
-  setSelectedInstanceNull (state) {
-    state.selectedInstance = null
+
+  setSelectedInstancePosition(state, position) {
+    const instance = state.selectedInstance
+    if(instance) instance.location.coordinates = position
   },
-  setCenteredNull (state) {
-    state.centeredInstance = null
-  },
+
   setPlantIcons (state, icons) {
     state.plantIcons = icons
   },
-  setDraggable (state, instanceId) {
-    state.draggableInstance = instanceId
-  },
-  setInstancePosition(state, { instance, position }) {
-    const targetInstance = getInstance(state, instance._id)
-    if(targetInstance) targetInstance.location.coordinates = position
-  },
-  deletePlant(state, plantId) {
-    const plantIndex = state.plants.findIndex(plant => plant._id === plantId)
-    state.plants.splice(plantIndex, 1)
-  },
-  deleteInstance(state, { plantId, instanceId }) {
-    const plant = state.plants.find(plant => plant._id === plantId)
-    const instanceIndex = plant.instances.findIndex(instance => instance._id === instanceId)
-    plant.instances.splice(instanceIndex, 1)
-  },
-  updateMap(state) {
-    state.updateMap = true
-  },
-  mapUpdated(state) {
-    state.updateMap = false
-  },
-  addPlant(state, plant){
-    state.plants.push(plant);
-  },
-  updatePlant(state, updatedPlant){
-    const plantIndex = state.plants.findIndex(plant => plant._id === updatedPlant._id)
-    state.plants[plantIndex] = updatedPlant
-  },
-  addInstance(state, { plant, instance }){
-    plant.instances.push(instance)
-  },
-  editInstance(state, { plant, instanceId, editData }){
-    const instance = plant.instances.find(instance => instance._id === instanceId)
-    Object.keys(editData).forEach(key => {
-      instance[key] = editData[key]
-    })
-  }
   
+  mapUpdateNeeded(state, needsUpdate) {
+    state.updateMap = needsUpdate
+  },
 }
 
 const actions = {
   async loadPlants ({commit}) {
-    const data = await this.$axios.$get('/api/flora')
-    commit('setPlants', data)
-  },
-  deleteInstance ({ commit, getters }, instanceId) {
-    const { plants } = getters
-    const plant = getPlantFromInstance(plants, instanceId)
-    commit('setTempPlant', plant)
-    commit('deleteInstance', { plantId: plant._id, instanceId })
-    this.$axios.patch('/api/flora/' + plant._id, plant).then(() => {
-      commit('setTempPlant', null)
-    }).catch(() => {
-      commit('revertTempPlant')
-    })
-    commit('updateMap')
-  },
-  deletePlant ({commit}, plantId) {
-    this.$axios.delete('/api/flora/' + plantId).then((res) => {
-      commit('deletePlant', plantId)
-      commit('setCenteredNull')
-      commit('setSelectedPlantNull')
-      commit('setSelectedInstanceNull')
-      commit('updateMap')
-      return true
-    }).catch(() => {
-      commit('setError', 'Failed to delete plant', { root: true })
-      return false
-    })
-  },
-  async createPlant({commit}, plant){
     try {
-      const res = await this.$axios.post('/api/flora', plant)
-      commit('addPlant', res.data);
-      return res.data._id
+      const plants = await this.$axios.$get('/api/flora')
+      commit('setPlants', plants)
+    } catch (err) {
+      commit('setError', 'Failed to load plants', { root: true })
+    }
+  },
+
+  // Plant Core Actions
+  async createPlant({commit}, plantData){
+    try {
+      const plant = await this.$axios.$post('/api/flora', plantData)
+      commit('addPlant', plant);
+      return plant
     } catch (error) {
       commit('setError', 'Failed to create plant', { root: true })
     }
   },
-  async updatePlant({commit}, plant){
+
+  async updatePlant({commit}, plantData){
     try {
-      const res = await this.$axios.patch('/api/flora/' + plant._id, plant)
-      commit('updatePlant', res.data);
-      return res.data._id
+      const plant = await this.$axios.$patch('/api/flora/' + plantData._id, plantData)
+      commit('updatePlant', plant);
+      return plant._id
     } catch (error) {
       commit('setError', 'Failed to update plant', { root: true })
     }
   },
-  async createInstance({ commit, getters }) {
-    const plant = getters.getSelectedPlant
-    commit('addInstance',
-    { plant, instance: { location: {
-      coordinates: [
-        -31.976764, 115.818220
-      ],
-      type: 'Point'
-    }}})
-      const { data } = await this.$axios.patch('/api/flora/' + plant._id, plant)
-      if (!data) {
-        commit('setError', 'Failed to add plant instance', { root: true })
-      }
-      const { instances } = data
-      const instanceLength = instances.length
-      commit('setCenteredInstance', instances[instanceLength - 1])
-      commit('setPlant', data)
-      commit('updateMap')
+
+  async deletePlant ({commit}, plantId) {
+    try {
+      const plant = await this.$axios.$delete('/api/flora/' + plantId)
+      commit('deletePlant', plant._id)
+      commit('setSelectedPlant', null)
+      commit('setSelectedInstance', null)
+      commit('setCenteredInstance', null)
+      commit('mapUpdateNeeded', true)
+      return plant._id
+    } catch (err) {
+      commit('setError', 'Failed to delete plant', { root: true })
+    }
   },
-  async editInstance({ commit, getters }, editData){
-    const plant = getters.getSelectedPlant
-    console.log(getters.getSelectedInstance);
-    const instanceId = getters.getSelectedInstance._id
-    commit('editInstance', { plant, instanceId, editData })
-      const { data } = await this.$axios.patch('/api/flora/' + plant._id, plant)
-      if (!data) {
-        commit('setError', 'Failed to add plant instance', { root: true })
-      }
-      commit('setCenteredInstance', instanceId)
-      commit('setPlant', data)
-      commit('updateMap')
+
+  // Instance Core Actions
+  async createInstance({ commit, getters }, plantId) {
+    try {
+      const plant = await this.$axios.$patch('/api/flora/' + plantId, {
+        $push: { instances: {
+          location: {
+            coordinates: [
+              -31.976764, 115.818220
+            ],
+            type: 'Point'
+          }}}
+        })
+        const newInstance = plant.instances.find((instance) => {
+          return !getters.getPlantFromId(plantId).instances.some((oldInstance) => instance._id === oldInstance._id)
+        })
+        commit('updatePlant', plant)
+        commit('setSelectedInstance', {plantId: plant._id, instanceId: newInstance._id})
+        commit('setCenteredInstance', {plantId: plant._id, instanceId: newInstance._id})
+        commit('updateMap')
+    } catch (err) {
+      commit('setError', 'Failed to add plant instance', { root: true })
+    }
   },
-  async syncSelectedPlant({getters}){
-    const plant = getters.getSelectedPlant
-    await this.$axios.patch('/api/flora/' + plant._id, plant)
-  }
+
+  async updateInstance({ commit, getters }, updateInstance){
+    try {
+      const updatePlant = getters.getSelectedPlant
+      const instanceIndex = updatePlant.instances.findIndex((instance) => instance._id === updateInstance._id)
+      updatePlant.instances[instanceIndex] = updateInstance
+      const plant = await this.$axios.$patch('/api/flora/' + updatePlant._id, updatePlant)
+      commit('updatePlant', plant)
+      commit('updateMap')
+    } catch (err) {
+      commit('setError', 'Failed to add plant instance', { root: true })
+    }
+  },
+
+  async deleteInstance ({ commit, getters }, instanceId) {
+    try {
+      const updatePlant = getters.getSelectedPlant
+      const instanceIndex = updatePlant.instances.findIndex((instance) => instance._id === instanceId)
+      updatePlant.splice(instanceIndex, 1)
+      const plant = await this.$axios.$patch('/api/flora/' + updatePlant._id, updatePlant)
+      commit('updatePlant', plant)
+      commit('setSelectedInstance', null)
+      commit('setCenteredInstance', null)
+      commit('updateMap')
+    } catch (err) {
+      commit('setError', 'Failed to delete plant instance', { root: true })
+    }
+  },
 }
 
 export default { state, mutations, actions, getters }

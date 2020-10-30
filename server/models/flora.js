@@ -31,10 +31,12 @@ const floraSchema = new mongoose.Schema({
         }
       },
       heading: {
-        type: String
+        type: String,
+        default: ''
       },
       description: {
-        type: String
+        type: String,
+        default: ''
       }
     }
   ],

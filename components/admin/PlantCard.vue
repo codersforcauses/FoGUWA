@@ -126,7 +126,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      addInstance: 'plants/createInstance',
+      createInstance: 'plants/createInstance',
       deletePlant: 'plants/deletePlant'
     }),
     ...mapMutations({
@@ -147,7 +147,7 @@ export default {
       this.centerInstance(instance)
     },
     handleInstanceAdd(){
-      this.addInstance(this.getSelectedPlant)
+      this.createInstance(this.getSelectedPlant)
       this.displayForm = 1
     }
   }

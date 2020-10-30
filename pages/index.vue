@@ -1,19 +1,14 @@
 <template>
   <v-layout>
-    <plant-info
-      v-if="this.$route.name ==='index' && plant"
-      v-model="infoDrawer"
-      :plant="plant"
-      :instance="instance"
-    />
+    <plant-info v-model="infoDrawer" />
     <v-card height="100%" width="100%" tile>
-      <uwa-plant-map :plants="plants" @plant-clicked="handlePlantClick" />
+      <uwa-plant-map @plant-clicked="handlePlantClick" />
     </v-card>
   </v-layout>
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapMutations } from 'vuex'
 import iconData from '@/assets/js/plantIcons.js'
 // eslint-disable-next-line import/order
 import PlantInfo from './../components/PlantInfo'
@@ -29,13 +24,6 @@ export default {
   data: () => ({
     infoDrawer: false
   }),
-  computed: {
-    ...mapGetters({
-      plants: 'plants/plants',
-      plant: 'plants/getSelectedPlant',
-      instance: 'plants/getSelectedInstance'
-    }),
-  },
   mounted(){
     this.loadPlants()
     this.setPlantIcons(iconPaths)
@@ -47,7 +35,7 @@ export default {
     ...mapActions({
       loadPlants: 'plants/loadPlants'
     }),
-    handlePlantClick(payload) {
+    handlePlantClick() {
       this.infoDrawer = true
     }
   }

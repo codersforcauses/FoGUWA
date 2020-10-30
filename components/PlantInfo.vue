@@ -1,5 +1,6 @@
 <template>
   <v-navigation-drawer
+    v-if="selectedPlant && selectedInstance"
     v-model="plantInfoVisible"
     app
     bottom
@@ -23,36 +24,36 @@
     </v-btn>
     <v-card flat>
       <v-carousel
-        v-if="plant.images.length > 0"
+        v-if="selectedPlant.images.length > 0"
         hide-delimiters
         cycle
         interval="3500"
         show-arrows-on-hover
-        :show-arrows="plant.images.length > 1"
+        :show-arrows="selectedPlant.images.length > 1"
         height="60vh"
       >
-        <v-carousel-item v-for="(image, i) in plant.images" :key="i">
+        <v-carousel-item v-for="(image, i) in selectedPlant.images" :key="i">
           <v-img height="100%" :src="require(`~/assets/images/plants/${image}`)"></v-img>
         </v-carousel-item>
       </v-carousel>
-      <div v-if="plant">
+      <div v-if="selectedPlant">
         <v-card-title primary-title>
-          {{ plant.name }}
+          {{ selectedPlant.name }}
         </v-card-title>
         <v-card-subtitle>
-          <em>{{ plant.scientificName }}</em>
+          <em>{{ selectedPlant.scientificName }}</em>
         </v-card-subtitle>
         <v-card-text>
-          {{ plant.description }}
+          {{ selectedPlant.description }}
         </v-card-text>
       </div>
-      <div v-if="instance.heading || instance.description">
+      <div v-if="selectedInstance.heading !== '' || selectedInstance.description !== ''">
         <v-divider />
-        <v-subheader class="font-weight-bold">
-          {{ instance.heading }}
+        <v-subheader v-if="selectedInstance.heading !== ''" class="font-weight-bold">
+          {{ selectedInstance.heading }}
         </v-subheader>
-        <v-card-text>
-          {{ instance.description }}
+        <v-card-text v-if="selectedInstance.description !== ''">
+          {{ selectedInstance.description }}
         </v-card-text>
       </div>
     </v-card>
@@ -60,20 +61,21 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'PlantInfo',
   props: {
-    value: Boolean,
-    plant: {
-      type: Object,
-      default: null
-    },
-    instance: {
-      type: Object,
-      default: null
-    },
+    value: {
+      type: Boolean,
+      required: true
+    }
   },
   computed: {
+    ...mapGetters({
+      selectedPlant: 'plants/getSelectedPlant',
+      selectedInstance: 'plants/getSelectedInstance',
+    }),
     plantInfoVisible: {
       get() {
         return this.value

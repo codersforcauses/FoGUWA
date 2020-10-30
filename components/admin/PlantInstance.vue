@@ -87,11 +87,7 @@ export default {
       deletePlant: 'plants/deletePlant'
     }),
     handleDelete(){
-      if(this.oneInstanceRemaining) {
-        this.deletePlant(this.plant._id)
-        this.$router.push({ path: '/admin/plants' })
-      }
-      else this.deleteInstance(this.plantInstance._id)
+      this.deleteInstance(this.plantInstance._id)
       this.deleteInstanceModel = false
     },
     emitInstanceEdit(){

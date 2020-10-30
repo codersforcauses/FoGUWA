@@ -27,12 +27,6 @@ export default {
   components: {
     'google-map-loader': GoogleMapLoader,
   },
-  props: {
-    plants: {
-      type: Array,
-      required: true
-    }
-  },
   data: () => ({
     map: null,
     google: null,
@@ -43,12 +37,11 @@ export default {
   computed: {
     ...mapState(['position']),
     ...mapGetters({
+      plants: 'plants/getPlants',
       getPlantIcon: 'plants/getPlantIcon',
-      selectedPlant: 'plants/getSelectedPlant',
-      selectedInstance: 'plants/getSelectedInstance',
       centeredInstance: 'plants/getCenteredInstance',
-      getDraggable: 'plants/getDraggable',
-      mapUpdate: 'plants/updateMap',
+      draggableInstance: 'plants/getDraggableInstance',
+      updateMap: 'plants/updateMap',
     }),
     mapConfig() {
       return {
@@ -71,26 +64,34 @@ export default {
     google() {
       this.loadMarkers()
     },
-    mapUpdate() {
+    plants: {
+      handler() {
+        this.loadMarkers()
+      },
+      deep: true
+    },
+    mapUpdateNeeded() {
       this.loadMarkers()
-      this.mapUpdated()
+      this.mapUpdateNeeded(false)
     },
     centeredInstance(instance){
       if(instance){
         const [ lat, lng ] = instance.location.coordinates
-        this.setCenter({ lat, lng })
-        this.setCenterNull()
+        this.map.panTo({ lat, lng })
+        this.setCenteredInstance(null)
       }
     },
-    getDraggable(instance){
+    draggableInstance(instance){
       if(instance){
         const markerIndex = this.markerInstances.findIndex(( markerInstance ) => {
           return markerInstance.instance === instance
         })
-        this.markerInstances[markerIndex].marker.setDraggable(true)
+        this.markerInstances[markerIndex].marker.setZIndex(1)
+        this.markerInstances[markerIndex].marker.setDraggableInstance(true)
       } else {
         this.markerInstances.forEach(markerInstance => {
-          markerInstance.marker.setDraggable(false)
+          markerInstance.marker.setZIndex(0)
+          markerInstance.marker.setDraggableInstance(false)
         })
       }
     },
@@ -118,12 +119,12 @@ export default {
   },
   methods: {
     ...mapMutations({
-      setPlant: 'plants/setSelectedPlant',
-      setInstance: 'plants/setSelectedInstance',
-      setDraggable: 'plants/setDraggable',
-      setCenterNull: 'plants/setCenteredNull',
-      setInstancePositon: 'plants/setInstancePosition',
-      mapUpdated: 'plants/mapUpdated'
+      setSelectedPlant: 'plants/setSelectedPlant',
+      setSelectedInstance: 'plants/setSelectedInstance',
+      setDraggableInstance: 'plants/setDraggableInstance',
+      setCenteredInstance: 'plants/setCenteredInstance',
+      setSelectedInstancePosition: 'plants/setSelectedInstancePosition',
+      mapUpdateNeeded: 'plants/mapUpdateNeeded'
     }),
     loadMarkers() {
       if (this.map && this.google) {
@@ -166,26 +167,21 @@ export default {
           anchor: new this.google.maps.Point(10, 15),
           ...icon
         },
-        draggable: false,
-        crossOnDrag: false,
         map: this.map,
       })
     },
     addListenerToMarker(markerInstance, plant, instance) {
       markerInstance.addListener('click', () => {
+        this.setSelectedPlant(plant._id)
+        this.setSelectedInstance(instance._id)
         this.$emit('plant-clicked', { plant, instance })
-        this.setPlant(plant)
-        this.setInstance(instance)
       })
       this.google.maps.event.addListener(markerInstance, 'dragend', () => {
         this.handleDrag(markerInstance, instance)
       })
     },
     handleDrag(marker, instance){
-      this.setInstancePositon({ instance, position: [marker.position.lat(), marker.position.lng()] })
-    },
-    setCenter(coords) {
-      this.map.panTo(coords)
+      this.setSelectedInstancePosition([marker.position.lat(), marker.position.lng()])
     }
   }
 }

@@ -121,13 +121,13 @@ export default {
           await this.updatePlant(this.plant);
           this.emitBack()
         } else {
-          const newPlantID = await this.addPlant(this.plant);
+          const newPlantID = await this.createPlant(this.plant);
           if (newPlantID) this.$router.push({ path: '/admin/plants/' + newPlantID })
         }
       }  
     },
     ...mapActions({
-      addPlant: 'plants/createPlant',
+      createPlant: 'plants/createPlant',
       updatePlant: 'plants/updatePlant'
     })
   },
