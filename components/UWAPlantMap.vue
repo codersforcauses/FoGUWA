@@ -64,13 +64,7 @@ export default {
     google() {
       this.loadMarkers()
     },
-    plants: {
-      handler() {
-        this.loadMarkers()
-      },
-      deep: true
-    },
-    mapUpdateNeeded() {
+    updateMap() {
       this.loadMarkers()
       this.mapUpdateNeeded(false)
     },
@@ -84,14 +78,14 @@ export default {
     draggableInstance(instance){
       if(instance){
         const markerIndex = this.markerInstances.findIndex(( markerInstance ) => {
-          return markerInstance.instance === instance
+          return markerInstance.instance === instance._id
         })
         this.markerInstances[markerIndex].marker.setZIndex(1)
-        this.markerInstances[markerIndex].marker.setDraggableInstance(true)
+        this.markerInstances[markerIndex].marker.setDraggable(true)
       } else {
         this.markerInstances.forEach(markerInstance => {
           markerInstance.marker.setZIndex(0)
-          markerInstance.marker.setDraggableInstance(false)
+          markerInstance.marker.setDraggable(false)
         })
       }
     },

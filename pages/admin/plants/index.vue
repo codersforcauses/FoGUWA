@@ -1,5 +1,5 @@
 <template>
-  <plant-list :plants="plants" />
+  <plant-list />
 </template>
 
 <script>
@@ -9,12 +9,6 @@
     middleware: 'admin',
     components: {
       'plant-list': PlantList
-    },
-    props: {
-      plants: {
-        type: Array,
-        required: true
-      }
     }
   }
 </script>

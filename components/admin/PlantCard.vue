@@ -46,7 +46,7 @@
           Locations
         </v-subheader>
         <plant-instance
-          v-for="(instance,i) in plant.instances"
+          v-for="(instance, i) in plant.instances"
           :key="i"
           :instance-index="i"
           :index-selected="instanceHovered"
@@ -82,7 +82,8 @@
       <plant-edit :plant-value="plant" @back="handleBackClick" />
     </v-window-item>
     <v-window-item :value="1">
-      <instance-edit :instance="getSelectedInstance" @back="handleBackClick" />
+      <instance-edit v-if="instance" @back="handleBackClick" />
+      <v-skeleton-loader v-else type="article" class="mx-auto" />
     </v-window-item>
   </v-window>
 </template>
@@ -99,25 +100,19 @@ export default {
     'instance-edit': InstanceEdit,
     'plant-instance': PlantInstance
   },
-  props:{
-    plant:{
-      type: Object,
-      required: true
-    },
-    icon: {
-      type: Object,
-      required: true
-    },
-  },
   data: () => ({
     displayForm: 2,
     instanceHovered: -1
   }),
   computed: {
     ...mapGetters({
-      getSelectedInstance: "plants/getSelectedInstance",
-      getSelectedPlant: "plants/getSelectedPlant"
-    })
+      plant: "plants/getSelectedPlant",
+      instance: "plants/getSelectedInstance",
+      getPlantIcon: "plants/getPlantIcon"
+    }),
+    icon() {
+      return this.getPlantIcon(this.plant.icon)
+    }
   },
   watch: {
     getSelectedPlant(val) {
@@ -130,7 +125,8 @@ export default {
       deletePlant: 'plants/deletePlant'
     }),
     ...mapMutations({
-      centerInstance: 'plants/setCenteredInstance',
+      setSelectedInstance: 'plants/setSelectedInstance',
+      setCenteredInstance: 'plants/setCenteredInstance',
       setSelectedPlant: 'plants/setSelectedPlant'
     }),
     handlePlantDelete(){
@@ -139,15 +135,16 @@ export default {
     handleBackClick(){
       this.displayForm = 2
     },
-    handleInstanceEdit(instance){
-      this.centerInstance(instance)
+    handleInstanceEdit(editInstance){
+      this.setSelectedInstance(editInstance._id)
+      this.setCenteredInstance(editInstance._id)
       this.displayForm = 1
     },
-    handleCentered(instance){
-      this.centerInstance(instance)
+    handleCentered(centeredInstance){
+      this.setCenteredInstance(centeredInstance._id)
     },
     handleInstanceAdd(){
-      this.createInstance(this.getSelectedPlant)
+      this.createInstance(this.plant._id)
       this.displayForm = 1
     }
   }

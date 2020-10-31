@@ -25,10 +25,10 @@
       {{ draggable ? "lock position" : "move on map" }}
     </v-btn>
     <v-chip label outlined small>
-      {{ "Lat: " + instance.location.coordinates[0] + " Lng: " + instance.location.coordinates[1] }}
+      {{ "Lat: " + selectedInstance.location.coordinates[0] + " Lng: " + selectedInstance.location.coordinates[1] }}
     </v-chip>
     <v-card-actions class="px-4 pb-4">
-      <v-btn color="primary" text @click="$emit('back')">
+      <v-btn color="primary" text @click="handleBack">
         BACK
       </v-btn>
       <v-spacer></v-spacer>
@@ -40,65 +40,65 @@
 </template>
 
 <script>
-import { mapMutations, mapActions } from 'vuex'
+import { mapMutations, mapGetters, mapActions } from 'vuex'
 
 export default {
-  props: {
-    instance: {
-      type: Object,
-      default: () => ({
-          location: {
-            type: "Point",
-            coordinates: [-32, 115]
-          },
-          heading: "",
-          description: ""
-      })
-    }
-  },
   data: () => ({
     heading: '',
     description: '',
+    oldCoords: [],
     draggable: false
   }),
-  watch: {
-    instance() {
-      this.heading = this.instance.heading
-      this.description = this.instance.description
-    },
+  computed: {
+    ...mapGetters({
+      selectedInstance: 'plants/getSelectedInstance'
+    })
   },
   mounted() {
-    this.heading = this.instance.heading
-    this.description = this.instance.description
+    this.heading = this.selectedInstance.heading
+    this.description = this.selectedInstance.description
+    this.oldCoords[0] = this.selectedInstance.location.coordinates[0]
+    this.oldCoords[1] = this.selectedInstance.location.coordinates[1]
   },
   methods: {
     ...mapActions({
-      updateInstance: 'plants/updateInstance',
-      syncSelectedPlant: 'plants/syncSelectedPlant'
+      updateInstance: 'plants/updateInstance'
     }),
     ...mapMutations({
-      setDraggable: 'plants/setDraggable',
-      centerInstance: 'plants/setCenteredInstance'
+      setDraggableInstance: 'plants/setDraggableInstance',
+      setCenterInstance: 'plants/setCenteredInstance',
+      setSelectedInstance: 'plants/setSelectedInstance',
+      setSelectedInstancePosition: 'plants/setSelectedInstancePosition',
+      mapUpdateNeeded: 'plants/mapUpdateNeeded'
     }),
     handleMarkerMove(){
       if(!this.draggable){
-        this.centerInstance(this.instance._id)
-        this.setDraggable(this.instance._id)
+        this.setCenterInstance(this.selectedInstance._id)
+        this.setDraggableInstance(this.selectedInstance._id)
         this.draggable = true
       } else {
-        this.setDraggable(null)
+        this.setDraggableInstance(null)
         this.draggable = false
-        this.syncSelectedPlant()
       }
-      
     },
-    handleInstanceSave(){
+    handleBack() {
       if(this.draggable) this.handleMarkerMove()
-      const editData = {
-        heading : this.heading,
-        description : this.description,
-      }
-      this.updateInstance(editData)
+      this.setSelectedInstancePosition(this.oldCoords)
+      this.mapUpdateNeeded(true)
+      this.draggable = false
+      this.setSelectedInstance(null)
+      this.setCenterInstance(null)
+      this.$emit('back')
+    },
+    async handleInstanceSave(){
+      
+      await this.updateInstance({
+        ...this.selectedInstance,
+        heading: this.heading,
+        description: this.description,
+      })
+      this.setSelectedInstance(null)
+      this.setCenterInstance(null)
       this.$emit('back')
     }
   }

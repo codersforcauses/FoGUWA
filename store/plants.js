@@ -80,23 +80,33 @@ const mutations = {
   },
 
   setSelectedPlant (state, plantId) {
-    state.selectedPlant = state.plants.find((plant) => plant._id === plantId)
+    if (!plantId) state.selectedPlant = null
+    else state.selectedPlant = state.plants.find((plant) => plant._id === plantId)
   },
 
   // Instance Selections
   setSelectedInstance (state, instanceId) {
-    const plant = state.selectedPlant
-    state.selectedInstance = plant.instances.find((instance) => instance._id === instanceId)
+    if (!instanceId) state.selectedInstance = null
+    else {
+      const plant = state.selectedPlant
+      state.selectedInstance = plant.instances.find((instance) => instance._id === instanceId)
+    }
   },
 
   setCenteredInstance (state, instanceId) {
-    const plant = state.selectedPlant
-    state.centeredInstance = plant.instances.find((instance) => instance._id === instanceId)
+    if (!instanceId) state.centeredInstance = null
+    else {
+      const plant = state.selectedPlant
+      state.centeredInstance = plant.instances.find((instance) => instance._id === instanceId)
+    }
   },
 
   setDraggableInstance (state, instanceId) {
-    const plant = state.selectedPlant
-    state.draggableInstance = plant.instances.find((instance) => instance._id === instanceId)
+    if (!instanceId) state.draggableInstance = null
+    else {
+      const plant = state.selectedPlant
+      state.draggableInstance = plant.instances.find((instance) => instance._id === instanceId)
+    }
   },
 
   setSelectedInstancePosition(state, position) {
@@ -161,22 +171,27 @@ const actions = {
   // Instance Core Actions
   async createInstance({ commit, getters }, plantId) {
     try {
+      const updatePlant = getters.getSelectedPlant
+      const arrayCopy = [...updatePlant.instances]
+      arrayCopy.push({
+        location: {
+          coordinates: [
+            -31.976764, 115.818220
+          ],
+          type: 'Point'
+        }})
       const plant = await this.$axios.$patch('/api/flora/' + plantId, {
-        $push: { instances: {
-          location: {
-            coordinates: [
-              -31.976764, 115.818220
-            ],
-            type: 'Point'
-          }}}
-        })
+        ...updatePlant,
+        instances: arrayCopy
+      })
         const newInstance = plant.instances.find((instance) => {
           return !getters.getPlantFromId(plantId).instances.some((oldInstance) => instance._id === oldInstance._id)
         })
         commit('updatePlant', plant)
-        commit('setSelectedInstance', {plantId: plant._id, instanceId: newInstance._id})
-        commit('setCenteredInstance', {plantId: plant._id, instanceId: newInstance._id})
-        commit('updateMap')
+        commit('setSelectedPlant', plant._id)
+        commit('setSelectedInstance', newInstance._id)
+        commit('setCenteredInstance', newInstance._id)
+        commit('mapUpdateNeeded', true)
     } catch (err) {
       commit('setError', 'Failed to add plant instance', { root: true })
     }
@@ -186,12 +201,14 @@ const actions = {
     try {
       const updatePlant = getters.getSelectedPlant
       const instanceIndex = updatePlant.instances.findIndex((instance) => instance._id === updateInstance._id)
-      updatePlant.instances[instanceIndex] = updateInstance
-      const plant = await this.$axios.$patch('/api/flora/' + updatePlant._id, updatePlant)
+      const arrayCopy = [...updatePlant.instances]
+      arrayCopy[instanceIndex] = updateInstance
+      const plant = await this.$axios.$patch('/api/flora/' + updatePlant._id, {...updatePlant, instances: arrayCopy})
       commit('updatePlant', plant)
-      commit('updateMap')
+      commit('setSelectedPlant', plant._id)
+      commit('mapUpdateNeeded', true)
     } catch (err) {
-      commit('setError', 'Failed to add plant instance', { root: true })
+      commit('setError', 'Failed to update plant instance', { root: true })
     }
   },
 
@@ -199,12 +216,14 @@ const actions = {
     try {
       const updatePlant = getters.getSelectedPlant
       const instanceIndex = updatePlant.instances.findIndex((instance) => instance._id === instanceId)
-      updatePlant.splice(instanceIndex, 1)
-      const plant = await this.$axios.$patch('/api/flora/' + updatePlant._id, updatePlant)
+      const arrayCopy = [...updatePlant.instances]
+      arrayCopy.splice(instanceIndex, 1)
+      const plant = await this.$axios.$patch('/api/flora/' + updatePlant._id, {...updatePlant, instances: arrayCopy})
       commit('updatePlant', plant)
       commit('setSelectedInstance', null)
       commit('setCenteredInstance', null)
-      commit('updateMap')
+      commit('setSelectedPlant', plant._id)
+      commit('mapUpdateNeeded', true)
     } catch (err) {
       commit('setError', 'Failed to delete plant instance', { root: true })
     }

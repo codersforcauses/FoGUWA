@@ -1,7 +1,6 @@
 <template>
   <div>
-    <plant-card v-if="plant" :plant="plant" :icon="getPlantIcon(plant.icon)" />
-    <v-skeleton-loader v-else type="article" class="mx-auto" />
+    <plant-card />
   </div>
 </template>
 
@@ -17,16 +16,12 @@
     computed: {
       ...mapGetters({
         getPlant: 'plants/getPlantFromId',
-        getPlantIcon: 'plants/getPlantIcon',
-        getSelectedPlant: 'plants/getSelectedPlant'
-      }),
-      plant() {
-        return this.getPlant(this.$route.params.plantId)
-      }
+      })
     },
     mounted(){
-      if(!this.plant) this.$router.replace({ path: '/admin/plants' })
-      else this.setSelectedPlant(this.plant)
+      const plant = this.getPlant(this.$route.params.plantId)
+      if(!plant) this.$router.replace({ path: '/admin/plants' })
+      else this.setSelectedPlant(plant._id)
     },
     methods: {
       ...mapMutations({

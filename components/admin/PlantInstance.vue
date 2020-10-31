@@ -18,10 +18,7 @@
           </v-btn>
         </template>
         <v-card>
-          <v-card-title v-if="oneInstanceRemaining" class="headline">
-            Delete this entire plant?
-          </v-card-title>
-          <v-card-title v-else class="headline">
+          <v-card-title class="headline">
             Delete this plant instance?
           </v-card-title>
           <v-card-text>

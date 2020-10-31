@@ -40,14 +40,9 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  props: {
-    plants: {
-      type: Array,
-      required: true
-    }
-  },
   computed: {
     ...mapGetters({
+      plants: 'plants/getPlants',
       getPlantIcon: 'plants/getPlantIcon'
     }),
   }
