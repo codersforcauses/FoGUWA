@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const { ObjectId } = mongoose.Schema.Types
 
 const floraSchema = new mongoose.Schema({
   name: {
@@ -41,7 +42,7 @@ const floraSchema = new mongoose.Schema({
     }
   ],
   images: {
-    type: [String]
+    type: [ObjectId]
   }
 })
 

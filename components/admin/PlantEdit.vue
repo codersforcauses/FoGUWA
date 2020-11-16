@@ -1,7 +1,7 @@
 <template>
   <v-form ref="form" v-model="formValid" lazy-validation class="mt-8">
     <v-text-field
-      v-model="plant.name"
+      v-model="plantName"
       :rules="textRules"
       required
       clearable
@@ -12,7 +12,7 @@
       class="mx-4"
     ></v-text-field>
     <v-text-field
-      v-model="plant.scientificName"
+      v-model="sciName"
       clearable
       label="Scientific Name"
       no-resize
@@ -22,7 +22,7 @@
       class="mx-4"
     ></v-text-field>
     <v-textarea
-      v-model="plant.description"
+      v-model="plantDesc"
       :rules="textRules"
       required
       clearable
@@ -33,55 +33,75 @@
       no-resize
     ></v-textarea>
     <v-card-actions class="mx-4 mb-6">
-      <v-list>
+      <v-list width="100%">
         <v-subheader>Images</v-subheader>
         <v-list-item
-          v-for="(image, i) in plant.images"
-          :key="image"
+          v-for="imageId in plantImages"
+          :key="getImage(imageId).alt"
         >
-          <v-list-item-avatar>
+          <v-list-item-avatar
+            width="80"
+            height="80"
+            color="#eee"
+            rounded
+          >
             <v-img
-              src="https://scontent.fper6-1.fna.fbcdn.net/v/t1.0-9/123584211_3660594127295060_801662606055952945_o.jpg?_nc_cat=108&ccb=2&_nc_sid=cdbe9c&_nc_ohc=h8xs05qslRAAX-S75VR&_nc_ht=scontent.fper6-1.fna&oh=9de3da8e62f9b2ccee3911fe0c1566b9&oe=5FCAA610"
-              max-height="100"
-              max-width="100"
+              :alt="getImage(imageId).alt"
+              :src="getImage(imageId).data"
             >
             </v-img>
           </v-list-item-avatar>
-          <v-text-field
-            :value="plant.images[i]"
-            clearable
-            :label="`Image ${i + 1}`"
-            no-resize
-            outlined
-            dense
-            rows="1"
-            class="mx-4"
-            @blur="updateImage($event, i)"
+          <v-list-item-content>
+            <v-list-item-title>{{ getImage(imageId).alt }}</v-list-item-title>
+          </v-list-item-content>
+          <v-list-item-action>
+            <v-btn icon @click="removeImage(imageId)">
+              <v-icon>mdi-delete</v-icon>
+            </v-btn>
+          </v-list-item-action>
+        </v-list-item>
+        <v-list-item
+          @click="addImageOpen = true"
+        >
+          <v-list-item-avatar
+            width="80"
+            height="80"
+            rounded
           >
-            {{ image }}
-          </v-text-field>
+            <v-sheet
+              color="#eee"
+              width="100%"
+              height="100%"
+            >
+              <v-icon>
+                mdi-plus
+              </v-icon>
+            </v-sheet>
+          </v-list-item-avatar>
+          <v-list-item-content>
+            <v-list-item-title>Add Image</v-list-item-title>
+          </v-list-item-content>
+          <image-dialog :dialog="addImageOpen" @encode-complete="addImage" @close-dialog="addImageOpen = false"></image-dialog>
         </v-list-item>
       </v-list>
     </v-card-actions>
     <v-card-actions class="mx-4 mb-6">
       <v-subheader>Icon</v-subheader>
-      <v-btn-toggle :v-model="selectedBtn">
-        <v-btn
-          v-for="(icon, i) in getAllPlantIcons"
-          :key="i"
-          :color="icon.fillColor"
-          icon
-          outlined
-          fab
-          class="round mx-1"
-          :style="{ borderColor: `${selectedBtn === getIconIndex(i) ? icon.fillColor : 'grey'} !important` }"
-          @click="plant.icon = i"
-        >
-          <v-icon :color="selectedBtn === getIconIndex(i) ? icon.fillColor: 'grey'">
-            {{ icon.mdiName }}
-          </v-icon>
-        </v-btn>
-      </v-btn-toggle>
+      <v-btn
+        v-for="(icon, iconName) in getAllPlantIcons"
+        :key="icon.name"
+        :color="icon.fillColor"
+        icon
+        outlined
+        fab
+        class="round mx-1"
+        :style="{ borderColor: `${plantIcon === iconName ? icon.fillColor : 'grey'} !important` }"
+        @click="plantIcon = iconName"
+      >
+        <v-icon :color="plantIcon === iconName ? icon.fillColor: 'grey'">
+          {{ icon.mdiName }}
+        </v-icon>
+      </v-btn>
     </v-card-actions>
     <v-card-actions class="px-4 pb-4">
       <v-btn color="primary" text @click="emitBack">
@@ -97,23 +117,19 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import ImageDialog from './AddImage'
 
 export default {
-  props:{
-    plantValue: {
-      type: Object,
-      default:() => ({
-          name: "",
-          scientificName: "",
-          images: [],
-          icon: "other",
-          description: "",
-          instances: []
-        })
-    }
+  components: {
+    'image-dialog': ImageDialog
   },
   data: () => ({
-    plant: {},
+    plantName: '',
+    sciName: '',
+    plantDesc: '',
+    plantImages: [],
+    plantIcon: '',
+    addImageOpen: false,
     formValid: false,
     textRules: [
         v => !!v || 'Field is required',
@@ -121,47 +137,28 @@ export default {
   }),
   computed: {
     ...mapGetters({
-      getAllPlantIcons: 'plants/getAllPlantIcons'
+      plant: 'plants/getSelectedPlant',
+      getAllPlantIcons: 'plants/getAllPlantIcons',
+      getImage: 'images/getImage'
     }),
-    selectedBtn() {
-      return this.getIconIndex(this.plant.icon)
-    }
-  },
-  watch: {
-    plant: {
-      handler() {
-        
-      },
-      deep: true
-    }
   },
   created() {
-    this.plant = {...this.plantValue}
-    this.plant.images = [...this.plantValue.images]
-    this.imageIcons = [...this.plantValue.images]
+    this.plantName = this.plant.name
+    this.sciName = this.plant.scientificName
+    this.plantDesc = this.plant.description
+    this.plantImages = this.plant.images
+    this.plantIcon = this.plant.icon
   },
   methods: {
     getIconIndex(iconName){
-      const iconIndexList = [
-        "other",
-        "leaf",
-        "tree",
-        "tulip",
-        "lotus"
-      ]
+      const iconIndexList = Object.keys(this.getAllPlantIcons)
       return iconIndexList.indexOf(iconName);
     },
-    updateImage(e, i){
-      this.plant.images[i] = e.target.value
-      console.log(this.plant.images)
+    addImage(image) {
+      this.createImage({ imageData: image, plantId: this.plant._id })
     },
-    getSrc(src){
-      try {
-        const realSrc = require(`~/assets/images/plants/${src}`)
-        return realSrc
-      } catch(err) {
-        return require(`~/assets/images/unknown.jpg`)
-      }
+    removeImage(imageId) {
+      this.deleteImage({ imageId, plantId: this.plant._id })
     },
     emitBack(){
       this.$emit('back')
@@ -169,7 +166,13 @@ export default {
     async saveOrUpdatePlant(){    
       if(this.$refs.form.validate()) {
         if(this.$route.params.plantId) {
-          await this.updatePlant(this.plant);
+          await this.updatePlant({
+            name: this.plantName,
+            scientificName: this.sciName,
+            description: this.plantDesc,
+            images: this.plantImages,
+            icon: this.plantIcon
+          });
           this.emitBack()
         } else {
           const newPlantID = await this.createPlant(this.plant);
@@ -179,7 +182,10 @@ export default {
     },
     ...mapActions({
       createPlant: 'plants/createPlant',
-      updatePlant: 'plants/updatePlant'
+      updatePlant: 'plants/updatePlant',
+      createImage: 'images/createImage',
+      updateImage: 'images/updateImage',
+      deleteImage: 'images/deleteImage'
     })
   },
 }

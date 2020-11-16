@@ -8,7 +8,7 @@
 
 <script>
 /* eslint-disable import/order */
-import { mapState, mapMutations, mapGetters } from 'vuex'
+import { mapState, mapMutations, mapActions, mapGetters } from 'vuex'
 import GoogleMapLoader from './GoogleMapLoader'
 import { uwaMapSettings } from '@/assets/js/mapSettings'
 import iconData from '@/assets/js/plantIcons'
@@ -120,8 +120,16 @@ export default {
       setSelectedInstancePosition: 'plants/setSelectedInstancePosition',
       mapUpdateNeeded: 'plants/mapUpdateNeeded'
     }),
-    loadMarkers() {
+    ...mapActions({
+      loadPlants: 'plants/loadPlants',
+      loadImages: 'images/loadImages'
+    }),
+    async loadMarkers() {
       if (this.map && this.google) {
+        if(this.plants.length === 0) {
+          await this.loadPlants()
+          this.loadPlants()
+        }
         this.clearMarkers()        
         // Create new markers and store them
         this.plants.forEach((plant, index) => {

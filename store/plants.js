@@ -64,6 +64,17 @@ const mutations = {
     state.plants[plantIndex] = updatedPlant
   },
 
+  addImage(state, {imageId, plantId}){
+    const plantIndex = state.plants.findIndex(plant => plant._id === plantId)
+    state.plants[plantIndex].images.push(imageId)
+  },
+
+  removeImage(state, {imageId, plantId}){
+    const plant = state.plants.find(plant => plant._id === plantId)
+    const imageIndex = plant.images.findIndex(id => id === imageId)
+    plant.images.splice(imageIndex, 1)
+  },
+
   deletePlant(state, plantId) {
     const plantIndex = state.plants.findIndex(plant => plant._id === plantId)
     state.plants.splice(plantIndex, 1)
@@ -153,7 +164,7 @@ const actions = {
       commit('setError', 'Failed to update plant', { root: true })
     }
   },
-
+  
   async deletePlant ({commit}, plantId) {
     try {
       const plant = await this.$axios.$delete('/api/flora/' + plantId)
@@ -168,6 +179,26 @@ const actions = {
     }
   },
 
+  addImageToPlant({ getters, commit, dispatch }, {imageId, plantId}){
+    try {
+      commit('addImage', { imageId, plantId })
+      const plantData = getters.getPlantFromId(plantId)
+      this.$axios.$patch('/api/flora/' + plantData._id, plantData)
+    } catch (error) {
+      commit('setError', 'Failed to add image to plant', { root: true })
+    }
+  },
+  
+  removeImageFromPlant({ getters, commit, dispatch }, {imageId, plantId}){
+    try {
+      commit('removeImage', { imageId, plantId })
+      const plantData = getters.getPlantFromId(plantId)
+      this.$axios.$patch('/api/flora/' + plantData._id, plantData)
+    } catch (error) {
+      commit('setError', 'Failed to remove image from plant', { root: true })
+    }
+  },
+  
   // Instance Core Actions
   async createInstance({ commit, getters }, plantId) {
     try {

@@ -1,26 +1,26 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const { checkJwt, restrictAccess } = require('../authentication.js')
-const { addFlora } = require('../controllers/flora')
+const { addImage } = require('../controllers/image')
 const { updateModel } = require('./routeUtilities')
 
-const Flora = mongoose.model('Flora')
+const Image = mongoose.model('Image')
 const router = express.Router()
 
-router.get('/flora', async (req, res) => {
+router.get('/image', async (req, res) => {
   try {
-    const floraObj = await Flora.find()
-    res.json(floraObj)
+    const imageObj = await Image.find()
+    res.json(imageObj)
   } catch (error) {
     res.status(500).json(error)
   }
 })
 
-router.get('/flora/:id', async (req, res) => {
+router.get('/image/:id', async (req, res) => {
   if (mongoose.Types.ObjectId.isValid(req.params.id)) {
     try {
-      const flora = await Flora.findById(req.params.id)
-      return flora ? res.json(flora) : res.status(404).json('Flora not found')
+      const image = await Image.findById(req.params.id)
+      return image ? res.json(image) : res.status(404).json('Image not found')
     } catch (error) {
       return res.status(500).json(error)
     }
@@ -28,10 +28,10 @@ router.get('/flora/:id', async (req, res) => {
   return res.status(400).json('Invalid objectId')
 })
 
-router.post('/flora', async (req, res) => {
+router.post('/image', async (req, res) => {
   try {
-    const flora = await addFlora(req.body)
-    res.json(flora)
+    const image = await addImage(req.body)
+    res.json(image)
   } catch (error) {
     if(error.name === 'ValidationError') {
       return res.status(400).json(error)
@@ -40,13 +40,13 @@ router.post('/flora', async (req, res) => {
   }
 })
 
-router.patch('/flora/:id', checkJwt, restrictAccess, async (req, res) => {
+router.patch('/image/:id', checkJwt, restrictAccess, async (req, res) => {
   const update = { ...req.body }
   delete update._id
   if (mongoose.Types.ObjectId.isValid(req.params.id)) {
     try {
-      const flora = await updateModel(Flora, req.params.id, update)
-      return flora ? res.json(flora) : res.status(404).json('Flora not found')
+      const image = await updateModel(Image, req.params.id, update)
+      return image ? res.json(image) : res.status(404).json('Image not found')
     } catch (error) {
       return res.status(500).json({ error })
     }
@@ -54,11 +54,11 @@ router.patch('/flora/:id', checkJwt, restrictAccess, async (req, res) => {
   return res.status(400).json('Invalid objectId')
 })
 
-router.delete('/flora/:id', checkJwt, restrictAccess, async (req, res) => {
+router.delete('/image/:id', checkJwt, restrictAccess, async (req, res) => {
   if (mongoose.Types.ObjectId.isValid(req.params.id)) {
     try {
-      const flora = await Flora.findByIdAndDelete(req.params.id)
-      return flora ? res.json(flora) : res.status(404).json('Flora not found')
+      const image = await Image.findByIdAndDelete(req.params.id)
+      return image ? res.json(image) : res.status(404).json('Image not found')
     } catch (error) {
       return res.status(500).json(error)
     }

@@ -1,11 +1,13 @@
 const bodyParser = require('body-parser')
 const FloraRouter = require('./routes/flora')
 const UsersRouter = require('./routes/users')
+const ImageRouter = require('./routes/image')
 
 module.exports = app => {
-  app.use(bodyParser.json())
+  app.use(bodyParser.json({limit: '500mb'}))
   app.use('/api', FloraRouter)
   app.use('/api', UsersRouter)
+  app.use('/api', ImageRouter)
 
   app.use((req, res, next) => {
     if (res.body !== undefined) {
