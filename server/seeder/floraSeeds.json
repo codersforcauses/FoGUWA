@@ -2,18 +2,14 @@
   {
     "name": "Swamp banksia",
     "scientificName": "Banksia littoralis",
-    "old_images": [
-      "swamp_banksia1.jpg",
-      "swamp_banksia2.jpg"
-    ],
     "images": [
       {
         "alt": "Swamp Banksia 1",
-        "src": "swamp_banksia1.jpg"
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/swamp_banksia1.jpg"
       },
       {
         "alt": "Swamp Banksia 2",
-        "src": "swamp_banksia2.jpg"
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/swamp_banksia2.jpg"
       }
     ],
     "icon": "lotus",
@@ -30,23 +26,18 @@
   {
     "name": "Wickham's grevillea",
     "scientificName": "Grevillea wickhamii",
-    "old_images": [
-      "grevillia1.jpg",
-      "grevillia2.jpg",
-      "grevillia3.jpg"
-    ],
     "images": [
       {
         "alt": "Grevillia 1",
-        "src": "grevillia1.jpg"
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/grevillia1.jpg"
       },
       {
         "alt": "Grevillia 2",
-        "src": "grevillia2.jpg"
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/grevillia2.jpg"
       },
       {
         "alt": "Grevillia 3",
-        "src": "grevillia3.jpg"
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/grevillia3.jpg"
       }
     ],
     "icon": "leaf",
@@ -63,28 +54,22 @@
   {
     "name": "Acorn banksia",
     "scientificName": "Banksia prionotes",
-    "old_images": [
-      "acorn_banksia1.jpg",
-      "acorn_banksia2.jpg",
-      "acorn_banksia3.jpg",
-      "acorn_banksia4.jpg"
-    ],
     "images": [
       {
         "alt": "Acorn Banksia 1",
-        "src": "acorn_banksia1.jpg"
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/acorn_banksia1.jpg"
       },
       {
         "alt": "Acorn Banksia 2",
-        "src": "acorn_banksia2.jpg"
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/acorn_banksia2.jpg"
       },
       {
         "alt": "Acorn Banksia 3",
-        "src": "acorn_banksia3.jpg"
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/acorn_banksia3.jpg"
       },
       {
         "alt": "Acorn Banksia 4",
-        "src": "acorn_banksia4.jpg"
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/acorn_banksia4.jpg"
       }
     ],
     "icon": "tree",
@@ -101,28 +86,22 @@
   {
     "name": "Marri",
     "scientificName": "Corymbia calophylla",
-    "old_images": [
-      "marri1.jpg",
-      "marri2.jpg",
-      "marri3.jpg",
-      "marri4.jpg"
-    ],
     "images": [
       {
         "alt": "Marri 1",
-        "src": "marri1.jpg"
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/marri1.jpg"
       },
       {
         "alt": "Marri 2",
-        "src": "marri2.jpg"
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/marri2.jpg"
       },
       {
         "alt": "Marri 3",
-        "src": "marri3.jpg"
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/marri3.jpg"
       },
       {
         "alt": "Marri 4",
-        "src": "marri4.jpg"
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/marri4.jpg"
       }
     ],
     "icon": "tulip",
@@ -139,23 +118,18 @@
   {
     "name": "Pin-cushion Hakea",
     "scientificName": "Hakea laurina",
-    "old_images": [
-      "hakea1.jpg",
-      "hakea2.jpg",
-      "hakea3.jpg"
-    ],
     "images": [
       {
         "alt": "Hakea 1",
-        "src": "hakea1.jpg"
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/hakea1.jpg"
       },
       {
         "alt": "Hakea 2",
-        "src": "hakea2.jpg"
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/hakea2.jpg"
       },
       {
         "alt": "Hakea 3",
-        "src": "hakea3.jpg"
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/hakea3.jpg"
       }
     ],
     "icon": "leaf",
@@ -172,23 +146,18 @@
   {
     "name": "Jarrah",
     "scientificName": "Eucalyptus marginata",
-    "old_images": [
-      "jarrah1.jpg",
-      "jarrah2.jpg",
-      "jarrah3.jpg"
-    ],
     "images": [
       {
         "alt": "Jarrah 1",
-        "src": "jarrah1.jpg"
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/jarrah1.jpg"
       },
       {
         "alt": "Jarrah 2",
-        "src": "jarrah2.jpg"
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/jarrah2.jpg"
       },
       {
         "alt": "Jarrah 3",
-        "src": "jarrah3.jpg"
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/jarrah3.jpg"
       }
     ],
     "icon": "tree",
@@ -215,23 +184,18 @@
   {
     "name": "Western Australia Christmas Tree",
     "scientificName": "Nuytsia floribunda",
-    "old_images":[
-      "christmas1.jpg",
-      "christmas2.jpg",
-      "christmas3.jpg"
-    ],
     "images": [
       {
         "alt": "Christmas Tree 1",
-        "src": "christmas1.jpg"
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/christmas1.jpg"
       },
       {
         "alt": "Christmas Tree 2",
-        "src": "christmas2.jpg"
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/christmas2.jpg"
       },
       {
         "alt": "Christmas Tree 3",
-        "src": "christmas2.jpg"
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/christmas2.jpg"
       }
     ],
     "icon": "tree",
@@ -248,23 +212,18 @@
   {
     "name": "Zamia Palm",
     "scientificName": "Macrozamia riedlei",
-    "old_images": [
-      "zamia1.jpg",
-      "zamia2.jpg",
-      "zamia3.jpg"
-    ],
     "images": [
       {
         "alt": "Zamia Palm 1",
-        "src": "zamia1.jpg"
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/zamia1.jpg"
       },
       {
         "alt": "Zamia Palm 2",
-        "src": "zamia2.jpg"
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/zamia2.jpg"
       },
       {
         "alt": "Zamia Palm 3",
-        "src": "zamia3.jpg"
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/zamia3.jpg"
       }
     ],
     "icon": "tree",
@@ -281,23 +240,18 @@
   {
     "name": "Western Australian Peppermint",
     "scientificName": "Agonis flexuosa",
-    "old_images":[
-      "peppermint1.jpg",
-      "peppermint2.jpg",
-      "peppermint3.jpg"
-    ],
     "images": [
       {
         "alt": "Peppermint 1",
-        "src": "peppermint1.jpg"
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/peppermint1.jpg"
       },
       {
         "alt": "peppermint 2",
-        "src": "peppermint2.jpg"
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/peppermint2.jpg"
       },
       {
         "alt": "peppermint 3",
-        "src": "peppermint3.jpg"
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/peppermint3.jpg"
       }
     ],
     "icon": "lotus",
@@ -314,13 +268,10 @@
   {
     "name": "Norfolk Island Pine",
     "scientificName": "Araucaria heterophylla",
-    "old_images":[
-      "norfolk1.jpg"
-    ],
     "images": [
       {
         "alt": "Norfolk 1",
-        "src": "norfolk1.jpg"
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/norfolk1.jpg"
       }
     ],
     "icon": "tree",
@@ -337,13 +288,10 @@
   {
     "name": "Emma",
     "scientificName": "The Dancer",
-    "old_images": [
-      "dancer1.jpg"
-    ],
     "images": [
       {
         "alt": "Dancer 1",
-        "src": "dancer1.jpg"
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/dancer1.jpg"
       }
     ],
     "icon": "other",
@@ -360,23 +308,18 @@
   {
     "name": "Grass tree",
     "scientificName": "Xanthorrhoea",
-    "old_images":[
-      "grasstree1.jpg",
-      "grasstree2.jpg",
-      "grasstree3.jpg"
-    ],
     "images": [
       {
         "alt": "Grasstree 1",
-        "src": "grasstree1.jpg"
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/grasstree1.jpg"
       },
       {
         "alt": "Grasstree 2",
-        "src": "grasstree2.jpg"
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/grasstree2.jpg"
       },
       {
         "alt": "Grasstree 3",
-        "src": "grasstree3.jpg"
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/grasstree3.jpg"
       }
     ],
     "icon": "tree",

@@ -10,8 +10,8 @@
         :show-arrows="plant.images.length > 1"
         height="400px"
       >
-        <v-carousel-item v-for="imageId in plant.images" :key="imageId">
-          <v-img height="450px" :alt="getImage(imageId).alt" :src="getImage(imageId).data" />
+        <v-carousel-item v-for="image in plant.images" :key="image.id">
+          <v-img height="450px" :alt="image.alt" :src="image.src" />
         </v-carousel-item>
       </v-carousel>
       <div

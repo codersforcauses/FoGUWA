@@ -96,6 +96,7 @@ module.exports = {
     extend(config, ctx) {}
   },
   env: {
-    GMAPS_KEY: process.env.GMAPS_KEY
+    GMAPS_KEY: process.env.GMAPS_KEY,
+    S3_BASE_URL: process.env.S3_BASE_URL
   }
 }

@@ -121,8 +121,7 @@ export default {
       mapUpdateNeeded: 'plants/mapUpdateNeeded'
     }),
     ...mapActions({
-      loadPlants: 'plants/loadPlants',
-      loadImages: 'images/loadImages'
+      loadPlants: 'plants/loadPlants'
     }),
     async loadMarkers() {
       if (this.map && this.google) {

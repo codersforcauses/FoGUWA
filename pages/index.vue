@@ -26,7 +26,6 @@ export default {
   }),
   mounted(){
     this.loadPlants()
-    this.loadImages()
     this.setPlantIcons(iconPaths)
   },
   methods: {
@@ -34,8 +33,7 @@ export default {
       setPlantIcons: 'plants/setPlantIcons'
     }),
     ...mapActions({
-      loadPlants: 'plants/loadPlants',
-      loadImages: 'images/loadImages'
+      loadPlants: 'plants/loadPlants'
     }),
     handlePlantClick() {
       this.infoDrawer = true

@@ -36,8 +36,8 @@
       <v-list width="100%">
         <v-subheader>Images</v-subheader>
         <v-list-item
-          v-for="imageId in plantImages"
-          :key="getImage(imageId).alt"
+          v-for="image in plantImages"
+          :key="image.id"
         >
           <v-list-item-avatar
             width="80"
@@ -46,16 +46,16 @@
             rounded
           >
             <v-img
-              :alt="getImage(imageId).alt"
-              :src="getImage(imageId).data"
+              :alt="image.alt"
+              :src="image.src"
             >
             </v-img>
           </v-list-item-avatar>
           <v-list-item-content>
-            <v-list-item-title>{{ getImage(imageId).alt }}</v-list-item-title>
+            <v-list-item-title>{{ image.alt }}</v-list-item-title>
           </v-list-item-content>
           <v-list-item-action>
-            <v-btn icon @click="removeImage(imageId)">
+            <v-btn icon @click="removeImage(image)">
               <v-icon>mdi-delete</v-icon>
             </v-btn>
           </v-list-item-action>
@@ -81,7 +81,7 @@
           <v-list-item-content>
             <v-list-item-title>Add Image</v-list-item-title>
           </v-list-item-content>
-          <image-dialog :dialog="addImageOpen" @encode-complete="addImage" @close-dialog="addImageOpen = false"></image-dialog>
+          <image-dialog :dialog="addImageOpen" @upload-complete="addImage" @close-dialog="addImageOpen = false"></image-dialog>
         </v-list-item>
       </v-list>
     </v-card-actions>
@@ -116,7 +116,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 import ImageDialog from './AddImage'
 
 export default {
@@ -138,27 +138,33 @@ export default {
   computed: {
     ...mapGetters({
       plant: 'plants/getSelectedPlant',
-      getAllPlantIcons: 'plants/getAllPlantIcons',
-      getImage: 'images/getImage'
+      getAllPlantIcons: 'plants/getAllPlantIcons'
     }),
   },
   created() {
     this.plantName = this.plant.name
     this.sciName = this.plant.scientificName
     this.plantDesc = this.plant.description
-    this.plantImages = this.plant.images
+    this.plantImages = [...this.plant.images]
     this.plantIcon = this.plant.icon
   },
   methods: {
+    ...mapMutations({
+      'setSelectedPlant': 'plants/setSelectedPlant'
+    }),
     getIconIndex(iconName){
       const iconIndexList = Object.keys(this.getAllPlantIcons)
       return iconIndexList.indexOf(iconName);
     },
-    addImage(image) {
-      this.createImage({ imageData: image, plantId: this.plant._id })
+    addImage({ src, alt }) {
+      this.plantImages.push({
+        src,
+        alt
+      })
     },
-    removeImage(imageId) {
-      this.deleteImage({ imageId, plantId: this.plant._id })
+    removeImage({ src }) {
+      const imageIndex = this.plantImages.findIndex(image => image.src === src)
+      this.plantImages.splice(imageIndex, 1)
     },
     emitBack(){
       this.$emit('back')
@@ -167,6 +173,7 @@ export default {
       if(this.$refs.form.validate()) {
         if(this.$route.params.plantId) {
           await this.updatePlant({
+            _id: this.plant._id,
             name: this.plantName,
             scientificName: this.sciName,
             description: this.plantDesc,
@@ -182,10 +189,7 @@ export default {
     },
     ...mapActions({
       createPlant: 'plants/createPlant',
-      updatePlant: 'plants/updatePlant',
-      createImage: 'images/createImage',
-      updateImage: 'images/updateImage',
-      deleteImage: 'images/deleteImage'
+      updatePlant: 'plants/updatePlant'
     })
   },
 }

@@ -10,10 +10,12 @@
   ],
   "build": {
     "env": {
-      "GMAPS_KEY": "@gmap-api"
+      "GMAPS_KEY": "@gmap-api",
+      "S3_BASE_URL": "@s3-base-url"
     }
   },
   "env": {
-    "GMAPS_KEY": "@gmap-api"
+    "GMAPS_KEY": "@gmap-api",
+    "S3_BASE_URL": "@s3-base-url"
   }
 }

@@ -48,5 +48,4 @@ process.on('SIGTERM', () => {
 module.exports.mongoose = mongoose.connection
 
 require('../models/flora')
-require('../models/image')
 require('../models/users')

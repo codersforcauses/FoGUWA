@@ -32,8 +32,8 @@
         :show-arrows="selectedPlant.images.length > 1"
         height="60vh"
       >
-        <v-carousel-item v-for="imageId in selectedPlant.images" :key="imageId">
-          <v-img height="100%" :alt="getImage(imageId).alt" :src="getImage(imageId).data"></v-img>
+        <v-carousel-item v-for="image in selectedPlant.images" :key="image.id">
+          <v-img height="100%" :alt="image.alt" :src="image.src"></v-img>
         </v-carousel-item>
       </v-carousel>
       <div v-if="selectedPlant">
@@ -74,8 +74,7 @@ export default {
   computed: {
     ...mapGetters({
       selectedPlant: 'plants/getSelectedPlant',
-      selectedInstance: 'plants/getSelectedInstance',
-      getImage: 'images/getImage'
+      selectedInstance: 'plants/getSelectedInstance'
     }),
     plantInfoVisible: {
       get() {

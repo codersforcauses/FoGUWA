@@ -30,7 +30,7 @@
             counter
             label="Image Add"
             placeholder="Select your image"
-            accept="image/*"
+            accept="image/jpeg image/png"
             prepend-icon="mdi-camera"
             outlined
             :show-size="1000"
@@ -41,13 +41,16 @@
           <v-btn
             color="error"
             outlined
-            @click="$emit('close-dialog')"
+            @click="handleClose"
           >
             Cancel
           </v-btn>
           <v-spacer></v-spacer>
-          <v-btn color="primary" :disabled="!valid" @click="encodeImage">
-            Add
+          <v-btn color="primary" :disabled="!valid" @click="uploadImage">
+            <div v-if="!loading">
+              Add
+            </div>
+            <v-progress-circular v-else size="20" indeterminate />
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -67,6 +70,7 @@ export default {
     alt: '',
     file: null,
     valid: false,
+    loading: false,
     fileRules: [
       value => !value || value.size < 16000000 || 'Image size must be less than 16MB',
     ],
@@ -75,25 +79,29 @@ export default {
     ],
   }),
   methods: {
-    encodeImage() {
-      this.toDataURL(this.file, (data) => {
-        this.$emit('encode-complete', { data, alt: this.alt })
-        this.file = null
-        this.$refs.form.resetValidation()
-        this.$refs.form.reset()
-        this.$emit('close-dialog')
-      },
-      'image/png')
-    },
-    toDataURL(file, callback, outputFormat) {
-      const reader = new FileReader();
-      reader.addEventListener("load", function () {
-        callback(reader.result)
-      }, false);
-
-      if (file) {
-        reader.readAsDataURL(file);
+    async uploadImage() {
+      try {
+        this.loading = true
+        const { url: uploadUrl, key } = await this.$axios.$post('/api/image', { contentType: this.file.type, fileName: this.file.name })
+        await fetch(uploadUrl, { // Using fetch as it doesn't send auth token
+          method: 'PUT',
+          headers: {
+            'Content-Type': this.file.type
+          },
+          body: this.file
+        })
+        this.$emit('upload-complete', { src: `${process.env.S3_BASE_URL}${key}`, alt: this.alt })
+        this.handleClose()
+      } catch(err) {
+        this.loading = false
+        console.log(err)  // TODO Set error vuex
+        console.log('Error uploading image')  // TODO Set error vuex
       }
+    },
+    handleClose() {
+      this.loading = false
+      this.$emit('close-dialog')
+      this.$refs.form.reset()
     }
   }
 }

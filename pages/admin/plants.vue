@@ -25,7 +25,6 @@ export default {
   },
   mounted() {
     this.loadPlants()
-    this.loadImages()
     this.setPlantIcons(iconPaths)
   },
   methods: {
@@ -35,8 +34,7 @@ export default {
       setSelectedInstance: 'plants/setSelectedInstance'
     }),
     ...mapActions({
-      loadPlants: 'plants/loadPlants',
-      loadImages: 'images/loadImages'
+      loadPlants: 'plants/loadPlants'
     }),
     handlePlantClick(payload) {
       this.$router.replace({ path: '/admin/plants/' + payload.plant._id })
