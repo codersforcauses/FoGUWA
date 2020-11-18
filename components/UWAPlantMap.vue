@@ -127,7 +127,6 @@ export default {
       if (this.map && this.google) {
         if(this.plants.length === 0) {
           await this.loadPlants()
-          this.loadPlants()
         }
         this.clearMarkers()        
         // Create new markers and store them

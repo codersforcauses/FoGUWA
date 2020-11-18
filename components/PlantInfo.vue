@@ -32,7 +32,7 @@
         :show-arrows="selectedPlant.images.length > 1"
         height="60vh"
       >
-        <v-carousel-item v-for="image in selectedPlant.images" :key="image.id">
+        <v-carousel-item v-for="image in selectedPlant.images" :key="image.src">
           <v-img height="100%" :alt="image.alt" :src="image.src"></v-img>
         </v-carousel-item>
       </v-carousel>

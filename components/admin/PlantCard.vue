@@ -10,7 +10,7 @@
         :show-arrows="plant.images.length > 1"
         height="400px"
       >
-        <v-carousel-item v-for="image in plant.images" :key="image.id">
+        <v-carousel-item v-for="image in plant.images" :key="image.src">
           <v-img height="450px" :alt="image.alt" :src="image.src" />
         </v-carousel-item>
       </v-carousel>
@@ -108,8 +108,7 @@ export default {
     ...mapGetters({
       plant: 'plants/getSelectedPlant',
       instance: 'plants/getSelectedInstance',
-      getPlantIcon: 'plants/getPlantIcon',
-      getImage: 'images/getImage'
+      getPlantIcon: 'plants/getPlantIcon'
     }),
     icon() {
       return this.getPlantIcon(this.plant.icon)

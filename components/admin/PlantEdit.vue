@@ -37,7 +37,7 @@
         <v-subheader>Images</v-subheader>
         <v-list-item
           v-for="image in plantImages"
-          :key="image.id"
+          :key="image.src"
         >
           <v-list-item-avatar
             width="80"
@@ -157,10 +157,7 @@ export default {
       return iconIndexList.indexOf(iconName);
     },
     addImage({ src, alt }) {
-      this.plantImages.push({
-        src,
-        alt
-      })
+      this.plantImages.push({ src, alt })
     },
     removeImage({ src }) {
       const imageIndex = this.plantImages.findIndex(image => image.src === src)
