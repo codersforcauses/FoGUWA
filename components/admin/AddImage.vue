@@ -5,7 +5,7 @@
       :value="dialog"
       width="500"
     >
-      <v-card class="px-3">
+      <v-card class="px-3 pb-3">
         <v-card-title class="mb-3">
           Add Image
         </v-card-title>
@@ -19,7 +19,7 @@
             :rules="titleRules"
             label="Title"
             placeholder="Image Title"
-            prepend-icon="mdi-image"
+            prepend-inner-icon="mdi-image"
             outlined
           >
           </v-text-field>
@@ -31,7 +31,8 @@
             label="Image Add"
             placeholder="Select your image"
             accept="image/jpeg image/png"
-            prepend-icon="mdi-camera"
+            prepend-icon=""
+            prepend-inner-icon="mdi-camera"
             outlined
             :show-size="1000"
           >
@@ -39,6 +40,7 @@
         </v-form>
         <v-card-actions>
           <v-btn
+            :disabled="loading"
             color="error"
             outlined
             @click="handleClose"

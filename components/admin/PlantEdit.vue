@@ -137,16 +137,11 @@ export default {
   }),
   computed: {
     ...mapGetters({
-      plant: 'plants/getSelectedPlant',
       getAllPlantIcons: 'plants/getAllPlantIcons'
     }),
   },
-  created() {
-    this.plantName = this.plant.name
-    this.sciName = this.plant.scientificName
-    this.plantDesc = this.plant.description
-    this.plantImages = [...this.plant.images]
-    this.plantIcon = this.plant.icon
+  mounted() {
+    if (this.$route.params.plantId) this.setInitialValues()
   },
   methods: {
     ...mapMutations({
@@ -166,21 +161,31 @@ export default {
     emitBack(){
       this.$emit('back')
     },
-    async saveOrUpdatePlant(){    
+    setInitialValues() {
+      const selectedPlant = this.$store.getters["plants/getSelectedPlant"]
+      this.plantId = selectedPlant._id
+      this.plantName = selectedPlant.name
+      this.sciName = selectedPlant.scientificName
+      this.plantDesc = selectedPlant.description
+      this.plantImages = [...selectedPlant.images]
+      this.plantIcon = selectedPlant.icon
+    },
+    async saveOrUpdatePlant(){ 
       if(this.$refs.form.validate()) {
+        const newPlant = {
+          name: this.plantName,
+          scientificName: this.sciName,
+          description: this.plantDesc,
+          images: this.plantImages,
+          icon: this.plantIcon
+        }
         if(this.$route.params.plantId) {
-          await this.updatePlant({
-            _id: this.plant._id,
-            name: this.plantName,
-            scientificName: this.sciName,
-            description: this.plantDesc,
-            images: this.plantImages,
-            icon: this.plantIcon
-          });
+          newPlant._id = this.plantId
+          await this.updatePlant(newPlant);
           this.emitBack()
         } else {
-          const newPlantID = await this.createPlant(this.plant);
-          if (newPlantID) this.$router.push({ path: '/admin/plants/' + newPlantID })
+          const createdPlant = await this.createPlant(newPlant);
+          if (createdPlant) this.$router.push({ path: '/admin/plants/' + createdPlant._id })
         }
       }  
     },

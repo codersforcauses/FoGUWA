@@ -77,7 +77,7 @@ module.exports = {
           secondary: '#F7AEF8',
           info: '#907AD6',
           warning: '#D3BE70',
-          error: '#EF7674',
+          error: '#b9413f',
           success: '#8BE8CB'
         }
       },

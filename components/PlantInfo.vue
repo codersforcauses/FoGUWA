@@ -5,6 +5,7 @@
     app
     bottom
     hide-overlay
+    mobile-breakpoint="sm"
     width="450px"
   >
     <v-btn

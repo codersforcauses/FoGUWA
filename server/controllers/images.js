@@ -14,7 +14,6 @@ const config = {
 }
 
 const getUploadLink = (key, contentType) => {
-  console.log(key);
   const params = {
     Bucket: config.bucket_name,
     Key: key,

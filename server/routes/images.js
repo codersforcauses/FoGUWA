@@ -4,7 +4,6 @@ const { getUploadLink } = require('../controllers/images')
 const router = express.Router()
 
 router.post('/image', checkJwt, restrictAccess, async (req, res) => {
-  console.log(req.body);
   const { contentType, fileName } = req.body
   try {
     const signedData = await getUploadLink(fileName, contentType)
