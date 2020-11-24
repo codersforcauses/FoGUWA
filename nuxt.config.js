@@ -77,7 +77,7 @@ module.exports = {
           secondary: '#F7AEF8',
           info: '#907AD6',
           warning: '#D3BE70',
-          error: '#EF7674',
+          error: '#b9413f',
           success: '#8BE8CB'
         }
       },
@@ -96,6 +96,7 @@ module.exports = {
     extend(config, ctx) {}
   },
   env: {
-    GMAPS_KEY: process.env.GMAPS_KEY
+    GMAPS_KEY: process.env.GMAPS_KEY,
+    S3_BASE_URL: process.env.S3_BASE_URL
   }
 }

@@ -41,7 +41,18 @@ const floraSchema = new mongoose.Schema({
     }
   ],
   images: {
-    type: [String]
+    type: [
+      {
+        alt: {
+          type: String,
+          required: true
+        },
+        src: {
+          type: String,
+          required: true
+        }
+      }
+    ]
   }
 })
 

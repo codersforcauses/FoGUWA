@@ -61,7 +61,7 @@ const mutations = {
 
   updatePlant(state, updatedPlant){
     const plantIndex = state.plants.findIndex(plant => plant._id === updatedPlant._id)
-    state.plants[plantIndex] = updatedPlant
+    Object.assign(state.plants[plantIndex], updatedPlant)
   },
 
   deletePlant(state, plantId) {
@@ -144,16 +144,16 @@ const actions = {
     }
   },
 
-  async updatePlant({commit}, plantData){
+  async updatePlant({state, commit}, plantData){
     try {
       const plant = await this.$axios.$patch('/api/flora/' + plantData._id, plantData)
       commit('updatePlant', plant);
-      return plant._id
+      return plant
     } catch (error) {
       commit('setError', 'Failed to update plant', { root: true })
     }
   },
-
+  
   async deletePlant ({commit}, plantId) {
     try {
       const plant = await this.$axios.$delete('/api/flora/' + plantId)
@@ -167,7 +167,7 @@ const actions = {
       commit('setError', 'Failed to delete plant', { root: true })
     }
   },
-
+  
   // Instance Core Actions
   async createInstance({ commit, getters }, plantId) {
     try {

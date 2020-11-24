@@ -5,6 +5,7 @@
     app
     bottom
     hide-overlay
+    mobile-breakpoint="sm"
     width="450px"
   >
     <v-btn
@@ -32,8 +33,8 @@
         :show-arrows="selectedPlant.images.length > 1"
         height="60vh"
       >
-        <v-carousel-item v-for="(image, i) in selectedPlant.images" :key="i">
-          <v-img height="100%" :src="require(`~/assets/images/plants/${image}`)"></v-img>
+        <v-carousel-item v-for="image in selectedPlant.images" :key="image.src">
+          <v-img height="100%" :alt="image.alt" :src="image.src"></v-img>
         </v-carousel-item>
       </v-carousel>
       <div v-if="selectedPlant">
@@ -74,7 +75,7 @@ export default {
   computed: {
     ...mapGetters({
       selectedPlant: 'plants/getSelectedPlant',
-      selectedInstance: 'plants/getSelectedInstance',
+      selectedInstance: 'plants/getSelectedInstance'
     }),
     plantInfoVisible: {
       get() {

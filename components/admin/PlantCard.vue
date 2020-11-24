@@ -10,8 +10,8 @@
         :show-arrows="plant.images.length > 1"
         height="400px"
       >
-        <v-carousel-item v-for="(image, i) in plant.images" :key="i">
-          <v-img height="450px" :src="require(`~/assets/images/plants/${image}`)" />
+        <v-carousel-item v-for="image in plant.images" :key="image.src">
+          <v-img height="450px" :alt="image.alt" :src="image.src" />
         </v-carousel-item>
       </v-carousel>
       <div
@@ -79,7 +79,7 @@
       </v-btn>
     </v-window-item>
     <v-window-item :value="3">
-      <plant-edit :plant-value="plant" @back="handleBackClick" />
+      <plant-edit @back="handleBackClick" />
     </v-window-item>
     <v-window-item :value="1">
       <instance-edit v-if="instance" @back="handleBackClick" />
@@ -106,9 +106,9 @@ export default {
   }),
   computed: {
     ...mapGetters({
-      plant: "plants/getSelectedPlant",
-      instance: "plants/getSelectedInstance",
-      getPlantIcon: "plants/getPlantIcon"
+      plant: 'plants/getSelectedPlant',
+      instance: 'plants/getSelectedInstance',
+      getPlantIcon: 'plants/getPlantIcon'
     }),
     icon() {
       return this.getPlantIcon(this.plant.icon)

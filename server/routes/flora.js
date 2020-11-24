@@ -1,7 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const { checkJwt, restrictAccess } = require('../authentication.js')
-const { addFlora } = require('../seeder/index')
+const { addFlora } = require('../controllers/flora')
 const { updateModel } = require('./routeUtilities')
 
 const Flora = mongoose.model('Flora')
@@ -28,7 +28,7 @@ router.get('/flora/:id', async (req, res) => {
   return res.status(400).json('Invalid objectId')
 })
 
-router.post('/flora', async (req, res) => {
+router.post('/flora', checkJwt, restrictAccess, async (req, res) => {
   try {
     const flora = await addFlora(req.body)
     res.json(flora)
