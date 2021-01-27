@@ -1,7 +1,7 @@
 process.env.NODE_ENV !== 'production' && require('dotenv').config()
 
 module.exports = {
-  target: 'static',
+  target: 'server',
   telemetry: false,
   /*
    ** Headers of the page

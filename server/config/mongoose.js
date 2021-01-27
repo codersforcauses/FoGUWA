@@ -1,7 +1,9 @@
 const mongoose = require('mongoose')
 const consola = require('consola')
 
-const dbURI = 'mongodb://localhost:27017/fog'
+const dbURI = process.env.NODE_ENV === 'production' ?
+  process.env.DB_URI :
+  'mongodb://localhost:27017/fog'
 
 mongoose.connect(dbURI, {
   useNewUrlParser: true,
