@@ -31,15 +31,28 @@ const floraSchema = new mongoose.Schema({
         }
       },
       heading: {
-        type: String
+        type: String,
+        default: ''
       },
       description: {
-        type: String
-      },
+        type: String,
+        default: ''
+      }
     }
   ],
   images: {
-    type: [String]
+    type: [
+      {
+        alt: {
+          type: String,
+          required: true
+        },
+        src: {
+          type: String,
+          required: true
+        }
+      }
+    ]
   }
 })
 

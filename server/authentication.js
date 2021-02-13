@@ -39,15 +39,10 @@ const getUserInfo = token => {
 const findUser = async req => {
   const token = getToken(req)
   if (!token) throw new Error('Error retrieving token')
-  try {
-    const userInfo = await getUserInfo(token)
-    const { email } = userInfo.data
-    const adminObject = await findUserByEmail(email) // Returns null on non admin
-    const { name, _id } = adminObject
-    return adminObject ? { name, _id } : null
-  } catch ({ response }) {
-    if(response.statusText === 'Unauthorized') throw new Error('User is unauthrorised')
-  }
+  const userInfo = await getUserInfo(token)
+  const { email } = userInfo.data
+  const adminObject = await findUserByEmail(email) // Returns null on non admin
+  return adminObject || null
 }
 
 const userIsAdmin = async req => {

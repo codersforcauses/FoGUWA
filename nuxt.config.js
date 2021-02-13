@@ -1,7 +1,7 @@
 process.env.NODE_ENV !== 'production' && require('dotenv').config()
 
 module.exports = {
-  mode: 'universal',
+  target: 'server',
   telemetry: false,
   /*
    ** Headers of the page
@@ -28,14 +28,14 @@ module.exports = {
       {
         rel: 'stylesheet',
         href:
-          'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'
+          'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700'
       }
     ]
   },
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#639700' },
+  loading: { color: '#3F51B5' },
   /*
    ** Global CSS
    */
@@ -73,12 +73,12 @@ module.exports = {
     theme: {
       themes: {
         light: {
-          primary: '#639700',
-          secondary: '#FF8F00',
-          info: '#26A69A',
-          warning: '#FFC107',
-          error: '#DD2C00',
-          success: '#00E676'
+          primary: '#3F51B5',
+          secondary: '#F7AEF8',
+          info: '#907AD6',
+          warning: '#D3BE70',
+          error: '#b9413f',
+          success: '#8BE8CB'
         }
       },
       options: {
@@ -96,6 +96,7 @@ module.exports = {
     extend(config, ctx) {}
   },
   env: {
-    GMAPS_KEY: process.env.GMAPS_KEY
+    GMAPS_KEY: process.env.GMAPS_KEY,
+    S3_BASE_URL: process.env.S3_BASE_URL
   }
 }
