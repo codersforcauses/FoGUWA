@@ -61,6 +61,10 @@ module.exports = {
    */
   modules: ['@nuxtjs/pwa', '@nuxtjs/axios', '@nuxtjs/auth'],
 
+  axios: {
+    baseURL: process.env.BASE_URL || 'http://localhost:' + process.env.PORT,
+  },
+
   auth: {
     strategies: {
       auth0: {
