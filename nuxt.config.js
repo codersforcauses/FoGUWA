@@ -58,7 +58,7 @@ module.exports = {
   modules: ['@nuxtjs/pwa', '@nuxtjs/axios', '@nuxtjs/auth'],
 
   axios: {
-    baseURL: process.env.BASE_URL || 'http://localhost:8080',
+    baseURL: process.env.NODE_ENV !== 'production' ? 'https://' + process.env.BASE_URL : 'http://localhost:8080' || 'http://localhost:8080',
   },
 
   auth: {
