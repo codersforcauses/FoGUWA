@@ -5,9 +5,9 @@
   "author": "JeremiahPinto",
   "private": true,
   "engines": {
-    "node": ">= 10.0.0",
-    "npm": ">= 6.0.0",
-    "yarn": ">= 1.0.0"
+    "node": "14.x",
+    "npm": "6.x",
+    "yarn": "1.x"
   },
   "scripts": {
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
