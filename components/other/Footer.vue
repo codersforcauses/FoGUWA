@@ -1,7 +1,6 @@
 <template>
   <v-footer v-show="!(isIndex && $vuetify.breakpoint.smAndDown)" class="px-4">
-    {{ !isIndex && !$vuetify.breakpoint.mobile }}
-    Made with &#10084; by Coders for Causes
+    Made with &#10084; by <a href="https://codersforcauses.org" target="_blank">Coders for Causes</a>
   </v-footer>
 </template>
 
