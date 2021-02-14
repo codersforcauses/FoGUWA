@@ -7,6 +7,7 @@
     hide-overlay
     mobile-breakpoint="sm"
     width="450px"
+    disable-resize-watcher
   >
     <v-btn
       fab
