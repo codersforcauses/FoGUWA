@@ -1,9 +1,11 @@
 <template>
   <v-navigation-drawer
+    v-if="selectedPlant && selectedInstance"
     v-model="plantInfoVisible"
     app
     bottom
     hide-overlay
+    mobile-breakpoint="sm"
     width="450px"
     disable-resize-watcher
   >
@@ -24,41 +26,58 @@
     </v-btn>
     <v-card flat>
       <v-carousel
+        v-if="selectedPlant.images.length > 0"
         hide-delimiters
         cycle
         interval="3500"
         show-arrows-on-hover
-        :show-arrows="plantInfo.images.length > 1"
+        :show-arrows="selectedPlant.images.length > 1"
         height="60vh"
       >
-        <v-carousel-item v-for="(image, i) in plantInfo.images" :key="i">
-          <v-img height="100%" :src="require(`~/assets/images/plants/${image}`)"></v-img>
+        <v-carousel-item v-for="image in selectedPlant.images" :key="image.src">
+          <v-img height="100%" :alt="image.alt" :src="image.src"></v-img>
         </v-carousel-item>
       </v-carousel>
-      <v-card-title primary-title>
-        {{ plantInfo.name }}
-      </v-card-title>
-      <v-card-subtitle>
-        <em>{{ plantInfo.scientificName }}</em>
-      </v-card-subtitle>
-      <v-card-text>
-        {{ plantInfo.description }}
-      </v-card-text>
+      <div v-if="selectedPlant">
+        <v-card-title primary-title>
+          {{ selectedPlant.name }}
+        </v-card-title>
+        <v-card-subtitle>
+          <em>{{ selectedPlant.scientificName }}</em>
+        </v-card-subtitle>
+        <v-card-text>
+          {{ selectedPlant.description }}
+        </v-card-text>
+      </div>
+      <div v-if="selectedInstance.heading !== '' || selectedInstance.description !== ''">
+        <v-divider />
+        <v-subheader v-if="selectedInstance.heading !== ''" class="font-weight-bold">
+          {{ selectedInstance.heading }}
+        </v-subheader>
+        <v-card-text v-if="selectedInstance.description !== ''">
+          {{ selectedInstance.description }}
+        </v-card-text>
+      </div>
     </v-card>
   </v-navigation-drawer>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'PlantInfo',
   props: {
-    value: Boolean,
-    plantInfo: {
-      type: Object,
+    value: {
+      type: Boolean,
       required: true
     }
   },
   computed: {
+    ...mapGetters({
+      selectedPlant: 'plants/getSelectedPlant',
+      selectedInstance: 'plants/getSelectedInstance'
+    }),
     plantInfoVisible: {
       get() {
         return this.value

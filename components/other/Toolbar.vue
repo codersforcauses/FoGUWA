@@ -2,7 +2,7 @@
   <v-toolbar
     :absolute="isIndex"
     :fixed="!isIndex"
-    :style="{ margin: margin }"
+    :style="{ margin: margin, zIndex: 6 }"
     height="56"
   >
     <v-app-bar-nav-icon @click="$emit('input', !value)" />
@@ -23,7 +23,7 @@
       </template>
       <template v-slot:append>
         <v-icon class="grey--text">
-          search
+          mdi-magnify
         </v-icon>
       </template>
     </v-text-field>
@@ -35,7 +35,7 @@
       text
       @click="geoBtnClicked"
     >
-      <v-icon>my_location</v-icon>
+      <v-icon>mdi-crosshairs-gps</v-icon>
     </v-btn>
 
     <v-toolbar-title v-show="!isIndex" class="title">

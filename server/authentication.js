@@ -17,7 +17,7 @@ const checkJwt = expressjwt({
     cache: true,
     rateLimit: true,
     jwksRequestsPerMinute: 5,
-    jwksUri: `https://fog-uwa.au.auth0.com/.well-known/jwks.json`
+    jwksUri: `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`
   }),
 
   // Validate the audience and the issuer.
@@ -33,21 +33,16 @@ const getUserInfo = token => {
       Authorization: `Bearer ${token}`
     }
   }
-  return axios.get('https://fog-uwa.au.auth0.com/userinfo', config)
+  return axios.get(`https://${process.env.AUTH0_DOMAIN}/userinfo`, config)
 }
 
 const findUser = async req => {
   const token = getToken(req)
   if (!token) throw new Error('Error retrieving token')
-  try {
-    const userInfo = await getUserInfo(token)
-    const { email } = userInfo.data
-    const adminObject = await findUserByEmail(email) // Returns null on non admin
-    const { name, _id } = adminObject
-    return adminObject ? { name, _id } : null
-  } catch ({ response }) {
-    if(response.statusText === 'Unauthorized') throw new Error('User is unauthrorised')
-  }
+  const userInfo = await getUserInfo(token)
+  const { email } = userInfo.data
+  const adminObject = await findUserByEmail(email) // Returns null on non admin
+  return adminObject || null
 }
 
 const userIsAdmin = async req => {
