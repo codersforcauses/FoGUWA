@@ -19,7 +19,7 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@nuxtjs/auth": "^4.8.5",
+    "@nuxtjs/auth-next": "5.0.0-1612791489.a5d8c28",
     "@nuxtjs/axios": "^5.9.2",
     "@nuxtjs/pwa": "3.0.0-beta.16",
     "aws-sdk": "^2.793.0",

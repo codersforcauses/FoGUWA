@@ -1,4 +1,4 @@
-process.env.NODE_ENV !== 'production' && require('dotenv').config()
+require('dotenv').config()
 
 module.exports = {
   target: 'server',
@@ -59,17 +59,21 @@ module.exports = {
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxtjs/pwa', '@nuxtjs/axios', '@nuxtjs/auth'],
+  modules: ['@nuxtjs/pwa', '@nuxtjs/axios', '@nuxtjs/auth-next'],
 
   axios: {
-    baseURL: process.env.BASE_URL || 'http://localhost:' + process.env.PORT,
+    baseURL: process.env.BASE_URL,
   },
 
   auth: {
+    redirect: {
+      login: '/',
+      callback: '/login'
+    },
     strategies: {
       auth0: {
         domain: process.env.AUTH0_DOMAIN,
-        client_id: process.env.AUTH0_CLIENT_ID,
+        clientId: process.env.AUTH0_CLIENT_ID,
         audience: process.env.AUTH0_AUDIENCE
       }
     }
