@@ -56,3 +56,5 @@ sw.*
 package-lock.json
 
 .vscode/
+
+.vercel

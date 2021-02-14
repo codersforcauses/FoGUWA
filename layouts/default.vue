@@ -65,7 +65,7 @@
         </v-snackbar>
       </v-card>
     </v-main>
-    <foot />
+    <foot :is-index="isIndex" />
   </v-app>
 </template>
 
