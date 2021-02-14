@@ -33,7 +33,7 @@ const getUserInfo = token => {
       Authorization: `Bearer ${token}`
     }
   }
-  return axios.get('https://fog-uwa.au.auth0.com/userinfo', config)
+  return axios.get(`https://${process.env.AUTH0_DOMAIN}/userinfo`, config)
 }
 
 const findUser = async req => {
