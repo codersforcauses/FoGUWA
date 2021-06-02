@@ -87,12 +87,12 @@ export default {
   data: () => ({
     items: [
       {
-        icon: 'map',
+        icon: 'mdi-map-marker-circle',
         title: 'Map',
         to: '/'
       },
       {
-        icon: 'info',
+        icon: 'mdi-information-outline',
         title: 'About',
         to: '/about'
       }

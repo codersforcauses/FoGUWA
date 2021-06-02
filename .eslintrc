@@ -22,6 +22,7 @@
   "rules": {
     "nuxt/no-cjs-in-config": "off",
     "vue/html-quotes": ["error", "double"],
-    "vue/html-self-closing": "off"
+    "vue/html-self-closing": "off",
+    "linebreak-style": ["error", "unix"]
   }
 }

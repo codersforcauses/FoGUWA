@@ -1,26 +1,18 @@
 <template>
-  <v-card height="100%">
-    <plant-info
-      v-model="infoDrawer"
-      :plant-info="plantInfo"
-    />
-    <google-map-loader
-      :map-config="mapConfig"
-      :map-inst.sync="map"
-      :google-inst.sync="google"
-    />
-  </v-card>
+  <google-map-loader
+    :map-config="mapConfig"
+    :map-inst.sync="map"
+    :google-inst.sync="google"
+  />
 </template>
 
 <script>
-import { mapState } from 'vuex'
-// eslint-disable-next-line import/order
-import PlantInfo from './PlantInfo.vue'
-import iconData from '@/assets/js/plantIcons.js'
-import { uwaMapSettings } from '@/assets/js/mapSettings'
-// eslint-disable-next-line import/order
+/* eslint-disable import/order */
+import { mapState, mapMutations, mapActions, mapGetters } from 'vuex'
 import GoogleMapLoader from './GoogleMapLoader'
-const { iconStyle, ...iconPaths } = iconData
+import { uwaMapSettings } from '@/assets/js/mapSettings'
+import iconData from '@/assets/js/plantIcons'
+const { iconStyle } = iconData
 
 // Use https://www.gps-coordinates.net/ to easily fetch coordinates
 const UWA_BOUNDS = {
@@ -31,33 +23,29 @@ const UWA_BOUNDS = {
 }
 const UWA_COORDS = { lat: -31.976764, lng: 115.818220 }
 
-const defaultInfo = {
-  plantName: 'Plants and Trees',
-  sciName: 'Planticus Namium',
-  images: [],
-  description:
-    'Plants are mainly multicellular, predominantly photosynthetic eukaryotes of the kingdom Plantae. Historically, plants were treated as one of two kingdoms including all living things that were not animals, and all algae and fungi were treated as plants.'
-}
-
 export default {
   components: {
     'google-map-loader': GoogleMapLoader,
-    'plant-info': PlantInfo
   },
   data: () => ({
     map: null,
     google: null,
     markerInstances: [],
     userMarker: null,
-    plants: null,
-    infoDrawer: false,
-    plantInfo: defaultInfo
+    mapCenter: UWA_COORDS
   }),
   computed: {
     ...mapState(['position']),
+    ...mapGetters({
+      plants: 'plants/getPlants',
+      getPlantIcon: 'plants/getPlantIcon',
+      centeredInstance: 'plants/getCenteredInstance',
+      draggableInstance: 'plants/getDraggableInstance',
+      updateMap: 'plants/updateMap',
+    }),
     mapConfig() {
       return {
-        center: UWA_COORDS,
+        center: this.mapCenter,
         restriction: {
           latLngBounds: UWA_BOUNDS,
           strictBounds: false
@@ -68,33 +56,42 @@ export default {
         ...uwaMapSettings
       }
     },
-    defaultInfo() {
-      return {
-        plantName: 'Plant Name',
-        sciName: 'Scientific Plant Name',
-        images: [
-          'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/dsc-5454_orig.jpg',
-          'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/dsc-7528_orig.jpg',
-          'http://www.ahachemistry.com/uploads/1/1/8/3/118378549/20090626-uwa-grounds2-007_orig.jpg'
-        ],
-        description:
-          'Plants are mainly multicellular, predominantly photosynthetic eukaryotes of the kingdom Plantae. Historically, plants were treated as one of two kingdoms including all living things that were not animals, and all algae and fungi were treated as plants.'
-      }
-    }
   },
   watch: {
-    map(val) {
+    map() {
       this.loadMarkers()
     },
-    google(val) {
+    google() {
       this.loadMarkers()
     },
-    markers(val) {
+    updateMap() {
       this.loadMarkers()
+      this.mapUpdateNeeded(false)
+    },
+    centeredInstance(instance){
+      if(instance){
+        const [ lat, lng ] = instance.location.coordinates
+        this.map.panTo({ lat, lng })
+        this.setCenteredInstance(null)
+      }
+    },
+    draggableInstance(instance){
+      if(instance){
+        const markerIndex = this.markerInstances.findIndex(( markerInstance ) => {
+          return markerInstance.instance === instance._id
+        })
+        this.markerInstances[markerIndex].marker.setZIndex(1)
+        this.markerInstances[markerIndex].marker.setDraggable(true)
+      } else {
+        this.markerInstances.forEach(markerInstance => {
+          markerInstance.marker.setZIndex(0)
+          markerInstance.marker.setDraggable(false)
+        })
+      }
     },
     position() {
-      if (this.userMarker === null) {
-        if (this.position !== null) {
+      if (!this.userMarker) {
+        if (this.position) {
           this.userMarker = new this.google.maps.Marker({
             position: this.position,
             icon: {
@@ -115,35 +112,42 @@ export default {
     }
   },
   methods: {
+    ...mapMutations({
+      setSelectedPlant: 'plants/setSelectedPlant',
+      setSelectedInstance: 'plants/setSelectedInstance',
+      setDraggableInstance: 'plants/setDraggableInstance',
+      setCenteredInstance: 'plants/setCenteredInstance',
+      setSelectedInstancePosition: 'plants/setSelectedInstancePosition',
+      mapUpdateNeeded: 'plants/mapUpdateNeeded'
+    }),
+    ...mapActions({
+      loadPlants: 'plants/loadPlants'
+    }),
     async loadMarkers() {
       if (this.map && this.google) {
+        if(this.plants.length === 0) {
+          await this.loadPlants()
+        }
         this.clearMarkers()        
-        await this.loadPlants()
         // Create new markers and store them
         this.plants.forEach((plant, index) => {
           // Plot all instances
           plant.instances.forEach(instance => {
             const markerInst = this.createMarkerInstance(plant, instance)
-            this.addListenerToMarker(markerInst, plant)
-            this.markerInstances.push(markerInst)
+            this.addListenerToMarker(markerInst, plant, instance)
+            this.markerInstances.push({ instance: instance._id, marker: markerInst })
           })
         })
       }
     },
-    async loadPlants() {
-      const data = await this.$axios.$get('/api/flora')
-      this.plants = data
-    },
     clearMarkers() {
-      this.markerInstances.forEach(marker => {
+      this.markerInstances.forEach(({ marker }) => {
         marker.setMap(null)
       })
       this.markerInstances = []
     },
     createMarkerInstance(plant, instance) {
-      const icon = iconPaths.hasOwnProperty(plant.icon)
-                  ? iconPaths[plant.icon]
-                  : iconPaths.info
+      const icon = this.getPlantIcon(plant.icon)
       Object.keys(iconStyle).forEach(style => {
         icon[style] = iconStyle[style]
       })
@@ -159,18 +163,25 @@ export default {
           lng: instance.location.coordinates[1]
         },
         icon: {
-          labelOrigin: new this.google.maps.Point(12, -5),
+          labelOrigin: new this.google.maps.Point(10, -5),
+          anchor: new this.google.maps.Point(10, 15),
           ...icon
         },
-        map: this.map
+        map: this.map,
       })
     },
-    addListenerToMarker(markerInstance, plant) {
+    addListenerToMarker(markerInstance, plant, instance) {
       markerInstance.addListener('click', () => {
-        this.plantInfo = plant
-        this.plantInfo.images = plant.images
-        this.infoDrawer = true
+        this.setSelectedPlant(plant._id)
+        this.setSelectedInstance(instance._id)
+        this.$emit('plant-clicked', { plant, instance })
       })
+      this.google.maps.event.addListener(markerInstance, 'dragend', () => {
+        this.handleDrag(markerInstance, instance)
+      })
+    },
+    handleDrag(marker, instance){
+      this.setSelectedInstancePosition([marker.position.lat(), marker.position.lng()])
     }
   }
 }

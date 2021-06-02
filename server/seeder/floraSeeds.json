@@ -3,8 +3,14 @@
     "name": "Swamp banksia",
     "scientificName": "Banksia littoralis",
     "images": [
-      "swamp_banksia1.jpg",
-      "swamp_banksia2.jpg"
+      {
+        "alt": "Swamp Banksia 1",
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/swamp_banksia1.jpg"
+      },
+      {
+        "alt": "Swamp Banksia 2",
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/swamp_banksia2.jpg"
+      }
     ],
     "icon": "lotus",
     "description": "It is a tree in the plant genus Banksia and is found in south west Western Australia from the south eastern metropolitan area of Perth to the Stirling Range and Albany. It grows in peaty sand, low-lying and seasonally-damp areas along water courses. It possesses epicormic buds that are hidden under its bark and its yellow-orange flowers bloom between March and August.",
@@ -21,9 +27,18 @@
     "name": "Wickham's grevillea",
     "scientificName": "Grevillea wickhamii",
     "images": [
-      "grevillia1.jpg",
-      "grevillia2.jpg",
-      "grevillia3.jpg"
+      {
+        "alt": "Grevillia 1",
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/grevillia1.jpg"
+      },
+      {
+        "alt": "Grevillia 2",
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/grevillia2.jpg"
+      },
+      {
+        "alt": "Grevillia 3",
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/grevillia3.jpg"
+      }
     ],
     "icon": "leaf",
     "description": "It is an erect shrub or small tree that grows to 6 metres in height. Flowers bloom between April and October and are normally red but can also appear pink, orange or yellow.It is endemic to Western Australia, Northern Territory and Queensland, and grows in loam, stony or skeletal soils, red sand, laterite, sandstone, limestone and quartzite. Hence, they are often found on sand dunes, plains, rocky hills and cliffs. On the UWA campus, it is grafted on the root stock of Grevillea robusta, which naturally occur in Queensland.",
@@ -40,10 +55,22 @@
     "name": "Acorn banksia",
     "scientificName": "Banksia prionotes",
     "images": [
-      "acorn_banksia1.jpg",
-      "acorn_banksia2.jpg",
-      "acorn_banksia3.jpg",
-      "acorn_banksia4.jpg"
+      {
+        "alt": "Acorn Banksia 1",
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/acorn_banksia1.jpg"
+      },
+      {
+        "alt": "Acorn Banksia 2",
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/acorn_banksia2.jpg"
+      },
+      {
+        "alt": "Acorn Banksia 3",
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/acorn_banksia3.jpg"
+      },
+      {
+        "alt": "Acorn Banksia 4",
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/acorn_banksia4.jpg"
+      }
     ],
     "icon": "tree",
     "description": "It is one of the more common and easy-to-grow banksias. They are adored by birds and gardeners alike. It is a non-lignotuberous tree or shrub that grows up to 10 metres in height. Flowers are cream and orange, and bloom between February and August. It grows on white, grey or yellow sand, sandy loam, brown clay, laterite and granite. Hence, it naturally occurs on sand plains, sand dunes, and undulating slopes. They are recommended for growth in Perth gardens as they are less sensitive to phosphorus and alkaline conditions compared to other banksias.",
@@ -60,10 +87,22 @@
     "name": "Marri",
     "scientificName": "Corymbia calophylla",
     "images": [
-      "marri1.jpg",
-      "marri2.jpg",
-      "marri3.jpg",
-      "marri4.jpg"
+      {
+        "alt": "Marri 1",
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/marri1.jpg"
+      },
+      {
+        "alt": "Marri 2",
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/marri2.jpg"
+      },
+      {
+        "alt": "Marri 3",
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/marri3.jpg"
+      },
+      {
+        "alt": "Marri 4",
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/marri4.jpg"
+      }
     ],
     "icon": "tulip",
     "description": "These serve as one of the major food sources for our threatened red-tailed black cockatoos and Carnaby's black cockatoo. Both are endangered as a result of habitat destruction and diminishing food sources. It is a eucalypt tree that has rough, tessellated bark and it grows to 40-60 metres in height. Flowers are white-pink and bloom between December to May. It grows on red-brown clay loam, orange-brown sandy clay, gravel, grey sand, limestone, granite and laterite. Hence, they naturally occur on hills, slopes, breakaways, wetlands, and fringing salt marches. Sadly, they are under threat from the Marri canker disease, that is aggravated by changes to soil conditions. ",
@@ -80,9 +119,18 @@
     "name": "Pin-cushion Hakea",
     "scientificName": "Hakea laurina",
     "images": [
-      "hakea1.jpg",
-      "hakea2.jpg",
-      "hakea3.jpg"
+      {
+        "alt": "Hakea 1",
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/hakea1.jpg"
+      },
+      {
+        "alt": "Hakea 2",
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/hakea2.jpg"
+      },
+      {
+        "alt": "Hakea 3",
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/hakea3.jpg"
+      }
     ],
     "icon": "leaf",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -99,9 +147,18 @@
     "name": "Jarrah",
     "scientificName": "Eucalyptus marginata",
     "images": [
-      "jarrah1.jpg",
-      "jarrah2.jpg",
-      "jarrah3.jpg"
+      {
+        "alt": "Jarrah 1",
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/jarrah1.jpg"
+      },
+      {
+        "alt": "Jarrah 2",
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/jarrah2.jpg"
+      },
+      {
+        "alt": "Jarrah 3",
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/jarrah3.jpg"
+      }
     ],
     "icon": "tree",
     "description": "Jarrah, djarraly in Noongar language, also known as the Swan River mahogany, naturally occurs in the south-west corner of Western Australia, where rainfall generally exceeds 600mm. It is found as far as Mooliabeenee, Clackline, Narrogin, and the Stirling Range. Its northern limit is Mount Peron near Jurien Bay. However, there are also outliers in Kulin and Tutanning in the Pingelly Shire. The plant may take the form of a mallee, a multi-stemmed eucalypt, in Mount Lesueur and the Stirling Range. It typically grows in soils derived from ironstone. Jarrah gum nuts are an important food source for the threatened Forest red-tailed black cockatoo that often visit the campus. Its flowers are an important food source for birds and insects.",
@@ -127,10 +184,19 @@
   {
     "name": "Western Australia Christmas Tree",
     "scientificName": "Nuytsia floribunda",
-    "images":[
-      "christmas1.jpg",
-      "christmas2.jpg",
-      "christmas3.jpg"
+    "images": [
+      {
+        "alt": "Christmas Tree 1",
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/christmas1.jpg"
+      },
+      {
+        "alt": "Christmas Tree 2",
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/christmas2.jpg"
+      },
+      {
+        "alt": "Christmas Tree 3",
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/christmas2.jpg"
+      }
     ],
     "icon": "tree",
     "description": "It is believed to be the largest parasitic tree in the world. It is an icon of the region it grows in, south-western Australia, and is known locally as the Western Australian Christmas Tree as its orange flowers bloom dramatically during summer. The tree is indiscriminate - it has greedy roots that can stab host plant victims up to 110m away, and they grow by attaching themselves to their hosts to draw water and nutrients.",
@@ -147,9 +213,18 @@
     "name": "Zamia Palm",
     "scientificName": "Macrozamia riedlei",
     "images": [
-      "zamia1.jpg",
-      "zamia2.jpg",
-      "zamia3.jpg"
+      {
+        "alt": "Zamia Palm 1",
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/zamia1.jpg"
+      },
+      {
+        "alt": "Zamia Palm 2",
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/zamia2.jpg"
+      },
+      {
+        "alt": "Zamia Palm 3",
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/zamia3.jpg"
+      }
     ],
     "icon": "tree",
     "description": "Macrozamia riedlii’s (zamia)  seeds - with their colourful fleshy covering (sarcotesta) - contain high levels of the poisonous macrozamin. Despite claims that the toxin is only in the seeds, the sarcotesta of Macrozamia riedlii actually shows 10 times higher concentrations in the sarcotesta than in the kernels (Ladd et al., 1993). Native animals do consume the sarcotesta, without obvious harm, but it is not known what their resistance to macrozamin may be based on. Emus (Dromaius novaehollandiae) carry the zamia seeds over vast distances, and appear to be important in their dispersal (Calviño-Cancela et al., 2006). Aboriginal people throughout Australia knew how to prepare the seeds or sarcotesta to reduce the toxin levels. It appears that in the southwest, Noongar people consumed the sarcotesta, whereas elsewhere in Australia they used the kernels.",
@@ -165,10 +240,19 @@
   {
     "name": "Western Australian Peppermint",
     "scientificName": "Agonis flexuosa",
-    "images":[
-      "peppermint1.jpg",
-      "peppermint2.jpg",
-      "peppermint3.jpg"
+    "images": [
+      {
+        "alt": "Peppermint 1",
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/peppermint1.jpg"
+      },
+      {
+        "alt": "peppermint 2",
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/peppermint2.jpg"
+      },
+      {
+        "alt": "peppermint 3",
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/peppermint3.jpg"
+      }
     ],
     "icon": "lotus",
     "description": "Agonis flexuosa, peppermint. One of the more important Angiosperms on the south-western Australian coast line. \nThe Western Australian Peppermint ( ThewWillow myrtle) Agonis flexuosa (C. L. Willdenow 1809) R. Sweet (1830)\nFamily: Myrtaceae\nOrder: Myrtales\nThree botanical varieties are recognised: var. angustifolia differs from the typical var. flexuosa in having long, narrow leaves, while var. latifolia has short, broad leaves.\nSeveral selected forms of A. flexuosa are available. Popular cultivars include 'Nana', a compact form to about 4 metres, 'Variegata', a form with variegated foliage (seen in Kings Park by the toilets nearest to the boabab tree) and 'After Dark', a form with deep burgundy to purple foliage.\nThis species is regarded as a weed in all other Australian States due to its incredible ability to survive in multiple different environments and is quite invasive.\nThe plant will live in soils of various types; calcareous, sandy, loam, clay, and granitic. Near-coastal areas.\nIt is an incredibly useful plant in its native range of distribution:\na. It serves as a stabiliser for moving sand dunes\nb. It provides a windbreak and is often sculpted by such forces\nc. It provides a humus layer to soil, useful after fire for new species\nd. It provides dense thickets for protective cover for many animal species\ne. It serves to establish plant life on new and exposed soils\nf. It provides an oil from its leaves with a pungent odour (possible perfume / aroma uses ?)\ng. It provides a good rehabilitation tree and street tree in coastal areas only in the South West of Western Australia\nh. It provides abundant flowers for insects (nectar)(possible implications for the honey industry)",
@@ -184,8 +268,11 @@
   {
     "name": "Norfolk Island Pine",
     "scientificName": "Araucaria heterophylla",
-    "images":[
-      "norfolk1.jpg"
+    "images": [
+      {
+        "alt": "Norfolk 1",
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/norfolk1.jpg"
+      }
     ],
     "icon": "tree",
     "description": "The Norfolk Island Pine or ‘living Christmas Tree’ is endemic to its’ island namesake, although it is not a true pine. It grows well in deep sand, and has a tolerance for salt and wind that make it ideal for the coastal areas and subtropical climates that it is found in. They grow relative to the area they are encapsulated in and can lose some of their youthful symmetry as they mature.",
@@ -202,7 +289,10 @@
     "name": "Emma",
     "scientificName": "The Dancer",
     "images": [
-      "dancer1.jpg"
+      {
+        "alt": "Dancer 1",
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/dancer1.jpg"
+      }
     ],
     "icon": "other",
     "description": "Bronze sculpture named 'Emma', created by Greg James at Jackson Court",
@@ -218,10 +308,19 @@
   {
     "name": "Grass tree",
     "scientificName": "Xanthorrhoea",
-    "images":[
-      "grasstree1.jpg",
-      "grasstree2.jpg",
-      "grasstree3.jpg"
+    "images": [
+      {
+        "alt": "Grasstree 1",
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/grasstree1.jpg"
+      },
+      {
+        "alt": "Grasstree 2",
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/grasstree2.jpg"
+      },
+      {
+        "alt": "Grasstree 3",
+        "src": "https://foguwa-images.s3.ap-southeast-2.amazonaws.com/grasstree3.jpg"
+      }
     ],
     "icon": "tree",
     "description": "A wide-spread species of perennial monocot with the ability to withstand fire. It is a species of high important to the Noongar people who named it balga, and used the  gum it contains, its’ spikes for spears, and the bardi grub that would reside among its leaves",

@@ -1,7 +1,7 @@
-process.env.NODE_ENV !== 'production' && require('dotenv').config()
+require('dotenv').config()
 
 module.exports = {
-  mode: 'universal',
+  target: 'server',
   telemetry: false,
   /*
    ** Headers of the page
@@ -28,14 +28,18 @@ module.exports = {
       {
         rel: 'stylesheet',
         href:
-          'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'
+          'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700'
       }
     ]
+  },
+  server: {
+    port: process.env.PORT || 3000,
+    host: '0.0.0.0',
   },
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#639700' },
+  loading: { color: '#3F51B5' },
   /*
    ** Global CSS
    */
@@ -55,12 +59,21 @@ module.exports = {
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxtjs/pwa', '@nuxtjs/axios', '@nuxtjs/auth'],
+  modules: ['@nuxtjs/pwa', '@nuxtjs/axios', '@nuxtjs/auth-next'],
+
+  axios: {
+    baseURL: process.env.BASE_URL,
+  },
+
   auth: {
+    redirect: {
+      login: '/',
+      callback: '/login'
+    },
     strategies: {
       auth0: {
         domain: process.env.AUTH0_DOMAIN,
-        client_id: process.env.AUTH0_CLIENT_ID,
+        clientId: process.env.AUTH0_CLIENT_ID,
         audience: process.env.AUTH0_AUDIENCE
       }
     }
@@ -73,12 +86,12 @@ module.exports = {
     theme: {
       themes: {
         light: {
-          primary: '#639700',
-          secondary: '#FF8F00',
-          info: '#26A69A',
-          warning: '#FFC107',
-          error: '#DD2C00',
-          success: '#00E676'
+          primary: '#3F51B5',
+          secondary: '#F7AEF8',
+          info: '#907AD6',
+          warning: '#D3BE70',
+          error: '#b9413f',
+          success: '#8BE8CB'
         }
       },
       options: {
@@ -96,6 +109,7 @@ module.exports = {
     extend(config, ctx) {}
   },
   env: {
-    GMAPS_KEY: process.env.GMAPS_KEY
+    GMAPS_KEY: process.env.GMAPS_KEY,
+    S3_BASE_URL: process.env.S3_BASE_URL
   }
 }
