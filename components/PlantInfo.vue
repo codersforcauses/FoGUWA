@@ -58,6 +58,19 @@
           {{ selectedInstance.description }}
         </v-card-text>
       </div>
+      <v-carousel
+        v-if="selectedPlant.images.length > 0"
+        hide-delimiters
+        cycle
+        interval="3500"
+        show-arrows-on-hover
+        :show-arrows="selectedPlant.images.length > 1"
+        height="60vh"
+      >
+        <v-carousel-item v-for="image in selectedPlant.images" :key="image.src">
+          <v-img height="100%" :alt="image.alt" :src="image.src"></v-img>
+        </v-carousel-item>
+      </v-carousel>
     </v-card>
   </v-navigation-drawer>
 </template>

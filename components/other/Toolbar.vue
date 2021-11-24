@@ -9,7 +9,10 @@
 
     <v-autocomplete
       v-show="isIndex"
-      :items="items"
+      :items="plantAndInstances"
+      item-text="name"
+      item-value="instance._id"
+      return-object
       :search-input.sync="search"
       :style="{ maxWidth: width }"
       :menu-props="{
@@ -17,54 +20,60 @@
         openOnClick: false,
         contentClass: 'search-menu'
       }"
+      label="Search Plants"
+      placeholder="Search Plants"
+      persistent-placeholder
       dense
-      auto-select-first
       single-line
       solo-inverted
       hide-details
-      hide-selected
+      hint="Search"
       flat
       dark
       color="grey"
       class="theme--dark"
+      @input="setPlant"
     >
       <template v-slot:label>
-        <span class="grey--text">Search FoGUWA</span>
+        <span class="grey--text">Search Plants</span>
       </template>
       <template v-slot:prepend-inner>
         <v-btn color="black" icon text @click="$emit('input', !value)">
-          <v-icon>menu</v-icon>
+          <v-icon>mdi-menu</v-icon>
         </v-btn>
         <v-divider class="ma-1 mr-3" light vertical />
       </template>
       <template v-slot:append>
         <v-btn :disabled="showSearch" color="primary" icon text>
-          <v-icon>search</v-icon>
+          <v-icon>mdi-magnify</v-icon>
         </v-btn>
         <v-btn
-          v-show="!geoBtnHidden && isIndex"
+          v-show="isIndex"
           :loading="geoBtnLoading"
           :color="geoBtnColor"
           icon
           text
           @click="geoBtnClicked"
         >
-          <v-icon>my_location</v-icon>
+          <v-icon>mdi-crosshairs-gps</v-icon>
         </v-btn>
       </template>
-      <template v-slot:item="item">
+      <template v-slot:item="{ item }">
         <!-- will need to pass in icon and colour to :items to display correct icons for the search -->
         <div class="pl-2 pr-3">
-          <v-icon>menu</v-icon>
+          <v-icon :color="(plantIcon(item.icon)).fillColor">
+            {{ (plantIcon(item.icon)).mdiName }}
+          </v-icon>
         </div>
         <div class="pl-5">
-          {{ item.item.text }}
+          {{ item.name }}
+          <span v-if="item.instance.heading" style="color: grey;">- {{ item.instance.heading }}</span>
         </div>
       </template>
       <template v-slot:no-data>
         <div class="no-data">
           <v-icon color="error lighten-4" class="px-2">
-            error_outline
+            mdi-alert-circle-outline
           </v-icon>
           <div class="px-2">
             No plants matching <code>{{ search }}</code> were found
@@ -80,6 +89,7 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex'
 import { loggingLevels } from '@/assets/js/logging.js'
 
 export default {
@@ -94,9 +104,14 @@ export default {
     geolocatorId: null,
     userPosition: null,
     search: '',
-    items: [{ text: 'hello', value: 'world' }]
+    selectedPlant: '',
   }),
   computed: {
+    ...mapGetters({
+      plants: 'plants/getPlants',
+      plantIcon: 'plants/getPlantIcon',
+      findPlant: 'plants/getPlantFromId'
+    }),
     margin() {
       return this.isIndex ? '10px' : '0'
     },
@@ -111,6 +126,17 @@ export default {
     },
     showSearch() {
       return this.search === ''
+    },
+    plantAndInstances() {
+      const instances = []
+      this.plants.forEach(plant => {
+        plant.instances.forEach(instance => instances.push({
+          instance,
+          ...plant,
+        }))
+      });
+      console.log(instances)
+      return instances
     }
   },
   watch: {
@@ -122,6 +148,18 @@ export default {
     }
   },
   methods: {
+    ...mapMutations({
+      setSelectedInstance: 'plants/setSelectedInstance',
+      setSelectedPlant: 'plants/setSelectedPlant',
+      setCentered: 'plants/setCenteredInstance'
+    }),
+    setPlant(plantAndInstance) {
+      if (plantAndInstance && typeof plantAndInstance === 'object'){
+        this.setSelectedPlant(plantAndInstance._id)
+        this.setSelectedInstance(plantAndInstance.instance._id)
+        this.setCentered(plantAndInstance.instance._id)
+      }
+    },
     setGeoBtnState(state) {
       switch (state) {
         case 'loading':
