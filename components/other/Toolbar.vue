@@ -2,41 +2,82 @@
   <v-toolbar
     :absolute="isIndex"
     :fixed="!isIndex"
-    :style="{ margin: margin, zIndex: 6 }"
+    :style="{ margin, borderRadius: radius, padding }"
     height="56"
   >
-    <v-app-bar-nav-icon @click="$emit('input', !value)" />
-
-    <v-text-field
+    <v-app-bar-nav-icon v-show="!isIndex" @click="$emit('input', !value)" />
+    <v-btn color="black" icon text @click="$emit('input', !value)">
+      <v-icon>mdi-menu</v-icon>
+    </v-btn>
+    <v-divider class="ma-1 mr-3" light vertical />
+    <v-autocomplete
       v-show="isIndex"
-      :style="{ width: width }"
+      :items="plantAndInstances"
+      item-text="name"
+      item-value="instance._id"
+      return-object
+      :search-input.sync="search"
+      :style="{ maxWidth: width }"
+      :menu-props="{
+        nudgeBottom: '5px',
+        openOnClick: false,
+        contentClass: 'search-menu'
+      }"
+      label="Search Plants"
+      placeholder="Search Plants"
+      persistent-placeholder
+      dense
       single-line
       solo-inverted
       hide-details
+      hint="Search"
       flat
       dark
       color="grey"
       class="theme--dark"
+      @input="setPlant"
     >
       <template v-slot:label>
-        <span class="grey--text">Search FoGUWA</span>
+        <span class="grey--text">Search Plants</span>
       </template>
       <template v-slot:append>
-        <v-icon class="grey--text">
-          mdi-magnify
-        </v-icon>
+        <v-btn :disabled="showSearch" color="primary" icon text>
+          <v-icon>mdi-magnify</v-icon>
+        </v-btn>
+        <v-btn
+          v-show="isIndex"
+          :loading="geoBtnLoading"
+          :color="geoBtnColor"
+          icon
+          text
+          @click="geoBtnClicked"
+        >
+          <v-icon>mdi-crosshairs-gps</v-icon>
+        </v-btn>
       </template>
-    </v-text-field>
-    <v-btn
-      v-show="!geoBtnHidden && isIndex"
-      :loading="geoBtnLoading"
-      :color="geoBtnColor"
-      icon
-      text
-      @click="geoBtnClicked"
-    >
-      <v-icon>mdi-crosshairs-gps</v-icon>
-    </v-btn>
+      <template v-slot:item="{ item }">
+        <!-- will need to pass in icon and colour to :items to display correct icons for the search -->
+        <div class="pl-2 pr-3">
+          <v-icon :color="(plantIcon(item.icon)).fillColor">
+            {{ (plantIcon(item.icon)).mdiName }}
+          </v-icon>
+        </div>
+        <div class="pl-5">
+          {{ item.name }}
+          <span v-if="item.instance.heading" style="color: grey;">- {{ item.instance.heading }}</span>
+        </div>
+      </template>
+      <template v-slot:no-data>
+        <div class="no-data">
+          <v-icon color="error lighten-4" class="px-2">
+            mdi-alert-circle-outline
+          </v-icon>
+          <div class="px-2">
+            No plants matching <code>{{ search }}</code> were found
+          </div>
+        </div>
+      </template>
+    </v-autocomplete>
 
     <v-toolbar-title v-show="!isIndex" class="title">
       FoGUWA
@@ -45,6 +86,7 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from 'vuex'
 import { loggingLevels } from '@/assets/js/logging.js'
 
 export default {
@@ -53,19 +95,45 @@ export default {
     isIndex: Boolean
   },
   data: () => ({
-    geoBtnHidden: false,
     geoBtnLoading: false,
-    geoBtnColor: 'default',
+    geoBtnColor: 'black',
     geoBtnState: 'ready',
     geolocatorId: null,
-    userPosition: null
+    userPosition: null,
+    search: '',
+    selectedPlant: '',
   }),
   computed: {
+    ...mapGetters({
+      plants: 'plants/getPlants',
+      plantIcon: 'plants/getPlantIcon',
+      findPlant: 'plants/getPlantFromId'
+    }),
     margin() {
       return this.isIndex ? '10px' : '0'
     },
+    padding() {
+      return this.isIndex ? '0' : '0 16px'
+    },
+    radius() {
+      return this.isIndex ? '4px' : '0'
+    },
     width() {
       return this.$vuetify.breakpoint.smAndDown ? 'calc(100vw - 136px)' : '100%'
+    },
+    showSearch() {
+      return this.search === ''
+    },
+    plantAndInstances() {
+      const instances = []
+      this.plants.forEach(plant => {
+        plant.instances.forEach(instance => instances.push({
+          instance,
+          ...plant,
+        }))
+      });
+      console.log(instances)
+      return instances
     }
   },
   watch: {
@@ -77,6 +145,18 @@ export default {
     }
   },
   methods: {
+    ...mapMutations({
+      setSelectedInstance: 'plants/setSelectedInstance',
+      setSelectedPlant: 'plants/setSelectedPlant',
+      setCentered: 'plants/setCenteredInstance'
+    }),
+    setPlant(plantAndInstance) {
+      if (plantAndInstance && typeof plantAndInstance === 'object'){
+        this.setSelectedPlant(plantAndInstance._id)
+        this.setSelectedInstance(plantAndInstance.instance._id)
+        this.setCentered(plantAndInstance.instance._id)
+      }
+    },
     setGeoBtnState(state) {
       switch (state) {
         case 'loading':
@@ -87,13 +167,10 @@ export default {
           this.geoBtnLoading = false
           this.geoBtnColor = 'primary'
           break
-        case 'hidden':
-          this.geoBtnHidden = false
-          break
         case 'ready':
         default:
           this.geoBtnLoading = false
-          this.geoBtnColor = 'default'
+          this.geoBtnColor = 'black'
           break
       }
       this.geoBtnState = state
@@ -101,11 +178,7 @@ export default {
     geoBtnClicked() {
       if (!this.isGeolocatorEnabled() && this.geoBtnState === 'ready') {
         this.setGeoBtnState('loading')
-        // eslint-disable-next-line
-        new Promise(resolve => {
-          // eslint-disable-line
-          resolve(this.geolocatorEnable())
-        })
+        this.geolocatorEnable()
       } else {
         this.geolocatorDisable()
       }
@@ -134,7 +207,7 @@ export default {
       // Setup the geolocator to access the devices location
       const options = {
         enableHighAccuracy: true,
-        // timeout: 5000,
+        timeout: 5000,
         maximumAge: 0
       }
       this.geolocatorId = navigator.geolocation.watchPosition(
@@ -202,3 +275,13 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.v-toolbar >>> .v-toolbar__content {
+  padding: 0 !important;
+}
+.no-data {
+  display: flex;
+  padding: 0 16px;
+}
+</style>

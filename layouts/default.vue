@@ -123,4 +123,7 @@ export default {
   background: #3F51B533;
   text-shadow: none;
 }
+.search-menu {
+  left: 10px !important;
+}
 </style>
