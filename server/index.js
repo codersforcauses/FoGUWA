@@ -2,6 +2,7 @@ const express = require('express')
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
 const cookieParser = require('cookie-parser')
+const enforce = require('express-sslify');
 const app = express()
 
 app.use(cookieParser())
@@ -16,6 +17,8 @@ const { seedUsers, seedFlora, seedDB } = require('./seeder')
 if (process.env.NODE_ENV !== 'production') {
   seedDB(mongoose, 'users', seedUsers)
   seedDB(mongoose, 'flora', seedFlora)
+} else {
+  app.use(enforce.HTTPS({ trustProtoHeader: true }))
 }
 
 const middleware = require('./middleware')

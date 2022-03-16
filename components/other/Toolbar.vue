@@ -5,8 +5,7 @@
     :style="{ margin, borderRadius: radius, padding }"
     height="56"
   >
-    <v-app-bar-nav-icon v-show="!isIndex" @click="$emit('input', !value)" />
-    <v-btn color="black" icon text @click="$emit('input', !value)">
+    <v-btn class="ml-1" color="black" icon text @click="$emit('input', !value)">
       <v-icon>mdi-menu</v-icon>
     </v-btn>
     <v-divider class="ma-1 mr-3" light vertical />

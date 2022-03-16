@@ -102,11 +102,6 @@ export default {
         icon: 'mdi-spa-outline',
         title: 'Plants',
         to: '/admin/plants'
-      },
-      {
-        icon: 'mdi-account-multiple-outline',
-        title: 'Users',
-        to: '/admin/users'
       }
     ]
   }),

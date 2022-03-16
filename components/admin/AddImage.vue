@@ -61,6 +61,8 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   props: {
     dialog: {
@@ -81,6 +83,7 @@ export default {
     ],
   }),
   methods: {
+    ...mapMutations(['setError']),
     async uploadImage() {
       try {
         this.loading = true
@@ -96,8 +99,7 @@ export default {
         this.handleClose()
       } catch(err) {
         this.loading = false
-        console.log(err)  // TODO Set error vuex
-        console.log('Error uploading image')  // TODO Set error vuex
+        this.setError('Error uploading image')
       }
     },
     handleClose() {
