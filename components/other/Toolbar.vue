@@ -6,7 +6,10 @@
     height="56"
   >
     <v-app-bar-nav-icon v-show="!isIndex" @click="$emit('input', !value)" />
-
+    <v-btn color="black" icon text @click="$emit('input', !value)">
+      <v-icon>mdi-menu</v-icon>
+    </v-btn>
+    <v-divider class="ma-1 mr-3" light vertical />
     <v-autocomplete
       v-show="isIndex"
       :items="plantAndInstances"
@@ -36,12 +39,6 @@
     >
       <template v-slot:label>
         <span class="grey--text">Search Plants</span>
-      </template>
-      <template v-slot:prepend-inner>
-        <v-btn color="black" icon text @click="$emit('input', !value)">
-          <v-icon>mdi-menu</v-icon>
-        </v-btn>
-        <v-divider class="ma-1 mr-3" light vertical />
       </template>
       <template v-slot:append>
         <v-btn :disabled="showSearch" color="primary" icon text>
