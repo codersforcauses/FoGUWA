@@ -7,7 +7,7 @@
 
 ## Build Setup
 
-- Make sure you have node v12 or higher and yarn installed.
+- Make sure you have node v16 or higher and yarn installed.
 - If you're working on windows, I would recommend you use Git-bash for your Git needs and as the main terminal for this project. Make sure that you have configured Git to use `LF` as your line endings and not `CRLF` which is default on windows.
 - Get the `.env` file from a member of the team and place it in the root of the project (i.e. in the same location where `package.json` is)
 
