@@ -2,11 +2,10 @@
   "name": "FoGUWA",
   "version": "1.0.0",
   "description": "A web app to display an interactive map that shows information about the various native flora growing on the UWA campus. The map is open for all to access but the main focus is mainly the FoGUWA community.",
-  "author": "JeremiahPinto",
+  "author": "Coders for Causes",
   "private": true,
   "engines": {
-    "node": "14.x",
-    "npm": "6.x",
+    "node": "18.x",
     "yarn": "1.x"
   },
   "scripts": {
